@@ -21,18 +21,21 @@ const COULEURS := {
 
 var _racine: Node3D
 var _materiaux := {}
+var _m  # meubles (tools/meubles.gd)
 
 
 func construire() -> int:
 	_racine = Node3D.new()
 	_racine.name = "Maison"
 	_racine.set_script(load("res://scripts/niveau/maison.gd"))
+	_m = load("res://tools/meubles.gd").new(self)
 	_environnement()
 	_hall()
 	_couloir()
 	_salon()
 	_atelier()
 	_jardin()
+	_ciel()
 	_joueur_et_interface()
 	var scene := PackedScene.new()
 	var err := scene.pack(_racine)
@@ -58,14 +61,8 @@ func _groupe(nom: String, pos := Vector3.ZERO) -> Node3D:
 
 func _mat(cle: String) -> StandardMaterial3D:
 	if not _materiaux.has(cle):
-		var m := StandardMaterial3D.new()
-		m.albedo_color = Color(COULEURS[cle])
-		m.roughness = 0.6
-		if cle in ["repere", "photo_bonne", "soleil", "aiguille", "horloge"]:
-			m.emission_enabled = true
-			m.emission = Color(COULEURS[cle])
-			m.emission_energy_multiplier = 0.6
-		_materiaux[cle] = m
+		var lumineux: bool = cle in ["repere", "photo_bonne", "soleil", "aiguille", "horloge"]
+		_materiaux[cle] = Style.materiau(Color(COULEURS[cle]), lumineux)
 	return _materiaux[cle]
 
 
@@ -160,15 +157,21 @@ func _environnement() -> void:
 	env.background_color = Color(COULEURS["hall_sol"])
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	env.ambient_light_color = Color("3ee6d0")
-	env.ambient_light_energy = 0.55
-	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	env.ambient_light_energy = 0.4
+	env.tonemap_mode = Environment.TONE_MAPPER_LINEAR
+	env.fog_enabled = true
+	env.fog_light_color = env.background_color
+	env.fog_density = 0.005
+	env.fog_sky_affect = 0.0
+	env.ssao_enabled = true
 	var we := WorldEnvironment.new()
 	we.environment = env
 	_ajouter(_racine, we, "WorldEnvironment")
 	var soleil := DirectionalLight3D.new()
 	soleil.rotation_degrees = Vector3(-55, 35, 0)
-	soleil.light_energy = 1.1
+	soleil.light_energy = 0.8
 	soleil.shadow_enabled = true
+	soleil.shadow_blur = 1.5
 	_ajouter(_racine, soleil, "Soleil")
 
 
@@ -188,6 +191,13 @@ func _hall() -> void:
 	cube.taille_depart = 0.3
 	cube.zone = AABB(Vector3(-3, -1, 0), Vector3(6, 6, 6))
 	_ajouter(g, cube, "Cube")
+	_m.tapis(g, "Tapis", Vector3(0, 0, 4.1), 1.3)
+	_m.lampe(g, "Lampe", Vector3(-2.5, 0, 5.5))
+	_m.plante(g, "Plante", Vector3(2.5, 0, 5.5))
+	_m.etagere(g, "Etagere", Vector3(-0.9, 0, 5.75), PI)
+	_m.applique(g, "AppliqueGauche", Vector3(-2.88, 2.3, 1.9))
+	_m.applique(g, "AppliqueDroite", Vector3(2.88, 2.3, 1.9))
+	_m.horloge_murale(g, "Horloge", Vector3(2.92, 1.8, 3.6), -PI / 2, 0.35)
 
 
 func _couloir() -> void:
@@ -202,6 +212,16 @@ func _couloir() -> void:
 	_photo(g, "PhotoViolette", Vector3(0, 1.8, -13.97), "photo_violette")
 	_photo(g, "PhotoJaune", Vector3(0.8, 1.8, -13.97), "photo_jaune")
 	_photo(g, "PhotoBonne", Vector3(-1.23, 1.7, -13.2), "photo_bonne", true, PI / 2)
+	# Décor répété tous les 2,5 m : la boucle (10 m) ne se voit pas.
+	_boite(g, "Tapis", Vector3(0, 0.011, -7), Vector3(0.9, 0.02, 13.6), "photo_violette", false)
+	var couleurs_cadres := ["photo_rouge", "photo_jaune", "photo_violette"]
+	for k in 5:
+		var z := -1.0 - 2.5 * k
+		_m.applique(g, "Applique%dG" % k, Vector3(-1.18, 2.3, z))
+		_m.applique(g, "Applique%dD" % k, Vector3(1.18, 2.3, z))
+		if k < 4:
+			_photo(g, "Cadre%dG" % k, Vector3(-1.23, 1.6, z - 1.25), couleurs_cadres[k % 3], false, PI / 2)
+			_photo(g, "Cadre%dD" % k, Vector3(1.23, 1.6, z - 1.25), couleurs_cadres[(k + 1) % 3], false, -PI / 2)
 	var boucle := Marker3D.new()
 	boucle.position = Vector3(0, 0, -2.5)
 	_ajouter(g, boucle, "Boucle")
@@ -226,7 +246,22 @@ func _salon() -> void:
 	_boite(g, "ArcheGauche", Vector3(27, 1.5, -10), Vector3(4, 3, 0.3), "pierre", true, PASSE)
 	_boite(g, "ArcheDroite", Vector3(33, 1.5, -10), Vector3(4, 3, 0.3), "pierre", true, PASSE)
 	_boite(g, "ArcheHaut", Vector3(30, 2.75, -10), Vector3(2, 0.5, 0.3), "pierre", true, PASSE)
-	_boite(g, "Canape", Vector3(27, 0.4, -6), Vector3(3, 0.8, 1), "canape", true, PRESENT)
+	# Le présent : un salon moderne.
+	_m.canape(g, "Canape", Vector3(27, 0, -6.5), 0.0, PRESENT)
+	_m.table_basse(g, "TableBasse", Vector3(27, 0, -5.0), 0.0, PRESENT)
+	_m.tele(g, "Tele", Vector3(27, 0, -2.6), PI, PRESENT)
+	_m.tapis(g, "Tapis", Vector3(27, 0, -5.0), 1.6, PRESENT)
+	_m.lampe(g, "Lampe", Vector3(25.6, 0, -9.3), PRESENT)
+	_m.plante(g, "Plante", Vector3(34.3, 0, -0.7), PRESENT)
+	_m.etagere(g, "Etagere", Vector3(34.8, 0, -7), -PI / 2, PRESENT)
+	# Le passé : une salle de château.
+	_boite(g, "Dalles", Vector3(30, 0.011, -5), Vector3(10, 0.02, 9.9), "pierre", false, PASSE)
+	_m.banc(g, "Banc", Vector3(27, 0, -6.8), 0.0)
+	_m.tonneau(g, "Tonneau1", Vector3(34.2, 0, -1.2))
+	_m.tonneau(g, "Tonneau2", Vector3(33.4, 0, -0.7))
+	for z in [-3.0, -8.0]:
+		_m.torche(g, "TorcheG%d" % absi(int(z)), Vector3(25.25, 1.6, z))
+		_m.torche(g, "TorcheD%d" % absi(int(z)), Vector3(34.75, 1.6, z))
 	_boite(g, "Colonne", Vector3(32.5, 1.5, -5), Vector3(0.8, 3, 0.8), "colonne", true, PASSE)
 	_texte(g, "Indice", Vector3(30, 2.5, -9.8), "Appuie sur Tab (ou clic droit)\npour voir cette pièce à une autre époque.")
 	var arrivee := Marker3D.new()
@@ -245,6 +280,13 @@ func _atelier() -> void:
 	_boite(g, "Repere", Vector3(30, 0.01, -12), Vector3(0.6, 0.02, 0.6), "repere", false)
 	_texte(g, "Indice", Vector3(34.9, 1.8, -14), "Place-toi sur la marque\net regarde au loin.", -PI / 2)
 	_ancrage(g, "Ancrage", Vector3(30, 0, -11), Vector3(30, 1.5, -16), Vector3(10, 3, 12))
+	_m.etabli(g, "Etabli", Vector3(34.2, 0, -16.5), -PI / 2)
+	_m.engrenage(g, "Engrenage1", Vector3(34.93, 2.1, -18.4), 0.5, "engrenage", PI / 2)
+	_m.engrenage(g, "Engrenage2", Vector3(34.93, 1.55, -19.3), 0.3, "flottant_2", PI / 2)
+	for k in 3:
+		_m.horloge_murale(g, "HorlogeMurale%d" % k, Vector3(25.07, 1.7 + 0.3 * (k % 2), -13.5 - 2.8 * k), PI / 2, 0.3 + 0.1 * k)
+	_m.plante(g, "Plante", Vector3(25.7, 0, -21.3))
+	_m.lampe(g, "Lampe", Vector3(34.3, 0, -21.3))
 	# L'horloge : vue depuis la marque, ses morceaux éparpillés forment un cadran.
 	var centre_image := Vector3(30, 2.2, -20)
 	var vue := Marker3D.new()
@@ -285,6 +327,11 @@ func _jardin() -> void:
 	var g := _groupe("Jardin")
 	_boite(g, "Sol", Vector3(30, -0.25, -26.2), Vector3(6, 0.5, 8), "jardin")
 	_texte(g, "Panneau", Vector3(30, 1.8, -29), "Bientôt : l'Égypte ancienne…")
+	_m.arbre(g, "Arbre1", Vector3(27.8, 0, -28.8), 1.0)
+	_m.arbre(g, "Arbre2", Vector3(32.3, 0, -27.4), 0.8)
+	var fleurs := [[28.5, -24.6, "fleur_1"], [31.6, -24.2, "fleur_2"], [29.1, -26.6, "fleur_3"], [31.2, -29.6, "fleur_1"], [28.2, -26.0, "fleur_2"]]
+	for k in fleurs.size():
+		_m.fleur(g, "Fleur%d" % k, Vector3(fleurs[k][0], 0, fleurs[k][1]), fleurs[k][2])
 	var fin := Area3D.new()
 	fin.position = Vector3(30, 1, -25)
 	_ajouter(g, fin, "Fin")
@@ -293,6 +340,23 @@ func _jardin() -> void:
 	boite.size = Vector3(6, 2, 2)
 	forme.shape = boite
 	_ajouter(fin, forme, "CollisionShape3D")
+
+
+## Des objets géants qui flottent autour de la maison : le temps se dérègle.
+func _ciel() -> void:
+	var g := _groupe("Ciel")
+	var objets := [
+		["anneau", "flottant_1", Vector3(14, 10, -12), 4.0, Vector3(0.2, 0.3, 0)],
+		["cube", "flottant_2", Vector3(-12, 8, -18), 3.0, Vector3(0.1, 0.25, 0.15)],
+		["pyramide", "flottant_3", Vector3(46, 11, -14), 3.0, Vector3(0, 0.2, 0.1)],
+		["boule", "flottant_4", Vector3(12, 15, -38), 2.5, Vector3(0, 0.15, 0)],
+		["anneau", "flottant_3", Vector3(-9, 12, 9), 3.0, Vector3(0.25, 0, 0.2)],
+		["cube", "flottant_1", Vector3(42, 9, 6), 2.0, Vector3(0.3, 0.1, 0)],
+		["anneau", "flottant_2", Vector3(30, 14, -40), 5.0, Vector3(0, 0, 0.15)],
+	]
+	for k in objets.size():
+		var o: Array = objets[k]
+		_m.flottant(g, "Flottant%d" % k, o[2], o[0], o[1], o[3], o[4])
 
 
 func _joueur_et_interface() -> void:

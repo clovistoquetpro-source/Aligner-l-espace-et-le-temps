@@ -1,10 +1,20 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/objets/objet_perspectif.gd" id="1"]
+[ext_resource type="Shader" path="res://shaders/contour.gdshader" id="2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_contour"]
+shader = ExtResource("2")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+next_pass = SubResource("ShaderMaterial_contour")
 albedo_color = Color(1, 0.62352943, 0.10980392, 1)
-roughness = 0.5
+roughness = 0.8
+diffuse_mode = 3
+specular_mode = 2
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
 
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 material = SubResource("StandardMaterial3D_1")

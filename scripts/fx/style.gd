@@ -14,10 +14,10 @@ static func materiau(couleur: Color, lumineux := false) -> StandardMaterial3D:
 	m.albedo_color = couleur
 	m.roughness = 0.8
 	m.diffuse_mode = BaseMaterial3D.DIFFUSE_TOON
-	m.specular_mode = BaseMaterial3D.SPECULAR_TOON
+	m.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 	m.rim_enabled = true
-	m.rim = 0.35
-	m.rim_tint = 0.6
+	m.rim = 0.15
+	m.rim_tint = 0.8
 	if lumineux:
 		m.emission_enabled = true
 		m.emission = couleur

@@ -31,10 +31,7 @@ func _process(delta: float) -> void:
 
 
 func _horloge_realignee() -> void:
-	var or_mat := StandardMaterial3D.new()
-	or_mat.albedo_color = Color("ffd700")
-	or_mat.emission_enabled = true
-	or_mat.emission = Color("ffb000")
+	var or_mat := Style.materiau(Color("ffd700"), true)
 	for piece in _enigme.get_children():
 		if piece is CSGShape3D:
 			piece.material = or_mat
