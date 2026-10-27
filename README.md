@@ -20,7 +20,7 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 | Aller à gauche, à droite | Q, D | A, D |
 | Regarder | Souris | Souris |
 | Sauter | Espace | Espace |
-| Prendre ou poser un objet | E | E |
+| Prendre ou poser un objet (vise loin pour l'agrandir, près pour le rétrécir) | E | E |
 | Basculer d'époque | Tab ou clic droit | Tab ou clic droit |
 | Libérer la souris | Échap | Échap |
 

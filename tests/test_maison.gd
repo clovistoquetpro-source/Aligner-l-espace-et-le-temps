@@ -91,6 +91,53 @@ func test_horloge_se_vise_un_peu_au_dessus_du_centre() -> void:
 	T.ok(enigme.est_resolu, "3° au-dessus du centre de l'horloge : aligné")
 
 
+const SAUT_MAX := Player.JUMP * Player.JUMP / (2.0 * 9.8)
+
+
+func test_estrade_demande_d_agrandir_le_cube() -> void:
+	var n: Node3D = await _charger()
+	var estrade: CSGBox3D = n.get_node("Hall/Estrade")
+	var cube: ObjetPerspectif = n.get_node("Hall/Cube")
+	var hauteur := estrade.global_position.y + estrade.size.y / 2
+	T.ok(hauteur > SAUT_MAX + 0.2, "trop haute pour un saut (%.2f m)" % hauteur)
+	T.ok(hauteur < 2 * SAUT_MAX - 0.15, "atteignable depuis un cube grimpable")
+	T.ok(cube.taille_depart + SAUT_MAX < hauteur, "le cube de départ est trop petit")
+
+
+## Le joueur saute en avançant vers -Z ; renvoie sa position après 2 s.
+func _sauter_en_avant(j: Player) -> Vector3:
+	for i in 10:
+		await tree.physics_frame
+	Input.action_press("avancer")
+	Input.action_press("sauter")
+	await tree.physics_frame
+	await tree.physics_frame
+	Input.action_release("sauter")
+	for i in 120:
+		await tree.physics_frame
+	Input.action_release("avancer")
+	return j.global_position
+
+
+func test_sans_cube_on_ne_monte_pas() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	j.teleport(Transform3D(Basis(), Vector3(-1.5, 0, 2.3)))
+	var pos: Vector3 = await _sauter_en_avant(j)
+	T.ok(pos.z > 1.4, "bloqué par l'estrade (z = %.2f)" % pos.z)
+
+
+func test_avec_un_cube_agrandi_on_monte() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	var cube: ObjetPerspectif = n.get_node("Hall/Cube")
+	cube.taille = 0.8
+	cube.global_position = Vector3(0, 0.4, 1.95)
+	j.teleport(Transform3D(Basis(), Vector3(0, 0.85, 2.1)))
+	var pos: Vector3 = await _sauter_en_avant(j)
+	T.ok(pos.z < 1.0, "monté sur l'estrade ou passé dans le couloir (z = %.2f)" % pos.z)
+
+
 func test_parcours_complet() -> void:
 	var n: Node3D = await _charger()
 	var j: Player = n.get_node("Player")

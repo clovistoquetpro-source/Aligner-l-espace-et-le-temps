@@ -15,7 +15,7 @@ const COULEURS := {
 	"atelier_sol": "3a3360", "atelier_mur": "6bcb77",
 	"horloge": "ff3d7f", "aiguille": "00f5d4",
 	"photo_cadre": "ffffff", "photo_rouge": "ff595e", "photo_bonne": "00d1b2",
-	"photo_jaune": "ffca3a", "photo_violette": "9b5de5", "cube": "ff9f1c", "soleil": "fff3b0", "repere": "00f5d4",
+	"photo_jaune": "ffca3a", "photo_violette": "9b5de5", "soleil": "fff3b0", "repere": "00f5d4",
 	"porte": "f15bb5", "jardin": "9ef01a",
 }
 
@@ -83,13 +83,13 @@ func _boite(parent: Node, nom: String, pos: Vector3, taille: Vector3, couleur: S
 	return b
 
 
-func _texte(parent: Node, nom: String, pos: Vector3, texte: String, rot_y := 0.0) -> Label3D:
+func _texte(parent: Node, nom: String, pos: Vector3, texte: String, rot_y := 0.0, taille := 0.006) -> Label3D:
 	var l := Label3D.new()
 	l.position = pos
 	l.rotation.y = rot_y
 	l.text = texte
 	l.font_size = 64
-	l.pixel_size = 0.006
+	l.pixel_size = taille
 	l.outline_size = 16
 	l.modulate = Color.WHITE
 	l.outline_modulate = Color("2b1d4e")
@@ -176,10 +176,18 @@ func _hall() -> void:
 	var g := _groupe("Hall")
 	_piece(g, Vector3(0, 0, 3), Vector2(6, 6), "hall_sol", "hall_mur", {"avant": 2.5})
 	_photo(g, "PhotoSouvenir", Vector3(-2.98, 1.7, 3), "photo_bonne", true, PI / 2)
-	_texte(g, "Souvenir", Vector3(-2.95, 2.3, 3), "Mon souvenir préféré", PI / 2)
-	_texte(g, "Indice", Vector3(0, 2.6, 0.05), "Le couloir ne mène nulle part…\nsauf si tu regardes\nle bon souvenir.")
+	_texte(g, "Souvenir", Vector3(-2.95, 2.3, 3), "Mon souvenir préféré", PI / 2, 0.004)
+	_texte(g, "Indice", Vector3(0, 2.75, 0.05), "Le couloir ne mène nulle part…\nsauf si tu regardes le bon souvenir.", 0.0, 0.004)
 	_ancrage(g, "Ancrage", Vector3(0, 0, 4.5), Vector3(0, 1.5, 3), Vector3(6, 3, 6))
-	_cube(g, "Cube", Vector3(1.8, 0.3, 2.5))
+	# L'entrée du couloir est sur une estrade trop haute pour un saut : il faut
+	# agrandir le cube (perspective forcée) et s'en servir comme marche.
+	_boite(g, "Estrade", Vector3(0, 0.8, 0.75), Vector3(6, 1.6, 1.5), "hall_mur")
+	_texte(g, "IndiceEstrade", Vector3(0, 1.0, 1.52), "Trop haut ?\nPrends le cube (E), vise loin pour l'agrandir,\npose-le (E) et grimpe dessus.", 0.0, 0.0035)
+	var cube: ObjetPerspectif = load("res://scenes/cube.tscn").instantiate()
+	cube.position = Vector3(1.8, 0.15, 3.5)
+	cube.taille_depart = 0.3
+	cube.zone = AABB(Vector3(-3, -1, 0), Vector3(6, 6, 6))
+	_ajouter(g, cube, "Cube")
 
 
 func _couloir() -> void:
@@ -271,24 +279,6 @@ func _morceau(horloge: Node3D, nom: String, vue: Vector3, point_image: Vector3, 
 	b.material = _mat(couleur)
 	b.use_collision = false
 	_ajouter(horloge, b, nom)
-
-
-## Un objet à prendre et à porter (touche E).
-func _cube(g: Node3D, nom: String, pos: Vector3) -> void:
-	var corps := RigidBody3D.new()
-	corps.position = pos
-	_ajouter(g, corps, nom)
-	var mesh := MeshInstance3D.new()
-	var boite := BoxMesh.new()
-	boite.size = Vector3(0.5, 0.5, 0.5)
-	boite.material = _mat("cube")
-	mesh.mesh = boite
-	_ajouter(corps, mesh, "Mesh")
-	var forme := CollisionShape3D.new()
-	var b := BoxShape3D.new()
-	b.size = Vector3(0.5, 0.5, 0.5)
-	forme.shape = b
-	_ajouter(corps, forme, "CollisionShape3D")
 
 
 func _jardin() -> void:
