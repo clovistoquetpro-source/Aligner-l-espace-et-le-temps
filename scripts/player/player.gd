@@ -8,10 +8,12 @@ const JUMP := 4.5
 const MOUSE_SENS := 0.0025
 const KILL_Y := -20.0
 const HOLD_DIST := 1.5
-const PICK_DIST := 2.5
+const PICK_DIST := 4.0
 
 var anchor: Transform3D
 var held: RigidBody3D = null
+## Taille à l'écran de l'objet perspectif porté (taille / distance).
+var _ratio := 0.0
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
@@ -51,6 +53,9 @@ func prendre(objet: RigidBody3D) -> void:
 	held = objet
 	objet.freeze = true
 	add_collision_exception_with(objet)
+	if objet is ObjetPerspectif:
+		objet.porte = true
+		_ratio = objet.taille / camera.global_position.distance_to(objet.global_position)
 	_suivre_objet()
 
 
@@ -59,6 +64,8 @@ func poser() -> void:
 		return
 	held.freeze = false
 	remove_collision_exception_with(held)
+	if held is ObjetPerspectif:
+		held.porte = false
 	held = null
 
 
@@ -106,6 +113,10 @@ func _physics_process(delta: float) -> void:
 func _suivre_objet() -> void:
 	if held == null or not is_instance_valid(held):
 		held = null
+		return
+	if held is ObjetPerspectif:
+		var exclure: Array[RID] = [get_rid()]
+		held.placer(camera, _ratio, exclure)
 		return
 	held.global_position = camera.global_position - camera.global_basis.z * HOLD_DIST
 	held.global_rotation = Vector3(0, global_rotation.y, 0)
