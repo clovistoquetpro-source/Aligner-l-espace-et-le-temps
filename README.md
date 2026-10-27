@@ -26,3 +26,9 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 ## Tests
 
 `./run_tests.sh` (il faut la commande `godot` dans le PATH, ou la variable `GODOT`).
+
+## Le niveau « La maison »
+
+`scenes/maison.tscn` est construit par le code de `tools/constructeur_maison.gd` :
+`godot --headless --path . -s res://tools/construire_maison.gd`.
+Si tu retouches la maison dans l'éditeur Godot, ne relance plus cette commande : elle écraserait tes retouches.
