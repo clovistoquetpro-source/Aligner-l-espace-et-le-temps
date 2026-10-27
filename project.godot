@@ -7,6 +7,10 @@ run/main_scene="res://scenes/maison.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Temps="*res://scripts/time/temps.gd"
+
 [display]
 
 window/size/viewport_width=1280

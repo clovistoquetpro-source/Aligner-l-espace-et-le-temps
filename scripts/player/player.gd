@@ -73,6 +73,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed("interagir"):
 		_interagir()
+	elif event.is_action_pressed("basculer"):
+		Temps.basculer(self)
 
 
 func _interagir() -> void:
