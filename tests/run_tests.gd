@@ -15,6 +15,10 @@ func _lancer() -> void:
 		if not (f.begins_with("test_") and f.ends_with(".gd")):
 			continue
 		var script: GDScript = load("res://tests/" + f)
+		if script == null or not script.can_instantiate():
+			T.echecs.append("%s : le script ne se charge pas" % f)
+			print("ECHEC " + f)
+			continue
 		for m in script.get_script_method_list():
 			var nom: String = m["name"]
 			if not nom.begins_with("test_"):
