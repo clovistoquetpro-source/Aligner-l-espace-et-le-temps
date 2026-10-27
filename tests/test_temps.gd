@@ -26,6 +26,7 @@ func _boite_du_passe(pos: Vector3) -> CSGBox3D:
 	boite.use_collision = true
 	boite.position = pos
 	var membre := EpochMember.new()
+	membre.name = "EpochMember"
 	membre.epoque = TempsScript.Epoque.PASSE
 	boite.add_child(membre)
 	_ajouter(boite)
@@ -72,3 +73,31 @@ func test_bascule_refusee_si_mur_apparait_sur_le_joueur() -> void:
 	T.ok(not Temps.basculer(joueur), "bascule refusée")
 	T.eq(Temps.courante, TempsScript.Epoque.PRESENT, "on reste au présent")
 	T.eq(refus[0], 1, "signal bascule_refusee")
+
+
+func test_decor_non_solide_ne_bloque_pas_la_bascule() -> void:
+	Temps.reinitialiser()
+	var deco := CSGBox3D.new()
+	deco.size = Vector3(2, 2, 2)
+	deco.position = Vector3(0, 1, 0)
+	deco.use_collision = false
+	var membre := EpochMember.new()
+	membre.epoque = TempsScript.Epoque.PASSE
+	deco.add_child(membre)
+	_ajouter(deco)
+	await tree.process_frame
+	var joueur: Node3D = _ajouter(Node3D.new())
+	T.ok(Temps.basculer(joueur), "un décor sans collision ne bloque pas la bascule")
+
+
+func test_decor_non_solide_reste_non_solide() -> void:
+	Temps.reinitialiser()
+	var boite := CSGBox3D.new()
+	boite.use_collision = false
+	var membre := EpochMember.new()
+	membre.epoque = TempsScript.Epoque.PASSE
+	boite.add_child(membre)
+	_ajouter(boite)
+	Temps.basculer(_ajouter(Node3D.new()))
+	T.ok(boite.visible, "visible dans le passé")
+	T.ok(not boite.use_collision, "toujours sans collision")

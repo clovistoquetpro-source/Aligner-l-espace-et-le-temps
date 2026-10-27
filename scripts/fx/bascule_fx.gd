@@ -77,4 +77,5 @@ func _appliquer_couleurs(t: float) -> void:
 	if t >= 1.0:
 		_depart = _cible
 	environnement.background_color = _depart["ciel"].lerp(_cible["ciel"], t)
+	environnement.fog_light_color = environnement.background_color
 	environnement.ambient_light_color = _depart["ambiance"].lerp(_cible["ambiance"], t)
