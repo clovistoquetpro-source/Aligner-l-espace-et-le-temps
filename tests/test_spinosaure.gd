@@ -92,11 +92,14 @@ func test_poisson_tenu_ne_reveille_pas() -> void:
 func test_gros_poisson_reveille() -> void:
 	var dino := _monde()
 	var fois := [0]
-	dino.reveille.connect(func() -> void: fois[0] += 1)
 	var p := _poisson(2.0, Vector3(0, 0.5, 4))
+	var couche := [-1]
+	dino.reveille.connect(func() -> void:
+		fois[0] += 1
+		couche[0] = p.collision_layer)
 	await _attendre(4)
 	T.eq(fois[0], 1, "il se réveille")
-	T.ok(p.collision_layer == 0, "on ne peut plus reprendre le poisson")
+	T.eq(couche[0], 0, "on ne peut plus reprendre le poisson")
 	await _attendre(30)
 	T.eq(dino.etat, Spinosaure.Etat.REPU, "repu")
 	T.proche(dino.global_position, Vector3(6, 0, 8), "couché plus loin")

@@ -34,6 +34,12 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 `godot --headless --path . -s res://tools/construire_maison.gd`.
 Si tu retouches la maison dans l'éditeur Godot, ne relance plus cette commande : elle écraserait tes retouches.
 
+## Le niveau « L'Égypte »
+
+`scenes/egypte.tscn` est construit par `tools/constructeur_egypte.gd` :
+`godot --headless --path . -s res://tools/construire_egypte.gd`.
+Pour essayer l'Égypte sans passer par la maison, ouvre `scenes/egypte.tscn` dans Godot et appuie sur **F6** (lancer la scène courante).
+
 ## Modèles 3D
 
 Chaque monde a son propre pack de modèles, pour changer de style d'une époque à l'autre. Tous sont sous licence CC0 (libres, même pour un jeu vendu) :
@@ -43,5 +49,9 @@ Chaque monde a son propre pack de modèles, pour changer de style d'une époque 
 | `assets/modeles/maison` | Furniture Kit, de Kenney | https://kenney.nl/assets/furniture-kit |
 | `assets/modeles/jardin` | Nature Kit, de Kenney (une sélection) | https://kenney.nl/assets/nature-kit |
 | `assets/modeles/chateau` | Fantasy Props MegaKit (version gratuite), de Quaternius (une sélection) | https://quaternius.com/packs/fantasypropsmegakit.html |
+| `assets/modeles/militaire` | Toon Shooter Game Kit, de Quaternius (une sélection) | https://quaternius.com |
+| `assets/modeles/dinos` | Animated Dinosaur Pack, de Quaternius (le T-rex, transformé en spinosaure) | https://quaternius.com |
+
+Les monuments de l'Égypte peuvent venir du Low Poly Egypt Pack de reodesuxz (gratuit, mais sa licence interdit de redistribuer ses fichiers). Tant que le dépôt est public, il n'est pas dans `assets/modeles/egypte` : le jeu construit à la place des formes simples de même taille (`tools/decor_egypte.gd`).
 
 Au lancement, chaque modèle prend le style cartoon du jeu (ombres en aplats) grâce à `scripts/fx/habillage_cartoon.gd`. Le contour sombre façon BD est tracé sur tout l’écran par la caméra du joueur (`shaders/contour_ecran.gdshader`). Pour les objets de Quaternius, on ne garde que la texture de couleur, réduite (`tools/preparer_quaternius.py`).

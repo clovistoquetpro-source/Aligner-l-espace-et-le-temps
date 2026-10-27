@@ -1,0 +1,8 @@
+Toon Shooter Game Kit (Dec 2022), by Quaternius — https://quaternius.com
+Une sélection : le soldat, les sacs de sable, les caisses, les barrières,
+le château d'eau et le tank.
+
+License:
+CC0 1.0 Universal (CC0 1.0)
+Public Domain Dedication
+https://creativecommons.org/publicdomain/zero/1.0/

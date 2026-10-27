@@ -1,0 +1,152 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/niveau/egypte.gd" id="1_acnp8"]
+[ext_resource type="Script" path="res://scripts/fx/habillage_cartoon.gd" id="2_7bxt4"]
+[ext_resource type="PackedScene" path="res://assets/modeles/militaire/Character_Soldier.gltf" id="3_wee21"]
+[ext_resource type="Script" path="res://scripts/time/epoch_member.gd" id="4_qsoyc"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="5_1re3w"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="6_d6u6y"]
+[ext_resource type="PackedScene" path="res://scenes/bascule_fx.tscn" id="7_tfaqu"]
+[ext_resource type="Script" path="res://scripts/fx/bascule_fx.gd" id="8_rdxom"]
+
+[sub_resource type="Environment" id="Environment_sonfh"]
+background_mode = 1
+background_color = Color(0.24313726, 0.9019608, 0.8156863, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.7019608, 0.2784314, 1)
+ambient_light_energy = 0.35
+ssao_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.24313726, 0.9019608, 0.8156863, 1)
+fog_density = 0.004
+fog_sky_affect = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l3627"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.9098039, 0.58431375, 0.3529412, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n0uss"]
+size = Vector3(200, 20, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ogl8"]
+size = Vector3(200, 20, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rcweu"]
+size = Vector3(200, 20, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0uh7v"]
+size = Vector3(200, 20, 1)
+
+[node name="Egypte" type="Node3D" unique_id=2006031507]
+script = ExtResource("1_acnp8")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=222701177]
+environment = SubResource("Environment_sonfh")
+
+[node name="Soleil" type="DirectionalLight3D" parent="." unique_id=1649375436]
+transform = Transform3D(0.8660254, 0.21130913, -0.45315388, 0, 0.90630776, 0.42261827, 0.5, -0.36599815, 0.7848855, 0, 0, 0)
+light_color = Color(1, 0.9137255, 0.76862746, 1)
+light_energy = 0.85
+shadow_enabled = true
+shadow_blur = 1.5
+directional_shadow_max_distance = 120.0
+
+[node name="Sol" type="CSGBox3D" parent="." unique_id=1614705966]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(240, 1, 240)
+material = SubResource("StandardMaterial3D_l3627")
+
+[node name="Bords" type="Node3D" parent="." unique_id=555368026]
+
+[node name="Bord0" type="StaticBody3D" parent="Bords" unique_id=1870781633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 100)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bords/Bord0" unique_id=1767756768]
+shape = SubResource("BoxShape3D_n0uss")
+
+[node name="Bord1" type="StaticBody3D" parent="Bords" unique_id=1559936572]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 100, 10, 6.123234e-15)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bords/Bord1" unique_id=1572368641]
+shape = SubResource("BoxShape3D_0ogl8")
+
+[node name="Bord2" type="StaticBody3D" parent="Bords" unique_id=1789901719]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.2246468e-14, 10, -100)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bords/Bord2" unique_id=699656373]
+shape = SubResource("BoxShape3D_rcweu")
+
+[node name="Bord3" type="StaticBody3D" parent="Bords" unique_id=1768294420]
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, -100, 10, -1.8369702e-14)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bords/Bord3" unique_id=38620854]
+shape = SubResource("BoxShape3D_0uh7v")
+
+[node name="Mirage" type="Node3D" parent="." unique_id=264030393]
+
+[node name="Carriere" type="Node3D" parent="." unique_id=638609127]
+
+[node name="Rampe" type="Node3D" parent="." unique_id=1071460604]
+
+[node name="Camp" type="Node3D" parent="." unique_id=1562367564]
+
+[node name="SoldatGuetteur" type="Node3D" parent="Camp" unique_id=1957833457]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30, 0, 4)
+script = ExtResource("2_7bxt4")
+animation = "Idle"
+caches = PackedStringArray("AK", "GrenadeLauncher", "Knife_1", "Knife_2", "Pistol", "Revolver", "Revolver_Small", "RocketLauncher", "ShortCannon", "Shotgun", "Shovel", "SMG", "Sniper", "Sniper_2")
+
+[node name="Modele" type="Node3D" parent="Camp/SoldatGuetteur" unique_id=1487269716 instance=ExtResource("3_wee21")]
+transform = Transform3D(0.770856, 0, 0, 0, 0.770856, 0, 0, 0, 0.770856, 0, 0.10203621, -0.6976074)
+
+[node name="EpochMember" type="Node" parent="Camp/SoldatGuetteur" unique_id=577550506]
+script = ExtResource("4_qsoyc")
+
+[node name="Temple" type="Node3D" parent="." unique_id=1329579162]
+
+[node name="Chantier" type="Node3D" parent="." unique_id=191240628]
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1265921868 instance=ExtResource("5_1re3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 70)
+script = ExtResource("6_d6u6y")
+
+[node name="BasculeFx" type="CanvasLayer" parent="." unique_id=602010577 instance=ExtResource("7_tfaqu")]
+layer = 10
+script = ExtResource("8_rdxom")
+
+[node name="Interface" type="CanvasLayer" parent="." unique_id=666522703]
+
+[node name="Viseur" type="Label" parent="Interface" unique_id=1926242555]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -11.5
+offset_right = 2.5
+offset_bottom = 11.5
+theme_override_font_sizes/font_size = 40
+text = "·"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="Interface" unique_id=588676562]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_top = 40.0
+offset_right = 0.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0.16862746, 0.11372549, 0.30588236, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1

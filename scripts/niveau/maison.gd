@@ -1,14 +1,9 @@
-extends Node3D
+extends Niveau
 
 ## Niveau « La maison » : relie l'énigme, la sortie et les messages.
 
-const DUREE_MESSAGE := 4.0
-
-var _reste_message := 0.0
-
 @onready var _enigme: Alignement = $Atelier/Horloge
 @onready var _sortie: CSGShape3D = $Atelier/PorteSortie
-@onready var _message: Label = $Interface/Message
 
 
 func _ready() -> void:
@@ -17,17 +12,6 @@ func _ready() -> void:
 	_enigme.resolu.connect(_horloge_realignee)
 	$Jardin/Fin.body_entered.connect(_fin)
 	afficher("Ta maison n'est plus tout à fait ta maison…")
-
-
-func afficher(texte: String, duree := DUREE_MESSAGE) -> void:
-	_message.text = texte
-	_reste_message = duree
-
-
-func _process(delta: float) -> void:
-	if _reste_message > 0.0:
-		_reste_message -= delta
-		_message.modulate.a = clampf(_reste_message, 0.0, 1.0)
 
 
 func _horloge_realignee() -> void:
