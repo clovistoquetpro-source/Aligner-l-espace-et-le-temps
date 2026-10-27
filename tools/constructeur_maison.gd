@@ -110,8 +110,9 @@ func _piece(g: Node3D, centre: Vector3, taille: Vector2, sol: String, mur: Strin
 	var murs := {
 		"avant": [Vector3(0, h / 2, -lz / 2 - 0.1), lx + 0.4, true, Vector3(0, 0, 1), lx],
 		"arriere": [Vector3(0, h / 2, lz / 2 + 0.1), lx + 0.4, true, Vector3(0, 0, -1), lx],
-		"gauche": [Vector3(-lx / 2 - 0.1, h / 2, 0), lz, false, Vector3(1, 0, 0), lz],
-		"droite": [Vector3(lx / 2 + 0.1, h / 2, 0), lz, false, Vector3(-1, 0, 0), lz],
+		# Les plinthes de côté s'arrêtent contre celles de l'avant et de l'arrière.
+		"gauche": [Vector3(-lx / 2 - 0.1, h / 2, 0), lz, false, Vector3(1, 0, 0), lz - 0.08],
+		"droite": [Vector3(lx / 2 + 0.1, h / 2, 0), lz, false, Vector3(-1, 0, 0), lz - 0.08],
 	}
 	for cote in murs:
 		var pos: Vector3 = centre + murs[cote][0]
@@ -272,7 +273,7 @@ func _hall() -> void:
 	_fenetre(g, g.get_node("Mur_gauche"), "Gauche", Vector3(-3.1, 1.8, 4.5), 1.0, 1.4)
 	_m.suspension(g, "Suspension", Vector3(0, HAUTEUR_HALL, 3.5), 0.9)
 	_photo(g, "PhotoSouvenir", Vector3(-2.98, 1.7, 3), "photo_bonne", true, PI / 2)
-	_texte(g, "Souvenir", Vector3(-2.95, 2.3, 3), "Mon souvenir préféré", PI / 2, 0.004)
+	_texte(g, "Souvenir", Vector3(-2.95, 2.35, 3), "Mon souvenir\npréféré", PI / 2, 0.0035)
 	_texte(g, "Indice", Vector3(0, 2.75, 0.05), "Le couloir ne mène nulle part…\nsauf si tu regardes le bon souvenir.", 0.0, 0.004)
 	_ancrage(g, "Ancrage", Vector3(0, 0, 4.5), Vector3(0, 1.5, 3), Vector3(6, 3, 6))
 	# L'entrée du couloir est sur une estrade trop haute pour un saut : il faut
@@ -295,8 +296,8 @@ func _hall() -> void:
 	_m.lumiere(lampe_table, Vector3(0, 0.5, 0), 2.5, 0.4)
 	_m.kenney(g, "PetitePlante", "plantSmall2", Vector3(2.8, 0.76, 4.2), 0.0, false)
 	_m.kenney(g, "Ours", "bear", Vector3(-1.3, 1.62, 5.8), PI, false, -1, 1.1)
-	_m.applique(g, "AppliqueGauche", Vector3(-2.88, 2.3, 1.9))
-	_m.applique(g, "AppliqueDroite", Vector3(2.88, 2.3, 1.9))
+	_m.applique(g, "AppliqueGauche", Vector3(-2.88, 2.3, 1.0))
+	_m.applique(g, "AppliqueDroite", Vector3(2.88, 2.3, 1.0))
 	_m.horloge_murale(g, "Horloge", Vector3(2.92, 1.8, 3.6), -PI / 2, 0.35)
 
 
@@ -304,14 +305,16 @@ func _couloir() -> void:
 	var g := _groupe("Couloir")
 	_boite(g, "Sol", Vector3(0, -0.25, -7), Vector3(2.5, 0.5, 14), "couloir_sol")
 	var h := HAUTEUR_HALL
-	_boite(g, "MurGauche", Vector3(-1.35, h / 2, -7), Vector3(0.2, h, 14), "couloir_mur")
-	_boite(g, "MurDroit", Vector3(1.35, h / 2, -7), Vector3(0.2, h, 14), "couloir_mur")
+	# Les murs et le plafond commencent derrière le mur avant du hall (z = -0,2) :
+	# deux boîtes au même endroit scintillent.
+	_boite(g, "MurGauche", Vector3(-1.35, h / 2, -7.1), Vector3(0.2, h, 13.8), "couloir_mur")
+	_boite(g, "MurDroit", Vector3(1.35, h / 2, -7.1), Vector3(0.2, h, 13.8), "couloir_mur")
 	_boite(g, "MurFond", Vector3(0, h / 2, -14.1), Vector3(2.9, h, 0.2), "couloir_mur")
-	_plafond(g, Vector3(0, 0, -7), Vector2(2.9, 14), h, "plafond_couloir")
+	_plafond(g, Vector3(0, 0, -7.2), Vector2(2.9, 14), h, "plafond_couloir")
 	# Le débord du toit ne doit pas dépasser dans le hall.
 	_toit(g, Vector3(0, h + 0.3, -7.25), 2.9, 13.5, "couloir_mur", false)
-	_plinthe(g, "PlintheGauche", Vector3(-1.23, 0.06, -7), 14, false)
-	_plinthe(g, "PlintheDroite", Vector3(1.23, 0.06, -7), 14, false)
+	_plinthe(g, "PlintheGauche", Vector3(-1.23, 0.06, -6.98), 13.96, false)
+	_plinthe(g, "PlintheDroite", Vector3(1.23, 0.06, -6.98), 13.96, false)
 	_plinthe(g, "PlintheFond", Vector3(0, 0.06, -13.98), 2.5, true)
 	# Les mauvaises photos sont dans l'axe ; la bonne est sur le côté, il faut
 	# tourner la tête vers elle en traversant.
@@ -362,9 +365,9 @@ func _salon() -> void:
 	_boite(g, "MurHaut", Vector3(30, 4, -10), Vector3(10, 2, 0.3), "salon_mur")
 	_plafond(g, Vector3(30, 0, -11), Vector2(10.4, 22.4), h, "plafond_salon")
 	_toit(g, Vector3(30, h + 0.3, -11), 10.4, 22.4, "salon_mur")
-	_plinthe(g, "PlintheGauche", Vector3(25.12, 0.06, -11), 22, false)
-	_plinthe(g, "PlintheDroite", Vector3(34.88, 0.06, -11), 22, false)
-	_plinthe(g, "PlintheArriere", Vector3(30, 0.06, -0.12), 10, true)
+	_plinthe(g, "PlintheGauche", Vector3(25.02, 0.06, -11), 21.92, false)
+	_plinthe(g, "PlintheDroite", Vector3(34.98, 0.06, -11), 21.92, false)
+	_plinthe(g, "PlintheArriere", Vector3(30, 0.06, -0.02), 10, true)
 	# Une grande fenêtre basse et des fenêtres hautes côté jardin.
 	_fenetre(g, arriere, "Arriere", Vector3(32.0, 1.8, 0.1), 1.4, 1.4)
 	_fenetre(g, droit, "Droite", Vector3(35.1, 1.8, -4.5), 1.2, 1.4)
@@ -467,8 +470,10 @@ func _atelier() -> void:
 	var g := _groupe("Atelier")
 	# Le sol et les murs de côté sont ceux du salon (même grand volume).
 	var h := HAUTEUR_SALON
-	_boite(g, "MurFond_a", Vector3(27, h / 2, -22.1), Vector3(4, h, 0.2), "atelier_mur")
-	_boite(g, "MurFond_b", Vector3(33, h / 2, -22.1), Vector3(4, h, 0.2), "atelier_mur")
+	# Le mur du fond va jusqu'au bord extérieur des murs de côté (pas de trou
+	# dans les coins).
+	_boite(g, "MurFond_a", Vector3(26.9, h / 2, -22.1), Vector3(4.2, h, 0.2), "atelier_mur")
+	_boite(g, "MurFond_b", Vector3(33.1, h / 2, -22.1), Vector3(4.2, h, 0.2), "atelier_mur")
 	_boite(g, "MurFond_haut", Vector3(30, (2.5 + h) / 2, -22.1), Vector3(2, h - 2.5, 0.2), "atelier_mur")
 	_plinthe(g, "PlintheFond_a", Vector3(27, 0.06, -21.98), 4, true)
 	_plinthe(g, "PlintheFond_b", Vector3(33, 0.06, -21.98), 4, true)

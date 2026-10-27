@@ -252,3 +252,71 @@ func test_dans_le_passe_on_traverse_le_salon_jusqu_a_l_atelier() -> void:
 	Input.action_release("avancer")
 	T.ok(j.global_position.z < -11.0, "passé sous l'arche (z = %.2f)" % j.global_position.z)
 	T.ok(Temps.basculer(j), "on peut revenir au présent dans l'atelier")
+
+
+## Murs, sols, plafonds… : deux de ces boîtes ne doivent jamais occuper le
+## même volume (leurs faces se superposent et scintillent).
+const STRUCTURE := ["Mur", "Plafond", "Sol", "Estrade", "Colonne", "Arche", "PorteSortie"]
+
+
+func _boite(b: CSGBox3D) -> AABB:
+	return b.global_transform * AABB(-b.size / 2, b.size)
+
+
+func _epoque(n: Node) -> int:
+	var e := n.get_node_or_null("EpochMember")
+	return e.epoque if e != null else -1
+
+
+func _boites(n: Node, prefixes: Array) -> Array[Node]:
+	return _tous(n, func(x: Node) -> bool:
+		return x is CSGBox3D and not (x.get_parent() is CSGShape3D) \
+			and prefixes.any(func(p: String) -> bool: return String(x.name).begins_with(p)))
+
+
+func _chevauchements(boites: Array[Node]) -> Array[String]:
+	var res: Array[String] = []
+	for i in boites.size():
+		for k in range(i + 1, boites.size()):
+			var a: CSGBox3D = boites[i]
+			var b: CSGBox3D = boites[k]
+			if _epoque(a) >= 0 and _epoque(b) >= 0 and _epoque(a) != _epoque(b):
+				continue
+			var inter := _boite(a).intersection(_boite(b))
+			if inter.size.x * inter.size.y * inter.size.z > 1e-6:
+				res.append("%s / %s" % [a.get_path(), b.get_path()])
+	return res
+
+
+func test_les_murs_ne_se_chevauchent_pas() -> void:
+	var n: Node3D = await _charger()
+	var c := _chevauchements(_boites(n, STRUCTURE))
+	T.ok(c.is_empty(), "chevauchements : %s" % ", ".join(c))
+
+
+func test_les_plinthes_touchent_un_mur_sans_se_chevaucher() -> void:
+	var n: Node3D = await _charger()
+	var plinthes := _boites(n, ["Plinthe"])
+	var murs := _boites(n, ["Mur"])
+	T.ok(plinthes.size() >= 8, "des plinthes")
+	for p in plinthes:
+		var colle := murs.any(func(m: Node) -> bool: return _boite(m).grow(0.005).intersects(_boite(p)))
+		T.ok(colle, "%s contre un mur" % p.get_path())
+	var c := _chevauchements(plinthes)
+	T.ok(c.is_empty(), "plinthes qui se chevauchent : %s" % ", ".join(c))
+
+
+func test_le_cadre_des_fenetres_ne_colle_pas_au_trou_du_mur() -> void:
+	# Le bord intérieur du cadre doit être un peu dans l'ouverture : sinon ses
+	# faces tombent pile sur celles du trou et scintillent.
+	var n: Node3D = await _charger()
+	var vitres := _tous(n, func(x: Node) -> bool: return x is CSGBox3D and String(x.name).begins_with("Vitre"))
+	for v: CSGBox3D in vitres:
+		var cadre := v.get_parent().get_node("Fenetre" + String(v.name).trim_prefix("Vitre"))
+		for b in cadre.get_children():
+			if not (b is CSGBox3D) or not is_equal_approx(b.size.z, 0.3):
+				continue
+			if absf(b.position.x) > 0.01:
+				T.ok(absf(b.position.x) - b.size.x / 2 < v.size.x / 2 - 0.005, "%s : montant en retrait" % cadre.name)
+			if absf(b.position.y) > 0.01:
+				T.ok(absf(b.position.y) - b.size.y / 2 < v.size.y / 2 - 0.005, "%s : traverse en retrait" % cadre.name)

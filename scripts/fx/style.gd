@@ -1,12 +1,9 @@
 class_name Style
 extends RefCounted
 
-## Le style « cartoon coloré » du jeu : ombres en aplats, reflet sur les bords
-## et contour sombre.
-
-const CONTOUR := preload("res://shaders/contour.gdshader")
-
-static var _contour: ShaderMaterial
+## Le style « cartoon coloré » du jeu : ombres en aplats et reflet sur les
+## bords. Le contour sombre est tracé à l'écran par la caméra du joueur
+## (shaders/contour_ecran.gdshader).
 
 
 ## Matériaux cartoon déjà faits à partir des matériaux des modèles importés.
@@ -26,7 +23,7 @@ static func materiau(couleur: Color, lumineux := false) -> StandardMaterial3D:
 
 
 ## La version cartoon du matériau d'un modèle importé : mêmes couleur et
-## texture, ombres en aplats et contour. Une seule copie par original.
+## texture, ombres en aplats. Une seule copie par original.
 ## `corriger_couleurs` : Kenney enregistre ses couleurs telles qu'on les voit
 ## (sRGB) là où glTF attend des valeurs linéaires ; sans correction, elles
 ## sortent délavées.
@@ -59,17 +56,10 @@ static func _styliser(m: BaseMaterial3D) -> void:
 	m.rim_enabled = true
 	m.rim = 0.15
 	m.rim_tint = 0.8
-	m.next_pass = contour()
 
 
-static func contour() -> ShaderMaterial:
-	if _contour == null:
-		_contour = ShaderMaterial.new()
-		_contour.shader = CONTOUR
-	return _contour
-
-
-## Une vitre à peine teintée, sans contour : on voit le ciel à travers.
+## Une vitre à peine teintée : on voit le ciel à travers. Elle n'écrit pas de
+## profondeur, donc le contour à l'écran passe à travers elle.
 static func vitre() -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
 	m.albedo_color = Color(0.85, 0.97, 1.0, 0.15)
