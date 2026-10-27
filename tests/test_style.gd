@@ -17,3 +17,10 @@ func test_materiau_lumineux() -> void:
 
 func test_contour_partage() -> void:
 	T.eq(Style.materiau(Color.RED).next_pass, Style.materiau(Color.BLUE).next_pass, "un seul matériau de contour")
+
+
+func test_vitre_transparente_sans_contour() -> void:
+	var m := Style.vitre()
+	T.eq(m.transparency, BaseMaterial3D.TRANSPARENCY_ALPHA, "transparente")
+	T.ok(m.albedo_color.a < 0.5, "on voit à travers")
+	T.ok(m.next_pass == null, "pas de contour autour du verre")

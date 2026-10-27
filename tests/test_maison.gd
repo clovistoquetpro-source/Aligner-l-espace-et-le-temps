@@ -175,3 +175,49 @@ func test_parcours_complet() -> void:
 	T.ok(enigme.est_resolu, "horloge réalignée")
 	var sortie: CSGShape3D = n.get_node("Atelier/PorteSortie")
 	T.ok(not sortie.visible and not sortie.use_collision, "la sortie est ouverte")
+
+
+## Bas d'un plafond (boîte CSG), en coordonnées du monde.
+func _bas(plafond: CSGBox3D) -> float:
+	return plafond.global_position.y - plafond.size.y / 2
+
+
+func test_chaque_piece_a_un_plafond_solide_sans_ombre() -> void:
+	var n: Node3D = await _charger()
+	for chemin in ["Hall/Plafond", "Couloir/Plafond", "Salon/Plafond"]:
+		var p := n.get_node_or_null(chemin) as CSGBox3D
+		T.ok(p != null, "%s existe" % chemin)
+		if p == null:
+			continue
+		T.ok(p.use_collision, "%s solide" % chemin)
+		# Le plafond ne cache pas le soleil : les pièces restent lumineuses.
+		T.eq(p.cast_shadow, GeometryInstance3D.SHADOW_CASTING_SETTING_OFF, "%s sans ombre" % chemin)
+
+
+func test_debout_sur_l_estrade_on_passe_sous_les_plafonds() -> void:
+	var n: Node3D = await _charger()
+	var estrade: CSGBox3D = n.get_node("Hall/Estrade")
+	var tete := estrade.global_position.y + estrade.size.y / 2 + 1.8
+	for chemin in ["Hall/Plafond", "Couloir/Plafond"]:
+		var p := n.get_node_or_null(chemin) as CSGBox3D
+		T.ok(p != null and _bas(p) > tete + 0.3, "%s assez haut pour passer depuis l'estrade" % chemin)
+
+
+func test_le_plafond_ne_coupe_pas_l_horloge() -> void:
+	var n: Node3D = await _charger()
+	var p := n.get_node_or_null("Salon/Plafond") as CSGBox3D
+	T.ok(p != null, "plafond du salon")
+	if p == null:
+		return
+	for morceau in n.get_node("Atelier/Horloge").get_children():
+		var b := morceau as CSGBox3D
+		var boite: AABB = b.global_transform * AABB(-b.size / 2, b.size)
+		T.ok(boite.end.y < _bas(p), "%s sous le plafond" % b.name)
+
+
+func test_les_fenetres_ont_une_vitre_solide() -> void:
+	var n: Node3D = await _charger()
+	var vitres := _tous(n, func(x: Node) -> bool: return x is CSGBox3D and String(x.name).begins_with("Vitre"))
+	T.ok(vitres.size() >= 3, "au moins 3 fenêtres (%d)" % vitres.size())
+	for v in vitres:
+		T.ok((v as CSGBox3D).use_collision, "%s bloque le passage" % v.name)

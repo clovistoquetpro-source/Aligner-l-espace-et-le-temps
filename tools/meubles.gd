@@ -18,8 +18,10 @@ const COULEURS := {
 	"cadran": "fffcf2", "tronc": "8d5524", "fleur_1": "ff006e", "fleur_2": "ffbe0b",
 	"fleur_3": "3a86ff", "applique": "fff3b0", "nuage": "ffffff", "flottant_1": "f15bb5",
 	"flottant_2": "00bbf9", "flottant_3": "fee440", "flottant_4": "9b5de5",
+	"cadre_fenetre": "ffffff", "ampoule": "fff8e1", "fer": "3d3551", "bougie": "fffcf2",
 }
-const LUMINEUX := ["abat_jour", "ecran", "flamme", "applique", "cadran"]
+const LUMINEUX := ["abat_jour", "ecran", "flamme", "applique", "cadran", "ampoule"]
+const LUMIERE_CHAUDE := Color("ffd6a5")
 
 var _b
 var _materiaux := {}
@@ -174,7 +176,73 @@ func horloge_murale(parent: Node, nom: String, pos: Vector3, rot_y := 0.0, rayon
 	return p
 
 
+## Une lumière ponctuelle qui éclaire autour d'une lampe (sans ombre).
+func lumiere(p: Node, pos: Vector3, portee: float, energie: float, couleur := LUMIERE_CHAUDE) -> OmniLight3D:
+	var l := OmniLight3D.new()
+	l.position = pos
+	l.omni_range = portee
+	l.light_energy = energie
+	l.light_color = couleur
+	return _b._ajouter(p, l, "Lumiere")
+
+
+## Une lampe suspendue : `pos` est le point d'accroche au plafond.
+func suspension(parent: Node, nom: String, pos: Vector3, longueur := 1.0, epoque := -1) -> CSGCombiner3D:
+	var p := prop(parent, nom, pos, 0.0, false, epoque)
+	cyl(p, Vector3(0, -longueur / 2, 0), 0.015, longueur, "fer", 4)
+	cyl(p, Vector3(0, -longueur - 0.12, 0), 0.3, 0.3, "abat_jour", 8, true)
+	boule(p, Vector3(0, -longueur - 0.3, 0), 0.08, "ampoule", 5)
+	lumiere(p, Vector3(0, -longueur - 0.4, 0), 6.0, 0.8)
+	return p
+
+
+## Un plafonnier plat, collé au plafond (`pos`).
+func plafonnier(parent: Node, nom: String, pos: Vector3, epoque := -1) -> CSGCombiner3D:
+	var p := prop(parent, nom, pos, 0.0, false, epoque)
+	cyl(p, Vector3(0, -0.04, 0), 0.28, 0.08, "ampoule", 8)
+	cyl(p, Vector3(0, -0.01, 0), 0.32, 0.03, "metal", 8)
+	lumiere(p, Vector3(0, -0.4, 0), 3.5, 0.5)
+	return p
+
+
+## Le cadre blanc d'une fenêtre (avec sa croix), centré sur `pos`, dans le
+## plan local XY.
+func cadre_fenetre(parent: Node, nom: String, pos: Vector3, largeur: float, hauteur: float, rot_y := 0.0) -> CSGCombiner3D:
+	var p := prop(parent, nom, pos, rot_y, false)
+	var e := 0.1
+	for y in [-1, 1]:
+		cube(p, Vector3(0, y * (hauteur + e) / 2, 0), Vector3(largeur + 2 * e, e, 0.3), "cadre_fenetre")
+	for x in [-1, 1]:
+		cube(p, Vector3(x * (largeur + e) / 2, 0, 0), Vector3(e, hauteur, 0.3), "cadre_fenetre")
+	cube(p, Vector3.ZERO, Vector3(0.05, hauteur, 0.06), "cadre_fenetre")
+	cube(p, Vector3.ZERO, Vector3(largeur, 0.05, 0.06), "cadre_fenetre")
+	# Rebord sous la fenêtre.
+	cube(p, Vector3(0, -(hauteur / 2 + e), 0), Vector3(largeur + 0.4, 0.06, 0.45), "cadre_fenetre")
+	return p
+
+
 # --- Le passé ------------------------------------------------------------------
+
+## Un lustre en fer avec des bougies, accroché au plafond (`pos`).
+func lustre(parent: Node, nom: String, pos: Vector3, longueur := 1.2, epoque := PASSE) -> CSGCombiner3D:
+	var p := prop(parent, nom, pos, 0.0, false, epoque)
+	cyl(p, Vector3(0, -longueur / 2, 0), 0.02, longueur, "fer", 4)
+	var anneau := CSGTorus3D.new()
+	anneau.position = Vector3(0, -longueur, 0)
+	anneau.inner_radius = 0.55
+	anneau.outer_radius = 0.65
+	anneau.sides = 12
+	anneau.ring_sides = 4
+	anneau.smooth_faces = false
+	anneau.material = mat("fer")
+	_b._ajouter(p, anneau, "Anneau")
+	for i in 6:
+		var a := TAU * i / 6.0
+		var c := Vector3(cos(a) * 0.6, -longueur + 0.12, sin(a) * 0.6)
+		cyl(p, c, 0.04, 0.2, "bougie", 6)
+		cyl(p, c + Vector3(0, 0.16, 0), 0.04, 0.1, "flamme", 5, true)
+	lumiere(p, Vector3(0, -longueur, 0), 7.0, 1.0, Color("ffb35c"))
+	return p
 
 func torche(parent: Node, nom: String, pos: Vector3, epoque := PASSE) -> CSGCombiner3D:
 	var p := prop(parent, nom, pos, 0.0, false, epoque)

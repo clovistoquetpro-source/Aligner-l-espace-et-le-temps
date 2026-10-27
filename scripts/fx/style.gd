@@ -31,3 +31,13 @@ static func contour() -> ShaderMaterial:
 		_contour = ShaderMaterial.new()
 		_contour.shader = CONTOUR
 	return _contour
+
+
+## Une vitre à peine teintée, sans contour : on voit le ciel à travers.
+static func vitre() -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = Color(0.85, 0.97, 1.0, 0.15)
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	return m
