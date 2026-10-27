@@ -234,10 +234,13 @@ func plafonnier(parent: Node, nom: String, pos: Vector3, epoque := -1) -> CSGCom
 func cadre_fenetre(parent: Node, nom: String, pos: Vector3, largeur: float, hauteur: float, rot_y := 0.0) -> CSGCombiner3D:
 	var p := prop(parent, nom, pos, rot_y, false)
 	var e := 0.1
+	# Le cadre mord de 2 cm dans l'ouverture : ses faces ne tombent pas pile
+	# sur celles du trou (elles scintilleraient).
+	var r := 0.02
 	for y in [-1, 1]:
-		cube(p, Vector3(0, y * (hauteur + e) / 2, 0), Vector3(largeur + 2 * e, e, 0.3), "cadre_fenetre")
+		cube(p, Vector3(0, y * (hauteur / 2 + e / 2 - r), 0), Vector3(largeur + 2 * (e - r), e, 0.3), "cadre_fenetre")
 	for x in [-1, 1]:
-		cube(p, Vector3(x * (largeur + e) / 2, 0, 0), Vector3(e, hauteur, 0.3), "cadre_fenetre")
+		cube(p, Vector3(x * (largeur / 2 + e / 2 - r), 0, 0), Vector3(e, hauteur, 0.3), "cadre_fenetre")
 	cube(p, Vector3.ZERO, Vector3(0.05, hauteur, 0.06), "cadre_fenetre")
 	cube(p, Vector3.ZERO, Vector3(largeur, 0.05, 0.06), "cadre_fenetre")
 	# Rebord sous la fenêtre.

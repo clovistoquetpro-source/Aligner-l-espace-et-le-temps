@@ -44,4 +44,4 @@ Chaque monde a son propre pack de modèles, pour changer de style d'une époque 
 | `assets/modeles/jardin` | Nature Kit, de Kenney (une sélection) | https://kenney.nl/assets/nature-kit |
 | `assets/modeles/chateau` | Fantasy Props MegaKit (version gratuite), de Quaternius (une sélection) | https://quaternius.com/packs/fantasypropsmegakit.html |
 
-Au lancement, chaque modèle prend le style cartoon du jeu (ombres en aplats et contour sombre) grâce à `scripts/fx/habillage_cartoon.gd`. Pour les objets de Quaternius, on ne garde que la texture de couleur, réduite (`tools/preparer_quaternius.py`).
+Au lancement, chaque modèle prend le style cartoon du jeu (ombres en aplats) grâce à `scripts/fx/habillage_cartoon.gd`. Le contour sombre façon BD est tracé sur tout l’écran par la caméra du joueur (`shaders/contour_ecran.gdshader`). Pour les objets de Quaternius, on ne garde que la texture de couleur, réduite (`tools/preparer_quaternius.py`).
