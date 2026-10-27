@@ -1,26 +1,24 @@
 extends RefCounted
 
-## Meubles et décors low-poly, faits de formes simples (boîtes, cylindres à
-## peu de côtés, sphères anguleuses). Chaque meuble est un CSGCombiner3D :
-## ses morceaux gardent leur couleur, et un EpochMember peut le rattacher à
-## une époque.
+## Meubles et décors de la maison. La plupart viennent des packs importés
+## (assets/modeles : Kenney pour la maison et le jardin, Quaternius pour le
+## château du passé). Ce qu'aucun pack ne fournit (horloges, engrenages,
+## lampes, objets du ciel…) est fait de formes simples : chaque décor est
+## alors un CSGCombiner3D dont les morceaux gardent leur couleur. Un
+## EpochMember peut rattacher un décor à une époque.
 
 const TempsScript := preload("res://scripts/time/temps.gd")
 const PRESENT := TempsScript.Epoque.PRESENT
 const PASSE := TempsScript.Epoque.PASSE
 
 const COULEURS := {
-	"bois": "c97b4a", "bois_fonce": "7a4a2e", "tissu": "ffd93d", "coussin": "fff3b0",
-	"metal": "5c5f7a", "abat_jour": "ffe066", "terre_cuite": "e07a5f", "feuille": "52b788",
-	"feuille_claire": "95d5b2", "ecran": "4cc9f0", "livre_1": "ef476f", "livre_2": "06d6a0",
-	"livre_3": "118ab2", "livre_4": "ffd166", "tapis": "b388eb", "tapis_2": "7b2cbf",
-	"pierre_claire": "e9c46a", "flamme": "ff9f1c", "dalle": "d4a373", "engrenage": "f72585",
-	"cadran": "fffcf2", "tronc": "8d5524", "fleur_1": "ff006e", "fleur_2": "ffbe0b",
-	"fleur_3": "3a86ff", "applique": "fff3b0", "nuage": "ffffff", "flottant_1": "f15bb5",
-	"flottant_2": "00bbf9", "flottant_3": "fee440", "flottant_4": "9b5de5",
-	"cadre_fenetre": "ffffff", "ampoule": "fff8e1", "fer": "3d3551", "bougie": "fffcf2",
+	"bois": "c97b4a", "bois_fonce": "7a4a2e", "metal": "5c5f7a", "abat_jour": "ffe066",
+	"livre_1": "ef476f", "livre_2": "06d6a0", "livre_3": "118ab2",
+	"livre_4": "ffd166", "flamme": "ff9f1c", "engrenage": "f72585", "cadran": "fffcf2",
+	"applique": "fff3b0", "flottant_1": "f15bb5", "flottant_2": "00bbf9", "flottant_3": "fee440",
+	"flottant_4": "9b5de5", "cadre_fenetre": "ffffff", "ampoule": "fff8e1", "fer": "3d3551",
 }
-const LUMINEUX := ["abat_jour", "ecran", "flamme", "applique", "cadran", "ampoule"]
+const LUMINEUX := ["abat_jour", "flamme", "applique", "cadran", "ampoule"]
 const LUMIERE_CHAUDE := Color("ffd6a5")
 
 var _b
@@ -35,6 +33,84 @@ func mat(cle: String) -> StandardMaterial3D:
 	if not _materiaux.has(cle):
 		_materiaux[cle] = Style.materiau(Color(COULEURS[cle]), cle in LUMINEUX)
 	return _materiaux[cle]
+
+
+# --- Modèles importés (assets/modeles) ------------------------------------------
+
+const MODELES := "res://assets/modeles/"
+const HABILLAGE := preload("res://scripts/fx/habillage_cartoon.gd")
+## Les meubles de Kenney sont à la moitié de la taille réelle.
+const ECHELLE_KENNEY := 2.0
+
+
+## Un modèle importé (glTF), habillé en cartoon au lancement. `ancrage` dit
+## quel point du modèle est posé sur `pos` : "sol" (milieu de la base),
+## "plafond" (milieu du haut), "mur" (base, contre le dos) ou "mur_haut"
+## (haut, contre le dos). Les modèles regardent vers +Z. `solide` ajoute une
+## boîte de collision à la taille du modèle.
+func modele(parent: Node, nom: String, chemin: String, pos: Vector3, rot_y := 0.0, echelle := 1.0, solide := true, epoque := -1, ancrage := "sol") -> Node3D:
+	var corps: Node3D = StaticBody3D.new() if solide else Node3D.new()
+	corps.set_script(HABILLAGE)
+	corps.position = pos
+	corps.rotation.y = rot_y
+	_b._ajouter(parent, corps, nom)
+	var m: Node3D = load(MODELES + chemin).instantiate()
+	var boite := _boite_englobante(m, Transform3D.IDENTITY)
+	var c := boite.get_center()
+	var ancre := c
+	ancre.y = boite.end.y if ancrage in ["plafond", "mur_haut"] else boite.position.y
+	if ancrage.begins_with("mur"):
+		ancre.z = boite.position.z
+	m.scale = Vector3.ONE * echelle
+	m.position = -ancre * echelle
+	_b._ajouter(corps, m, "Modele")
+	# Les packs de Kenney (maison, jardin) ont des couleurs à raviver.
+	corps.set("corriger_couleurs", chemin.get_slice("/", 0) in ["maison", "jardin"])
+	if solide:
+		var forme := CollisionShape3D.new()
+		var b := BoxShape3D.new()
+		b.size = boite.size * echelle
+		forme.shape = b
+		forme.position = (c - ancre) * echelle
+		_b._ajouter(corps, forme, "Collision")
+	if epoque >= 0:
+		var e := EpochMember.new()
+		e.epoque = epoque
+		_b._ajouter(corps, e, "EpochMember")
+	return corps
+
+
+## Un meuble de la maison du présent (Kenney Furniture Kit, couleurs unies).
+func kenney(parent: Node, nom: String, modele_nom: String, pos: Vector3, rot_y := 0.0, solide := true, epoque := -1, echelle := ECHELLE_KENNEY, ancrage := "sol") -> Node3D:
+	return modele(parent, nom, "maison/%s.glb" % modele_nom, pos, rot_y, echelle, solide, epoque, ancrage)
+
+
+## Un objet de la salle de château du passé (Quaternius Fantasy Props,
+## textures peintes).
+func chateau(parent: Node, nom: String, modele_nom: String, pos: Vector3, rot_y := 0.0, solide := true, ancrage := "sol", epoque := PASSE) -> Node3D:
+	return modele(parent, nom, "chateau/%s.gltf" % modele_nom, pos, rot_y, 1.0, solide, epoque, ancrage)
+
+
+## Un élément du jardin (Kenney Nature Kit), sans collision.
+func nature(parent: Node, nom: String, modele_nom: String, pos: Vector3, echelle: float, rot_y := 0.0) -> Node3D:
+	return modele(parent, nom, "jardin/%s.glb" % modele_nom, pos, rot_y, echelle, false)
+
+
+## Boîte englobante des maillages sous `n`, dans le repère de `n`.
+func _boite_englobante(n: Node, t: Transform3D) -> AABB:
+	var res := AABB()
+	var vide := true
+	var tn := t * (n as Node3D).transform if n is Node3D else t
+	if n is MeshInstance3D:
+		res = tn * (n as MeshInstance3D).mesh.get_aabb()
+		vide = false
+	for enfant in n.get_children():
+		var b := _boite_englobante(enfant, tn)
+		if b.size == Vector3.ZERO:
+			continue
+		res = b if vide else res.merge(b)
+		vide = false
+	return res
 
 
 # --- Briques ---------------------------------------------------------------
@@ -87,43 +163,6 @@ func boule(p: Node, pos: Vector3, rayon: float, couleur: String, segments := 6) 
 
 # --- Maison d'aujourd'hui ------------------------------------------------------
 
-func canape(parent: Node, nom: String, pos: Vector3, rot_y := 0.0, epoque := -1) -> CSGCombiner3D:
-	var p := prop(parent, nom, pos, rot_y, true, epoque)
-	cube(p, Vector3(0, 0.225, 0), Vector3(2.2, 0.45, 0.9), "tissu")
-	cube(p, Vector3(0, 0.6, -0.33), Vector3(2.2, 0.6, 0.25), "tissu")
-	cube(p, Vector3(-0.98, 0.33, 0), Vector3(0.25, 0.66, 0.9), "tissu")
-	cube(p, Vector3(0.98, 0.33, 0), Vector3(0.25, 0.66, 0.9), "tissu")
-	cube(p, Vector3(-0.43, 0.52, 0.03), Vector3(0.82, 0.14, 0.6), "coussin")
-	cube(p, Vector3(0.43, 0.52, 0.03), Vector3(0.82, 0.14, 0.6), "coussin")
-	return p
-
-
-func table_basse(parent: Node, nom: String, pos: Vector3, rot_y := 0.0, epoque := -1) -> CSGCombiner3D:
-	var p := prop(parent, nom, pos, rot_y, true, epoque)
-	cube(p, Vector3(0, 0.42, 0), Vector3(1.2, 0.08, 0.7), "bois")
-	for x in [-0.5, 0.5]:
-		for z in [-0.27, 0.27]:
-			cyl(p, Vector3(x, 0.19, z), 0.04, 0.38, "bois_fonce", 6)
-	boule(p, Vector3(0.25, 0.53, 0), 0.08, "fleur_1", 5)
-	return p
-
-
-func lampe(parent: Node, nom: String, pos: Vector3, epoque := -1) -> CSGCombiner3D:
-	var p := prop(parent, nom, pos, 0.0, false, epoque)
-	cyl(p, Vector3(0, 0.03, 0), 0.2, 0.06, "metal", 8)
-	cyl(p, Vector3(0, 0.75, 0), 0.03, 1.4, "metal", 6)
-	cyl(p, Vector3(0, 1.55, 0), 0.32, 0.4, "abat_jour", 8, true)
-	return p
-
-
-func plante(parent: Node, nom: String, pos: Vector3, epoque := -1) -> CSGCombiner3D:
-	var p := prop(parent, nom, pos, 0.0, false, epoque)
-	cyl(p, Vector3(0, 0.2, 0), 0.22, 0.4, "terre_cuite", 6)
-	boule(p, Vector3(0, 0.62, 0), 0.32, "feuille", 6)
-	boule(p, Vector3(0.15, 0.85, 0.05), 0.22, "feuille_claire", 5)
-	boule(p, Vector3(-0.12, 0.9, -0.08), 0.2, "feuille", 5)
-	return p
-
 
 func etagere(parent: Node, nom: String, pos: Vector3, rot_y := 0.0, epoque := -1) -> CSGCombiner3D:
 	var p := prop(parent, nom, pos, rot_y, true, epoque)
@@ -143,21 +182,6 @@ func etagere(parent: Node, nom: String, pos: Vector3, rot_y := 0.0, epoque := -1
 			cube(p, Vector3(x + largeur / 2, y + 0.025 + hauteur / 2, 0), Vector3(largeur, hauteur, 0.25), livres[k % 4])
 			x += largeur + 0.02
 			k += 1
-	return p
-
-
-func tele(parent: Node, nom: String, pos: Vector3, rot_y := 0.0, epoque := -1) -> CSGCombiner3D:
-	var p := prop(parent, nom, pos, rot_y, true, epoque)
-	cube(p, Vector3(0, 0.25, 0), Vector3(1.4, 0.5, 0.45), "bois_fonce")
-	cube(p, Vector3(0, 0.95, 0), Vector3(1.2, 0.7, 0.08), "metal")
-	cube(p, Vector3(0, 0.95, 0.045), Vector3(1.08, 0.58, 0.02), "ecran")
-	return p
-
-
-func tapis(parent: Node, nom: String, pos: Vector3, rayon := 1.4, epoque := -1) -> CSGCombiner3D:
-	var p := prop(parent, nom, pos, 0.0, false, epoque)
-	cyl(p, Vector3(0, 0.01, 0), rayon, 0.02, "tapis", 12)
-	cyl(p, Vector3(0, 0.02, 0), rayon * 0.6, 0.02, "tapis_2", 12)
 	return p
 
 
@@ -221,53 +245,7 @@ func cadre_fenetre(parent: Node, nom: String, pos: Vector3, largeur: float, haut
 	return p
 
 
-# --- Le passé ------------------------------------------------------------------
-
-## Un lustre en fer avec des bougies, accroché au plafond (`pos`).
-func lustre(parent: Node, nom: String, pos: Vector3, longueur := 1.2, epoque := PASSE) -> CSGCombiner3D:
-	var p := prop(parent, nom, pos, 0.0, false, epoque)
-	cyl(p, Vector3(0, -longueur / 2, 0), 0.02, longueur, "fer", 4)
-	var anneau := CSGTorus3D.new()
-	anneau.position = Vector3(0, -longueur, 0)
-	anneau.inner_radius = 0.55
-	anneau.outer_radius = 0.65
-	anneau.sides = 12
-	anneau.ring_sides = 4
-	anneau.smooth_faces = false
-	anneau.material = mat("fer")
-	_b._ajouter(p, anneau, "Anneau")
-	for i in 6:
-		var a := TAU * i / 6.0
-		var c := Vector3(cos(a) * 0.6, -longueur + 0.12, sin(a) * 0.6)
-		cyl(p, c, 0.04, 0.2, "bougie", 6)
-		cyl(p, c + Vector3(0, 0.16, 0), 0.04, 0.1, "flamme", 5, true)
-	lumiere(p, Vector3(0, -longueur, 0), 7.0, 1.0, Color("ffb35c"))
-	return p
-
-func torche(parent: Node, nom: String, pos: Vector3, epoque := PASSE) -> CSGCombiner3D:
-	var p := prop(parent, nom, pos, 0.0, false, epoque)
-	cyl(p, Vector3(0, 0, 0), 0.05, 0.5, "bois_fonce", 6)
-	cyl(p, Vector3(0, 0.35, 0), 0.12, 0.25, "flamme", 6, true)
-	return p
-
-
-func tonneau(parent: Node, nom: String, pos: Vector3, epoque := PASSE) -> CSGCombiner3D:
-	var p := prop(parent, nom, pos, 0.0, true, epoque)
-	cyl(p, Vector3(0, 0.45, 0), 0.35, 0.9, "bois", 10)
-	cyl(p, Vector3(0, 0.2, 0), 0.36, 0.06, "metal", 10)
-	cyl(p, Vector3(0, 0.7, 0), 0.36, 0.06, "metal", 10)
-	return p
-
-
-func banc(parent: Node, nom: String, pos: Vector3, rot_y := 0.0, epoque := PASSE) -> CSGCombiner3D:
-	var p := prop(parent, nom, pos, rot_y, true, epoque)
-	cube(p, Vector3(0, 0.45, 0), Vector3(1.8, 0.15, 0.5), "pierre_claire")
-	cube(p, Vector3(-0.7, 0.2, 0), Vector3(0.25, 0.4, 0.45), "pierre_claire")
-	cube(p, Vector3(0.7, 0.2, 0), Vector3(0.25, 0.4, 0.45), "pierre_claire")
-	return p
-
-
-# --- Atelier et jardin -----------------------------------------------------------
+# --- Atelier et ciel -----------------------------------------------------------
 
 func etabli(parent: Node, nom: String, pos: Vector3, rot_y := 0.0) -> CSGCombiner3D:
 	var p := prop(parent, nom, pos, rot_y, true)
@@ -288,21 +266,6 @@ func engrenage(parent: Node, nom: String, pos: Vector3, rayon: float, couleur :=
 	for i in 10:
 		var a := TAU * i / 10.0
 		cube(p, Vector3(cos(a), sin(a), 0) * rayon, Vector3(rayon * 0.25, rayon * 0.25, 0.08), couleur, Vector3(0, 0, a))
-	return p
-
-
-func arbre(parent: Node, nom: String, pos: Vector3, hauteur := 1.0) -> CSGCombiner3D:
-	var p := prop(parent, nom, pos, 0.0, true)
-	cyl(p, Vector3(0, 0.7 * hauteur, 0), 0.15 * hauteur, 1.4 * hauteur, "tronc", 6)
-	boule(p, Vector3(0, 1.8 * hauteur, 0), 0.9 * hauteur, "feuille", 6)
-	boule(p, Vector3(0.4, 2.3, 0.2) * hauteur, 0.55 * hauteur, "feuille_claire", 5)
-	return p
-
-
-func fleur(parent: Node, nom: String, pos: Vector3, couleur: String) -> CSGCombiner3D:
-	var p := prop(parent, nom, pos, 0.0, false)
-	cyl(p, Vector3(0, 0.15, 0), 0.015, 0.3, "feuille", 4)
-	boule(p, Vector3(0, 0.33, 0), 0.07, couleur, 5)
 	return p
 
 

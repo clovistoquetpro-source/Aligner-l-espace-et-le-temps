@@ -33,3 +33,15 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 `scenes/maison.tscn` est construit par le code de `tools/constructeur_maison.gd` :
 `godot --headless --path . -s res://tools/construire_maison.gd`.
 Si tu retouches la maison dans l'éditeur Godot, ne relance plus cette commande : elle écraserait tes retouches.
+
+## Modèles 3D
+
+Chaque monde a son propre pack de modèles, pour changer de style d'une époque à l'autre. Tous sont sous licence CC0 (libres, même pour un jeu vendu) :
+
+| Dossier | Pack | Où |
+| --- | --- | --- |
+| `assets/modeles/maison` | Furniture Kit, de Kenney | https://kenney.nl/assets/furniture-kit |
+| `assets/modeles/jardin` | Nature Kit, de Kenney (une sélection) | https://kenney.nl/assets/nature-kit |
+| `assets/modeles/chateau` | Fantasy Props MegaKit (version gratuite), de Quaternius (une sélection) | https://quaternius.com/packs/fantasypropsmegakit.html |
+
+Au lancement, chaque modèle prend le style cartoon du jeu (ombres en aplats et contour sombre) grâce à `scripts/fx/habillage_cartoon.gd`. Pour les objets de Quaternius, on ne garde que la texture de couleur, réduite (`tools/preparer_quaternius.py`).

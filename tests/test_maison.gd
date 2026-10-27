@@ -221,3 +221,34 @@ func test_les_fenetres_ont_une_vitre_solide() -> void:
 	T.ok(vitres.size() >= 3, "au moins 3 fenêtres (%d)" % vitres.size())
 	for v in vitres:
 		T.ok((v as CSGBox3D).use_collision, "%s bloque le passage" % v.name)
+
+
+func _membres(n: Node, e: int) -> Array[Node]:
+	return _tous(n, func(x: Node) -> bool: return x is HabillageCartoon and x.get_node_or_null("EpochMember") != null and x.get_node("EpochMember").epoque == e)
+
+
+func test_la_maison_est_meublee_avec_les_packs() -> void:
+	var n: Node3D = await _charger()
+	var modeles := _tous(n, func(x: Node) -> bool: return x is HabillageCartoon)
+	T.ok(modeles.size() >= 40, "au moins 40 modèles importés (%d)" % modeles.size())
+	T.ok(_membres(n, TempsScript.Epoque.PRESENT).size() >= 8, "un salon meublé au présent")
+	T.ok(_membres(n, TempsScript.Epoque.PASSE).size() >= 8, "une salle de château dans le passé")
+	if modeles.is_empty():
+		return
+	var mi := modeles[0].find_children("*", "MeshInstance3D", true, false)[0] as MeshInstance3D
+	var m := mi.get_surface_override_material(0) as BaseMaterial3D
+	T.ok(m != null and m.diffuse_mode == BaseMaterial3D.DIFFUSE_TOON, "habillés en cartoon")
+
+
+func test_dans_le_passe_on_traverse_le_salon_jusqu_a_l_atelier() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	j.teleport(Transform3D(Basis(), Vector3(30, 0, -1.5)))
+	await tree.physics_frame
+	T.ok(Temps.basculer(j), "on peut basculer à l'arrivée dans le salon")
+	Input.action_press("avancer")
+	for i in 150:
+		await tree.physics_frame
+	Input.action_release("avancer")
+	T.ok(j.global_position.z < -11.0, "passé sous l'arche (z = %.2f)" % j.global_position.z)
+	T.ok(Temps.basculer(j), "on peut revenir au présent dans l'atelier")

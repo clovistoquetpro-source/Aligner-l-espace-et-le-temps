@@ -10,5 +10,9 @@ func _initialize() -> void:
 
 
 func _construire() -> void:
-	var err: int = load("res://tools/constructeur_maison.gd").new().construire()
+	var script: GDScript = load("res://tools/constructeur_maison.gd")
+	if script == null or not script.can_instantiate():
+		quit(1)
+		return
+	var err: int = script.new().construire()
 	quit(0 if err == OK else 1)

@@ -284,10 +284,17 @@ func _hall() -> void:
 	cube.taille_depart = 0.3
 	cube.zone = AABB(Vector3(-3, -1, 0), Vector3(6, 6, 6))
 	_ajouter(g, cube, "Cube")
-	_m.tapis(g, "Tapis", Vector3(0, 0, 4.1), 1.3)
-	_m.lampe(g, "Lampe", Vector3(-2.5, 0, 5.5))
-	_m.plante(g, "Plante", Vector3(2.5, 0, 5.5))
 	_m.etagere(g, "Etagere", Vector3(-0.9, 0, 5.75), PI)
+	_m.kenney(g, "Tapis", "rugRound", Vector3(0, 0, 4.1), 0.0, false, -1, 2.8)
+	var lampe: Node3D = _m.kenney(g, "Lampe", "lampRoundFloor", Vector3(-2.55, 0, 5.55), 0.0, false)
+	_m.lumiere(lampe, Vector3(0, 1.5, 0), 3.0, 0.5)
+	_m.kenney(g, "Plante", "pottedPlant", Vector3(2.55, 0, 5.55))
+	_m.kenney(g, "PorteManteau", "coatRackStanding", Vector3(-2.6, 0, 2.1))
+	_m.kenney(g, "Commode", "sideTableDrawers", Vector3(2.78, 0, 4.5), -PI / 2)
+	var lampe_table: Node3D = _m.kenney(g, "LampeTable", "lampRoundTable", Vector3(2.8, 0.76, 4.85), -PI / 2, false)
+	_m.lumiere(lampe_table, Vector3(0, 0.5, 0), 2.5, 0.4)
+	_m.kenney(g, "PetitePlante", "plantSmall2", Vector3(2.8, 0.76, 4.2), 0.0, false)
+	_m.kenney(g, "Ours", "bear", Vector3(-1.3, 1.62, 5.8), PI, false, -1, 1.1)
 	_m.applique(g, "AppliqueGauche", Vector3(-2.88, 2.3, 1.9))
 	_m.applique(g, "AppliqueDroite", Vector3(2.88, 2.3, 1.9))
 	_m.horloge_murale(g, "Horloge", Vector3(2.92, 1.8, 3.6), -PI / 2, 0.35)
@@ -301,7 +308,8 @@ func _couloir() -> void:
 	_boite(g, "MurDroit", Vector3(1.35, h / 2, -7), Vector3(0.2, h, 14), "couloir_mur")
 	_boite(g, "MurFond", Vector3(0, h / 2, -14.1), Vector3(2.9, h, 0.2), "couloir_mur")
 	_plafond(g, Vector3(0, 0, -7), Vector2(2.9, 14), h, "plafond_couloir")
-	_toit(g, Vector3(0, h + 0.3, -7.05), 2.9, 14.1, "couloir_mur", false)
+	# Le débord du toit ne doit pas dépasser dans le hall.
+	_toit(g, Vector3(0, h + 0.3, -7.25), 2.9, 13.5, "couloir_mur", false)
 	_plinthe(g, "PlintheGauche", Vector3(-1.23, 0.06, -7), 14, false)
 	_plinthe(g, "PlintheDroite", Vector3(1.23, 0.06, -7), 14, false)
 	_plinthe(g, "PlintheFond", Vector3(0, 0.06, -13.98), 2.5, true)
@@ -323,6 +331,12 @@ func _couloir() -> void:
 		if k < 4:
 			_photo(g, "Cadre%dG" % k, Vector3(-1.23, 1.6, z - 1.25), couleurs_cadres[k % 3], false, PI / 2)
 			_photo(g, "Cadre%dD" % k, Vector3(1.23, 1.6, z - 1.25), couleurs_cadres[(k + 1) % 3], false, -PI / 2)
+	# Une console avec des plantes tous les 5 m (la boucle fait 10 m).
+	for k in 2:
+		var z := -3.75 - 5.0 * k
+		_m.kenney(g, "Console%d" % k, "sideTable", Vector3(1.03, 0, z), -PI / 2)
+		for i in 3:
+			_m.kenney(g, "Plante%d_%d" % [k, i], "plantSmall%d" % (i + 1), Vector3(1.03, 0.76, z - 0.35 + 0.35 * i), 0.0, false)
 	var boucle := Marker3D.new()
 	boucle.position = Vector3(0, 0, -2.5)
 	_ajouter(g, boucle, "Boucle")
@@ -361,26 +375,85 @@ func _salon() -> void:
 	_boite(g, "ArcheGauche", Vector3(27, 1.5, -10), Vector3(4, 3, 0.3), "pierre", true, PASSE)
 	_boite(g, "ArcheDroite", Vector3(33, 1.5, -10), Vector3(4, 3, 0.3), "pierre", true, PASSE)
 	_boite(g, "ArcheHaut", Vector3(30, 2.75, -10), Vector3(2, 0.5, 0.3), "pierre", true, PASSE)
-	# Le présent : un salon moderne.
-	_m.canape(g, "Canape", Vector3(27, 0, -6.5), 0.0, PRESENT)
-	_m.table_basse(g, "TableBasse", Vector3(27, 0, -5.0), 0.0, PRESENT)
-	_m.tele(g, "Tele", Vector3(27, 0, -2.6), PI, PRESENT)
-	_m.tapis(g, "Tapis", Vector3(27, 0, -5.0), 1.6, PRESENT)
-	_m.lampe(g, "Lampe", Vector3(25.6, 0, -9.3), PRESENT)
-	_m.plante(g, "Plante", Vector3(34.3, 0, -0.7), PRESENT)
-	_m.etagere(g, "Etagere", Vector3(34.8, 0, -7), -PI / 2, PRESENT)
-	_m.suspension(g, "Suspension1", Vector3(27, h, -5), 1.6, PRESENT)
-	_m.suspension(g, "Suspension2", Vector3(32.5, h, -4), 1.8, PRESENT)
+	# Le présent : un salon moderne (Kenney), avec des cartons pas encore
+	# déballés.
+	var ke: Callable = _m.kenney
+	ke.call(g, "Tapis", "rugRectangle", Vector3(27, 0, -3.6), 0.0, false, PRESENT, 2.5)
+	ke.call(g, "MeubleTele", "cabinetTelevision", Vector3(27, 0, -0.27), PI, true, PRESENT)
+	ke.call(g, "Tele", "televisionModern", Vector3(27, 0.62, -0.3), PI, false, PRESENT)
+	ke.call(g, "Radio", "radio", Vector3(26.4, 0.62, -0.25), PI, false, PRESENT)
+	ke.call(g, "EnceinteG", "speaker", Vector3(25.5, 0, -0.3), PI, true, PRESENT)
+	ke.call(g, "EnceinteD", "speaker", Vector3(28.5, 0, -0.3), PI, true, PRESENT)
+	ke.call(g, "TableBasse", "tableCoffee", Vector3(27, 0, -3.2), 0.0, true, PRESENT)
+	ke.call(g, "Canape", "loungeSofa", Vector3(27, 0, -5.0), 0.0, true, PRESENT)
+	ke.call(g, "Coussin", "pillowBlue", Vector3(26.4, 0.5, -5.0), 0.3, false, PRESENT)
+	ke.call(g, "Fauteuil", "loungeChair", Vector3(28.85, 0, -3.2), -PI / 2, true, PRESENT)
+	var lampe := ke.call(g, "Lampe", "lampSquareFloor", Vector3(25.45, 0, -5.4), 0.0, false, PRESENT) as Node3D
+	_m.lumiere(lampe, Vector3(0, 1.5, 0), 3.5, 0.5)
+	ke.call(g, "Plante", "pottedPlant", Vector3(34.4, 0, -0.6), 0.0, true, PRESENT)
+	ke.call(g, "PlanteTele", "plantSmall1", Vector3(27.6, 0.62, -0.25), 0.0, false, PRESENT)
+	ke.call(g, "FauteuilLecture", "loungeDesignChair", Vector3(25.6, 0, -7.3), PI / 2, true, PRESENT)
+	ke.call(g, "TableLecture", "sideTable", Vector3(25.3, 0, -8.3), PI / 2, true, PRESENT)
+	ke.call(g, "LivresLecture", "books", Vector3(25.3, 0.76, -8.3), 0.4, false, PRESENT)
+	ke.call(g, "Bibliotheque", "bookcaseClosedWide", Vector3(34.75, 0, -7.2), -PI / 2, true, PRESENT)
+	ke.call(g, "Livres", "books", Vector3(34.75, 1.58, -7.6), -PI / 2, false, PRESENT)
+	ke.call(g, "Table", "tableCross", Vector3(32.5, 0, -2.6), 0.0, true, PRESENT)
+	for i in 4:
+		var x := 32.0 + (i % 2)
+		var z := -1.85 if i < 2 else -3.35
+		ke.call(g, "Chaise%d" % i, "chairCushion", Vector3(x, 0, z), PI if i < 2 else 0.0, true, PRESENT)
+	ke.call(g, "Carton1", "cardboardBoxClosed", Vector3(25.5, 0, -9.3), 0.2, true, PRESENT, 2.5)
+	ke.call(g, "Carton2", "cardboardBoxClosed", Vector3(25.5, 0.7, -9.3), -0.3, false, PRESENT, 2.5)
+	ke.call(g, "Carton3", "cardboardBoxOpen", Vector3(26.4, 0, -9.3), 0.1, true, PRESENT, 2.5)
+	var ventilo := Node3D.new()
+	ventilo.position = Vector3(30, h, -5)
+	ventilo.set_script(load("res://scripts/fx/tourne.gd"))
+	ventilo.set("vitesse", Vector3(0, 2.5, 0))
+	_ajouter(g, ventilo, "Ventilateur")
+	ke.call(ventilo, "Helices", "ceilingFan", Vector3.ZERO, 0.0, false, PRESENT, 3.0, "plafond")
+	_m.suspension(g, "Suspension1", Vector3(27, h, -4.2), 1.6, PRESENT)
+	_m.suspension(g, "Suspension2", Vector3(32.5, h, -2.6), 1.8, PRESENT)
 	# Le passé : une salle de château.
 	_boite(g, "Dalles", Vector3(30, 0.011, -5), Vector3(10, 0.02, 9.9), "pierre", false, PASSE)
-	_m.banc(g, "Banc", Vector3(27, 0, -6.8), 0.0)
-	_m.tonneau(g, "Tonneau1", Vector3(34.2, 0, -1.2))
-	_m.tonneau(g, "Tonneau2", Vector3(33.4, 0, -0.7))
-	for z in [-3.0, -8.0]:
-		_m.torche(g, "TorcheG%d" % absi(int(z)), Vector3(25.25, 1.6, z))
-		_m.torche(g, "TorcheD%d" % absi(int(z)), Vector3(34.75, 1.6, z))
+	# Le passé : une salle de château (Quaternius), aux mêmes places que les
+	# meubles du présent.
+	var ch: Callable = _m.chateau
+	ch.call(g, "GrandeTable", "Table_Large", Vector3(27, 0, -4.5))
+	ch.call(g, "BancNord", "Bench", Vector3(27, 0, -3.55))
+	ch.call(g, "BancSud", "Bench", Vector3(27, 0, -5.45))
+	ch.call(g, "Fauteuil", "Chair_1", Vector3(28.95, 0, -4.5), -PI / 2)
+	for i in 3:
+		ch.call(g, "Assiette%d" % i, "Table_Plate", Vector3(26.0 + i, 0.81, -4.2), 0.0, false)
+	ch.call(g, "Chope1", "Mug", Vector3(26.3, 0.81, -4.75), 0.4, false)
+	ch.call(g, "Chope2", "Mug", Vector3(27.6, 0.81, -4.8), -0.8, false)
+	ch.call(g, "Calice", "Chalice", Vector3(28.1, 0.81, -4.3), 0.0, false)
+	ch.call(g, "Marmite", "Pot_1", Vector3(27.0, 0.81, -4.7), 0.0, false)
+	var chandelier := ch.call(g, "Chandelier3", "CandleStick_Triple", Vector3(25.9, 0.81, -4.75), 0.0, false) as Node3D
+	_m.lumiere(chandelier, Vector3(0, 0.6, 0), 2.5, 0.5, Color("ffb35c"))
+	var lustre := ch.call(g, "Lustre", "Chandelier", Vector3(27, h, -4.5), 0.0, false, "plafond") as Node3D
+	_m.lumiere(lustre, Vector3(0, -1.2, 0), 7.0, 1.0, Color("ffb35c"))
+	for z in [-2.5, -7.5]:
+		for cote in [-1, 1]:
+			var nom := "Torche%s%d" % ["G" if cote < 0 else "D", absi(int(z * 10))]
+			var torche := ch.call(g, nom, "Torch_Metal", Vector3(30 + cote * 5.0, 1.7, z), -cote * PI / 2, false, "mur") as Node3D
+			_m.cyl(torche, Vector3(0, 0.72, 0.3), 0.08, 0.2, "flamme", 5, true)
+			_m.lumiere(torche, Vector3(0, 0.9, 0.4), 4.0, 0.6, Color("ff9f1c"))
+	ch.call(g, "BanniereG", "Banner_1_Cloth", Vector3(25.0, 4.2, -5.0), PI / 2, false, "mur_haut")
+	ch.call(g, "BanniereD", "Banner_1_Cloth", Vector3(35.0, 4.2, -9.0), -PI / 2, false, "mur_haut")
+	ch.call(g, "BanniereFondG", "Banner_1_Cloth", Vector3(26.5, 4.2, 0.0), PI, false, "mur_haut")
+	ch.call(g, "BanniereFondD", "Banner_1_Cloth", Vector3(34.0, 4.2, 0.0), PI, false, "mur_haut")
+	ch.call(g, "BanniereArcheG", "Banner_1_Cloth", Vector3(27.0, 2.9, -9.85), 0.0, false, "mur_haut")
+	ch.call(g, "BanniereArcheD", "Banner_1_Cloth", Vector3(33.0, 2.9, -9.85), 0.0, false, "mur_haut")
+	ch.call(g, "Tonneau1", "Barrel", Vector3(34.4, 0, -0.55))
+	ch.call(g, "Tonneau2", "Barrel_Apples", Vector3(33.6, 0, -0.5))
+	ch.call(g, "Caisse", "Crate_Wooden", Vector3(34.5, 0, -1.6), 0.3)
+	ch.call(g, "Bibliotheque", "Bookcase_2", Vector3(34.78, 0, -7.2), -PI / 2)
+	ch.call(g, "Coffre", "Chest_Wood", Vector3(25.45, 0, -9.0), PI / 2)
+	ch.call(g, "Armes", "WeaponStand", Vector3(25.5, 0, -1.0), PI / 2)
+	ch.call(g, "Chaudron", "Cauldron", Vector3(33.4, 0, -8.6))
+	var chandelier_pied := ch.call(g, "ChandelierPied", "CandleStick_Stand", Vector3(28.3, 0, -8.8)) as Node3D
+	_m.lumiere(chandelier_pied, Vector3(0, 1.4, 0), 3.0, 0.5, Color("ffb35c"))
 	_boite(g, "Colonne", Vector3(32.5, h / 2, -5), Vector3(0.8, h, 0.8), "colonne", true, PASSE)
-	_m.lustre(g, "Lustre", Vector3(29, h, -5), 1.4)
 	for k in 11:
 		_boite(g, "Poutre%d" % k, Vector3(30, h - 0.15, -1 - 2 * k), Vector3(10, 0.3, 0.3), "poutre", false, PASSE)
 	_texte(g, "Indice", Vector3(30, 2.5, -9.8), "Appuie sur Tab (ou clic droit)\npour voir cette pièce à une autre époque.")
@@ -410,8 +483,17 @@ func _atelier() -> void:
 	_m.engrenage(g, "Engrenage2", Vector3(34.93, 1.55, -19.3), 0.3, "flottant_2", PI / 2)
 	for k in 3:
 		_m.horloge_murale(g, "HorlogeMurale%d" % k, Vector3(25.07, 1.7 + 0.3 * (k % 2), -13.5 - 2.8 * k), PI / 2, 0.3 + 0.1 * k)
-	_m.plante(g, "Plante", Vector3(25.7, 0, -21.3))
-	_m.lampe(g, "Lampe", Vector3(34.3, 0, -21.3))
+	_m.kenney(g, "Plante", "pottedPlant", Vector3(25.6, 0, -21.4))
+	var lampe: Node3D = _m.kenney(g, "Lampe", "lampSquareFloor", Vector3(34.5, 0, -21.5), 0.0, false)
+	_m.lumiere(lampe, Vector3(0, 1.5, 0), 3.5, 0.5)
+	for i in 2:
+		_m.kenney(g, "EtagereBasse%d" % i, "bookcaseOpenLow", Vector3(25.25, 0, -14.9 - 2.8 * i), PI / 2)
+		_m.kenney(g, "Livres%d" % i, "books", Vector3(25.25, 0.8, -14.9 - 2.8 * i), PI / 2, false)
+	_m.kenney(g, "Bureau", "desk", Vector3(34.6, 0, -12.3), -PI / 2)
+	_m.kenney(g, "Ecran", "computerScreen", Vector3(34.75, 0.76, -12.3), -PI / 2, false)
+	_m.kenney(g, "ChaiseBureau", "chairDesk", Vector3(33.6, 0, -12.3), PI / 2)
+	_m.kenney(g, "Poubelle", "trashcan", Vector3(34.6, 0, -13.5))
+	_m.kenney(g, "Carton", "cardboardBoxOpen", Vector3(25.6, 0, -11.0), 0.4, true, -1, 2.5)
 	# L'horloge : vue depuis la marque, ses morceaux éparpillés forment un cadran.
 	var centre_image := Vector3(30, 2.2, -20)
 	var vue := Marker3D.new()
@@ -451,12 +533,38 @@ func _morceau(horloge: Node3D, nom: String, vue: Vector3, point_image: Vector3, 
 func _jardin() -> void:
 	var g := _groupe("Jardin")
 	_boite(g, "Sol", Vector3(30, -0.25, -26.2), Vector3(6, 0.5, 8), "jardin")
-	_texte(g, "Panneau", Vector3(30, 1.8, -29), "Bientôt : l'Égypte ancienne…")
-	_m.arbre(g, "Arbre1", Vector3(27.8, 0, -28.8), 1.0)
-	_m.arbre(g, "Arbre2", Vector3(32.3, 0, -27.4), 0.8)
-	var fleurs := [[28.5, -24.6, "fleur_1"], [31.6, -24.2, "fleur_2"], [29.1, -26.6, "fleur_3"], [31.2, -29.6, "fleur_1"], [28.2, -26.0, "fleur_2"]]
-	for k in fleurs.size():
-		_m.fleur(g, "Fleur%d" % k, Vector3(fleurs[k][0], 0, fleurs[k][1]), fleurs[k][2])
+	_texte(g, "Panneau", Vector3(30, 1.9, -29.4), "Bientôt : l'Égypte ancienne…")
+	var n: Callable = _m.nature
+	n.call(g, "Arbre1", "tree_default", Vector3(27.9, 0, -28.9), 3.0, 0.4)
+	n.call(g, "Arbre2", "tree_oak", Vector3(32.2, 0, -27.8), 3.2, 1.2)
+	n.call(g, "Arbre3", "tree_small", Vector3(27.8, 0, -25.6), 3.0, 2.0)
+	for i in 4:
+		n.call(g, "Dalle%d" % i, "path_stone", Vector3(30, 0, -22.75 - 0.95 * i), 1.5, 0.15 * (i % 2))
+	n.call(g, "Panneau3D", "sign", Vector3(30, 0, -29.5), 3.0)
+	# Un avant-goût de la suite : un obélisque égyptien au fond du jardin.
+	n.call(g, "Obelisque", "statue_obelisk", Vector3(32.0, 0, -29.4), 3.0, 0.3)
+	n.call(g, "BuissonG", "plant_bushDetailed", Vector3(27.6, 0, -22.9), 2.5)
+	n.call(g, "BuissonD", "plant_bushDetailed", Vector3(32.4, 0, -22.9), 2.5, 1.0)
+	var fleurs := [
+		["flower_redA", 28.6, -24.2], ["flower_yellowA", 31.5, -24.0], ["flower_purpleA", 29.0, -26.6],
+		["flower_redB", 31.3, -29.4], ["flower_yellowB", 28.3, -26.9], ["flower_purpleB", 32.5, -25.4],
+		["flower_redA", 31.9, -26.3], ["flower_yellowA", 28.9, -29.6], ["flower_purpleA", 30.9, -27.4],
+		["flower_redB", 27.6, -27.6], ["flower_yellowB", 32.6, -29.6], ["flower_purpleB", 29.6, -28.2],
+	]
+	for i in fleurs.size():
+		n.call(g, "Fleur%d" % i, fleurs[i][0], Vector3(fleurs[i][1], 0, fleurs[i][2]), 2.2, i * 0.7)
+	var herbes := [[28.2, -23.6], [31.8, -23.4], [29.4, -25.3], [32.7, -26.6], [27.5, -26.4], [30.6, -28.6], [28.6, -28.0], [32.0, -28.9], [30.3, -25.9], [27.6, -29.8]]
+	for i in herbes.size():
+		n.call(g, "Herbe%d" % i, "grass_large" if i % 2 else "grass", Vector3(herbes[i][0], 0, herbes[i][1]), 2.5, i * 1.3)
+	n.call(g, "Champignons", "mushroom_redGroup", Vector3(28.4, 0, -29.5), 2.5)
+	n.call(g, "Souche", "stump_round", Vector3(32.6, 0, -24.3), 2.5)
+	n.call(g, "Rocher1", "rock_smallA", Vector3(29.3, 0, -29.8), 2.5)
+	n.call(g, "Rocher2", "rock_smallB", Vector3(32.8, 0, -27.0), 2.0, 1.0)
+	for i in 3:
+		n.call(g, "ClotureG%d" % i, "fence_simple", Vector3(27.1, 0, -23.6 - 2.5 * i), 2.5, PI / 2)
+		n.call(g, "ClotureD%d" % i, "fence_simple", Vector3(32.9, 0, -23.6 - 2.5 * i), 2.5, PI / 2)
+	for i in 3:
+		n.call(g, "ClotureFond%d" % i, "fence_gate" if i == 1 else "fence_simple", Vector3(28.0 + 2.0 * i, 0, -30.1), 2.0)
 	var fin := Area3D.new()
 	fin.position = Vector3(30, 1, -25)
 	_ajouter(g, fin, "Fin")
