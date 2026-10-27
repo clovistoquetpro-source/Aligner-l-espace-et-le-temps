@@ -1,15 +1,16 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://scripts/niveau/egypte.gd" id="1_acnp8"]
-[ext_resource type="Script" path="res://scripts/fx/habillage_cartoon.gd" id="2_7bxt4"]
-[ext_resource type="PackedScene" path="res://assets/modeles/militaire/Character_Soldier.gltf" id="3_wee21"]
-[ext_resource type="Script" path="res://scripts/time/epoch_member.gd" id="4_qsoyc"]
-[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="5_1re3w"]
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="6_d6u6y"]
-[ext_resource type="PackedScene" path="res://scenes/bascule_fx.tscn" id="7_tfaqu"]
-[ext_resource type="Script" path="res://scripts/fx/bascule_fx.gd" id="8_rdxom"]
+[ext_resource type="Script" path="res://scripts/niveau/egypte.gd" id="1_7bxt4"]
+[ext_resource type="Script" path="res://scripts/portal/porte_trompeuse.gd" id="2_wee21"]
+[ext_resource type="Script" path="res://scripts/fx/habillage_cartoon.gd" id="3_qsoyc"]
+[ext_resource type="PackedScene" path="res://assets/modeles/militaire/Character_Soldier.gltf" id="4_1re3w"]
+[ext_resource type="Script" path="res://scripts/time/epoch_member.gd" id="5_d6u6y"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="6_tfaqu"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="7_rdxom"]
+[ext_resource type="PackedScene" path="res://scenes/bascule_fx.tscn" id="8_sonfh"]
+[ext_resource type="Script" path="res://scripts/fx/bascule_fx.gd" id="9_l3627"]
 
-[sub_resource type="Environment" id="Environment_sonfh"]
+[sub_resource type="Environment" id="Environment_n0uss"]
 background_mode = 1
 background_color = Color(0.24313726, 0.9019608, 0.8156863, 1)
 ambient_light_source = 2
@@ -21,7 +22,7 @@ fog_light_color = Color(0.24313726, 0.9019608, 0.8156863, 1)
 fog_density = 0.004
 fog_sky_affect = 0.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l3627"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ogl8"]
 diffuse_mode = 3
 specular_mode = 2
 albedo_color = Color(0.9098039, 0.58431375, 0.3529412, 1)
@@ -30,25 +31,130 @@ rim_enabled = true
 rim = 0.15
 rim_tint = 0.8
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_n0uss"]
-size = Vector3(200, 20, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_0ogl8"]
-size = Vector3(200, 20, 1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_rcweu"]
 size = Vector3(200, 20, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0uh7v"]
 size = Vector3(200, 20, 1)
 
-[node name="Egypte" type="Node3D" unique_id=2006031507]
-script = ExtResource("1_acnp8")
+[sub_resource type="BoxShape3D" id="BoxShape3D_rc13j"]
+size = Vector3(200, 20, 1)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=222701177]
-environment = SubResource("Environment_sonfh")
+[sub_resource type="BoxShape3D" id="BoxShape3D_3rtf8"]
+size = Vector3(200, 20, 1)
 
-[node name="Soleil" type="DirectionalLight3D" parent="." unique_id=1649375436]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_416le"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.7254902, 0.58431375, 0.38039216, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yub8v"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.8235294, 0.6862745, 0.4509804, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8a32n"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.9529412, 0.7647059, 0.1882353, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wuhmu"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.70980394, 0.3372549, 0.16470589, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvv0r"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.09411765, 0.23921569, 0.627451, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lvx68"]
+size = Vector3(20.4, 6, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qft85"]
+size = Vector3(0.2, 6, 16.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ylhk"]
+size = Vector3(0.2, 6, 16.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ehgi"]
+size = Vector3(7.2, 6, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yju0k"]
+size = Vector3(7.2, 6, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_13djw"]
+size = Vector3(0.2, 6, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t4mcf"]
+size = Vector3(0.2, 6, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p835w"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.8784314, 0.5411765, 0.29803923, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g3nuo"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.5411765, 0.3529412, 0.23529412, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_karei"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.3529412, 0.65882355, 0.23529412, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_af17v"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.7882353, 0.5294118, 0.30980393, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v2s7a"]
+size = Vector3(6.2, 4, 0.4)
+
+[node name="Egypte" type="Node3D" unique_id=624209781]
+script = ExtResource("1_7bxt4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1094451022]
+environment = SubResource("Environment_n0uss")
+
+[node name="Soleil" type="DirectionalLight3D" parent="." unique_id=2007007110]
 transform = Transform3D(0.8660254, 0.21130913, -0.45315388, 0, 0.90630776, 0.42261827, 0.5, -0.36599815, 0.7848855, 0, 0, 0)
 light_color = Color(1, 0.9137255, 0.76862746, 1)
 light_energy = 0.85
@@ -56,73 +162,489 @@ shadow_enabled = true
 shadow_blur = 1.5
 directional_shadow_max_distance = 120.0
 
-[node name="Sol" type="CSGBox3D" parent="." unique_id=1614705966]
+[node name="Sol" type="CSGBox3D" parent="." unique_id=194759860]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
 size = Vector3(240, 1, 240)
-material = SubResource("StandardMaterial3D_l3627")
+material = SubResource("StandardMaterial3D_0ogl8")
 
-[node name="Bords" type="Node3D" parent="." unique_id=555368026]
+[node name="Bords" type="Node3D" parent="." unique_id=1420465717]
 
-[node name="Bord0" type="StaticBody3D" parent="Bords" unique_id=1870781633]
+[node name="Bord0" type="StaticBody3D" parent="Bords" unique_id=153681206]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 100)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bords/Bord0" unique_id=1767756768]
-shape = SubResource("BoxShape3D_n0uss")
-
-[node name="Bord1" type="StaticBody3D" parent="Bords" unique_id=1559936572]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 100, 10, 6.123234e-15)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bords/Bord1" unique_id=1572368641]
-shape = SubResource("BoxShape3D_0ogl8")
-
-[node name="Bord2" type="StaticBody3D" parent="Bords" unique_id=1789901719]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.2246468e-14, 10, -100)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bords/Bord2" unique_id=699656373]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bords/Bord0" unique_id=636394950]
 shape = SubResource("BoxShape3D_rcweu")
 
-[node name="Bord3" type="StaticBody3D" parent="Bords" unique_id=1768294420]
-transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, -100, 10, -1.8369702e-14)
+[node name="Bord1" type="StaticBody3D" parent="Bords" unique_id=682666567]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 100, 10, 6.123234e-15)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bords/Bord3" unique_id=38620854]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bords/Bord1" unique_id=178226689]
 shape = SubResource("BoxShape3D_0uh7v")
 
-[node name="Mirage" type="Node3D" parent="." unique_id=264030393]
+[node name="Bord2" type="StaticBody3D" parent="Bords" unique_id=1593719989]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.2246468e-14, 10, -100)
 
-[node name="Carriere" type="Node3D" parent="." unique_id=638609127]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bords/Bord2" unique_id=559377501]
+shape = SubResource("BoxShape3D_rc13j")
 
-[node name="Rampe" type="Node3D" parent="." unique_id=1071460604]
+[node name="Bord3" type="StaticBody3D" parent="Bords" unique_id=1592534790]
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, -100, 10, -1.8369702e-14)
 
-[node name="Camp" type="Node3D" parent="." unique_id=1562367564]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bords/Bord3" unique_id=2057871211]
+shape = SubResource("BoxShape3D_3rtf8")
 
-[node name="SoldatGuetteur" type="Node3D" parent="Camp" unique_id=1957833457]
+[node name="Mirage" type="Node3D" parent="." unique_id=799421980]
+
+[node name="Obelisque" type="CSGCombiner3D" parent="Mirage" unique_id=1438525268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 64)
+use_collision = true
+
+[node name="Boite0" type="CSGBox3D" parent="Mirage/Obelisque" unique_id=1781324484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+size = Vector3(1.4, 0.4, 1.4)
+material = SubResource("StandardMaterial3D_416le")
+
+[node name="Boite1" type="CSGBox3D" parent="Mirage/Obelisque" unique_id=301713950]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
+size = Vector3(0.9, 5.4, 0.9)
+material = SubResource("StandardMaterial3D_yub8v")
+
+[node name="Cylindre2" type="CSGCylinder3D" parent="Mirage/Obelisque" unique_id=117297917]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 6.25, 0)
+radius = 0.64
+height = 0.9
+sides = 4
+cone = true
+smooth_faces = false
+material = SubResource("StandardMaterial3D_8a32n")
+
+[node name="Ombre" type="CSGBox3D" parent="Mirage" unique_id=903383992]
+transform = Transform3D(-0.8660254, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660254, -0.9079511, 0.012, 57.77839)
+size = Vector3(0.8, 0.02, 14.368196)
+material = SubResource("StandardMaterial3D_wuhmu")
+
+[node name="BoutOmbre" type="Marker3D" parent="Mirage" unique_id=312804841]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6840978, 0, 51.556778)
+
+[node name="Stele" type="CSGCombiner3D" parent="Mirage" unique_id=25871051]
+transform = Transform3D(0.84663653, 0, 0.53217155, 0, 1, 0, -0.53217155, 0, 0.84663653, -2.2, 0, 66.5)
+use_collision = true
+
+[node name="Boite0" type="CSGBox3D" parent="Mirage/Stele" unique_id=610841705]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+size = Vector3(1.4, 2.2, 0.34)
+material = SubResource("StandardMaterial3D_yub8v")
+
+[node name="Boite1" type="CSGBox3D" parent="Mirage/Stele" unique_id=1070354454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0.18)
+size = Vector3(1.2, 0.12, 0.04)
+material = SubResource("StandardMaterial3D_hvv0r")
+
+[node name="Indice" type="Label3D" parent="Mirage" unique_id=815539069]
+transform = Transform3D(0.84663653, 0, 0.53217155, 0, 1, 0, -0.53217155, 0, 0.84663653, -2.0935657, 1.3, 66.66933)
+pixel_size = 0.0024
+outline_modulate = Color(0.16862746, 0.11372549, 0.30588236, 1)
+text = "Qui marche droit
+tourne en rond.
+Qui suit mon ombre
+arrive."
+font_size = 64
+outline_size = 16
+
+[node name="Bords" type="Node3D" parent="Mirage" unique_id=1961879324]
+
+[node name="PlaceSud" type="StaticBody3D" parent="Mirage/Bords" unique_id=962279759]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 76.1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mirage/Bords/PlaceSud" unique_id=2031924846]
+shape = SubResource("BoxShape3D_lvx68")
+
+[node name="PlaceOuest" type="StaticBody3D" parent="Mirage/Bords" unique_id=1375618391]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1, 3, 68)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mirage/Bords/PlaceOuest" unique_id=1343387990]
+shape = SubResource("BoxShape3D_qft85")
+
+[node name="PlaceEst" type="StaticBody3D" parent="Mirage/Bords" unique_id=386805554]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1, 3, 68)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mirage/Bords/PlaceEst" unique_id=877464614]
+shape = SubResource("BoxShape3D_7ylhk")
+
+[node name="PlaceNordOuest" type="StaticBody3D" parent="Mirage/Bords" unique_id=1915265555]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6, 3, 59.9)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mirage/Bords/PlaceNordOuest" unique_id=1773300667]
+shape = SubResource("BoxShape3D_1ehgi")
+
+[node name="PlaceNordEst" type="StaticBody3D" parent="Mirage/Bords" unique_id=1972388170]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 3, 59.9)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mirage/Bords/PlaceNordEst" unique_id=283208622]
+shape = SubResource("BoxShape3D_yju0k")
+
+[node name="CheminOuest" type="StaticBody3D" parent="Mirage/Bords" unique_id=1396790936]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 3, 45)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mirage/Bords/CheminOuest" unique_id=322313427]
+shape = SubResource("BoxShape3D_13djw")
+
+[node name="CheminEst" type="StaticBody3D" parent="Mirage/Bords" unique_id=216964872]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1, 3, 45)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mirage/Bords/CheminEst" unique_id=1157318791]
+shape = SubResource("BoxShape3D_t4mcf")
+
+[node name="Dunes" type="CSGCombiner3D" parent="Mirage" unique_id=534675657]
+
+[node name="Boule0" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=456040857]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 4.2, -6.6, 0, 33)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule1" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=370248275]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 4.2, 6.6, 0, 33)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule2" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=352359235]
+transform = Transform3D(3.5, 0, 0, 0, 4.2, 0, 0, 0, 4.2, -6.6, 0, 39)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule3" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=1631741525]
+transform = Transform3D(3.5, 0, 0, 0, 4.2, 0, 0, 0, 4.2, 6.6, 0, 39)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule4" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=603881185]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 4.2, -6.6, 0, 45)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule5" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=1389651589]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 4.2, 6.6, 0, 45)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule6" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=810050041]
+transform = Transform3D(3.5, 0, 0, 0, 4.2, 0, 0, 0, 4.2, -6.6, 0, 51)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule7" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=73246651]
+transform = Transform3D(3.5, 0, 0, 0, 4.2, 0, 0, 0, 4.2, 6.6, 0, 51)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule8" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=535815847]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 4.2, -6.6, 0, 57)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule9" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=1688749081]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 4.2, 6.6, 0, 57)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule10" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=1860020635]
+transform = Transform3D(3.5, 0, 0, 0, 3.2, 0, 0, 0, 3.5, -8, 0, 79.6)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule11" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=792430558]
+transform = Transform3D(3.5, 0, 0, 0, 3.2, 0, 0, 0, 3.5, -4, 0, 79.6)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule12" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=548874600]
+transform = Transform3D(3.5, 0, 0, 0, 3.2, 0, 0, 0, 3.5, 0, 0, 79.6)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule13" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=1174163829]
+transform = Transform3D(3.5, 0, 0, 0, 3.2, 0, 0, 0, 3.5, 4, 0, 79.6)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule14" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=1350338269]
+transform = Transform3D(3.5, 0, 0, 0, 3.2, 0, 0, 0, 3.5, 8, 0, 79.6)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule15" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=1340407366]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 3.2, -13.6, 0, 63)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule16" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=1423733102]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 3.2, 13.6, 0, 63)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule17" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=336281112]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 3.2, -13.6, 0, 67)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule18" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=1980328997]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 3.2, 13.6, 0, 67)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule19" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=833524276]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 3.2, -13.6, 0, 71)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule20" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=1351236560]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 3.2, 13.6, 0, 71)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule21" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=1602138373]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 3.2, -13.6, 0, 75)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule22" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=1974823802]
+transform = Transform3D(3.5, 0, 0, 0, 3.4, 0, 0, 0, 3.2, 13.6, 0, 75)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule23" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=1805149865]
+transform = Transform3D(4.5, 0, 0, 0, 3.2, 0, 0, 0, 3.4, -8, 0, 56.5)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Boule24" type="CSGSphere3D" parent="Mirage/Dunes" unique_id=291354864]
+transform = Transform3D(4.5, 0, 0, 0, 3.2, 0, 0, 0, 3.4, 8, 0, 56.5)
+radius = 1.0
+radial_segments = 8
+rings = 4
+smooth_faces = false
+material = SubResource("StandardMaterial3D_p835w")
+
+[node name="Palmier1" type="CSGCombiner3D" parent="Mirage" unique_id=1510061928]
+transform = Transform3D(0.921061, 0, 0.38941833, 0, 1, 0, -0.38941833, 0, 0.921061, 7.5, 0, 72)
+use_collision = true
+
+[node name="Cylindre0" type="CSGCylinder3D" parent="Mirage/Palmier1" unique_id=1427138967]
+transform = Transform3D(0.99680173, 0.07991469, 0, -0.07991469, 0.99680173, 0, 0, 0, 1, 0.15, 1.85, 0)
+radius = 0.18
+height = 3.7
+sides = 6
+smooth_faces = false
+material = SubResource("StandardMaterial3D_g3nuo")
+
+[node name="Boite1" type="CSGBox3D" parent="Mirage/Palmier1" unique_id=835398728]
+transform = Transform3D(0.9393727, 0.3428978, 0, -0.3428978, 0.9393727, 0, 0, 0, 1, 1.05, 3.75, 0)
+size = Vector3(1.6, 0.08, 0.45)
+material = SubResource("StandardMaterial3D_karei")
+
+[node name="Boite2" type="CSGBox3D" parent="Mirage/Palmier1" unique_id=493591036]
+transform = Transform3D(0.46968633, 0.17144889, -0.86602545, -0.3428978, 0.9393727, 0, 0.81352067, 0.29695824, 0.49999997, 0.675, 3.75, 0.649519)
+size = Vector3(1.6, 0.08, 0.45)
+material = SubResource("StandardMaterial3D_karei")
+
+[node name="Boite3" type="CSGBox3D" parent="Mirage/Palmier1" unique_id=179951725]
+transform = Transform3D(-0.46968642, -0.17144892, -0.8660254, -0.3428978, 0.9393727, 0, 0.8135206, 0.2969582, -0.50000006, -0.07499999, 3.75, 0.649519)
+size = Vector3(1.6, 0.08, 0.45)
+material = SubResource("StandardMaterial3D_karei")
+
+[node name="Boite4" type="CSGBox3D" parent="Mirage/Palmier1" unique_id=989766643]
+transform = Transform3D(-0.9393727, -0.3428978, 8.742278e-08, -0.3428978, 0.9393727, 0, -8.212257e-08, -2.9977077e-08, -1, -0.45, 3.75, 9.1848514e-17)
+size = Vector3(1.6, 0.08, 0.45)
+material = SubResource("StandardMaterial3D_karei")
+
+[node name="Boite5" type="CSGBox3D" parent="Mirage/Palmier1" unique_id=874675827]
+transform = Transform3D(-0.46968627, -0.17144887, 0.86602545, -0.3428978, 0.9393727, 0, -0.81352067, -0.29695824, -0.4999999, -0.07499999, 3.75, -0.649519)
+size = Vector3(1.6, 0.08, 0.45)
+material = SubResource("StandardMaterial3D_karei")
+
+[node name="Boite6" type="CSGBox3D" parent="Mirage/Palmier1" unique_id=90215107]
+transform = Transform3D(0.46968627, 0.17144887, 0.86602545, -0.3428978, 0.9393727, 0, -0.81352067, -0.29695824, 0.4999999, 0.675, 3.75, -0.649519)
+size = Vector3(1.6, 0.08, 0.45)
+material = SubResource("StandardMaterial3D_karei")
+
+[node name="Palmier2" type="CSGCombiner3D" parent="Mirage" unique_id=1719834576]
+transform = Transform3D(-0.41614684, 0, 0.9092974, 0, 1, 0, -0.9092974, 0, -0.41614684, 8.2, 0, 66)
+use_collision = true
+
+[node name="Cylindre0" type="CSGCylinder3D" parent="Mirage/Palmier2" unique_id=584744575]
+transform = Transform3D(0.99680173, 0.07991469, 0, -0.07991469, 0.99680173, 0, 0, 0, 1, 0.15, 1.85, 0)
+radius = 0.18
+height = 3.7
+sides = 6
+smooth_faces = false
+material = SubResource("StandardMaterial3D_g3nuo")
+
+[node name="Boite1" type="CSGBox3D" parent="Mirage/Palmier2" unique_id=786781664]
+transform = Transform3D(0.9393727, 0.3428978, 0, -0.3428978, 0.9393727, 0, 0, 0, 1, 1.05, 3.75, 0)
+size = Vector3(1.6, 0.08, 0.45)
+material = SubResource("StandardMaterial3D_karei")
+
+[node name="Boite2" type="CSGBox3D" parent="Mirage/Palmier2" unique_id=628288998]
+transform = Transform3D(0.46968633, 0.17144889, -0.86602545, -0.3428978, 0.9393727, 0, 0.81352067, 0.29695824, 0.49999997, 0.675, 3.75, 0.649519)
+size = Vector3(1.6, 0.08, 0.45)
+material = SubResource("StandardMaterial3D_karei")
+
+[node name="Boite3" type="CSGBox3D" parent="Mirage/Palmier2" unique_id=1679568012]
+transform = Transform3D(-0.46968642, -0.17144892, -0.8660254, -0.3428978, 0.9393727, 0, 0.8135206, 0.2969582, -0.50000006, -0.07499999, 3.75, 0.649519)
+size = Vector3(1.6, 0.08, 0.45)
+material = SubResource("StandardMaterial3D_karei")
+
+[node name="Boite4" type="CSGBox3D" parent="Mirage/Palmier2" unique_id=1318555024]
+transform = Transform3D(-0.9393727, -0.3428978, 8.742278e-08, -0.3428978, 0.9393727, 0, -8.212257e-08, -2.9977077e-08, -1, -0.45, 3.75, 9.1848514e-17)
+size = Vector3(1.6, 0.08, 0.45)
+material = SubResource("StandardMaterial3D_karei")
+
+[node name="Boite5" type="CSGBox3D" parent="Mirage/Palmier2" unique_id=1829814405]
+transform = Transform3D(-0.46968627, -0.17144887, 0.86602545, -0.3428978, 0.9393727, 0, -0.81352067, -0.29695824, -0.4999999, -0.07499999, 3.75, -0.649519)
+size = Vector3(1.6, 0.08, 0.45)
+material = SubResource("StandardMaterial3D_karei")
+
+[node name="Boite6" type="CSGBox3D" parent="Mirage/Palmier2" unique_id=2127638260]
+transform = Transform3D(0.46968627, 0.17144887, 0.86602545, -0.3428978, 0.9393727, 0, -0.81352067, -0.29695824, 0.4999999, 0.675, 3.75, -0.649519)
+size = Vector3(1.6, 0.08, 0.45)
+material = SubResource("StandardMaterial3D_karei")
+
+[node name="Rocher" type="CSGCombiner3D" parent="Mirage" unique_id=710329985]
+transform = Transform3D(0.5403023, 0, 0.84147096, 0, 1, 0, -0.84147096, 0, 0.5403023, -8, 0, 73)
+use_collision = true
+
+[node name="Boite0" type="CSGBox3D" parent="Mirage/Rocher" unique_id=463205218]
+transform = Transform3D(0.91500837, 0.11235893, 0.38747287, -0.07951545, 0.9918219, -0.09983342, -0.39552122, 0.060538333, 0.9164595, 0, 0.6, 0)
+size = Vector3(1.8, 1.2, 1.3)
+material = SubResource("StandardMaterial3D_af17v")
+
+[node name="Boite1" type="CSGBox3D" parent="Mirage/Rocher" unique_id=1287077792]
+transform = Transform3D(0.591374, -0.2467678, 0.76771253, 0.14645933, 0.9690615, 0.19866933, -0.79298586, -0.0050492063, 0.6092192, 0.5, 1.05, 0.1)
+size = Vector3(0.9, 0.8, 0.9)
+material = SubResource("StandardMaterial3D_af17v")
+
+[node name="Porte" type="Area3D" parent="Mirage" unique_id=1135559581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 56)
+script = ExtResource("2_wee21")
+destinations = Array[NodePath]([NodePath("../Retour"), NodePath("../Sortie")])
+cible_regard = NodePath("../BoutOmbre")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mirage/Porte" unique_id=1847688725]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_v2s7a")
+
+[node name="Retour" type="Marker3D" parent="Mirage" unique_id=1983913990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 66)
+
+[node name="Sortie" type="Marker3D" parent="Mirage" unique_id=2079230093]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 56)
+
+[node name="Carriere" type="Node3D" parent="." unique_id=327032080]
+
+[node name="Rampe" type="Node3D" parent="." unique_id=1964236179]
+
+[node name="Camp" type="Node3D" parent="." unique_id=1321902763]
+
+[node name="SoldatGuetteur" type="Node3D" parent="Camp" unique_id=1912671852]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30, 0, 4)
-script = ExtResource("2_7bxt4")
+script = ExtResource("3_qsoyc")
 animation = "Idle"
 caches = PackedStringArray("AK", "GrenadeLauncher", "Knife_1", "Knife_2", "Pistol", "Revolver", "Revolver_Small", "RocketLauncher", "ShortCannon", "Shotgun", "Shovel", "SMG", "Sniper", "Sniper_2")
 
-[node name="Modele" type="Node3D" parent="Camp/SoldatGuetteur" unique_id=1487269716 instance=ExtResource("3_wee21")]
+[node name="Modele" type="Node3D" parent="Camp/SoldatGuetteur" unique_id=1487269716 instance=ExtResource("4_1re3w")]
 transform = Transform3D(0.770856, 0, 0, 0, 0.770856, 0, 0, 0, 0.770856, 0, 0.10203621, -0.6976074)
 
-[node name="EpochMember" type="Node" parent="Camp/SoldatGuetteur" unique_id=577550506]
-script = ExtResource("4_qsoyc")
+[node name="EpochMember" type="Node" parent="Camp/SoldatGuetteur" unique_id=2114757354]
+script = ExtResource("5_d6u6y")
 
-[node name="Temple" type="Node3D" parent="." unique_id=1329579162]
+[node name="Temple" type="Node3D" parent="." unique_id=1649738050]
 
-[node name="Chantier" type="Node3D" parent="." unique_id=191240628]
+[node name="Chantier" type="Node3D" parent="." unique_id=286047044]
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=1265921868 instance=ExtResource("5_1re3w")]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1592180167 instance=ExtResource("6_tfaqu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 70)
-script = ExtResource("6_d6u6y")
+script = ExtResource("7_rdxom")
 
-[node name="BasculeFx" type="CanvasLayer" parent="." unique_id=602010577 instance=ExtResource("7_tfaqu")]
+[node name="BasculeFx" type="CanvasLayer" parent="." unique_id=801861458 instance=ExtResource("8_sonfh")]
 layer = 10
-script = ExtResource("8_rdxom")
+script = ExtResource("9_l3627")
 
-[node name="Interface" type="CanvasLayer" parent="." unique_id=666522703]
+[node name="Interface" type="CanvasLayer" parent="." unique_id=2053399965]
 
-[node name="Viseur" type="Label" parent="Interface" unique_id=1926242555]
+[node name="Viseur" type="Label" parent="Interface" unique_id=245595277]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -137,7 +659,7 @@ text = "·"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Message" type="Label" parent="Interface" unique_id=588676562]
+[node name="Message" type="Label" parent="Interface" unique_id=1861666055]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

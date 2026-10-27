@@ -20,7 +20,7 @@ const COULEURS := {
 	# Égypte (mêmes teintes que le Low Poly Egypt Pack)
 	"ocre": "d2af73", "ocre_fonce": "b99561", "or": "f3c330", "lapis": "183da0",
 	"turquoise": "1fb5a8", "palme": "5aa83c", "tronc": "8a5a3c", "papyrus": "7cb342",
-	"dune": "f0b36a", "rocher": "c9874f", "peau": "c68a4a",
+	"dune": "e08a4c", "rocher": "c9874f", "peau": "c68a4a",
 }
 const LUMINEUX := ["abat_jour", "flamme", "applique", "cadran", "ampoule"]
 const LUMIERE_CHAUDE := Color("ffd6a5")

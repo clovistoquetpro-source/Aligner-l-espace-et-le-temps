@@ -81,6 +81,35 @@ func _texte(parent: Node, nom: String, pos: Vector3, texte: String, rot_y := 0.0
 	return _ajouter(parent, l, nom)
 
 
+## Un mur invisible (bord d'un chemin, d'une zone), en coordonnées du monde.
+func _mur_invisible(parent: Node3D, nom: String, centre: Vector3, taille: Vector3) -> StaticBody3D:
+	var mur := StaticBody3D.new()
+	mur.position = centre - parent.position
+	_ajouter(parent, mur, nom)
+	var forme := CollisionShape3D.new()
+	var boite := BoxShape3D.new()
+	boite.size = taille
+	forme.shape = boite
+	_ajouter(mur, forme, "CollisionShape3D")
+	return mur
+
+
+## Une porte trompeuse de la taille voulue (largeur, hauteur, épaisseur),
+## posée au sol en `pos`.
+func _porte_trompeuse(parent: Node3D, nom: String, pos: Vector3, taille: Vector3, rot_y := 0.0) -> PorteTrompeuse:
+	var porte := PorteTrompeuse.new()
+	porte.position = pos - parent.position
+	porte.rotation.y = rot_y
+	_ajouter(parent, porte, nom)
+	var forme := CollisionShape3D.new()
+	var boite := BoxShape3D.new()
+	boite.size = taille
+	forme.shape = boite
+	forme.position = Vector3(0, taille.y / 2, 0)
+	_ajouter(porte, forme, "CollisionShape3D")
+	return porte
+
+
 ## Point de réapparition : `point` en coordonnées du monde, avec la zone qui
 ## l'active.
 func _ancrage(g: Node3D, nom: String, point: Vector3, centre_zone: Vector3, taille_zone: Vector3) -> void:
