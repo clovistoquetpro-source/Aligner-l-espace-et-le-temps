@@ -45,3 +45,4 @@ func test_couleurs_par_epoque() -> void:
 	Temps.epoque_changee.emit(1)
 	fx._process(1.0)
 	T.eq(env.background_color, BasculeFx.PALETTES[1]["ciel"], "ciel du passé")
+	T.eq(env.fog_light_color, BasculeFx.PALETTES[1]["ciel"], "brouillard de la couleur du ciel")
