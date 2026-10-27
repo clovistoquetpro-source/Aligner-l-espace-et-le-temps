@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/objets/objet_perspectif.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="Materiau_orange"]
+albedo_color = Color(1, 0.62352943, 0.10980392, 1)
+roughness = 0.8
+diffuse_mode = 3
+specular_mode = 2
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Materiau_turquoise"]
+albedo_color = Color(0.24313726, 0.9019608, 0.8156863, 1)
+roughness = 0.8
+diffuse_mode = 3
+specular_mode = 2
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Materiau_oeil"]
+albedo_color = Color(0.16862746, 0.11372549, 0.30588236, 1)
+roughness = 0.8
+diffuse_mode = 3
+specular_mode = 2
+
+[sub_resource type="SphereMesh" id="Mesh_corps"]
+material = SubResource("Materiau_orange")
+radius = 0.5
+height = 1.0
+radial_segments = 16
+rings = 8
+
+[sub_resource type="PrismMesh" id="Mesh_queue"]
+material = SubResource("Materiau_turquoise")
+size = Vector3(0.42, 0.3, 0.06)
+
+[sub_resource type="PrismMesh" id="Mesh_nageoire"]
+material = SubResource("Materiau_turquoise")
+size = Vector3(0.3, 0.14, 0.04)
+
+[sub_resource type="SphereMesh" id="Mesh_oeil"]
+material = SubResource("Materiau_oeil")
+radius = 0.035
+height = 0.07
+radial_segments = 8
+rings = 4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(1, 0.45, 0.3)
+
+[node name="Poisson" type="RigidBody3D"]
+script = ExtResource("1")
+taille_depart = 0.4
+
+[node name="Mesh" type="Node3D" parent="."]
+
+[node name="Corps" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(0.76, 0, 0, 0, 0.42, 0, 0, 0, 0.28, 0.1, 0, 0)
+mesh = SubResource("Mesh_corps")
+
+[node name="Queue" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, -0.38, 0, 0)
+mesh = SubResource("Mesh_queue")
+
+[node name="Nageoire" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08, 0.24, 0)
+mesh = SubResource("Mesh_nageoire")
+
+[node name="OeilG" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34, 0.05, 0.11)
+mesh = SubResource("Mesh_oeil")
+
+[node name="OeilD" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34, 0.05, -0.11)
+mesh = SubResource("Mesh_oeil")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_1")

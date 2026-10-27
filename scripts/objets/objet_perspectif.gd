@@ -24,8 +24,11 @@ var taille: float:
 			_appliquer_taille()
 
 var _depart: Transform3D
+## Taille de la boîte de collision pour `taille == 1` (un cube : Vector3.ONE).
+var _forme_base := Vector3.ONE
 
-@onready var _mesh: MeshInstance3D = $Mesh
+## Le dessin de l'objet : un seul mesh ou plusieurs formes.
+@onready var _mesh: Node3D = $Mesh
 @onready var _forme: CollisionShape3D = $CollisionShape3D
 
 
@@ -34,6 +37,7 @@ static func taille_pour(ratio: float, distance: float) -> float:
 
 
 func _ready() -> void:
+	_forme_base = (_forme.shape as BoxShape3D).size
 	_forme.shape = _forme.shape.duplicate()
 	taille = taille_depart
 	_appliquer_taille()
@@ -42,7 +46,7 @@ func _ready() -> void:
 
 func _appliquer_taille() -> void:
 	_mesh.scale = Vector3.ONE * taille
-	(_forme.shape as BoxShape3D).size = Vector3.ONE * taille
+	(_forme.shape as BoxShape3D).size = _forme_base * taille
 
 
 func reinitialiser() -> void:
@@ -89,7 +93,7 @@ func placer(cam: Camera3D, ratio: float, exclure: Array[RID]) -> void:
 
 func _libre(espace: PhysicsDirectSpaceState3D, t: Transform3D, cote: float, excl: Array[RID]) -> bool:
 	var boite := BoxShape3D.new()
-	boite.size = Vector3.ONE * cote * 0.98
+	boite.size = _forme_base * cote * 0.98
 	var q := PhysicsShapeQueryParameters3D.new()
 	q.shape = boite
 	q.transform = t
