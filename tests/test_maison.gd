@@ -44,6 +44,53 @@ func test_contenu_du_niveau() -> void:
 		T.ok(_tous(n, func(x: Node) -> bool: return x is EpochMember and x.epoque == e).size() >= 1, "membres de l'époque %d" % e)
 
 
+func test_marcher_tout_droit_fait_boucler() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	j.teleport(Transform3D(Basis(), Vector3(0, 0, -8)))
+	await tree.physics_frame
+	Input.action_press("avancer")
+	var boucle := false
+	for i in 120:
+		var z_avant := j.global_position.z
+		await tree.physics_frame
+		if j.global_position.z - z_avant > 5.0:
+			boucle = true
+			break
+	Input.action_release("avancer")
+	T.ok(boucle, "sans viser la bonne photo, le couloir boucle")
+	T.ok(j.global_position.x < 5.0, "pas arrivé au salon")
+
+
+func test_objet_a_prendre_dans_le_hall() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	var objets := _tous(n, func(x: Node) -> bool: return x is RigidBody3D)
+	T.ok(objets.size() >= 1, "au moins un objet à porter")
+	if objets.is_empty():
+		return
+	var objet: RigidBody3D = objets[0]
+	j.teleport(Transform3D(Basis(), objet.global_position + Vector3(0, 0, 1.5) - Vector3(0, objet.global_position.y, 0)))
+	_viser(j, objet.global_position)
+	await tree.physics_frame
+	j._interagir()
+	T.eq(j.held, objet, "E prend l'objet")
+
+
+func test_horloge_se_vise_un_peu_au_dessus_du_centre() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	var enigme: Alignement = n.get_node("Atelier/Horloge")
+	var vue: Node3D = enigme.get_node(enigme.point_de_vue)
+	j.teleport(Transform3D(Basis(), vue.global_position - Vector3(0, 1.6, 0)))
+	var vers_centre := enigme.global_position - j.camera.global_position
+	var vise := j.camera.global_position + Basis(Vector3.RIGHT, deg_to_rad(3)) * vers_centre
+	_viser(j, vise)
+	await tree.physics_frame
+	enigme.verifier(j.camera)
+	T.ok(enigme.est_resolu, "3° au-dessus du centre de l'horloge : aligné")
+
+
 func test_parcours_complet() -> void:
 	var n: Node3D = await _charger()
 	var j: Player = n.get_node("Player")
@@ -75,8 +122,7 @@ func test_parcours_complet() -> void:
 	var enigme: Alignement = n.get_node("Atelier/Horloge")
 	var vue: Node3D = enigme.get_node(enigme.point_de_vue)
 	j.teleport(Transform3D(Basis(), vue.global_position - Vector3(0, 1.6, 0)))
-	j.rotation.y = 0.0
-	j.head.rotation.x = 0.0
+	_viser(j, enigme.global_position)
 	await tree.physics_frame
 	enigme.verifier(j.camera)
 	T.ok(enigme.est_resolu, "horloge réalignée")

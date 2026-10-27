@@ -15,7 +15,7 @@ const COULEURS := {
 	"atelier_sol": "3a3360", "atelier_mur": "6bcb77",
 	"horloge": "ff3d7f", "aiguille": "00f5d4",
 	"photo_cadre": "ffffff", "photo_rouge": "ff595e", "photo_bonne": "00d1b2",
-	"photo_jaune": "ffca3a", "soleil": "fff3b0", "repere": "00f5d4",
+	"photo_jaune": "ffca3a", "photo_violette": "9b5de5", "cube": "ff9f1c", "soleil": "fff3b0", "repere": "00f5d4",
 	"porte": "f15bb5", "jardin": "9ef01a",
 }
 
@@ -179,6 +179,7 @@ func _hall() -> void:
 	_texte(g, "Souvenir", Vector3(-2.95, 2.3, 3), "Mon souvenir préféré", PI / 2)
 	_texte(g, "Indice", Vector3(0, 2.6, 0.05), "Le couloir ne mène nulle part…\nsauf si tu regardes\nle bon souvenir.")
 	_ancrage(g, "Ancrage", Vector3(0, 0, 4.5), Vector3(0, 1.5, 3), Vector3(6, 3, 6))
+	_cube(g, "Cube", Vector3(1.8, 0.3, 2.5))
 
 
 func _couloir() -> void:
@@ -187,9 +188,12 @@ func _couloir() -> void:
 	_boite(g, "MurGauche", Vector3(-1.35, 1.5, -7), Vector3(0.2, 3, 14), "couloir_mur")
 	_boite(g, "MurDroit", Vector3(1.35, 1.5, -7), Vector3(0.2, 3, 14), "couloir_mur")
 	_boite(g, "MurFond", Vector3(0, 1.5, -14.1), Vector3(2.9, 3, 0.2), "couloir_mur")
+	# Les mauvaises photos sont dans l'axe ; la bonne est sur le côté, il faut
+	# tourner la tête vers elle en traversant.
 	_photo(g, "PhotoRouge", Vector3(-0.8, 1.8, -13.97), "photo_rouge")
-	_photo(g, "PhotoBonne", Vector3(0, 1.8, -13.97), "photo_bonne", true)
+	_photo(g, "PhotoViolette", Vector3(0, 1.8, -13.97), "photo_violette")
 	_photo(g, "PhotoJaune", Vector3(0.8, 1.8, -13.97), "photo_jaune")
+	_photo(g, "PhotoBonne", Vector3(-1.23, 1.7, -13.2), "photo_bonne", true, PI / 2)
 	var boucle := Marker3D.new()
 	boucle.position = Vector3(0, 0, -2.5)
 	_ajouter(g, boucle, "Boucle")
@@ -233,11 +237,12 @@ func _atelier() -> void:
 	_boite(g, "Repere", Vector3(30, 0.01, -12), Vector3(0.6, 0.02, 0.6), "repere", false)
 	_texte(g, "Indice", Vector3(34.9, 1.8, -14), "Place-toi sur la marque\net regarde au loin.", -PI / 2)
 	_ancrage(g, "Ancrage", Vector3(30, 0, -11), Vector3(30, 1.5, -16), Vector3(10, 3, 12))
-	var vue := Marker3D.new()
-	vue.position = Vector3(30, 1.6, -12)
-	_ajouter(g, vue, "PointDeVue")
 	# L'horloge : vue depuis la marque, ses morceaux éparpillés forment un cadran.
 	var centre_image := Vector3(30, 2.2, -20)
+	var vue := Marker3D.new()
+	var oeil := Vector3(30, 1.6, -12)
+	vue.transform = Transform3D(Basis.looking_at(centre_image - oeil), oeil)
+	_ajouter(g, vue, "PointDeVue")
 	var centre := vue.position + (centre_image - vue.position) * 0.9
 	var horloge := Alignement.new()
 	horloge.position = centre
@@ -266,6 +271,24 @@ func _morceau(horloge: Node3D, nom: String, vue: Vector3, point_image: Vector3, 
 	b.material = _mat(couleur)
 	b.use_collision = false
 	_ajouter(horloge, b, nom)
+
+
+## Un objet à prendre et à porter (touche E).
+func _cube(g: Node3D, nom: String, pos: Vector3) -> void:
+	var corps := RigidBody3D.new()
+	corps.position = pos
+	_ajouter(g, corps, nom)
+	var mesh := MeshInstance3D.new()
+	var boite := BoxMesh.new()
+	boite.size = Vector3(0.5, 0.5, 0.5)
+	boite.material = _mat("cube")
+	mesh.mesh = boite
+	_ajouter(corps, mesh, "Mesh")
+	var forme := CollisionShape3D.new()
+	var b := BoxShape3D.new()
+	b.size = Vector3(0.5, 0.5, 0.5)
+	forme.shape = b
+	_ajouter(corps, forme, "CollisionShape3D")
 
 
 func _jardin() -> void:

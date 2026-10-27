@@ -7,7 +7,8 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 ## Jouer au prototype
 
 1. Installe [Godot 4.6](https://godotengine.org/download/windows/) (version standard, pas .NET).
-2. Récupère le dépôt avec [GitHub Desktop](https://desktop.github.com/) : bouton **Fetch origin**, puis **Pull origin** s'il apparaît.
+2. Récupère le dépôt avec [GitHub Desktop](https://desktop.github.com/) : **File → Clone repository**, puis `Aligner-l-espace-et-le-temps`. Ensuite, à chaque nouveauté, clique sur **Fetch origin**, puis sur **Pull origin** s'il apparaît.
+   Pour essayer une nouveauté pas encore acceptée (une pull request), choisis sa branche dans le menu **Current branch** en haut (par exemple `prototype-maison`).
 3. Dans Godot, clique sur **Importer**, choisis le fichier `project.godot` du dossier, puis **Importer et modifier**.
 4. Appuie sur **F5** pour jouer.
 
