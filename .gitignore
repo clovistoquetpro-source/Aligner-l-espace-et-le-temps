@@ -1,0 +1,6 @@
+# Godot
+.godot/
+*.import.tmp
+export_presets.cfg
+# Outils
+.superpowers/
