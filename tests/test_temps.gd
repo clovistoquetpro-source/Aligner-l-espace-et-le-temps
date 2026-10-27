@@ -44,6 +44,13 @@ func test_basculer_passe_au_passe() -> void:
 	T.eq(Temps.courante, TempsScript.Epoque.PRESENT, "retour au présent")
 
 
+func test_reinitialiser_dans_le_passe() -> void:
+	Temps.reinitialiser(Temps.Epoque.PASSE)
+	T.eq(Temps.courante, Temps.Epoque.PASSE, "on démarre dans le passé")
+	Temps.reinitialiser()
+	T.eq(Temps.courante, Temps.Epoque.PRESENT, "par défaut, le présent")
+
+
 func test_membre_du_passe_cache_au_present() -> void:
 	Temps.reinitialiser()
 	var boite := _boite_du_passe(Vector3(10, 0, 0))

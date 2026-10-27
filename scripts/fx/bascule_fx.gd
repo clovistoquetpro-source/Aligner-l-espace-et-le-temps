@@ -2,7 +2,8 @@ class_name BasculeFx
 extends CanvasLayer
 
 ## Effet plein écran quand on change d'époque, secousse quand c'est refusé,
-## et couleurs du monde propres à chaque époque.
+## et couleurs du monde propres à chaque époque (`palettes`, réglées par le
+## niveau ; celles de la maison par défaut).
 
 const DUREE := 0.5
 const DUREE_SECOUSSE := 0.15
@@ -10,6 +11,13 @@ const PALETTES := {
 	0: { "ciel": Color("ff9ecf"), "ambiance": Color("3ee6d0") },
 	1: { "ciel": Color("ffb347"), "ambiance": Color("7b4fd6") },
 }
+
+## { époque: { "ciel": Color, "ambiance": Color } }
+var palettes := PALETTES:
+	set(p):
+		palettes = p
+		_cible = palettes[Temps.courante]
+		_appliquer_couleurs(_t)
 
 var environnement: Environment:
 	set(e):
@@ -27,7 +35,7 @@ var _cible := PALETTES[0]
 func _ready() -> void:
 	Temps.epoque_changee.connect(_sur_bascule)
 	Temps.bascule_refusee.connect(_sur_refus)
-	_cible = PALETTES[Temps.courante]
+	_cible = palettes[Temps.courante]
 	_mettre_a_jour()
 
 
@@ -41,7 +49,7 @@ func secousse() -> float:
 
 func _sur_bascule(epoque: int) -> void:
 	_depart = { "ciel": _couleur("ciel"), "ambiance": _couleur("ambiance") }
-	_cible = PALETTES[epoque]
+	_cible = palettes[epoque]
 	_t = 0.0
 	_mettre_a_jour()
 
