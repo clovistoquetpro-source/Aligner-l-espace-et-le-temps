@@ -10,6 +10,8 @@ signal resolu
 @export var point_de_vue: NodePath
 @export var distance_max := 0.6
 @export var angle_max_deg := 6.0
+## Inactif, l'énigme ne se résout pas, même vue du bon endroit.
+@export var actif := true
 
 var est_resolu := false
 
@@ -25,7 +27,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func verifier(cam: Camera3D) -> void:
-	if est_resolu:
+	if est_resolu or not actif:
 		return
 	var vue := get_node_or_null(point_de_vue) as Node3D
 	if vue == null:
