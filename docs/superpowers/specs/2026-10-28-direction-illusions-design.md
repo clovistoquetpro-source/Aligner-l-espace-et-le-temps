@@ -49,6 +49,38 @@ Chaque épreuve doit avoir une raison d'être dans cette histoire.
 - **Plus tard** : une cinématique au début du jeu, qui pose le contexte de toute l'histoire.
 - **Comment l'histoire se raconte** (choix de clo) : par les toiles, et par les pensées du joueur, de courtes phrases à l'écran quand il découvre quelque chose. Elles intriguent, elles ne donnent jamais la solution.
 
+## L'histoire complète (brouillon à valider)
+
+### Ce que clo a décidé
+
+- **La blessure** : son premier amour est mort. Depuis, le peintre repeint sa vie pour que ça ne soit jamais arrivé.
+- **Le voyage** : on traverse les périodes de sa vie (l'enfance, l'adolescence, le jeune adulte), avec des moments durs et tristes. Le voyage n'est pas gai : la joie ne revient qu'à la fin.
+- **La révélation** : chaque fois qu'on « corrige » un souvenir, le présent devient plus gris et plus cassé.
+- **La fin** : il pose le pinceau. Les couleurs reviennent, il est vieux, et il reprend goût à la vie.
+- **La morale** : ressasser le passé en voulant qu'il soit autrement n'aide pas. Il faut aller de l'avant avec son histoire.
+
+### Le fil (proposition)
+
+- **Le peintre**, c'est le personnage aujourd'hui, vieux et seul dans la maison. Il repeint ses souvenirs à l'infini pour sauver son premier amour. À force, l'espace et le temps se sont déchirés : la maison a quitté la Terre et flotte dans les étoiles. Tout est gris, sauf les toiles : il ne vit plus que dans ses souvenirs.
+- **Le joueur** est ce même personnage, mais il se voit jeune, parce qu'il refuse le temps qui passe. Le miroir dit la vérité : il est vieux, c'est lui le peintre. Il ne le comprend vraiment qu'à la fin.
+- **La maison sert de point de départ** entre les niveaux. Chaque toile de la maison ouvre sur une période de sa vie. Après chaque niveau, on revient dans la maison, et elle est un peu plus abîmée : une pièce a disparu, des étoiles passent à travers les murs, des meubles flottent.
+- **Remettre en ordre**, le joueur croit d'abord que c'est corriger le souvenir (l'objectif du niveau l'y pousse), et le présent empire. Il finit par comprendre que remettre en ordre, c'est laisser le souvenir tel qu'il s'est vraiment passé, même triste.
+
+### Les niveaux (proposition)
+
+1. **La maison dans les étoiles** (le présent, fait). On veut sortir, on ne peut pas. Le miroir montre le joueur plus vieux. On entre dans les toiles.
+2. **L'enfance** : la maison sur Terre, le jardin (la toile du salon). Un enfant souvent seul, qui peint pour s'échapper. C'est la naissance de son défaut : fuir dans la peinture plutôt que vivre. Le moment dur reste à choisir avec clo.
+3. **L'adolescence** : il rencontre son premier amour. Les premiers souvenirs heureux sont aussi ceux qu'il a le plus repeints. On y voit déjà des versions trop belles, qui se craquellent.
+4. **Le jeune adulte** : la vie à deux, l'atelier (la toile « atelier inconnu » du salon), puis la mort. C'est le souvenir qu'il a repeint mille fois. Le niveau rejoue la même scène en de multiples versions (l'esprit d'Inception et de Tenet), et dans chacune, quelque chose cloche. La maison du présent est presque détruite.
+5. **L'atelier du peintre** (la fin) : il rencontre son moi plus vieux, épuisé, entouré de mille versions de la même toile. Tout le pousse à peindre une dernière correction. La solution est de poser le pinceau. Les couleurs reviennent, la maison retrouve la Terre et le jardin, et la porte d'entrée, qui fuyait au niveau 1, s'ouvre enfin. Il sort, vieux, dans le monde en couleurs.
+
+### Questions ouvertes
+
+- Le nom du personnage, et celui de son premier amour (qui c'est, à quoi il ou elle ressemble).
+- Le moment dur de l'enfance.
+- Comment l'amour meurt (une maladie, un accident…), et ce que le peintre change dans chaque version repeinte.
+- Ce qu'on voit à la toute fin, dehors.
+
 ## Méthode de construction
 
 On construit chaque niveau entièrement en formes simples (une « greybox ») : parcours, énigmes et histoire, avec des textes provisoires. Quand le niveau est complet et validé, on ajoute les textures, les détails et le personnage. On ne perd ainsi pas de travail d'habillage sur un niveau qu'on remanie. Dans la greybox, la maison est grise et tout ce qui est peint (les toiles et ce qu'il y a dedans) est en couleurs.
