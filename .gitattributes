@@ -3,3 +3,4 @@
 *.svg text
 *.glb binary
 *.bin binary
+*.fbx binary

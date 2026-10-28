@@ -46,3 +46,19 @@ func test_couleurs_par_epoque() -> void:
 	fx._process(1.0)
 	T.eq(env.background_color, BasculeFx.PALETTES[1]["ciel"], "ciel du passé")
 	T.eq(env.fog_light_color, BasculeFx.PALETTES[1]["ciel"], "brouillard de la couleur du ciel")
+
+
+func test_palettes_du_niveau() -> void:
+	Temps.reinitialiser()
+	var fx := _fx()
+	fx.palettes = {
+		0: { "ciel": Color.RED, "ambiance": Color.BLUE },
+		1: { "ciel": Color.GREEN, "ambiance": Color.YELLOW },
+	}
+	var env := Environment.new()
+	fx.environnement = env
+	T.eq(env.background_color, Color.RED, "ciel du niveau au présent")
+	T.eq(env.ambient_light_color, Color.BLUE, "ambiance du niveau au présent")
+	Temps.epoque_changee.emit(1)
+	fx._process(1.0)
+	T.eq(env.background_color, Color.GREEN, "ciel du niveau au passé")

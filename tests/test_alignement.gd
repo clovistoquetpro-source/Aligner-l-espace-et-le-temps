@@ -66,3 +66,22 @@ func test_pas_a_travers_un_mur() -> void:
 	var enigme: Alignement = r[0]
 	enigme.verifier(r[1])
 	T.ok(not enigme.est_resolu, "un mur cache les morceaux : pas résolu")
+
+
+func test_inactif_ne_se_resout_pas() -> void:
+	var r: Array = await _monde(false)
+	var enigme: Alignement = r[0]
+	enigme.actif = false
+	enigme.verifier(r[1])
+	T.ok(not enigme.est_resolu, "inactif : pas résolu")
+	enigme.actif = true
+	enigme.verifier(r[1])
+	T.ok(enigme.est_resolu, "actif : résolu")
+
+
+func test_cache_ne_se_resout_pas() -> void:
+	var r: Array = await _monde(false)
+	var enigme: Alignement = r[0]
+	enigme.visible = false
+	enigme.verifier(r[1])
+	T.ok(not enigme.est_resolu, "absent de cette époque : pas résolu")

@@ -37,6 +37,7 @@ func basculer(joueur: Node3D) -> bool:
 	return true
 
 
-func reinitialiser() -> void:
-	courante = Epoque.PRESENT
+## Remet le temps à l'époque de départ du niveau (le présent par défaut).
+func reinitialiser(epoque: int = Epoque.PRESENT) -> void:
+	courante = epoque
 	epoque_changee.emit(courante)

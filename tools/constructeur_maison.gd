@@ -1,11 +1,6 @@
-extends RefCounted
+extends "res://tools/constructeur.gd"
 
 ## Construit scenes/maison.tscn à partir du code (lancé par construire_maison.gd).
-## Attention : reconstruire écrase les retouches faites dans l'éditeur.
-
-const TempsScript := preload("res://scripts/time/temps.gd")
-const PRESENT := TempsScript.Epoque.PRESENT
-const PASSE := TempsScript.Epoque.PASSE
 
 const COULEURS := {
 	"hall_sol": "ffd6e8", "hall_mur": "8be9fd",
@@ -24,11 +19,6 @@ const COULEURS := {
 const HAUTEUR_HALL := 4.0
 const HAUTEUR_SALON := 5.0
 
-var _racine: Node3D
-var _materiaux := {}
-var _m  # meubles (tools/meubles.gd)
-
-
 func construire() -> int:
 	_racine = Node3D.new()
 	_racine.name = "Maison"
@@ -41,61 +31,16 @@ func construire() -> int:
 	_atelier()
 	_jardin()
 	_ciel()
-	_joueur_et_interface()
-	var scene := PackedScene.new()
-	var err := scene.pack(_racine)
-	if err == OK:
-		err = ResourceSaver.save(scene, "res://scenes/maison.tscn")
-	print("maison.tscn : ", error_string(err))
-	_racine.free()
-	return err
+	_joueur_et_interface(Vector3(0, 0, 4.5))
+	return _enregistrer("res://scenes/maison.tscn")
 
 
-func _ajouter(parent: Node, enfant: Node, nom: String) -> Node:
-	enfant.name = nom
-	parent.add_child(enfant)
-	enfant.owner = _racine
-	return enfant
+func _couleurs() -> Dictionary:
+	return COULEURS
 
 
-func _groupe(nom: String, pos := Vector3.ZERO) -> Node3D:
-	var g := Node3D.new()
-	g.position = pos
-	return _ajouter(_racine, g, nom)
-
-
-func _mat(cle: String) -> StandardMaterial3D:
-	if not _materiaux.has(cle):
-		var lumineux: bool = cle in ["repere", "photo_bonne", "soleil", "aiguille", "horloge"]
-		_materiaux[cle] = Style.materiau(Color(COULEURS[cle]), lumineux)
-	return _materiaux[cle]
-
-
-func _boite(parent: Node, nom: String, pos: Vector3, taille: Vector3, couleur: String, solide := true, epoque := -1) -> CSGBox3D:
-	var b := CSGBox3D.new()
-	b.position = pos
-	b.size = taille
-	b.material = _mat(couleur)
-	b.use_collision = solide
-	_ajouter(parent, b, nom)
-	if epoque >= 0:
-		var m := EpochMember.new()
-		m.epoque = epoque
-		_ajouter(b, m, "EpochMember")
-	return b
-
-
-func _texte(parent: Node, nom: String, pos: Vector3, texte: String, rot_y := 0.0, taille := 0.006) -> Label3D:
-	var l := Label3D.new()
-	l.position = pos
-	l.rotation.y = rot_y
-	l.text = texte
-	l.font_size = 64
-	l.pixel_size = taille
-	l.outline_size = 16
-	l.modulate = Color.WHITE
-	l.outline_modulate = Color("2b1d4e")
-	return _ajouter(parent, l, nom)
+func _lumineux() -> Array:
+	return ["repere", "photo_bonne", "soleil", "aiguille", "horloge"]
 
 
 ## Une pièce rectangulaire : sol, 4 murs et plinthes. `ouvertures` donne,
@@ -208,18 +153,6 @@ func _toit(g: Node3D, centre: Vector3, largeur: float, longueur: float, mur: Str
 		_boite(t, "Cheminee", Vector3(largeur / 4, montee / 2 + 0.6, -longueur / 4), Vector3(0.7, 1.6, 0.7), "pierre", false)
 	for n in t.find_children("*", "GeometryInstance3D", true, false):
 		(n as GeometryInstance3D).cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-
-
-func _ancrage(g: Node3D, nom: String, point: Vector3, centre_zone: Vector3, taille_zone: Vector3) -> void:
-	var a := PointAncrage.new()
-	a.position = point - g.position
-	_ajouter(g, a, nom)
-	var forme := CollisionShape3D.new()
-	var boite := BoxShape3D.new()
-	boite.size = taille_zone
-	forme.shape = boite
-	forme.position = centre_zone - point
-	_ajouter(a, forme, "CollisionShape3D")
 
 
 func _photo(g: Node3D, nom: String, pos: Vector3, couleur: String, avec_soleil := false, rot_y := 0.0) -> Node3D:
@@ -524,30 +457,18 @@ func _atelier() -> void:
 ## Place un morceau sur le rayon qui part du point de vue vers son point
 ## d'image, à la profondeur k, et l'agrandit d'autant : vu du point de vue, il
 ## a exactement la même taille que s'il était dans le plan de l'image.
-func _morceau(horloge: Node3D, nom: String, vue: Vector3, point_image: Vector3, taille: Vector3, rot_z: float, k: float, couleur: String) -> void:
-	var b := CSGBox3D.new()
-	b.position = vue + (point_image - vue) * k - horloge.position
-	b.size = taille
-	b.scale = Vector3.ONE * k
-	b.rotation.z = rot_z
-	b.material = _mat(couleur)
-	b.use_collision = false
-	_ajouter(horloge, b, nom)
-
-
 func _jardin() -> void:
 	var g := _groupe("Jardin")
 	_boite(g, "Sol", Vector3(30, -0.25, -26.2), Vector3(6, 0.5, 8), "jardin")
-	_texte(g, "Panneau", Vector3(30, 1.9, -29.4), "Bientôt : l'Égypte ancienne…")
+	_texte(g, "Panneau", Vector3(29.3, 2.0, -29.2), "L'Égypte : passe le portail\nen regardant l'obélisque", 0.0, 0.0032)
 	var n: Callable = _m.nature
-	n.call(g, "Arbre1", "tree_default", Vector3(27.9, 0, -28.9), 3.0, 0.4)
+	n.call(g, "Arbre1", "tree_default", Vector3(27.5, 0, -29.3), 3.0, 0.4)
 	n.call(g, "Arbre2", "tree_oak", Vector3(32.2, 0, -27.8), 3.2, 1.2)
 	n.call(g, "Arbre3", "tree_small", Vector3(27.8, 0, -25.6), 3.0, 2.0)
 	for i in 4:
 		n.call(g, "Dalle%d" % i, "path_stone", Vector3(30, 0, -22.75 - 0.95 * i), 1.5, 0.15 * (i % 2))
-	n.call(g, "Panneau3D", "sign", Vector3(30, 0, -29.5), 3.0)
-	# Un avant-goût de la suite : un obélisque égyptien au fond du jardin.
-	n.call(g, "Obelisque", "statue_obelisk", Vector3(32.0, 0, -29.4), 3.0, 0.3)
+	n.call(g, "Panneau3D", "sign", Vector3(28.7, 0, -29.3), 3.0)
+	_obelisque(g, Vector3(33, 0, -35.5))
 	n.call(g, "BuissonG", "plant_bushDetailed", Vector3(27.6, 0, -22.9), 2.5)
 	n.call(g, "BuissonD", "plant_bushDetailed", Vector3(32.4, 0, -22.9), 2.5, 1.0)
 	var fleurs := [
@@ -570,14 +491,37 @@ func _jardin() -> void:
 		n.call(g, "ClotureD%d" % i, "fence_simple", Vector3(32.9, 0, -23.6 - 2.5 * i), 2.5, PI / 2)
 	for i in 3:
 		n.call(g, "ClotureFond%d" % i, "fence_gate" if i == 1 else "fence_simple", Vector3(28.0 + 2.0 * i, 0, -30.1), 2.0)
-	var fin := Area3D.new()
-	fin.position = Vector3(30, 1, -25)
-	_ajouter(g, fin, "Fin")
+	# Le jardin flotte dans le ciel : des murs invisibles l'entourent. Le
+	# portail du fond mène en Égypte si on le passe en regardant l'obélisque.
+	_mur_invisible(g, "BordOuest", Vector3(26.9, 1.5, -26.2), Vector3(0.2, 3, 8))
+	_mur_invisible(g, "BordEst", Vector3(33.1, 1.5, -26.2), Vector3(0.2, 3, 8))
+	_mur_invisible(g, "BordFond", Vector3(30, 1.5, -30.4), Vector3(6.4, 3, 0.2))
+	var passage := PassageTemporel.new()
+	passage.position = Vector3(30, 0, -29.95)
+	passage.cible_regard = NodePath("../Obelisque")
+	passage.scene = "res://scenes/egypte.tscn"
+	_ajouter(g, passage, "PassageEgypte")
 	var forme := CollisionShape3D.new()
 	var boite := BoxShape3D.new()
-	boite.size = Vector3(6, 2, 2)
+	boite.size = Vector3(2, 2.2, 0.5)
 	forme.shape = boite
-	_ajouter(fin, forme, "CollisionShape3D")
+	forme.position = Vector3(0, 1.1, 0)
+	_ajouter(passage, forme, "CollisionShape3D")
+
+
+## Un avant-goût de la suite : un obélisque égyptien sur une petite île de
+## sable qui flotte derrière le jardin, un peu sur le côté du portail. Le
+## nœud Obelisque est au milieu de sa hauteur : c'est ce qu'on regarde.
+func _obelisque(g: Node3D, pos: Vector3) -> void:
+	var ile: CSGCombiner3D = _m.prop(g, "Ile", pos, 0.0, false)
+	_m.cyl(ile, Vector3(0, -0.3, 0), 1.6, 0.6, "dune", 10)
+	_m.cyl(ile, Vector3(0, -1.6, 0), 1.5, 2.0, "rocher", 10, true, Vector3(PI, 0, 0))
+	var o := Node3D.new()
+	_ajouter(g, o, "Obelisque")
+	var modele: Node3D = _m.nature(o, "Modele", "statue_obelisk", Vector3.ZERO, 3.0, 0.3)
+	var h: float = _m._boite_englobante(modele, Transform3D.IDENTITY).size.y
+	o.position = pos + Vector3(0, h / 2, 0)
+	modele.position.y = -h / 2
 
 
 ## Des objets géants qui flottent autour de la maison : le temps se dérègle.
@@ -595,31 +539,3 @@ func _ciel() -> void:
 	for k in objets.size():
 		var o: Array = objets[k]
 		_m.flottant(g, "Flottant%d" % k, o[2], o[0], o[1], o[3], o[4])
-
-
-func _joueur_et_interface() -> void:
-	var joueur: Player = load("res://scenes/player.tscn").instantiate()
-	joueur.position = Vector3(0, 0, 4.5)
-	_ajouter(_racine, joueur, "Player")
-	var fx: Node = load("res://scenes/bascule_fx.tscn").instantiate()
-	_ajouter(_racine, fx, "BasculeFx")
-	var ui := CanvasLayer.new()
-	_ajouter(_racine, ui, "Interface")
-	var viseur := Label.new()
-	viseur.text = "·"
-	viseur.add_theme_font_size_override("font_size", 40)
-	viseur.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	viseur.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	viseur.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	viseur.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_ajouter(ui, viseur, "Viseur")
-	var msg := Label.new()
-	msg.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
-	msg.offset_top = 40
-	msg.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	msg.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	msg.add_theme_font_size_override("font_size", 30)
-	msg.add_theme_color_override("font_outline_color", Color("2b1d4e"))
-	msg.add_theme_constant_override("outline_size", 10)
-	msg.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_ajouter(ui, msg, "Message")

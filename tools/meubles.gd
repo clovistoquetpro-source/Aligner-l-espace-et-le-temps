@@ -17,12 +17,20 @@ const COULEURS := {
 	"livre_4": "ffd166", "flamme": "ff9f1c", "engrenage": "f72585", "cadran": "fffcf2",
 	"applique": "fff3b0", "flottant_1": "f15bb5", "flottant_2": "00bbf9", "flottant_3": "fee440",
 	"flottant_4": "9b5de5", "cadre_fenetre": "ffffff", "ampoule": "fff8e1", "fer": "3d3551",
+	# Égypte (mêmes teintes que le Low Poly Egypt Pack)
+	"ocre": "d2af73", "ocre_fonce": "b99561", "or": "f3c330", "lapis": "183da0",
+	"turquoise": "1fb5a8", "palme": "5aa83c", "tronc": "8a5a3c", "papyrus": "7cb342",
+	"dune": "e08a4c", "rocher": "c9874f", "peau": "c68a4a",
 }
 const LUMINEUX := ["abat_jour", "flamme", "applique", "cadran", "ampoule"]
 const LUMIERE_CHAUDE := Color("ffd6a5")
+## Les armes que le modèle du soldat porte toutes à la fois.
+const ARMES := ["AK", "GrenadeLauncher", "Knife_1", "Knife_2", "Pistol", "Revolver", "Revolver_Small",
+	"RocketLauncher", "ShortCannon", "Shotgun", "Shovel", "SMG", "Sniper", "Sniper_2"]
 
 var _b
 var _materiaux := {}
+var _decor_egypte
 
 
 func _init(constructeur) -> void:
@@ -48,7 +56,9 @@ const ECHELLE_KENNEY := 2.0
 ## "plafond" (milieu du haut), "mur" (base, contre le dos) ou "mur_haut"
 ## (haut, contre le dos). Les modèles regardent vers +Z. `solide` ajoute une
 ## boîte de collision à la taille du modèle.
-func modele(parent: Node, nom: String, chemin: String, pos: Vector3, rot_y := 0.0, echelle := 1.0, solide := true, epoque := -1, ancrage := "sol") -> Node3D:
+## Avec `hauteur` > 0, l'échelle est calculée pour que le modèle mesure
+## cette hauteur.
+func modele(parent: Node, nom: String, chemin: String, pos: Vector3, rot_y := 0.0, echelle := 1.0, solide := true, epoque := -1, ancrage := "sol", hauteur := 0.0) -> Node3D:
 	var corps: Node3D = StaticBody3D.new() if solide else Node3D.new()
 	corps.set_script(HABILLAGE)
 	corps.position = pos
@@ -56,6 +66,8 @@ func modele(parent: Node, nom: String, chemin: String, pos: Vector3, rot_y := 0.
 	_b._ajouter(parent, corps, nom)
 	var m: Node3D = load(MODELES + chemin).instantiate()
 	var boite := _boite_englobante(m, Transform3D.IDENTITY)
+	if hauteur > 0.0:
+		echelle = hauteur / boite.size.y
 	var c := boite.get_center()
 	var ancre := c
 	ancre.y = boite.end.y if ancrage in ["plafond", "mur_haut"] else boite.position.y
@@ -94,6 +106,47 @@ func chateau(parent: Node, nom: String, modele_nom: String, pos: Vector3, rot_y 
 ## Un élément du jardin (Kenney Nature Kit), sans collision.
 func nature(parent: Node, nom: String, modele_nom: String, pos: Vector3, echelle: float, rot_y := 0.0) -> Node3D:
 	return modele(parent, nom, "jardin/%s.glb" % modele_nom, pos, rot_y, echelle, false)
+
+
+## Un monument de l'Égypte ancienne (Low Poly Egypt Pack, à l'échelle réelle).
+## La licence du pack interdit d'en redistribuer les fichiers : tant que le
+## dépôt est public, il n'est pas dans assets/modeles/egypte, et on construit
+## à la place une forme simple de même taille (tools/decor_egypte.gd).
+func egypte(parent: Node, nom: String, modele_nom: String, pos: Vector3, rot_y := 0.0, echelle := 1.0, solide := true, epoque := -1) -> Node3D:
+	var chemin := "egypte/%s.glb" % modele_nom
+	if ResourceLoader.exists(MODELES + chemin):
+		return modele(parent, nom, chemin, pos, rot_y, echelle, solide, epoque)
+	if _decor_egypte == null:
+		_decor_egypte = load("res://tools/decor_egypte.gd").new(self)
+	return _decor_egypte.construire(parent, nom, modele_nom, pos, rot_y, echelle, solide, epoque)
+
+
+## Un objet du camp de 1942 (Toon Shooter Game Kit de Quaternius).
+func militaire(parent: Node, nom: String, modele_nom: String, pos: Vector3, rot_y := 0.0, echelle := 1.0, solide := true, epoque := PRESENT) -> Node3D:
+	return modele(parent, nom, "militaire/%s.gltf" % modele_nom, pos, rot_y, echelle, solide, epoque)
+
+
+## Une caisse de 1942 (Toon Shooter), étirée à la `taille` voulue et posée au
+## sol en `pos`.
+func caisse(parent: Node, nom: String, pos: Vector3, taille: Vector3, epoque := PRESENT) -> Node3D:
+	var corps := modele(parent, nom, "militaire/Crate.gltf", pos, 0.0, 1.0, true, epoque)
+	var m: Node3D = corps.get_node("Modele")
+	var k := taille / _boite_englobante(m, Transform3D.IDENTITY).size
+	m.scale = k
+	m.position *= k
+	var forme: CollisionShape3D = corps.get_node("Collision")
+	(forme.shape as BoxShape3D).size = taille
+	forme.position *= k
+	return corps
+
+
+## Un soldat de 1942 de 1,8 m, sans collision et sans armes, qui joue une
+## animation en boucle (« Idle », « Wave »…).
+func soldat(parent: Node, nom: String, pos: Vector3, rot_y := 0.0, animation := "Idle", epoque := PRESENT) -> Node3D:
+	var s := modele(parent, nom, "militaire/Character_Soldier.gltf", pos, rot_y, 1.0, false, epoque, "sol", 1.8)
+	s.set("animation", animation)
+	s.set("caches", ARMES)
+	return s
 
 
 ## Boîte englobante des maillages sous `n`, dans le repère de `n`.

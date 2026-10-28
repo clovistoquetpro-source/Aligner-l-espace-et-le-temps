@@ -1,6 +1,7 @@
 extends RefCounted
 
 const TempsScript := preload("res://scripts/time/temps.gd")
+const O := preload("res://tests/outils_niveau.gd")
 
 var tree: SceneTree
 var _niveau: Node3D
@@ -20,28 +21,13 @@ func _charger() -> Node3D:
 	return _niveau
 
 
-func _tous(racine: Node, filtre: Callable) -> Array[Node]:
-	var res: Array[Node] = []
-	for n in racine.find_children("*", "", true, false):
-		if filtre.call(n):
-			res.append(n)
-	return res
-
-
-## Tourne le joueur pour que sa caméra vise ce point.
-func _viser(j: Player, cible: Vector3) -> void:
-	var d := cible - j.camera.global_position
-	j.rotation.y = atan2(-d.x, -d.z)
-	j.head.rotation.x = asin(d.normalized().y)
-
-
 func test_contenu_du_niveau() -> void:
 	var n: Node3D = await _charger()
-	T.eq(_tous(n, func(x: Node) -> bool: return x is Player).size(), 1, "un joueur")
-	T.ok(_tous(n, func(x: Node) -> bool: return x is PorteTrompeuse).size() >= 1, "une porte trompeuse")
-	T.eq(_tous(n, func(x: Node) -> bool: return x is Alignement).size(), 1, "une énigme d'alignement")
+	T.eq(O.tous(n, func(x: Node) -> bool: return x is Player).size(), 1, "un joueur")
+	T.ok(O.tous(n, func(x: Node) -> bool: return x is PorteTrompeuse).size() >= 1, "une porte trompeuse")
+	T.eq(O.tous(n, func(x: Node) -> bool: return x is Alignement).size(), 1, "une énigme d'alignement")
 	for e in [TempsScript.Epoque.PRESENT, TempsScript.Epoque.PASSE]:
-		T.ok(_tous(n, func(x: Node) -> bool: return x is EpochMember and x.epoque == e).size() >= 1, "membres de l'époque %d" % e)
+		T.ok(O.tous(n, func(x: Node) -> bool: return x is EpochMember and x.epoque == e).size() >= 1, "membres de l'époque %d" % e)
 
 
 func test_marcher_tout_droit_fait_boucler() -> void:
@@ -65,13 +51,13 @@ func test_marcher_tout_droit_fait_boucler() -> void:
 func test_objet_a_prendre_dans_le_hall() -> void:
 	var n: Node3D = await _charger()
 	var j: Player = n.get_node("Player")
-	var objets := _tous(n, func(x: Node) -> bool: return x is RigidBody3D)
+	var objets := O.tous(n, func(x: Node) -> bool: return x is RigidBody3D)
 	T.ok(objets.size() >= 1, "au moins un objet à porter")
 	if objets.is_empty():
 		return
 	var objet: RigidBody3D = objets[0]
 	j.teleport(Transform3D(Basis(), objet.global_position + Vector3(0, 0, 1.5) - Vector3(0, objet.global_position.y, 0)))
-	_viser(j, objet.global_position)
+	O.viser(j, objet.global_position)
 	await tree.physics_frame
 	j._interagir()
 	T.eq(j.held, objet, "E prend l'objet")
@@ -85,7 +71,7 @@ func test_horloge_se_vise_un_peu_au_dessus_du_centre() -> void:
 	j.teleport(Transform3D(Basis(), vue.global_position - Vector3(0, 1.6, 0)))
 	var vers_centre := enigme.global_position - j.camera.global_position
 	var vise := j.camera.global_position + Basis(Vector3.RIGHT, deg_to_rad(3)) * vers_centre
-	_viser(j, vise)
+	O.viser(j, vise)
 	await tree.physics_frame
 	enigme.verifier(j.camera)
 	T.ok(enigme.est_resolu, "3° au-dessus du centre de l'horloge : aligné")
@@ -147,14 +133,14 @@ func test_parcours_complet() -> void:
 
 	# Sans regarder la bonne photo, le couloir boucle.
 	j.teleport(Transform3D(Basis(), porte.global_position + Vector3(0, 0, 0.3)))
-	_viser(j, mauvaise.global_position)
+	O.viser(j, mauvaise.global_position)
 	j.set_meta("arrivee_ms", -100000)
 	porte._corps_entre(j)
 	T.ok(j.global_position.z > -4.0 and absf(j.global_position.x) < 2.0, "retour au début du couloir")
 
 	# En regardant la bonne photo, on arrive au salon.
 	j.teleport(Transform3D(Basis(), porte.global_position + Vector3(0, 0, 0.3)))
-	_viser(j, bonne.global_position)
+	O.viser(j, bonne.global_position)
 	j.set_meta("arrivee_ms", -100000)
 	porte._corps_entre(j)
 	T.ok(j.global_position.x > 25.0 and j.global_position.z > -10.0, "arrivé au salon")
@@ -169,7 +155,7 @@ func test_parcours_complet() -> void:
 	var enigme: Alignement = n.get_node("Atelier/Horloge")
 	var vue: Node3D = enigme.get_node(enigme.point_de_vue)
 	j.teleport(Transform3D(Basis(), vue.global_position - Vector3(0, 1.6, 0)))
-	_viser(j, enigme.global_position)
+	O.viser(j, enigme.global_position)
 	await tree.physics_frame
 	enigme.verifier(j.camera)
 	T.ok(enigme.est_resolu, "horloge réalignée")
@@ -217,19 +203,19 @@ func test_le_plafond_ne_coupe_pas_l_horloge() -> void:
 
 func test_les_fenetres_ont_une_vitre_solide() -> void:
 	var n: Node3D = await _charger()
-	var vitres := _tous(n, func(x: Node) -> bool: return x is CSGBox3D and String(x.name).begins_with("Vitre"))
+	var vitres := O.tous(n, func(x: Node) -> bool: return x is CSGBox3D and String(x.name).begins_with("Vitre"))
 	T.ok(vitres.size() >= 3, "au moins 3 fenêtres (%d)" % vitres.size())
 	for v in vitres:
 		T.ok((v as CSGBox3D).use_collision, "%s bloque le passage" % v.name)
 
 
 func _membres(n: Node, e: int) -> Array[Node]:
-	return _tous(n, func(x: Node) -> bool: return x is HabillageCartoon and x.get_node_or_null("EpochMember") != null and x.get_node("EpochMember").epoque == e)
+	return O.tous(n, func(x: Node) -> bool: return x is HabillageCartoon and x.get_node_or_null("EpochMember") != null and x.get_node("EpochMember").epoque == e)
 
 
 func test_la_maison_est_meublee_avec_les_packs() -> void:
 	var n: Node3D = await _charger()
-	var modeles := _tous(n, func(x: Node) -> bool: return x is HabillageCartoon)
+	var modeles := O.tous(n, func(x: Node) -> bool: return x is HabillageCartoon)
 	T.ok(modeles.size() >= 40, "au moins 40 modèles importés (%d)" % modeles.size())
 	T.ok(_membres(n, TempsScript.Epoque.PRESENT).size() >= 8, "un salon meublé au présent")
 	T.ok(_membres(n, TempsScript.Epoque.PASSE).size() >= 8, "une salle de château dans le passé")
@@ -254,55 +240,21 @@ func test_dans_le_passe_on_traverse_le_salon_jusqu_a_l_atelier() -> void:
 	T.ok(Temps.basculer(j), "on peut revenir au présent dans l'atelier")
 
 
-## Murs, sols, plafonds… : deux de ces boîtes ne doivent jamais occuper le
-## même volume (leurs faces se superposent et scintillent).
-const STRUCTURE := ["Mur", "Plafond", "Sol", "Estrade", "Colonne", "Arche", "PorteSortie"]
-
-
-func _boite(b: CSGBox3D) -> AABB:
-	return b.global_transform * AABB(-b.size / 2, b.size)
-
-
-func _epoque(n: Node) -> int:
-	var e := n.get_node_or_null("EpochMember")
-	return e.epoque if e != null else -1
-
-
-func _boites(n: Node, prefixes: Array) -> Array[Node]:
-	return _tous(n, func(x: Node) -> bool:
-		return x is CSGBox3D and not (x.get_parent() is CSGShape3D) \
-			and prefixes.any(func(p: String) -> bool: return String(x.name).begins_with(p)))
-
-
-func _chevauchements(boites: Array[Node]) -> Array[String]:
-	var res: Array[String] = []
-	for i in boites.size():
-		for k in range(i + 1, boites.size()):
-			var a: CSGBox3D = boites[i]
-			var b: CSGBox3D = boites[k]
-			if _epoque(a) >= 0 and _epoque(b) >= 0 and _epoque(a) != _epoque(b):
-				continue
-			var inter := _boite(a).intersection(_boite(b))
-			if inter.size.x * inter.size.y * inter.size.z > 1e-6:
-				res.append("%s / %s" % [a.get_path(), b.get_path()])
-	return res
-
-
 func test_les_murs_ne_se_chevauchent_pas() -> void:
 	var n: Node3D = await _charger()
-	var c := _chevauchements(_boites(n, STRUCTURE))
+	var c := O.chevauchements(O.boites(n, O.STRUCTURE))
 	T.ok(c.is_empty(), "chevauchements : %s" % ", ".join(c))
 
 
 func test_les_plinthes_touchent_un_mur_sans_se_chevaucher() -> void:
 	var n: Node3D = await _charger()
-	var plinthes := _boites(n, ["Plinthe"])
-	var murs := _boites(n, ["Mur"])
+	var plinthes := O.boites(n, ["Plinthe"])
+	var murs := O.boites(n, ["Mur"])
 	T.ok(plinthes.size() >= 8, "des plinthes")
 	for p in plinthes:
-		var colle := murs.any(func(m: Node) -> bool: return _boite(m).grow(0.005).intersects(_boite(p)))
+		var colle := murs.any(func(m: Node) -> bool: return O.boite(m).grow(0.005).intersects(O.boite(p)))
 		T.ok(colle, "%s contre un mur" % p.get_path())
-	var c := _chevauchements(plinthes)
+	var c := O.chevauchements(plinthes)
 	T.ok(c.is_empty(), "plinthes qui se chevauchent : %s" % ", ".join(c))
 
 
@@ -310,7 +262,7 @@ func test_le_cadre_des_fenetres_ne_colle_pas_au_trou_du_mur() -> void:
 	# Le bord intérieur du cadre doit être un peu dans l'ouverture : sinon ses
 	# faces tombent pile sur celles du trou et scintillent.
 	var n: Node3D = await _charger()
-	var vitres := _tous(n, func(x: Node) -> bool: return x is CSGBox3D and String(x.name).begins_with("Vitre"))
+	var vitres := O.tous(n, func(x: Node) -> bool: return x is CSGBox3D and String(x.name).begins_with("Vitre"))
 	for v: CSGBox3D in vitres:
 		var cadre := v.get_parent().get_node("Fenetre" + String(v.name).trim_prefix("Vitre"))
 		for b in cadre.get_children():
@@ -320,3 +272,36 @@ func test_le_cadre_des_fenetres_ne_colle_pas_au_trou_du_mur() -> void:
 				T.ok(absf(b.position.x) - b.size.x / 2 < v.size.x / 2 - 0.005, "%s : montant en retrait" % cadre.name)
 			if absf(b.position.y) > 0.01:
 				T.ok(absf(b.position.y) - b.size.y / 2 < v.size.y / 2 - 0.005, "%s : traverse en retrait" % cadre.name)
+
+
+func test_le_jardin_mene_en_egypte() -> void:
+	var n: Node3D = await _charger()
+	T.ok(not n.has_node("Jardin/Fin"), "plus de « Fin du prototype »")
+	var passage: PassageTemporel = n.get_node_or_null("Jardin/PassageEgypte")
+	T.ok(passage != null, "un passage au fond du jardin")
+	if passage == null:
+		return
+	T.eq(passage.scene, "res://scenes/egypte.tscn", "il mène en Égypte")
+	T.ok(ResourceLoader.exists(passage.scene), "la scène de l'Égypte existe")
+	var obelisque: Node3D = n.get_node("Jardin/Obelisque")
+	T.eq(passage.get_node(passage.cible_regard), obelisque, "il faut regarder l'obélisque")
+	T.ok("regardant l'obélisque" in (n.get_node("Jardin/Panneau") as Label3D).text, "le panneau le dit")
+	# On passe le portail en regardant l'obélisque, pas en marchant tout droit.
+	var franchi := [false]
+	passage.franchi.connect(func() -> void: franchi[0] = true)
+	passage.scene = ""
+	var j: Player = n.get_node("Player")
+	for vise in [false, true]:
+		j.teleport(Transform3D(Basis(), passage.global_position + Vector3(0, 0, 0.7)))
+		j.head.rotation.x = 0.0
+		if vise:
+			O.viser(j, obelisque.global_position)
+		passage._corps_entre(j)
+		T.eq(franchi[0], vise, "en regardant l'obélisque : %s" % vise)
+	# Le jardin est fermé : sans le bon regard, on bute au fond, sans tomber.
+	var espace := n.get_world_3d().direct_space_state
+	var centre := Vector3(30, 1, -26.5)
+	for i in 16:
+		var a := TAU * i / 16.0
+		var r := PhysicsRayQueryParameters3D.create(centre, centre + Vector3(sin(a), 0, -cos(a)) * 10)
+		T.ok(not espace.intersect_ray(r).is_empty(), "le jardin est fermé (direction %d/16)" % i)

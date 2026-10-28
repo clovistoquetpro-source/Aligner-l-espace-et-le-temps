@@ -93,3 +93,12 @@ func test_retour_au_depart_hors_zone() -> void:
 	cube._physics_process(0.016)
 	T.proche(cube.global_position, Vector3(1, 0.5, 1), "revient à sa place")
 	T.proche(cube.taille, 0.3, "reprend sa taille")
+
+
+func test_poisson_garde_ses_proportions() -> void:
+	var p: ObjetPerspectif = _ajouter(load("res://scenes/poisson.tscn").instantiate())
+	p.taille = 2.0
+	var forme: CollisionShape3D = p.get_node("CollisionShape3D")
+	T.proche((forme.shape as BoxShape3D).size, Vector3(2, 0.9, 0.6), "boîte du poisson agrandie")
+	T.proche(p.get_node("Mesh").scale, Vector3.ONE * 2, "le dessin suit")
+	T.ok(p.get_node("Mesh") is Node3D and not p.get_node("Mesh") is MeshInstance3D, "dessin fait de plusieurs formes")
