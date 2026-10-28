@@ -94,6 +94,21 @@ Une journée d'enfance, en trois parties qui s'enchaînent (les trois idées ré
 - Pour l'invitation de l'armoire, il y a deux cubes de bois : on agrandit l'un en marche, l'autre en plus haut.
 - Au retour, le message « Fin du niveau 2. Bientôt : l'adolescence. »
 
+### Le niveau 3 : l'adolescence, l'été au lac
+
+Choix de clo : la rencontre au bord du lac, l'été (lumière dorée, chaleur) ; la correction du peintre est « le moment parfait » ; la nouvelle mécanique est la journée en boucle (comme dans Inception). On y entre par une nouvelle toile du salon, « le lac », qui apparaît au retour de l'enfance.
+
+**L'histoire.** Thomas a 16 ans. Il peint le lac, seul, au bout du ponton. Juliette arrive à mobylette, les cheveux au vent, et s'arrête pour regarder : « Joli, ton lac. Mais il manque le ciel. » Puis : « Tu me l'offres ? Ce soir, sur l'île, au coucher du soleil. » Elle repart. Le peintre veut que ce premier rendez-vous ait été parfait : Thomas à l'heure, au sec, avec le tableau fini, sous un coucher de soleil parfait. En vrai, il est arrivé trop tard, à la nage, le tableau trempé, et elle a ri. C'était le plus beau soir de sa vie.
+
+**La journée en boucle.** Une journée dure 2 minutes, de l'après-midi doré au coucher du soleil. Au coucher du soleil, si le moment parfait n'a pas eu lieu, le peintre repeint tout et la journée recommence au ponton (« Encore ce jour-là… »). Chaque nouvelle journée, le peintre change un détail pour rendre le moment plus parfait. Une règle : ce que Thomas tient dans ses mains au moment où tout est repeint passe dans la journée suivante.
+
+**Les énigmes.**
+1. **Le tableau à finir** : le ciel du tableau est blanc. Il ne se finit qu'au coucher du soleil, depuis le ponton, en le tenant face au soleil. Mais à ce moment-là, il est trop tard pour aller sur l'île : il faut garder le tableau dans les mains jusqu'à ce que la journée se repeigne, pour l'avoir fini dès le début de la suivante.
+2. **Le pont cassé** : le pont vers l'île a perdu ses planches au milieu (6 m de vide). Nager, c'est possible, mais l'eau trempe le tableau. Dès la deuxième journée, le peintre a repeint les planches… seulement dans le reflet du lac. Elles ne portent Thomas que s'il regarde leur reflet dans l'eau en avançant ; s'il lève les yeux, il tombe à l'eau.
+3. **Le rendez-vous** : être sur l'île au coucher du soleil, devant Juliette, avec le tableau fini et sec. Trop tôt, elle attend le coucher du soleil ; trempé, elle rit (« Tu es venu à la nage ?! »), mais le peintre refuse : « Non… Ça devait être parfait. »
+
+**La correction et la vérité.** Le moment parfait a lieu : le soleil se fige, des fleurs poussent partout, Juliette dit « C'est… parfait », puis elle ne bouge plus, plate comme une toile. L'image se fissure : « Ce n'est pas vrai. Ce soir-là, je suis arrivé trop tard. » Le vrai souvenir se rejoue : la nuit, Thomas dans l'eau près de l'île, Juliette qui rit sur la rive. Quand il la rejoint : « Et je l'ai repeint… mille fois. » Chute dans les toiles, retour dans la maison des étoiles, encore plus abîmée.
+
 ### La durée
 
 clo vise 10 à 15 minutes, jusqu'à 20, par niveau : environ 1 h à 1 h 30 pour les 5 niveaux. Le niveau 1 actuel est trop court pour ça : il gagnera des énigmes. Chaque niveau combine plusieurs vraies énigmes et des moments d'histoire.
