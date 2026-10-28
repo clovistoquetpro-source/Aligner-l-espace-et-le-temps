@@ -11,6 +11,8 @@ const COUCHE_REEL := 2
 ## Couche visible seulement dans le reflet (le passage, le corps du joueur).
 const COUCHE_REFLET := 4
 const NEAR_MIN := 0.05
+## Au-delà de cette distance, on ne met plus le reflet à jour.
+const DISTANCE_VUE := 15.0
 
 @export var taille := Vector2(3.0, 2.4)
 ## Pixels par mètre de l'image du reflet.
@@ -67,8 +69,10 @@ func _process(_delta: float) -> void:
 	if oeil == null:
 		return
 	var c := camera_reflet(global_transform, oeil.global_position, taille)
+	var utile := not c.is_empty() and oeil.global_position.distance_to(global_position) < DISTANCE_VUE
 	_vitre.visible = not c.is_empty()
-	if c.is_empty():
+	_vue.render_target_update_mode = SubViewport.UPDATE_ALWAYS if utile else SubViewport.UPDATE_DISABLED
+	if not utile:
 		return
 	camera.global_transform = c["transform"]
 	camera.near = c["near"]

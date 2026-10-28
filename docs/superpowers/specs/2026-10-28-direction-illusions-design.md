@@ -43,6 +43,16 @@ Références : Viewfinder (la préférée de clo : une photo posée devient le d
 
 Chaque épreuve doit avoir une raison d'être dans cette histoire.
 
+### La structure du jeu (évoquée par clo, à confirmer)
+
+- **De souvenir en souvenir** : chaque toile est un souvenir. Le peintre (toi, plus tard) les a repeints de travers. À chaque niveau, on entre dans un souvenir et on le remet en ordre, et on apprend un morceau de ce qui s'est passé.
+- **Plus tard** : une cinématique au début du jeu, qui pose le contexte de toute l'histoire.
+- **Comment l'histoire se raconte** (choix de clo) : par les toiles, et par les pensées du joueur, de courtes phrases à l'écran quand il découvre quelque chose. Elles intriguent, elles ne donnent jamais la solution.
+
+## Méthode de construction
+
+On construit chaque niveau entièrement en formes simples (une « greybox ») : parcours, énigmes et histoire, avec des textes provisoires. Quand le niveau est complet et validé, on ajoute les textures, les détails et le personnage. On ne perd ainsi pas de travail d'habillage sur un niveau qu'on remanie. Dans la greybox, la maison est grise et tout ce qui est peint (les toiles et ce qu'il y a dedans) est en couleurs.
+
 ## Idées d'épreuves (à creuser)
 
 1. **Le couloir sans fin** (clo). On court dans un couloir, on a l'impression d'avancer, mais on reste toujours au même endroit. C'est un cul-de-sac et seulement ça : on n'en sort pas par une astuce. Le seul moyen est de faire demi-tour. Son rôle : la sensation pure, une salle du musée qu'on visite pour le malaise, sans rien à résoudre. D'abord prévu avec une musique angoissante, mais clo ne veut aucun son dans le prototype : l'angoisse passe par l'image.
@@ -52,17 +62,22 @@ Chaque épreuve doit avoir une raison d'être dans cette histoire.
 
 ## Prochaines étapes
 
-1. clo teste le prototype gris des deux premières salles (voir plus bas).
-2. Continuer le brainstorming avec ses retours : la toile qui se contient, tourner le tableau, de nouvelles idées.
-3. Repenser la direction artistique de la maison dans les étoiles.
+1. clo joue le niveau 1 complet (voir plus bas) et dit ce qui marche ou pas.
+2. Confirmer la structure « de souvenir en souvenir » et l'histoire du niveau 2.
+3. Inventer ensemble les énigmes du niveau suivant (la toile qui se contient reste en réserve).
+4. Habiller le niveau 1 quand il sera validé.
 
-## Le prototype gris (2026-10-28)
+## Le niveau 1 en formes simples (2026-10-28)
 
-`scenes/illusions.tscn`, construit par `tools/constructeur_illusions.gd`. F5 le lance. Tout est gris, sans décor ni son, et aucun message ne guide le joueur.
+`scenes/illusions.tscn`, construit par `tools/constructeur_illusions.gd`. F5 le lance. Sans son. Choix de clo : le joueur veut sortir de chez lui ; l'histoire passe par les toiles et ses pensées ; le miroir le montre plus vieux ; les énigmes de la fin sont la toile qu'on tourne et la perspective forcée.
 
-- **Le hall** : une salle de 8 × 8 m, avec une fenêtre sur les étoiles et l'entrée du couloir en face du joueur.
-- **Le couloir sans fin** : 16 tronçons identiques, avec des piliers et des cadres vides qui défilent. Au 7e tronçon, le joueur est ramené 3 tronçons en arrière sans s'en apercevoir. Seule sa lanterne l'éclaire, le fond reste noir. Plus il y reste, plus le champ de vision s'élargit : le couloir s'étire (au plus fort après 25 s). Demi-tour, et on revient au hall.
-- **La porte dans le dos** (ajout à valider) : la salle du miroir est murée au début. Après un passage dans le couloir, une ouverture apparaît dans le hall, mais seulement quand le joueur lui tourne le dos. Le couloir passe ainsi en premier.
-- **La salle du miroir** : un miroir de 3 × 2,4 m au nord. Dans le reflet, le mur sud a un passage, décalé de 2 m vers l'est, avec au fond une toile lumineuse. En vrai, le mur est plein. On voit son propre corps (une capsule grise) seulement dans le miroir.
-- **Le passage** : on le franchit en reculant vers lui à au moins 1,5 m/s, les yeux à moins de 35° du miroir. En regardant le mur, on se cogne.
-- **La chute dans les toiles** : 4 s de tableaux encadrés, chacun à 60 % du précédent, qui tournent en s'enfonçant. On atterrit dans une petite salle fermée, la « suite », avec un message de fin de test.
+1. **La chambre** : on se réveille (écran noir qui s'ouvre). « Quel drôle de rêve… » Au-dessus du lit, une toile montre la maison dans les étoiles ; par la fenêtre, les étoiles.
+2. **L'entrée** : une fenêtre sur le vide (« La maison flotte… »), et au nord le couloir de la porte d'entrée, éclairée au fond. L'objectif : sortir.
+3. **Le couloir de la porte d'entrée** : 16 tronçons identiques ; au 7e, le joueur est ramené 3 tronçons en arrière sans le voir. La porte d'entrée reste toujours à 18 m devant lui. Seule sa lanterne éclaire, le champ de vision s'élargit avec le temps (au plus fort après 25 s). Pensées à 8 s (« Elle ne se rapproche pas… ») et à 20 s (« Je ne sortirai pas par là. »). Demi-tour pour en sortir.
+4. **Le salon** : trois toiles-souvenirs (le jardin quand la maison était sur Terre, toi enfant qui peins, un atelier inconnu), chacune avec sa pensée. Après le couloir, une porte apparaît dans le mur est, seulement quand le joueur lui tourne le dos (ajout à valider) : « Cette porte… elle n'était pas là. »
+5. **La salle de bain** : le miroir au-dessus du lavabo. Dans le reflet, le joueur est plus vieux (blouse, béret rouge, pinceau) : « Ce n'est pas moi… Si. C'est moi, plus vieux. » Le mur derrière lui a un passage, seulement dans le reflet. On le franchit en reculant (au moins 1,5 m/s), les yeux à moins de 35° du miroir ; en regardant le mur, on se cogne.
+6. **La chute dans les toiles** : 4 s de tableaux encadrés, chacun à 60 % du précédent.
+7. **La galerie, dans la toile** : à ciel ouvert, au milieu des étoiles. La porte d'entrée est sur un balcon à 4 m. Une rampe monte à un palier à la même hauteur, mais le vide entre les deux fait 5,5 m : trop large pour un saut (on saute au plus 4,6 m).
+8. **La toile tournante** (tourner le tableau) : sur le mur est, une toile posée au sol montre la chambre d'enfant, en couleurs. E sur son cadre (une manivelle sur le côté) la tourne d'un quart de tour, et la chambre peinte tourne avec : ses murs deviennent son sol. On y entre en marchant dans la toile, on en ressort par son ouverture. En haut d'une étagère, un cube est hors de portée tant que la chambre est droite ; après un quart de tour (ou un demi), l'étagère est au sol. Différence avec l'idée de départ : c'est la pièce qui tourne, pas la gravité, et l'escalier qui ne marche que dans un sens n'est pas encore fait.
+9. **La perspective forcée** : le cube sort de la toile avec le joueur. Pris de près puis visé loin, à mi-hauteur du vide, il grandit (jusqu'à 4 m). Posé dans le vide, il fait un pont entre le palier et le balcon.
+10. **La fin** : la porte d'entrée ramène… dans la chambre. « Je ne suis pas sorti… Je suis revenu dans ma chambre. » La toile au-dessus du lit a changé : « Sur le tableau, c'est moi, plus vieux. Je peins la maison… dans les étoiles. » Puis « Fin du niveau 1 ».

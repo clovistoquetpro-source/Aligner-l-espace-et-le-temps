@@ -92,6 +92,8 @@ func _interagir() -> void:
 	var cible := ray.get_collider()
 	if cible is RigidBody3D:
 		prendre(cible)
+	elif cible != null and cible.has_method("activer"):
+		cible.activer(self)
 
 
 func _physics_process(delta: float) -> void:

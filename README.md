@@ -10,7 +10,7 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 2. Récupère le dépôt avec [GitHub Desktop](https://desktop.github.com/) : **File → Clone repository**, puis `Aligner-l-espace-et-le-temps`. Ensuite, à chaque nouveauté, clique sur **Fetch origin**, puis sur **Pull origin** s'il apparaît.
    Pour essayer une nouveauté pas encore acceptée (une pull request), choisis sa branche dans le menu **Current branch** en haut (par exemple `prototype-maison`).
 3. Dans Godot, clique sur **Importer**, choisis le fichier `project.godot` du dossier, puis **Importer et modifier**.
-4. Appuie sur **F5** pour jouer. F5 lance le prototype gris du musée des illusions (voir plus bas).
+4. Appuie sur **F5** pour jouer. F5 lance le niveau 1 de la nouvelle direction, en formes simples (voir plus bas).
 
 ## Touches
 
@@ -20,7 +20,7 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 | Aller à gauche, à droite | Q, D | A, D |
 | Regarder | Souris | Souris |
 | Sauter | Espace | Espace |
-| Prendre ou poser un objet (vise loin pour l'agrandir, près pour le rétrécir) | E | E |
+| Prendre ou poser un objet (vise loin pour l'agrandir, près pour le rétrécir), tourner une toile | E | E |
 | Basculer d'époque | Tab ou clic droit | Tab ou clic droit |
 | Libérer la souris | Échap | Échap |
 
@@ -28,11 +28,11 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 
 `./run_tests.sh` (il faut la commande `godot` dans le PATH, ou la variable `GODOT`).
 
-## Le prototype des illusions
+## Le niveau 1 : la maison dans les étoiles
 
-`scenes/illusions.tscn` est le prototype gris de la nouvelle direction (fiche : `docs/superpowers/specs/2026-10-28-direction-illusions-design.md`) : le couloir sans fin, puis la salle du miroir et la chute dans les toiles. Il est construit par `tools/constructeur_illusions.gd` :
+`scenes/illusions.tscn` est le niveau 1 de la nouvelle direction, en formes simples (fiche : `docs/superpowers/specs/2026-10-28-direction-illusions-design.md`). On se réveille, on veut sortir, et on passe par le couloir sans fin, le miroir de la salle de bain, la chute dans les toiles et la galerie. Il est construit par `tools/constructeur_illusions.gd` :
 `godot --headless --path . -s res://tools/construire_illusions.gd`.
-Tab n'y fait rien : il n'y a pas d'époques.
+Tab n'y fait rien : il n'y a pas d'époques. E sert aussi à tourner certaines toiles, en visant leur cadre.
 
 ## Le niveau « La maison »
 
