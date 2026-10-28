@@ -126,6 +126,20 @@ func militaire(parent: Node, nom: String, modele_nom: String, pos: Vector3, rot_
 	return modele(parent, nom, "militaire/%s.gltf" % modele_nom, pos, rot_y, echelle, solide, epoque)
 
 
+## Une caisse de 1942 (Toon Shooter), étirée à la `taille` voulue et posée au
+## sol en `pos`.
+func caisse(parent: Node, nom: String, pos: Vector3, taille: Vector3, epoque := PRESENT) -> Node3D:
+	var corps := modele(parent, nom, "militaire/Crate.gltf", pos, 0.0, 1.0, true, epoque)
+	var m: Node3D = corps.get_node("Modele")
+	var k := taille / _boite_englobante(m, Transform3D.IDENTITY).size
+	m.scale = k
+	m.position *= k
+	var forme: CollisionShape3D = corps.get_node("Collision")
+	(forme.shape as BoxShape3D).size = taille
+	forme.position *= k
+	return corps
+
+
 ## Un soldat de 1942 de 1,8 m, sans collision et sans armes, qui joue une
 ## animation en boucle (« Idle », « Wave »…).
 func soldat(parent: Node, nom: String, pos: Vector3, rot_y := 0.0, animation := "Idle", epoque := PRESENT) -> Node3D:

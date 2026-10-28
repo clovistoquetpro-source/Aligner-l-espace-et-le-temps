@@ -27,7 +27,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func verifier(cam: Camera3D) -> void:
-	if est_resolu or not actif:
+	# Caché, il n'existe pas dans cette époque (EpochMember) : rien à voir.
+	if est_resolu or not actif or not is_visible_in_tree():
 		return
 	var vue := get_node_or_null(point_de_vue) as Node3D
 	if vue == null:

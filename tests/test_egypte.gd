@@ -283,3 +283,122 @@ func test_chute_sur_le_sable() -> void:
 	var cartouche: Cartouche = n.get_node("Rampe/Cartouche")
 	T.eq(cartouche.zone, "rampe", "le cartouche de la rampe")
 	T.ok(cartouche.global_position.y > 7.9, "il est sur la terrasse")
+
+
+# --- Énigme 4 : la sentinelle -----------------------------------------------------
+
+const OUVERTURE := AABB(Vector3(31.7, 0, -1), Vector3(0.6, 3, 2))
+
+
+## Ce que touche un rayon qui traverse l'entrée du camp, d'ouest en est.
+func _a_travers_le_camp(n: Node3D, y: float, z: float) -> Object:
+	var r := PhysicsRayQueryParameters3D.create(Vector3(28, y, z), Vector3(36, y, z))
+	return n.get_world_3d().direct_space_state.intersect_ray(r).get("collider")
+
+
+func test_entree_fermee_dans_les_deux_epoques() -> void:
+	var n: Node3D = await _charger()
+	var gardiens := {TempsScript.Epoque.PRESENT: n.get_node("Camp/Sentinelle"), TempsScript.Epoque.PASSE: n.get_node("Camp/PorteAntique")}
+	for ep in gardiens:
+		await _basculer_sans_joueur(ep)
+		for y in [0.3, 1.5, 2.8]:
+			for z in [-0.9, 0.0, 0.9]:
+				T.eq(_a_travers_le_camp(n, y, z), gardiens[ep], "époque %d, y %.1f, z %.1f : l'entrée est fermée" % [ep, y, z])
+	# L'enceinte n'a pas d'autre ouverture (en Antiquité, le camp est vide).
+	await _basculer_sans_joueur(TempsScript.Epoque.PASSE)
+	var espace := n.get_world_3d().direct_space_state
+	for i in 36:
+		var dir := Vector3(cos(TAU * i / 36.0), 0, sin(TAU * i / 36.0))
+		for y in [0.5, 2.8]:
+			var depart := Vector3(42, y, 0)
+			var touche := espace.intersect_ray(PhysicsRayQueryParameters3D.create(depart, depart + dir * 30))
+			T.ok(not touche.is_empty(), "l'enceinte est close (direction %d, y %.1f)" % [i, y])
+
+
+## Vrai si un rayon horizontal de `depart` dans la direction `dir` touche
+## quelque chose avant `longueur` m.
+func _bloque(n: Node3D, depart: Vector3, dir: Vector3, longueur: float) -> bool:
+	var r := PhysicsRayQueryParameters3D.create(depart, depart + dir * longueur)
+	return not n.get_world_3d().direct_space_state.intersect_ray(r).is_empty()
+
+
+func test_on_ne_saute_pas_du_mirador_dans_le_camp() -> void:
+	var n: Node3D = await _charger()
+	await _basculer_sans_joueur(TempsScript.Epoque.PRESENT)
+	var vue: Node3D = n.get_node("Camp/PointDeVueAnkh")
+	T.ok(vue.global_position.y >= 7.59, "plateforme à 6 m")
+	# La cabine est fermée vers le camp et sur les côtés, jusqu'au toit ; entre
+	# 0,3 et 1,8 m, une fente trop basse pour le joueur (1,8 m) laisse voir.
+	var pied := vue.global_position - Vector3(0, 1.6, 0)
+	for y in [0.3, 1.8]:
+		for dir in [Vector3.BACK, Vector3.LEFT, Vector3.RIGHT, Vector3(1, 0, 1).normalized(), Vector3(-1, 0, 1).normalized()]:
+			T.ok(_bloque(n, pied + Vector3(0, y, 0), dir, 1.6), "cabine fermée (y %.1f, direction %s)" % [y, dir])
+	# L'escalier a les côtés fermés.
+	var escalier: Node3D = n.get_node("Camp/EscalierMirador")
+	for f in [0.3, 0.6, 0.9]:
+		var p := escalier.global_transform * Vector3(0, 6.0 * f + 0.5, -10.0 * f)
+		for dir in [Vector3.LEFT, Vector3.RIGHT]:
+			T.ok(_bloque(n, p, dir, 1.2), "escalier fermé à %d %%" % int(f * 100))
+	# En haut, la bascule vers l'Antiquité est refusée (on tomberait sur le mur).
+	for point in [pied, escalier.global_transform * Vector3(0, 3.3, -5.5)]:
+		var boite := AABB(point - Vector3(0.35, 0, 0.35), Temps.TAILLE_JOUEUR).grow(-Temps.MARGE)
+		T.ok(not TempsScript.bascule_possible(boite, O.solides_de(n, TempsScript.Epoque.PASSE)), "pas de bascule en %s" % point)
+	var au_sol := AABB(Vector3(44, 0, -27) - Vector3(0.35, 0, 0.35), Temps.TAILLE_JOUEUR).grow(-Temps.MARGE)
+	T.ok(TempsScript.bascule_possible(au_sol, O.solides_de(n, TempsScript.Epoque.PASSE)), "au pied de l'escalier, on bascule")
+
+
+func test_l_ankh_s_aligne_du_mirador() -> void:
+	var n: Node3D = await _charger()
+	await _basculer_sans_joueur(TempsScript.Epoque.PRESENT)
+	var j: Player = n.get_node("Player")
+	var ankh: Alignement = n.get_node("Camp/Ankh")
+	var vue: Node3D = n.get_node("Camp/PointDeVueAnkh")
+	var morceaux := ankh.get_children().filter(func(x: Node) -> bool: return x is CSGPolygon3D)
+	T.ok(morceaux.size() >= 6 and morceaux.size() <= 8, "%d morceaux" % morceaux.size())
+	var espace := n.get_world_3d().direct_space_state
+	for m: CSGPolygon3D in morceaux:
+		# Peint sur une caisse : juste dessous, une caisse.
+		var a_cote := m.global_position + Vector3(0.11, 0, 0.13)  # pas pile entre deux caisses
+		var r := PhysicsRayQueryParameters3D.create(a_cote, a_cote + Vector3.DOWN * 0.3)
+		var dessous: Object = espace.intersect_ray(r).get("collider")
+		T.ok(dessous != null and String(dessous.name).begins_with("Caisse"), "%s est sur une caisse (%s)" % [m.name, dessous])
+		# Vu du mirador, rien ne le cache, même pas une autre pile.
+		var vus := 0
+		for coin in m.polygon:
+			# Le dessous du morceau, posé sur la caisse (il n'a pas de collision).
+			var cible := m.global_transform * Vector3(coin.x * 0.9, coin.y * 0.9, -m.depth)
+			var touche := espace.intersect_ray(PhysicsRayQueryParameters3D.create(vue.global_position, cible + (cible - vue.global_position).normalized() * 0.1))
+			# Caché si le rayon touche quelque chose avant d'y arriver.
+			var avant: float = vue.global_position.distance_to(touche.get("position", Vector3.INF))
+			if avant >= vue.global_position.distance_to(cible) - 0.03:
+				vus += 1
+		T.eq(vus, m.polygon.size(), "%s : on voit tous ses coins du mirador" % m.name)
+	j.teleport(Transform3D(Basis(), vue.global_position - Vector3(0, 1.6, 0)))
+	O.viser(j, vue.global_position - vue.global_basis.z)
+	await tree.physics_frame
+	await tree.physics_frame
+	ankh.verifier(j.camera)
+	T.ok(ankh.est_resolu, "vu du mirador, l'ânkh est entier")
+	T.ok(j.global_position.distance_to(vue.global_position - Vector3(0, 1.6, 0)) < 0.1, "le joueur tient debout sur le repère")
+
+
+func test_le_camp_s_ouvre() -> void:
+	var n: Node3D = await _charger()
+	await _basculer_sans_joueur(TempsScript.Epoque.PRESENT)
+	var s: Sentinelle = n.get_node("Camp/Sentinelle")
+	T.ok(s.ecart.x > 0.0, "elle recule vers l'intérieur, loin du joueur")
+	s.duree = 0.05
+	(n.get_node("Camp/Ankh") as Alignement).resolu.emit()
+	await tree.create_timer(0.3).timeout
+	for ep in [TempsScript.Epoque.PRESENT, TempsScript.Epoque.PASSE]:
+		await _basculer_sans_joueur(ep)
+		for y in [0.3, 1.5, 2.8]:
+			for z in [-0.9, 0.0, 0.9]:
+				T.eq(_a_travers_le_camp(n, y, z), null, "époque %d, y %.1f, z %.1f : on entre" % [ep, y, z])
+	await _basculer_sans_joueur(TempsScript.Epoque.PRESENT)
+	var b: AABB = s.get_node("EpochMember").aabbs_solides()[0]
+	T.ok(not b.intersects(OUVERTURE), "la sentinelle s'est rangée hors du passage")
+	var cartouche: Cartouche = n.get_node("Camp/Cartouche")
+	T.eq(cartouche.zone, "camp", "le cartouche du camp")
+	T.eq(O.epoque(cartouche), -1, "il est là dans les deux époques")
+	T.ok(cartouche.global_position.x > 45.0, "au fond de l'enceinte")

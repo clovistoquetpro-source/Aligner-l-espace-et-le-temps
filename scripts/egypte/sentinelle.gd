@@ -27,7 +27,8 @@ func _ready() -> void:
 
 
 func _joueur_approche(corps: Node3D) -> void:
-	if a_laisse_passer or not corps is Player:
+	# Cachée, la sentinelle n'existe pas dans cette époque.
+	if a_laisse_passer or not corps is Player or not is_visible_in_tree():
 		return
 	Anime.jouer(self, "No")
 	refuse.emit()

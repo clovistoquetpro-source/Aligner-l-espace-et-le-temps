@@ -77,3 +77,11 @@ func test_inactif_ne_se_resout_pas() -> void:
 	enigme.actif = true
 	enigme.verifier(r[1])
 	T.ok(enigme.est_resolu, "actif : résolu")
+
+
+func test_cache_ne_se_resout_pas() -> void:
+	var r: Array = await _monde(false)
+	var enigme: Alignement = r[0]
+	enigme.visible = false
+	enigme.verifier(r[1])
+	T.ok(not enigme.est_resolu, "absent de cette époque : pas résolu")

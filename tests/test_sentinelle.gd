@@ -62,3 +62,12 @@ func test_s_ecarte_apres_l_alignement() -> void:
 	T.ok(s.a_laisse_passer, "il laisse passer")
 	s._joueur_approche(_ajouter(load("res://scenes/player.tscn").instantiate()))
 	T.eq(fois[0], 0, "il ne refuse plus")
+
+
+func test_absente_ne_refuse_pas() -> void:
+	var s := _monde()
+	var fois := [0]
+	s.refuse.connect(func() -> void: fois[0] += 1)
+	s.visible = false
+	s._joueur_approche(_ajouter(load("res://scenes/player.tscn").instantiate()))
+	T.eq(fois[0], 0, "pas de sentinelle dans cette époque : pas de « non »")
