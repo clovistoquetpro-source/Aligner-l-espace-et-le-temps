@@ -313,10 +313,10 @@ func _chambre(g: Node3D) -> void:
 	_boite(g, "Lit_drap", Vector3(-7.5, 0.52, 4.7), Vector3(0.95, 0.06, 1.6), "drap", false)
 	_boite(g, "Bureau", Vector3(-5.2, 0.38, -1.4), Vector3(1.2, 0.76, 0.6), "bureau")
 	_boite(g, "Chaise", Vector3(-5.2, 0.23, -0.8), Vector3(0.4, 0.46, 0.4), "chaise")
-	_boite(g, "Armoire", Vector3(-10.6, 1.15, 1.0), Vector3(0.8, 2.3, 1.6), "armoire")
+	_boite(g, "Armoire", Vector3(-10.6, 1.0, 1.0), Vector3(0.8, 2.0, 1.6), "armoire")
 	_boite(g, "Coffre", Vector3(-6.0, 0.25, 5.5), Vector3(0.8, 0.5, 0.6), "coffre")
-	_enveloppe(g, "Invitation_bureau", MAISON + Vector3(-5.3, 0.79, -1.45), false)
-	_enveloppe(g, "Invitation_armoire", MAISON + Vector3(-10.75, 2.32, 1.0), false)
+	_enveloppe(g, "Invitation_bureau", MAISON + Vector3(-5.3, 0.79, -1.45), Vector3(0.26, 0.02, 0.18))
+	_enveloppe(g, "Invitation_armoire", MAISON + Vector3(-10.9, 2.1, 1.0), Vector3(0.02, 0.18, 0.26))
 	for c in [["Cube_1", Vector3(-6.4, 0.2, 2.4)], ["Cube_2", Vector3(-6.0, 0.2, 3.4)]]:
 		var cube: ObjetPerspectif = load("res://scenes/cube.tscn").instantiate()
 		cube.position = c[1]
@@ -325,7 +325,7 @@ func _chambre(g: Node3D) -> void:
 		_ajouter(g, cube, c[0])
 	_lampe(g, "Lampe_chambre", MAISON + Vector3(-7.7, 2.5, 2), 7.0)
 	_pensee(g, "PenseeBureau", MAISON + Vector3(-5.3, 0.8, -1.45), "Mes invitations… Je ne les ai jamais données.", 3.0, 20.0)
-	_pensee(g, "PenseeArmoire", MAISON + Vector3(-10.6, 2.3, 1.0), "J'en avais caché là-haut, pour ne plus les voir.", 4.0, 15.0)
+	_pensee(g, "PenseeArmoire", MAISON + Vector3(-10.25, 1.95, 1.0), "J'en avais caché là-haut, pour ne plus les voir.", 4.0, 15.0)
 
 
 ## La salle de bain : le miroir au-dessus du lavabo, et une invitation qu'on
@@ -345,26 +345,36 @@ func _salle_de_bain(g: Node3D) -> void:
 	_ajouter(g, miroir, "Miroir")
 	_boite(g, "Baignoire", Vector3(7.3, 0.3, 5.55), Vector3(1.9, 0.6, 0.8), "lavabo")
 	_boite(g, "Etagere", Vector3(7.8, 1.0, 5.9), Vector3(0.6, 0.04, 0.2), "armoire")
-	_enveloppe(g, "Invitation_reflet", MAISON + Vector3(7.8, 1.11, 5.9), true)
+	_enveloppe(g, "Invitation_reflet", MAISON + Vector3(7.8, 1.11, 5.9), Vector3(0.26, 0.18, 0.02), true)
 	_lampe(g, "Lampe_sdb", MAISON + Vector3(7.3, 2.5, 2), 7.0)
 	_pensee(g, "PenseeMiroir", MAISON + Vector3(7.3, 1.45, -1.955), "Dans le miroir, je suis si petit.", 3.5, 15.0)
 
 
-## Une invitation : une petite enveloppe qu'on peut prendre. Celle du reflet
-## n'est visible que dans les miroirs (jusqu'à ce qu'on la prenne).
-func _enveloppe(g: Node3D, nom: String, pos: Vector3, reflet: bool) -> RigidBody3D:
+## Une invitation : une petite enveloppe (de la taille donnée, posée à plat ou
+## debout) avec un cachet rouge, qu'on peut prendre. Celle du reflet n'est
+## visible que dans les miroirs (jusqu'à ce qu'on la prenne).
+func _enveloppe(g: Node3D, nom: String, pos: Vector3, taille: Vector3, reflet := false) -> RigidBody3D:
 	var e := RigidBody3D.new()
 	e.position = pos - g.position
 	e.freeze = true
+	e.continuous_cd = true
 	e.add_to_group("invitations", true)
 	_ajouter(g, e, nom)
-	var taille := Vector3(0.26, 0.18, 0.02) if reflet else Vector3(0.26, 0.02, 0.18)
 	_forme(e, "CollisionShape3D", _boite_forme(taille + Vector3(0.04, 0.04, 0.04)))
 	var m := BoxMesh.new()
 	m.size = taille
 	var mi := _mesh(e, "Mesh", m, Vector3.ZERO, "enveloppe")
+	# Le cachet, au milieu de la face la plus large, un peu en relief.
+	var mince := 0 if taille.x < 0.05 else (1 if taille.y < 0.05 else 2)
+	var relief := Vector3.ZERO
+	relief[mince] = taille[mince] / 2 + 0.004
+	var cachet := BoxMesh.new()
+	cachet.size = Vector3(0.05, 0.05, 0.05)
+	cachet.size[mince] = 0.008
+	var mc := _mesh(e, "Cachet", cachet, relief, "boite")
 	if reflet:
 		mi.layers = Miroir.COUCHE_REFLET
+		mc.layers = Miroir.COUCHE_REFLET
 	return e
 
 

@@ -9,6 +9,8 @@ const MOUSE_SENS := 0.0025
 const KILL_Y := -20.0
 const HOLD_DIST := 1.5
 const PICK_DIST := 4.0
+## Un objet tenu reste à cette distance devant ce qu'il toucherait.
+const MARGE_TENUE := 0.3
 
 var anchor: Transform3D
 ## Multiplie la vitesse de marche (la peur ralentit Thomas).
@@ -122,5 +124,17 @@ func _suivre_objet() -> void:
 		var exclure: Array[RID] = [get_rid()]
 		held.placer(camera, _ratio, exclure)
 		return
-	held.global_position = camera.global_position - camera.global_basis.z * HOLD_DIST
+	held.global_position = camera.global_position - camera.global_basis.z * distance_tenue()
 	held.global_rotation = Vector3(0, global_rotation.y, 0)
+
+
+## La distance où tenir un objet : HOLD_DIST, ou moins s'il y a un obstacle
+## (on ne fait pas passer un objet à travers une table ou un mur).
+func distance_tenue() -> float:
+	var origine := camera.global_position
+	var q := PhysicsRayQueryParameters3D.create(origine, origine - camera.global_basis.z * HOLD_DIST)
+	q.exclude = [get_rid(), held.get_rid()]
+	var touche := get_world_3d().direct_space_state.intersect_ray(q)
+	if touche.is_empty():
+		return HOLD_DIST
+	return maxf(origine.distance_to(touche["position"]) - MARGE_TENUE, 0.2)

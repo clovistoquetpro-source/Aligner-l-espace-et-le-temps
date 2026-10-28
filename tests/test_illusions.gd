@@ -294,3 +294,25 @@ func test_au_retour_de_l_enfance_la_maison_s_abime() -> void:
 	T.ok(n.porte_ouverte and n.fini, "le niveau 1 est fait")
 	await _marcher("avancer", 90)
 	T.ok(j.global_position.z > -4.0, "on ne tombe pas dans le vide (%s)" % j.global_position)
+
+
+func test_la_porte_apparait_meme_si_on_fait_demi_tour_tot() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	await _placer(j, Vector3(0, 0, -3), 0.0)
+	await _marcher("avancer", 270)
+	T.eq(n.tours, 0, "on n'a pas fait de tour complet")
+	T.ok(n._pensees_couloir >= 1, "« Elle ne se rapproche pas… »")
+	await _placer(j, Vector3(8, 0, 0), PI / 2)
+	await _attendre(5)
+	T.ok(n.porte_ouverte, "en se retournant dans le salon, la porte est là")
+
+
+func test_quelques_pas_dans_le_couloir_ne_suffisent_pas() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	await _placer(j, Vector3(0, 0, -3), 0.0)
+	await _marcher("avancer", 60)
+	await _placer(j, Vector3(8, 0, 0), PI / 2)
+	await _attendre(5)
+	T.ok(not n.porte_ouverte, "il faut voir que la porte d'entrée ne se rapproche pas")

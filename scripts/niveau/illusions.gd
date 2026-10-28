@@ -19,7 +19,10 @@ const ANGLE_DOS_DEG := 100.0
 const RECUL_PORTE := 18.0
 const PORTE_Z_MAX := -22.0
 ## Les pensées du couloir, selon le temps qu'on y a passé (en secondes).
-const PENSEES_COULOIR := [[8.0, "Elle ne se rapproche pas…"], [20.0, "Je ne sortirai pas par là."]]
+const PENSEES_COULOIR := [[4.0, "Elle ne se rapproche pas…"], [15.0, "Je ne sortirai pas par là."]]
+## Après ce temps dans le couloir (en tout), la porte de la salle de bain
+## peut apparaître : Thomas a vu que la porte d'entrée ne se rapproche pas.
+const COULOIR_VU := 4.0
 
 ## Fois où le couloir a ramené le joueur en arrière sans qu'il le voie.
 var tours := 0
@@ -30,6 +33,8 @@ var fini := false
 var toile_enfant_ouverte := false
 
 var _temps_couloir := 0.0
+## Le temps passé dans le couloir, en tout (il ne redescend pas).
+var temps_couloir_total := 0.0
 var _pensees_couloir := 0
 var _fin_annoncee := false
 var _fov_base := 80.0
@@ -120,6 +125,7 @@ func _physics_process(delta: float) -> void:
 	var dans_le_couloir := _zone_couloir.overlaps_body(_joueur)
 	if dans_le_couloir:
 		_temps_couloir += delta
+		temps_couloir_total += delta
 	else:
 		_temps_couloir = maxf(_temps_couloir - delta * 3.0, 0.0)
 	angoisse = 0.0 if _temps_couloir <= 0.0 else clampf(0.2 + _temps_couloir / MONTEE, 0.0, 1.0)
@@ -129,7 +135,8 @@ func _physics_process(delta: float) -> void:
 	if dans_le_couloir and _pensees_couloir < PENSEES_COULOIR.size() and _temps_couloir > PENSEES_COULOIR[_pensees_couloir][0]:
 		penser(PENSEES_COULOIR[_pensees_couloir][1])
 		_pensees_couloir += 1
-	if not porte_ouverte and tours > 0 and _zone_salon.overlaps_body(_joueur) and _dans_le_dos(_porte_sdb.global_position):
+	var couloir_vu := tours > 0 or temps_couloir_total >= COULOIR_VU
+	if not porte_ouverte and couloir_vu and _zone_salon.overlaps_body(_joueur) and _dans_le_dos(_porte_sdb.global_position):
 		ouvrir_la_salle_de_bain()
 	# Le cube sort de la toile avec le joueur : il ne tourne plus avec elle.
 	if _cube.get_parent() == _piece and _joueur.held == _cube:

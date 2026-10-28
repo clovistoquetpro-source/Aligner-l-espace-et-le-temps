@@ -38,6 +38,8 @@ var echelle := 1.0
 var yeux_fermes := false
 
 var _yeux_forces := false
+## Où sont les invitations au début, pour les remettre si elles tombent.
+var _depart_invitations := {}
 var _temps_table := 0.0
 var _pensee_table := false
 var _pensee_gateau := false
@@ -63,6 +65,9 @@ func _ready() -> void:
 	_boucle.body_entered.connect(_sur_boucle)
 	_lucarne.body_entered.connect(_sur_lucarne)
 	_chute.finie.connect(_retour_dans_la_maison_des_etoiles)
+	for e in get_tree().get_nodes_in_group("invitations"):
+		if is_ancestor_of(e):
+			_depart_invitations[e.name] = e.global_transform
 	var pensee_depart: Pensee = $Cour/PenseeDepart
 	pensee_depart.active = false
 	var t := _ouvrir_les_yeux("La récré. Comme toujours, je reste collé au mur.")
@@ -192,8 +197,13 @@ func _dans_la_maison(delta: float) -> void:
 	var tenue := _joueur.held
 	# L'invitation du miroir devient visible quand on la tient.
 	if tenue != null and tenue.is_in_group("invitations"):
-		var m := tenue.get_node("Mesh") as MeshInstance3D
-		m.layers = 1
+		for m in tenue.find_children("*", "MeshInstance3D", false, false):
+			m.layers = 1
+	for e in get_tree().get_nodes_in_group("invitations"):
+		if is_ancestor_of(e) and e != tenue and e.global_position.y < -3.0:
+			e.global_transform = _depart_invitations[e.name]
+			(e as RigidBody3D).linear_velocity = Vector3.ZERO
+			(e as RigidBody3D).freeze = true
 	for corps in _fente.get_overlapping_bodies():
 		if corps.is_in_group("invitations") and corps != tenue:
 			poster(corps)

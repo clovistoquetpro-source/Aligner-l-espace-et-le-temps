@@ -325,3 +325,45 @@ func test_decrocher_les_dessins_puis_regarder_dehors() -> void:
 	await _attendre(int((7.0 + ChuteToiles.DUREE + 0.5) * 60), func() -> bool: return Histoire.scene_demandee != "")
 	T.eq(Histoire.scene_demandee, "res://scenes/illusions.tscn", "retour dans la maison des étoiles")
 	T.eq(Histoire.chapitre, 3, "le niveau 2 est fini")
+
+
+func test_une_invitation_posee_sur_la_table_reste_sur_la_table() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	await _a_la_maison(n)
+	var e: RigidBody3D = n.get_node("Maison/Invitation_bureau")
+	await _placer(j, MAISON + Vector3(0.9, 0, -4.5), 0.0)
+	j.prendre(e)
+	# On vise le milieu de la table, presque au ras : sans obstacle, l'objet
+	# serait sous la table.
+	O.viser(j, MAISON + Vector3(-0.1, 0.4, -4.8))
+	await _attendre(3)
+	T.ok(e.global_position.y > 0.76, "tenue au-dessus de la table, pas à travers (%.2f)" % e.global_position.y)
+	j.poser()
+	await _attendre(120)
+	T.ok(e.global_position.y > 0.74 and e.global_position.y < 1.0, "posée sur la table (%.2f)" % e.global_position.y)
+
+
+func test_une_invitation_tombee_revient_a_sa_place() -> void:
+	var n: Node3D = await _charger()
+	await _a_la_maison(n)
+	var e: RigidBody3D = n.get_node("Maison/Invitation_bureau")
+	var depart := e.global_position
+	e.freeze = false
+	e.global_position = MAISON + Vector3(0, -10, 0)
+	await _attendre(3)
+	T.proche(e.global_position, depart, "de retour sur le bureau", 0.01)
+
+
+func test_l_invitation_de_l_armoire_se_voit_depuis_un_cube() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	var e: RigidBody3D = n.get_node("Maison/Invitation_armoire")
+	await _a_la_maison(n)
+	# Les yeux à 2,15 m (debout sur un cube de 1 m) : rien ne cache l'invitation.
+	j.set_physics_process(false)
+	j.teleport(Transform3D(Basis(Vector3.UP, PI / 2), MAISON + Vector3(-8.5, 1.0, 1.0)))
+	T.ok(n._visible(j.camera.global_position, e.global_position + Vector3(0, 0.08, 0)), "on voit le haut de l'invitation")
+	j.teleport(Transform3D(Basis(Vector3.UP, PI / 2), MAISON + Vector3(-8.5, 0, 1.0)))
+	T.ok(not n._visible(j.camera.global_position, e.global_position), "depuis le sol, l'armoire la cache")
+	j.set_physics_process(true)
