@@ -227,13 +227,15 @@ func _nil(g: Node3D) -> void:
 	poisson.position = Vector3(-24, 0.2, 17.5)
 	poisson.rotation.y = 0.4
 	poisson.taille_depart = 0.4
-	# Hors de cette zone (et dans le Nil), il revient sur la rive.
-	poisson.zone = AABB(Vector3(-64, -2, -20), Vector3(52, 30, 39.5))
+	# Hors de cette zone, il revient sur la rive : dans le Nil, et aussi dans
+	# la carrière fermée (lancé par-dessus le spinosaure ou les falaises, on
+	# ne pourrait plus le reprendre). La zone s'arrête au flanc du dino.
+	poisson.zone = AABB(Vector3(-31, -2, -20), Vector3(19, 30, 39.5))
 	_ajouter(g, poisson, "Poisson")
 
 
 ## Le spinosaure endormi : le T-rex du pack (9 m), couché, avec une boîte de
-## collision qui ferme l'entrée de la carrière. Sa voile est ajoutée au
+## collision invisible qui ferme l'entrée de la carrière jusqu'en haut. Sa voile est ajoutée au
 ## lancement (scripts/egypte/spinosaure.gd).
 func _spinosaure(g: Node3D, pos: Vector3) -> void:
 	var dino := Spinosaure.new()
@@ -241,9 +243,11 @@ func _spinosaure(g: Node3D, pos: Vector3) -> void:
 	_ajouter(g, dino, "Spinosaure")
 	var forme := CollisionShape3D.new()
 	var boite := BoxShape3D.new()
-	boite.size = Vector3(5, 2.6, 7)
+	# Aussi haute que les falaises (6 m) : on ne l'escalade pas en montant
+	# sur le poisson agrandi.
+	boite.size = Vector3(5, 6, 7)
 	forme.shape = boite
-	forme.position = Vector3(1.0, 1.3, -0.5)
+	forme.position = Vector3(1.0, 3.0, -0.5)
 	_ajouter(dino, forme, "CollisionShape3D")
 	var habillage := Node3D.new()
 	habillage.set_script(_m.HABILLAGE)
@@ -277,7 +281,7 @@ func _rampe() -> void:
 	for i in RAMPE_LONGUEURS.size():
 		var long: float = RAMPE_LONGUEURS[i]
 		var pont := i % 2 == 1
-		_troncon(g, "Troncon%d" % (i + 1), z, long, pente, pont)
+		_troncon(g, "Troncon%d" % (i + 1), z, long, pente, pont, i == 2 or i == 4)
 		if pont:
 			for k in 3:
 				var b := _boite(g, "Flottant%d_%d" % [i + 1, k], Vector3(0.9 * (k - 1), (RAMPE_PIED - z + long * (k + 1) / 4.0) * pente + 0.6 * (k % 2), z - long * (k + 1) / 4.0), Vector3(1.4, 0.7, 1.0), "pierre", false, PASSE)
@@ -309,8 +313,10 @@ func _rampe() -> void:
 
 ## Un tronçon de rampe de `long` m (le long de -Z, à partir de `z0`), bordé de
 ## parapets. En briques et plein jusqu'au sol, ou, pour un `pont` de 1942, en
-## planches et suspendu (on peut passer dessous).
-func _troncon(g: Node3D, nom: String, z0: float, long: float, pente: float, pont: bool) -> CSGCombiner3D:
+## planches et suspendu (on peut passer dessous). Avec `chapeau`, un mur
+## invisible de 3 m coiffe les parapets : on ne saute pas dessus pour
+## contourner les sacs de sable.
+func _troncon(g: Node3D, nom: String, z0: float, long: float, pente: float, pont: bool, chapeau := false) -> CSGCombiner3D:
 	var t := CSGCombiner3D.new()
 	t.position = Vector3(0, 0, z0)
 	# X local = vers le haut de la rampe (-Z du monde), Z local = +X du monde.
@@ -329,6 +335,17 @@ func _troncon(g: Node3D, nom: String, z0: float, long: float, pente: float, pont
 	for cote in [-1, 1]:
 		var z := demi if cote > 0 else -RAMPE_LARGEUR / 2
 		_profil(t, "Parapet" + ("Est" if cote > 0 else "Ouest"), bord, PARAPET.x, z, "kaki" if pont else "pierre_fonce")
+	if chapeau:
+		var corps_chapeau := StaticBody3D.new()
+		_ajouter(t, corps_chapeau, "Chapeau")
+		for cote in [-1, 1]:
+			var forme := CollisionShape3D.new()
+			var boite := BoxShape3D.new()
+			boite.size = Vector3(Vector2(long, long * pente).length(), 3.0, PARAPET.x)
+			forme.shape = boite
+			forme.rotation.z = atan(pente)
+			forme.position = Vector3(long / 2, (h0 + h1) / 2 + PARAPET.y + 1.5, cote * (RAMPE_LARGEUR + PARAPET.x) / 2)
+			_ajouter(corps_chapeau, forme, "Est" if cote > 0 else "Ouest")
 	if pont:
 		var e := EpochMember.new()
 		e.epoque = PRESENT

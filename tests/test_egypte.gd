@@ -141,7 +141,8 @@ func test_le_spinosaure_bloque_l_entree() -> void:
 	var dino: Node = n.get_node("Carriere/Spinosaure")
 	for ep in [TempsScript.Epoque.PASSE, TempsScript.Epoque.PRESENT]:
 		await _basculer_sans_joueur(ep)
-		for y in [0.5, 1.5, 2.4]:
+		# Jusqu'en haut des falaises (6 m) : on ne l'escalade pas avec le poisson.
+		for y in [0.5, 1.5, 2.4, 3.5, 5.5]:
 			for z in [-1.8, 0.0, 1.8]:
 				T.eq(_a_travers_l_entree(n, y, z), dino, "époque %d, y %.1f, z %.1f : le spinosaure barre l'entrée" % [ep, y, z])
 
@@ -172,6 +173,24 @@ func test_poisson_qui_s_echappe() -> void:
 	await tree.physics_frame
 	await tree.physics_frame
 	T.ok(poisson.global_position.distance_to(depart) < 1.0, "jeté dans le Nil, il revient aussi")
+
+
+func test_poisson_perdu_dans_la_carriere() -> void:
+	var n: Node3D = await _charger()
+	var poisson: ObjetPerspectif = n.get_node("Carriere/Poisson")
+	var depart := poisson.global_position
+	# Lancé par-dessus le spinosaure ou les falaises, il ne doit pas rester
+	# dans la carrière fermée : on ne pourrait plus le reprendre.
+	for p in [Vector3(-52.7, 0.9, 0.5), Vector3(-49, 0.9, 2.5), Vector3(-45, 6.5, -13)]:
+		poisson.global_position = p
+		await tree.physics_frame
+		await tree.physics_frame
+		T.ok(poisson.global_position.distance_to(depart) < 1.0, "en %s, il revient au bord du Nil" % p)
+	# Posé sur la pierre plate, il reste là.
+	poisson.global_position = n.get_node("Carriere/ZoneAppat").global_position
+	await tree.physics_frame
+	await tree.physics_frame
+	T.ok(poisson.global_position.distance_to(depart) > 5.0, "sur la pierre plate, il reste")
 
 
 func test_carriere_resolue() -> void:
@@ -304,6 +323,20 @@ func test_traversee_de_la_rampe_au_clavier() -> void:
 	Input.action_release("avancer")
 	T.ok(arrive, "on arrive sur la terrasse (z = %.1f, y = %.1f)" % [j.global_position.z, j.global_position.y])
 	T.ok(j.global_position.y > 7.8, "à 8 m de haut")
+
+
+func test_on_ne_marche_pas_sur_les_parapets() -> void:
+	var n: Node3D = await _charger()
+	# En Antiquité (sans les sacs) : au-dessus des parapets des tronçons à
+	# sacs de sable, un mur invisible empêche d'y sauter pour les contourner.
+	for nom in ["Troncon3", "Troncon5"]:
+		var b := _aabb(n.get_node("Rampe/" + nom))
+		for k in 5:
+			var z := lerpf(b.end.z - 0.5, b.position.z + 0.5, k / 4.0)
+			var sol: Vector3 = _sous(n, 0, z).position
+			for cote in [-1, 1]:
+				for dy in [1.4, 2.5]:
+					T.ok(_bloque(n, sol + Vector3(0, dy, 0), Vector3(cote, 0, 0), 2.0), "%s, z %.1f, côté %d, %.1f m : le parapet est fermé au-dessus" % [nom, z, cote, dy])
 
 
 func test_chute_sur_le_sable() -> void:
@@ -683,6 +716,7 @@ func test_parcours_complet() -> void:
 	T.eq(_message(n), "Un groupe de blocs rejoint la pyramide ! (4/4)", "message du 4e groupe")
 	await tree.create_timer(0.3).timeout
 	T.ok(nuage.est_complet(), "le nuage est complet")
+	T.eq(_message(n), "Tous les blocs sont là ! Regarde-les depuis la tête du sphinx.", "on dit où aller")
 	j = await _au_point_de_vue(n)
 	var pyramide: Alignement = n.get_node("Chantier/Pyramide")
 	pyramide.verifier(j.camera)

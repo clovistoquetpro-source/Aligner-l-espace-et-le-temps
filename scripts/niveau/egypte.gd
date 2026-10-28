@@ -28,6 +28,7 @@ func _ready() -> void:
 		cartouche.touche.connect(func(z: String) -> void: _nuage.zone_reussie(z, cartouche.global_position))
 	_nuage.groupe_revenu.connect(func(_z: String, n: int) -> void:
 		afficher("Un groupe de blocs rejoint la pyramide ! (%d/%d)" % [n, Chantier.ZONES.size()]))
+	_nuage.complet.connect(afficher.bind("Tous les blocs sont là ! Regarde-les depuis la tête du sphinx."))
 	$Chantier/Belvedere.body_entered.connect(_au_belvedere)
 	_pyramide.resolu.connect(_recoller)
 	$Carriere/Spinosaure.renifle.connect(afficher.bind("Trop petit…"))
