@@ -272,3 +272,36 @@ func test_le_cadre_des_fenetres_ne_colle_pas_au_trou_du_mur() -> void:
 				T.ok(absf(b.position.x) - b.size.x / 2 < v.size.x / 2 - 0.005, "%s : montant en retrait" % cadre.name)
 			if absf(b.position.y) > 0.01:
 				T.ok(absf(b.position.y) - b.size.y / 2 < v.size.y / 2 - 0.005, "%s : traverse en retrait" % cadre.name)
+
+
+func test_le_jardin_mene_en_egypte() -> void:
+	var n: Node3D = await _charger()
+	T.ok(not n.has_node("Jardin/Fin"), "plus de « Fin du prototype »")
+	var passage: PassageTemporel = n.get_node_or_null("Jardin/PassageEgypte")
+	T.ok(passage != null, "un passage au fond du jardin")
+	if passage == null:
+		return
+	T.eq(passage.scene, "res://scenes/egypte.tscn", "il mène en Égypte")
+	T.ok(ResourceLoader.exists(passage.scene), "la scène de l'Égypte existe")
+	var obelisque: Node3D = n.get_node("Jardin/Obelisque")
+	T.eq(passage.get_node(passage.cible_regard), obelisque, "il faut regarder l'obélisque")
+	T.ok("regardant l'obélisque" in (n.get_node("Jardin/Panneau") as Label3D).text, "le panneau le dit")
+	# On passe le portail en regardant l'obélisque, pas en marchant tout droit.
+	var franchi := [false]
+	passage.franchi.connect(func() -> void: franchi[0] = true)
+	passage.scene = ""
+	var j: Player = n.get_node("Player")
+	for vise in [false, true]:
+		j.teleport(Transform3D(Basis(), passage.global_position + Vector3(0, 0, 0.7)))
+		j.head.rotation.x = 0.0
+		if vise:
+			O.viser(j, obelisque.global_position)
+		passage._corps_entre(j)
+		T.eq(franchi[0], vise, "en regardant l'obélisque : %s" % vise)
+	# Le jardin est fermé : sans le bon regard, on bute au fond, sans tomber.
+	var espace := n.get_world_3d().direct_space_state
+	var centre := Vector3(30, 1, -26.5)
+	for i in 16:
+		var a := TAU * i / 16.0
+		var r := PhysicsRayQueryParameters3D.create(centre, centre + Vector3(sin(a), 0, -cos(a)) * 10)
+		T.ok(not espace.intersect_ray(r).is_empty(), "le jardin est fermé (direction %d/16)" % i)

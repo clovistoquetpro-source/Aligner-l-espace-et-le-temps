@@ -10,7 +10,6 @@ func _ready() -> void:
 	Temps.reinitialiser()
 	$BasculeFx.environnement = $WorldEnvironment.environment
 	_enigme.resolu.connect(_horloge_realignee)
-	$Jardin/Fin.body_entered.connect(_fin)
 	afficher("Ta maison n'est plus tout à fait ta maison…")
 
 
@@ -21,9 +20,4 @@ func _horloge_realignee() -> void:
 			piece.material = or_mat
 	_sortie.visible = false
 	_sortie.use_collision = false
-	afficher("La réalité se recolle… La sortie est ouverte !")
-
-
-func _fin(corps: Node3D) -> void:
-	if corps is Player:
-		afficher("Époque réparée ! Fin du prototype. Merci d'avoir joué.", 1000.0)
+	afficher("La réalité se recolle… La sortie est ouverte !\nRegarde l'obélisque du jardin…", 6.0)
