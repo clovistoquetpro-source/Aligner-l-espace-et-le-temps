@@ -17,9 +17,12 @@ func nettoyer() -> void:
 	if is_instance_valid(_niveau):
 		_niveau.free()
 	Temps.reinitialiser()
+	Histoire.reinitialiser()
+	Histoire.simuler = false
 
 
 func _charger() -> Node3D:
+	Histoire.simuler = true
 	_niveau = load("res://scenes/illusions.tscn").instantiate()
 	tree.root.add_child(_niveau)
 	await tree.physics_frame
@@ -256,8 +259,38 @@ func test_un_grand_cube_fait_un_pont_jusqu_au_balcon() -> void:
 	Input.action_press("avancer")
 	await _attendre(150, func() -> bool: return j.global_position.x > cube.global_position.x + cube.taille / 2 - 0.5)
 	Input.action_press("sauter")
-	await _attendre(60, func() -> bool: return j.global_position.x > -0.5 and j.is_on_floor())
+	await _attendre(60, func() -> bool: return n.fini or (j.global_position.x > -0.5 and j.is_on_floor()))
 	Input.action_release("sauter")
-	await _attendre(30)
 	Input.action_release("avancer")
+	await _attendre(5)
 	T.ok(n.fini or (j.global_position.y > 3.9 and j.global_position.x > -1.0), "sur le balcon, jusqu'à la porte (%s)" % j.global_position)
+
+
+func test_apres_la_fin_la_toile_de_l_enfant_mene_au_niveau_2() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	var toile: Node3D = n.get_node("Salon/Toile_enfant")
+	await _placer(j, Vector3(10.4, 0, -2.0), 0.0)
+	O.viser(j, toile.global_position)
+	await _attendre(10)
+	T.ok(not n.get_node("Interface/ChuteToiles").en_cours(), "avant la fin du niveau 1, ce n'est qu'une toile")
+	n.fini = true
+	n.ouvrir_la_toile_de_l_enfant()
+	await _attendre(5)
+	T.ok(n.get_node("Interface/ChuteToiles").en_cours(), "on tombe dans la toile")
+	await _attendre(int((ChuteToiles.DUREE + 0.5) * 60), func() -> bool: return Histoire.scene_demandee != "")
+	T.eq(Histoire.scene_demandee, "res://scenes/enfance.tscn", "vers l'enfance")
+	T.eq(Histoire.chapitre, 2, "niveau 2")
+
+
+func test_au_retour_de_l_enfance_la_maison_s_abime() -> void:
+	Histoire.chapitre = 3
+	Histoire.corrections = 1
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	T.ok(j.global_position.distance_to(Vector3(10.4, 0, -1.2)) < 0.5, "au salon (%s)" % j.global_position)
+	T.ok(not n.get_node("Salon/Mur_nord").visible, "le mur du salon s'est envolé")
+	T.ok(n.get_node("Salon/Canape").position.y > 1.5, "les meubles flottent")
+	T.ok(n.porte_ouverte and n.fini, "le niveau 1 est fait")
+	await _marcher("avancer", 90)
+	T.ok(j.global_position.z > -4.0, "on ne tombe pas dans le vide (%s)" % j.global_position)

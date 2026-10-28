@@ -87,6 +87,13 @@ Une journée d'enfance, en trois parties qui s'enchaînent (les trois idées ré
 3. **Le grenier qui grandit**. Thomas s'y réfugie pour peindre. Il a punaisé ses dessins sur la lucarne, pour ne plus voir dehors. Le grenier grandit quand Thomas regarde ses dessins (il fuit) et rétrécit quand il regarde par la lucarne, vers les autres. La lucarne est trop haute : il faut décrocher les dessins (chaque regard sur eux fait grandir la pièce), puis regarder dehors pour que le grenier rapetisse et que la lucarne descende à portée. Différence avec l'idée de départ : on sort par la lucarne (vers les autres), pas par une trappe.
 4. **Le retour** dans la maison des étoiles, après une chute dans les toiles. La correction l'a abîmée : un mur du salon s'est envolé, des meubles flottent.
 
+**Construit en formes simples** (2026-10-28) : `scenes/enfance.tscn`, par `tools/constructeur_enfance.gd`. Ce qui reste à valider avec clo :
+- Dans la cour, une marelle et deux bancs ; la tour de jeux fait 4 m, avec un escalier et un toboggan. Les enfants sont 8, autour de la lampe ; entre leurs ombres, des rayons de lumière mènent à la lampe.
+- La peur : dans l'ombre d'un enfant, elle monte en 0,7 s ; Thomas va 5 fois moins vite, voit trouble, et ses yeux descendent de 1,15 m à 0,6 m.
+- La carte de maman (« Ferme les yeux et fais un vœu ») est le seul indice pour la table sans fin.
+- Pour l'invitation de l'armoire, il y a deux cubes de bois : on agrandit l'un en marche, l'autre en plus haut.
+- Au retour, le message « Fin du niveau 2. Bientôt : l'adolescence. »
+
 ### La durée
 
 clo vise 10 à 15 minutes, jusqu'à 20, par niveau : environ 1 h à 1 h 30 pour les 5 niveaux. Le niveau 1 actuel est trop court pour ça : il gagnera des énigmes. Chaque niveau combine plusieurs vraies énigmes et des moments d'histoire.
@@ -110,7 +117,7 @@ On construit chaque niveau entièrement en formes simples (une « greybox ») : 
 
 ## Prochaines étapes
 
-1. clo joue le niveau 1 complet (voir plus bas) et dit ce qui marche ou pas.
+1. clo joue les niveaux 1 et 2 (voir plus bas et plus haut) et dit ce qui marche ou pas.
 2. Confirmer la structure « de souvenir en souvenir » et l'histoire du niveau 2.
 3. Inventer ensemble les énigmes du niveau suivant (la toile qui se contient reste en réserve).
 4. Habiller le niveau 1 quand il sera validé.

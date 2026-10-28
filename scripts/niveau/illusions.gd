@@ -1,4 +1,4 @@
-extends Niveau
+extends Souvenir
 
 ## Niveau 1, en formes simples : « La maison dans les étoiles ».
 ## On se réveille et on veut sortir, mais la porte d'entrée recule au bout
@@ -6,7 +6,8 @@ extends Niveau
 ## soi-même plus vieux. On tombe dans les toiles, jusqu'à la galerie : la
 ## porte d'entrée est sur un balcon, et il faut aller chercher dans la toile
 ## tournante (la chambre d'enfant) de quoi y monter. La porte ramène… dans
-## la chambre.
+## la chambre. Ensuite, la toile de l'enfant, au salon, mène au niveau 2 ; au
+## retour, la maison s'est abîmée.
 
 ## Secondes passées dans le couloir pour que l'angoisse soit au plus fort.
 const MONTEE := 25.0
@@ -17,25 +18,23 @@ const ANGLE_DOS_DEG := 100.0
 ## La porte d'entrée reste toujours à cette distance devant le joueur.
 const RECUL_PORTE := 18.0
 const PORTE_Z_MAX := -22.0
-const DUREE_REVEIL := 2.5
 ## Les pensées du couloir, selon le temps qu'on y a passé (en secondes).
 const PENSEES_COULOIR := [[8.0, "Elle ne se rapproche pas…"], [20.0, "Je ne sortirai pas par là."]]
-## Un obstacle plus proche que la pensée (de cette marge) la cache.
-const MARGE_VUE := 0.4
 
 ## Fois où le couloir a ramené le joueur en arrière sans qu'il le voie.
 var tours := 0
 var angoisse := 0.0
 var porte_ouverte := false
 var fini := false
+## La toile de l'enfant mène au niveau 2 (une fois le niveau 1 fini).
+var toile_enfant_ouverte := false
 
 var _temps_couloir := 0.0
 var _pensees_couloir := 0
 var _fin_annoncee := false
 var _fov_base := 80.0
-var _file: Array[String] = []
+var _vers_enfance := false
 
-@onready var _joueur: Player = $Player
 @onready var _zone_couloir: Area3D = $Couloir/Zone
 @onready var _boucle: PorteTrompeuse = $Couloir/Boucle
 @onready var _porte_entree: Node3D = $Couloir/PorteEntree
@@ -47,8 +46,6 @@ var _file: Array[String] = []
 @onready var _fin: PorteTrompeuse = $Galerie/PorteFin
 @onready var _piece: Node3D = $ToilePeinte/Chambre
 @onready var _cube: ObjetPerspectif = $ToilePeinte/Chambre/Cube
-@onready var _chute: ChuteToiles = $Interface/ChuteToiles
-@onready var _noir: ColorRect = $Interface/Noir
 
 
 func _ready() -> void:
@@ -61,7 +58,10 @@ func _ready() -> void:
 	_chute.finie.connect(_atterrir)
 	# Connecté après la porte elle-même : le joueur est déjà dans la chambre.
 	_fin.body_entered.connect(_sur_fin)
-	_ouvrir_les_yeux("Quel drôle de rêve…")
+	if Histoire.chapitre >= 3:
+		_retour_de_l_enfance()
+	else:
+		_ouvrir_les_yeux("Quel drôle de rêve…")
 
 
 ## Une lanterne qu'on porte (le couloir n'a pas d'autre lumière), et le corps
@@ -99,34 +99,9 @@ func _habiller_le_joueur() -> void:
 	p.rotation.x = -0.6
 
 
-func _forme_du_reflet(parent: Node3D, mesh: Mesh, pos: Vector3, couleur: Color) -> MeshInstance3D:
-	var mi := MeshInstance3D.new()
-	mi.mesh = mesh
-	mi.position = pos
-	mi.layers = Miroir.COUCHE_REFLET
-	mi.material_override = Style.materiau(couleur)
-	parent.add_child(mi)
-	return mi
-
-
-func _ouvrir_les_yeux(pensee: String) -> void:
-	_noir.color.a = 1.0
-	var t := create_tween()
-	t.tween_interval(0.5)
-	t.tween_property(_noir, "color:a", 0.0, DUREE_REVEIL)
-	t.tween_callback(penser.bind(pensee))
-
-
-## Affiche une pensée, après celles qui attendent déjà.
-func penser(texte: String) -> void:
-	_file.append(texte)
-
-
 func _process(delta: float) -> void:
 	super._process(delta)
 	_suivre_la_porte()
-	if not _file.is_empty() and _reste_message <= 0.3:
-		afficher("« %s »" % _file.pop_front())
 
 
 func _sur_boucle(corps: Node3D) -> void:
@@ -162,31 +137,12 @@ func _physics_process(delta: float) -> void:
 	_ecouter_les_pensees()
 	if fini and not _fin_annoncee and $Chambre/PenseeFin.dite and _file.is_empty() and _reste_message <= 0.0:
 		_fin_annoncee = true
-		afficher("Fin du niveau 1 (prototype en formes simples).", 8.0)
-
-
-func _ecouter_les_pensees() -> void:
-	var cam := _joueur.camera
-	var oeil := cam.global_position
-	var regard := -cam.global_basis.z
-	for n in get_tree().get_nodes_in_group(Pensee.GROUPE):
-		var p := n as Pensee
-		if p.dite or not p.active or not is_ancestor_of(p):
-			continue
-		if not Pensee.vue(oeil, regard, p.global_position, p.distance, p.angle_max_deg, p.regard):
-			continue
-		if p.regard and not _visible(oeil, p.global_position):
-			continue
-		p.dite = true
-		penser(p.texte)
-
-
-## Rien de solide ne cache ce point.
-func _visible(oeil: Vector3, point: Vector3) -> bool:
-	var rayon := PhysicsRayQueryParameters3D.create(oeil, point)
-	rayon.exclude = [_joueur.get_rid()]
-	var touche := get_world_3d().direct_space_state.intersect_ray(rayon)
-	return touche.is_empty() or oeil.distance_to(touche["position"]) >= oeil.distance_to(point) - MARGE_VUE
+		afficher("Fin du niveau 1.", 5.0)
+		ouvrir_la_toile_de_l_enfant()
+	var toile: Node3D = $Salon/Toile_enfant
+	if toile_enfant_ouverte and not _vers_enfance and _regarde(toile.global_position, 25.0, 2.5):
+		_vers_enfance = true
+		_tomber_dans_les_toiles(_joueur)
 
 
 func _dans_le_dos(point: Vector3) -> bool:
@@ -206,13 +162,16 @@ func ouvrir_la_salle_de_bain() -> void:
 	_pensee_porte.active = true
 
 
-func _tomber_dans_les_toiles(joueur: Player) -> void:
-	joueur.velocity = Vector3.ZERO
-	joueur.set_physics_process(false)
-	_chute.lancer()
+func ouvrir_la_toile_de_l_enfant() -> void:
+	toile_enfant_ouverte = true
+	penser("Tout a commencé quand j'étais petit.")
 
 
 func _atterrir() -> void:
+	if _vers_enfance:
+		Histoire.chapitre = maxi(Histoire.chapitre, 2)
+		Histoire.vers("res://scenes/enfance.tscn")
+		return
 	_joueur.teleport(_arrivee.global_transform)
 	_joueur.set_anchor(_arrivee.global_transform)
 	_joueur.set_physics_process(true)
@@ -229,3 +188,33 @@ func _sur_fin(corps: Node3D) -> void:
 	$Chambre/Toile_lit_fin.visible = true
 	$Chambre/PenseeFin.active = true
 	_ouvrir_les_yeux("Je ne suis pas sorti… Je suis revenu dans ma chambre.")
+
+
+## De retour de l'enfance : la correction a abîmé la maison. Le mur nord du
+## salon s'est envolé (on voit les étoiles), les meubles flottent.
+func _retour_de_l_enfance() -> void:
+	fini = true
+	_fin_annoncee = true
+	ouvrir_la_salle_de_bain()
+	$Chambre/Toile_lit.visible = false
+	$Chambre/Toile_lit_fin.visible = true
+	var depart := Transform3D(Basis(), Vector3(10.4, 0, -1.2))
+	_joueur.teleport(depart)
+	_joueur.set_anchor(depart)
+	# Le mur disparaît, mais on ne tombe pas dans le vide.
+	var mur: CSGBox3D = $Salon/Mur_nord
+	mur.visible = false
+	var i := 0
+	for nom in ["Canape", "Canape_dossier", "Table_basse", "Table", "Chaise_1", "Chaise_2"]:
+		var m: CSGBox3D = get_node("Salon/" + nom)
+		m.use_collision = false
+		m.position.y += 1.8 + 0.3 * i
+		m.rotation = Vector3(0.2 * (i % 3) - 0.2, 0.3 * i, 0.15 * (i % 2))
+		var t := create_tween().set_loops()
+		t.tween_property(m, "position:y", m.position.y + 0.25, 2.0 + 0.3 * i).set_trans(Tween.TRANS_SINE)
+		t.tween_property(m, "position:y", m.position.y, 2.0 + 0.3 * i).set_trans(Tween.TRANS_SINE)
+		i += 1
+	var t := _ouvrir_les_yeux("La maison… Elle se défait.")
+	t.tween_callback(penser.bind("J'ai changé le souvenir. Et ici, tout s'abîme."))
+	t.tween_interval(9.0)
+	t.tween_callback(afficher.bind("Fin du niveau 2. Bientôt : l'adolescence.", 8.0))

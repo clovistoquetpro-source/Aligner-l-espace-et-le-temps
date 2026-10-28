@@ -442,1070 +442,1070 @@ rim_tint = 0.8
 [sub_resource type="BoxShape3D" id="BoxShape3D_83jax"]
 size = Vector3(6, 6, 0.4)
 
-[node name="Illusions" type="Node3D" unique_id=1525935416]
+[node name="Illusions" type="Node3D" unique_id=1555886300]
 script = ExtResource("1_acw6f")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1255340699]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1150774128]
 environment = SubResource("Environment_2sc81")
 
-[node name="Hall" type="Node3D" parent="." unique_id=1440820417]
+[node name="Hall" type="Node3D" parent="." unique_id=1240114501]
 
-[node name="Sol" type="CSGBox3D" parent="Hall" unique_id=1516133561]
+[node name="Sol" type="CSGBox3D" parent="Hall" unique_id=1517896301]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 use_collision = true
 size = Vector3(8.6, 0.5, 8.6)
 material = SubResource("StandardMaterial3D_4j2vk")
 
-[node name="Plafond" type="CSGBox3D" parent="Hall" unique_id=1918384219]
+[node name="Plafond" type="CSGBox3D" parent="Hall" unique_id=586480196]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35, 0)
 use_collision = true
 size = Vector3(8.6, 0.3, 8.6)
 material = SubResource("StandardMaterial3D_rwewh")
 
-[node name="Mur_nord_1" type="CSGBox3D" parent="Hall" unique_id=1153559500]
+[node name="Mur_nord_1" type="CSGBox3D" parent="Hall" unique_id=815997888]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.6, -4.15)
 use_collision = true
 size = Vector3(3, 3.2, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_nord_2" type="CSGBox3D" parent="Hall" unique_id=442718018]
+[node name="Mur_nord_2" type="CSGBox3D" parent="Hall" unique_id=1302529302]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, -4.15)
 use_collision = true
 size = Vector3(2, 0.6, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_nord_3" type="CSGBox3D" parent="Hall" unique_id=53755276]
+[node name="Mur_nord_3" type="CSGBox3D" parent="Hall" unique_id=1023810192]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.6, -4.15)
 use_collision = true
 size = Vector3(3, 3.2, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_sud_1" type="CSGBox3D" parent="Hall" unique_id=427661153]
+[node name="Mur_sud_1" type="CSGBox3D" parent="Hall" unique_id=512336068]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.35, 1.6, 4.15)
 use_collision = true
 size = Vector3(3.3, 3.2, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_sud_2" type="CSGBox3D" parent="Hall" unique_id=742876538]
+[node name="Mur_sud_2" type="CSGBox3D" parent="Hall" unique_id=1909811680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 4.15)
 use_collision = true
 size = Vector3(1.4, 0.8, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_sud_3" type="CSGBox3D" parent="Hall" unique_id=1072368474]
+[node name="Mur_sud_3" type="CSGBox3D" parent="Hall" unique_id=1748595336]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35, 1.6, 4.15)
 use_collision = true
 size = Vector3(3.3, 3.2, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_ouest_1" type="CSGBox3D" parent="Hall" unique_id=1314098278]
+[node name="Mur_ouest_1" type="CSGBox3D" parent="Hall" unique_id=2069388475]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15, 1.6, -3.15)
 use_collision = true
 size = Vector3(0.3, 3.2, 2.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_ouest_2" type="CSGBox3D" parent="Hall" unique_id=2117208611]
+[node name="Mur_ouest_2" type="CSGBox3D" parent="Hall" unique_id=629518034]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15, 0.45, 0)
 use_collision = true
 size = Vector3(0.3, 0.9, 4)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_ouest_3" type="CSGBox3D" parent="Hall" unique_id=1245144858]
+[node name="Mur_ouest_3" type="CSGBox3D" parent="Hall" unique_id=774972232]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15, 2.9, 0)
 use_collision = true
 size = Vector3(0.3, 0.6, 4)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_ouest_4" type="CSGBox3D" parent="Hall" unique_id=145693584]
+[node name="Mur_ouest_4" type="CSGBox3D" parent="Hall" unique_id=1970926490]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15, 1.6, 3.15)
 use_collision = true
 size = Vector3(0.3, 3.2, 2.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Fenetre" type="StaticBody3D" parent="Hall" unique_id=1291229626]
+[node name="Fenetre" type="StaticBody3D" parent="Hall" unique_id=430098627]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15, 1.75, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hall/Fenetre" unique_id=1421211667]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hall/Fenetre" unique_id=1565203683]
 shape = SubResource("BoxShape3D_elnlf")
 
-[node name="Mur_est_1" type="CSGBox3D" parent="Hall" unique_id=936645288]
+[node name="Mur_est_1" type="CSGBox3D" parent="Hall" unique_id=1730429676]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15, 1.6, -2.5)
 use_collision = true
 size = Vector3(0.3, 3.2, 3.6)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_est_2" type="CSGBox3D" parent="Hall" unique_id=1493014768]
+[node name="Mur_est_2" type="CSGBox3D" parent="Hall" unique_id=1205858389]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15, 2.8, 0)
 use_collision = true
 size = Vector3(0.3, 0.8, 1.4)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_est_3" type="CSGBox3D" parent="Hall" unique_id=1166579380]
+[node name="Mur_est_3" type="CSGBox3D" parent="Hall" unique_id=1650737635]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15, 1.6, 2.5)
 use_collision = true
 size = Vector3(0.3, 3.2, 3.6)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Banc" type="CSGBox3D" parent="Hall" unique_id=561467350]
+[node name="Banc" type="CSGBox3D" parent="Hall" unique_id=1221645298]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0.25, -2.6)
 use_collision = true
 size = Vector3(0.6, 0.5, 1.8)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Portemanteau" type="CSGBox3D" parent="Hall" unique_id=1091176315]
+[node name="Portemanteau" type="CSGBox3D" parent="Hall" unique_id=751611010]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.85, 1.7, -2.5)
 size = Vector3(0.1, 0.1, 1.2)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Lampe" type="OmniLight3D" parent="Hall" unique_id=1587549459]
+[node name="Lampe" type="OmniLight3D" parent="Hall" unique_id=2046403029]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
 light_energy = 1.2
 shadow_enabled = true
 omni_range = 7.0
 
-[node name="Zone" type="Area3D" parent="Hall" unique_id=132225155]
+[node name="Zone" type="Area3D" parent="Hall" unique_id=1226814153]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hall/Zone" unique_id=149925094]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hall/Zone" unique_id=1038770147]
 shape = SubResource("BoxShape3D_gghpc")
 
-[node name="PenseeFenetre" type="Node3D" parent="Hall" unique_id=1276443259]
+[node name="PenseeFenetre" type="Node3D" parent="Hall" unique_id=2133374685]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15, 1.75, 0)
 script = ExtResource("3_7h2ig")
 texte = "La maison flotte… au milieu de rien."
 angle_max_deg = 25.0
 
-[node name="Couloir" type="Node3D" parent="." unique_id=939990850]
+[node name="Couloir" type="Node3D" parent="." unique_id=1853334185]
 
-[node name="Sol" type="CSGBox3D" parent="Couloir" unique_id=1721306869]
+[node name="Sol" type="CSGBox3D" parent="Couloir" unique_id=321767871]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -36.3)
 use_collision = true
 size = Vector3(2.6, 0.5, 64)
 material = SubResource("StandardMaterial3D_kd5t4")
 
-[node name="Plafond" type="CSGBox3D" parent="Couloir" unique_id=737982378]
+[node name="Plafond" type="CSGBox3D" parent="Couloir" unique_id=886785390]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, -36.3)
 use_collision = true
 size = Vector3(2.6, 0.3, 64)
 material = SubResource("StandardMaterial3D_rwewh")
 
-[node name="Mur_g" type="CSGBox3D" parent="Couloir" unique_id=1782735281]
+[node name="Mur_g" type="CSGBox3D" parent="Couloir" unique_id=1439019708]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, 1.3, -36.3)
 use_collision = true
 size = Vector3(0.3, 2.6, 64)
 material = SubResource("StandardMaterial3D_t7k2d")
 
-[node name="Mur_d" type="CSGBox3D" parent="Couloir" unique_id=1073369659]
+[node name="Mur_d" type="CSGBox3D" parent="Couloir" unique_id=166530299]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 1.3, -36.3)
 use_collision = true
 size = Vector3(0.3, 2.6, 64)
 material = SubResource("StandardMaterial3D_t7k2d")
 
-[node name="Mur_fond" type="CSGBox3D" parent="Couloir" unique_id=739824548]
+[node name="Mur_fond" type="CSGBox3D" parent="Couloir" unique_id=680641722]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -68.45)
 use_collision = true
 size = Vector3(2.6, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_t7k2d")
 
-[node name="Pilier_g_0" type="CSGBox3D" parent="Couloir" unique_id=1908843105]
+[node name="Pilier_g_0" type="CSGBox3D" parent="Couloir" unique_id=1554553784]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -4.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_0" type="CSGBox3D" parent="Couloir" unique_id=1899760730]
+[node name="Pilier_d_0" type="CSGBox3D" parent="Couloir" unique_id=1417438505]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -4.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_0" type="CSGBox3D" parent="Couloir" unique_id=151291920]
+[node name="Poutre_0" type="CSGBox3D" parent="Couloir" unique_id=1688404291]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -4.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_0" type="CSGBox3D" parent="Couloir" unique_id=1256274601]
+[node name="Cadre_g_0" type="CSGBox3D" parent="Couloir" unique_id=2114860074]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -6.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_0" type="CSGBox3D" parent="Couloir" unique_id=165268697]
+[node name="Toile_g_0" type="CSGBox3D" parent="Couloir" unique_id=62772627]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -6.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_0" type="CSGBox3D" parent="Couloir" unique_id=1317839816]
+[node name="Cadre_d_0" type="CSGBox3D" parent="Couloir" unique_id=407020636]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -6.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_0" type="CSGBox3D" parent="Couloir" unique_id=2139968445]
+[node name="Toile_d_0" type="CSGBox3D" parent="Couloir" unique_id=410653773]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -6.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_1" type="CSGBox3D" parent="Couloir" unique_id=1776408467]
+[node name="Pilier_g_1" type="CSGBox3D" parent="Couloir" unique_id=1156135283]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -8.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_1" type="CSGBox3D" parent="Couloir" unique_id=437885510]
+[node name="Pilier_d_1" type="CSGBox3D" parent="Couloir" unique_id=490247351]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -8.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_1" type="CSGBox3D" parent="Couloir" unique_id=541225937]
+[node name="Poutre_1" type="CSGBox3D" parent="Couloir" unique_id=659821419]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -8.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_1" type="CSGBox3D" parent="Couloir" unique_id=52219325]
+[node name="Cadre_g_1" type="CSGBox3D" parent="Couloir" unique_id=20480860]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -10.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_1" type="CSGBox3D" parent="Couloir" unique_id=1078439527]
+[node name="Toile_g_1" type="CSGBox3D" parent="Couloir" unique_id=59927758]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -10.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_1" type="CSGBox3D" parent="Couloir" unique_id=1023505113]
+[node name="Cadre_d_1" type="CSGBox3D" parent="Couloir" unique_id=1258082145]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -10.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_1" type="CSGBox3D" parent="Couloir" unique_id=1678968283]
+[node name="Toile_d_1" type="CSGBox3D" parent="Couloir" unique_id=807524486]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -10.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_2" type="CSGBox3D" parent="Couloir" unique_id=279607168]
+[node name="Pilier_g_2" type="CSGBox3D" parent="Couloir" unique_id=179330434]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -12.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_2" type="CSGBox3D" parent="Couloir" unique_id=1150517180]
+[node name="Pilier_d_2" type="CSGBox3D" parent="Couloir" unique_id=860830148]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -12.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_2" type="CSGBox3D" parent="Couloir" unique_id=917273388]
+[node name="Poutre_2" type="CSGBox3D" parent="Couloir" unique_id=744655679]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -12.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_2" type="CSGBox3D" parent="Couloir" unique_id=1241073443]
+[node name="Cadre_g_2" type="CSGBox3D" parent="Couloir" unique_id=2071139204]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -14.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_2" type="CSGBox3D" parent="Couloir" unique_id=1124806513]
+[node name="Toile_g_2" type="CSGBox3D" parent="Couloir" unique_id=1910169903]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -14.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_2" type="CSGBox3D" parent="Couloir" unique_id=1175933212]
+[node name="Cadre_d_2" type="CSGBox3D" parent="Couloir" unique_id=630118347]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -14.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_2" type="CSGBox3D" parent="Couloir" unique_id=1346028194]
+[node name="Toile_d_2" type="CSGBox3D" parent="Couloir" unique_id=419586586]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -14.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_3" type="CSGBox3D" parent="Couloir" unique_id=266807324]
+[node name="Pilier_g_3" type="CSGBox3D" parent="Couloir" unique_id=1328944321]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -16.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_3" type="CSGBox3D" parent="Couloir" unique_id=1883135153]
+[node name="Pilier_d_3" type="CSGBox3D" parent="Couloir" unique_id=426461476]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -16.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_3" type="CSGBox3D" parent="Couloir" unique_id=111028666]
+[node name="Poutre_3" type="CSGBox3D" parent="Couloir" unique_id=167313631]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -16.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_3" type="CSGBox3D" parent="Couloir" unique_id=1214044201]
+[node name="Cadre_g_3" type="CSGBox3D" parent="Couloir" unique_id=1091001871]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -18.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_3" type="CSGBox3D" parent="Couloir" unique_id=972441179]
+[node name="Toile_g_3" type="CSGBox3D" parent="Couloir" unique_id=665584842]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -18.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_3" type="CSGBox3D" parent="Couloir" unique_id=115597449]
+[node name="Cadre_d_3" type="CSGBox3D" parent="Couloir" unique_id=584858981]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -18.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_3" type="CSGBox3D" parent="Couloir" unique_id=20297338]
+[node name="Toile_d_3" type="CSGBox3D" parent="Couloir" unique_id=533685119]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -18.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_4" type="CSGBox3D" parent="Couloir" unique_id=865801263]
+[node name="Pilier_g_4" type="CSGBox3D" parent="Couloir" unique_id=1210119695]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -20.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_4" type="CSGBox3D" parent="Couloir" unique_id=1505804737]
+[node name="Pilier_d_4" type="CSGBox3D" parent="Couloir" unique_id=213804029]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -20.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_4" type="CSGBox3D" parent="Couloir" unique_id=1045700807]
+[node name="Poutre_4" type="CSGBox3D" parent="Couloir" unique_id=801698653]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -20.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_4" type="CSGBox3D" parent="Couloir" unique_id=1245781251]
+[node name="Cadre_g_4" type="CSGBox3D" parent="Couloir" unique_id=867310112]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -22.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_4" type="CSGBox3D" parent="Couloir" unique_id=1288870453]
+[node name="Toile_g_4" type="CSGBox3D" parent="Couloir" unique_id=241014196]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -22.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_4" type="CSGBox3D" parent="Couloir" unique_id=1294589267]
+[node name="Cadre_d_4" type="CSGBox3D" parent="Couloir" unique_id=1657857800]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -22.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_4" type="CSGBox3D" parent="Couloir" unique_id=1503070900]
+[node name="Toile_d_4" type="CSGBox3D" parent="Couloir" unique_id=947090601]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -22.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_5" type="CSGBox3D" parent="Couloir" unique_id=1830281806]
+[node name="Pilier_g_5" type="CSGBox3D" parent="Couloir" unique_id=892325000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -24.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_5" type="CSGBox3D" parent="Couloir" unique_id=689284476]
+[node name="Pilier_d_5" type="CSGBox3D" parent="Couloir" unique_id=1771176516]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -24.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_5" type="CSGBox3D" parent="Couloir" unique_id=1202093396]
+[node name="Poutre_5" type="CSGBox3D" parent="Couloir" unique_id=203212482]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -24.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_5" type="CSGBox3D" parent="Couloir" unique_id=1530262151]
+[node name="Cadre_g_5" type="CSGBox3D" parent="Couloir" unique_id=622158418]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -26.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_5" type="CSGBox3D" parent="Couloir" unique_id=890815826]
+[node name="Toile_g_5" type="CSGBox3D" parent="Couloir" unique_id=1291984006]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -26.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_5" type="CSGBox3D" parent="Couloir" unique_id=1781111119]
+[node name="Cadre_d_5" type="CSGBox3D" parent="Couloir" unique_id=1687465054]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -26.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_5" type="CSGBox3D" parent="Couloir" unique_id=558664497]
+[node name="Toile_d_5" type="CSGBox3D" parent="Couloir" unique_id=1043940679]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -26.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_6" type="CSGBox3D" parent="Couloir" unique_id=1603680219]
+[node name="Pilier_g_6" type="CSGBox3D" parent="Couloir" unique_id=2019024045]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -28.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_6" type="CSGBox3D" parent="Couloir" unique_id=872304611]
+[node name="Pilier_d_6" type="CSGBox3D" parent="Couloir" unique_id=444462050]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -28.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_6" type="CSGBox3D" parent="Couloir" unique_id=209905786]
+[node name="Poutre_6" type="CSGBox3D" parent="Couloir" unique_id=486639795]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -28.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_6" type="CSGBox3D" parent="Couloir" unique_id=350185184]
+[node name="Cadre_g_6" type="CSGBox3D" parent="Couloir" unique_id=1190707071]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -30.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_6" type="CSGBox3D" parent="Couloir" unique_id=763513058]
+[node name="Toile_g_6" type="CSGBox3D" parent="Couloir" unique_id=999796670]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -30.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_6" type="CSGBox3D" parent="Couloir" unique_id=1258718030]
+[node name="Cadre_d_6" type="CSGBox3D" parent="Couloir" unique_id=1363204420]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -30.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_6" type="CSGBox3D" parent="Couloir" unique_id=1397579982]
+[node name="Toile_d_6" type="CSGBox3D" parent="Couloir" unique_id=1048557434]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -30.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_7" type="CSGBox3D" parent="Couloir" unique_id=206501436]
+[node name="Pilier_g_7" type="CSGBox3D" parent="Couloir" unique_id=1074535232]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -32.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_7" type="CSGBox3D" parent="Couloir" unique_id=527246226]
+[node name="Pilier_d_7" type="CSGBox3D" parent="Couloir" unique_id=1706985475]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -32.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_7" type="CSGBox3D" parent="Couloir" unique_id=1325215725]
+[node name="Poutre_7" type="CSGBox3D" parent="Couloir" unique_id=1453883211]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -32.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_7" type="CSGBox3D" parent="Couloir" unique_id=1057394470]
+[node name="Cadre_g_7" type="CSGBox3D" parent="Couloir" unique_id=1704089166]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -34.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_7" type="CSGBox3D" parent="Couloir" unique_id=1799107194]
+[node name="Toile_g_7" type="CSGBox3D" parent="Couloir" unique_id=1898230825]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -34.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_7" type="CSGBox3D" parent="Couloir" unique_id=749063406]
+[node name="Cadre_d_7" type="CSGBox3D" parent="Couloir" unique_id=2045328822]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -34.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_7" type="CSGBox3D" parent="Couloir" unique_id=892042850]
+[node name="Toile_d_7" type="CSGBox3D" parent="Couloir" unique_id=1940250979]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -34.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_8" type="CSGBox3D" parent="Couloir" unique_id=587814027]
+[node name="Pilier_g_8" type="CSGBox3D" parent="Couloir" unique_id=1354062673]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -36.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_8" type="CSGBox3D" parent="Couloir" unique_id=748260045]
+[node name="Pilier_d_8" type="CSGBox3D" parent="Couloir" unique_id=1453612496]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -36.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_8" type="CSGBox3D" parent="Couloir" unique_id=238500066]
+[node name="Poutre_8" type="CSGBox3D" parent="Couloir" unique_id=199843768]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -36.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_8" type="CSGBox3D" parent="Couloir" unique_id=1193013981]
+[node name="Cadre_g_8" type="CSGBox3D" parent="Couloir" unique_id=1591973308]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -38.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_8" type="CSGBox3D" parent="Couloir" unique_id=804000763]
+[node name="Toile_g_8" type="CSGBox3D" parent="Couloir" unique_id=1580900944]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -38.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_8" type="CSGBox3D" parent="Couloir" unique_id=200459077]
+[node name="Cadre_d_8" type="CSGBox3D" parent="Couloir" unique_id=194297750]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -38.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_8" type="CSGBox3D" parent="Couloir" unique_id=1854916812]
+[node name="Toile_d_8" type="CSGBox3D" parent="Couloir" unique_id=1213422091]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -38.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_9" type="CSGBox3D" parent="Couloir" unique_id=1094724455]
+[node name="Pilier_g_9" type="CSGBox3D" parent="Couloir" unique_id=742533104]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -40.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_9" type="CSGBox3D" parent="Couloir" unique_id=50214612]
+[node name="Pilier_d_9" type="CSGBox3D" parent="Couloir" unique_id=1422541760]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -40.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_9" type="CSGBox3D" parent="Couloir" unique_id=1224330488]
+[node name="Poutre_9" type="CSGBox3D" parent="Couloir" unique_id=1392304579]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -40.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_9" type="CSGBox3D" parent="Couloir" unique_id=67067235]
+[node name="Cadre_g_9" type="CSGBox3D" parent="Couloir" unique_id=2014525394]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -42.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_9" type="CSGBox3D" parent="Couloir" unique_id=1981445251]
+[node name="Toile_g_9" type="CSGBox3D" parent="Couloir" unique_id=1807127277]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -42.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_9" type="CSGBox3D" parent="Couloir" unique_id=372079647]
+[node name="Cadre_d_9" type="CSGBox3D" parent="Couloir" unique_id=1797749298]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -42.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_9" type="CSGBox3D" parent="Couloir" unique_id=668349680]
+[node name="Toile_d_9" type="CSGBox3D" parent="Couloir" unique_id=256112102]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -42.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_10" type="CSGBox3D" parent="Couloir" unique_id=467298888]
+[node name="Pilier_g_10" type="CSGBox3D" parent="Couloir" unique_id=1439963086]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -44.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_10" type="CSGBox3D" parent="Couloir" unique_id=606390670]
+[node name="Pilier_d_10" type="CSGBox3D" parent="Couloir" unique_id=1460433588]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -44.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_10" type="CSGBox3D" parent="Couloir" unique_id=2008779747]
+[node name="Poutre_10" type="CSGBox3D" parent="Couloir" unique_id=1742051935]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -44.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_10" type="CSGBox3D" parent="Couloir" unique_id=1455600025]
+[node name="Cadre_g_10" type="CSGBox3D" parent="Couloir" unique_id=348140557]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -46.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_10" type="CSGBox3D" parent="Couloir" unique_id=261296575]
+[node name="Toile_g_10" type="CSGBox3D" parent="Couloir" unique_id=313543622]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -46.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_10" type="CSGBox3D" parent="Couloir" unique_id=39834640]
+[node name="Cadre_d_10" type="CSGBox3D" parent="Couloir" unique_id=1093422224]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -46.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_10" type="CSGBox3D" parent="Couloir" unique_id=1037834844]
+[node name="Toile_d_10" type="CSGBox3D" parent="Couloir" unique_id=2132296818]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -46.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_11" type="CSGBox3D" parent="Couloir" unique_id=787774215]
+[node name="Pilier_g_11" type="CSGBox3D" parent="Couloir" unique_id=1766395510]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -48.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_11" type="CSGBox3D" parent="Couloir" unique_id=264069172]
+[node name="Pilier_d_11" type="CSGBox3D" parent="Couloir" unique_id=2009894044]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -48.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_11" type="CSGBox3D" parent="Couloir" unique_id=1274205139]
+[node name="Poutre_11" type="CSGBox3D" parent="Couloir" unique_id=2023766959]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -48.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_11" type="CSGBox3D" parent="Couloir" unique_id=1267615173]
+[node name="Cadre_g_11" type="CSGBox3D" parent="Couloir" unique_id=128091360]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -50.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_11" type="CSGBox3D" parent="Couloir" unique_id=2110713385]
+[node name="Toile_g_11" type="CSGBox3D" parent="Couloir" unique_id=906621157]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -50.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_11" type="CSGBox3D" parent="Couloir" unique_id=13503367]
+[node name="Cadre_d_11" type="CSGBox3D" parent="Couloir" unique_id=537492967]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -50.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_11" type="CSGBox3D" parent="Couloir" unique_id=1341298512]
+[node name="Toile_d_11" type="CSGBox3D" parent="Couloir" unique_id=1366393519]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -50.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_12" type="CSGBox3D" parent="Couloir" unique_id=2101182577]
+[node name="Pilier_g_12" type="CSGBox3D" parent="Couloir" unique_id=1370494373]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -52.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_12" type="CSGBox3D" parent="Couloir" unique_id=238497692]
+[node name="Pilier_d_12" type="CSGBox3D" parent="Couloir" unique_id=1566220810]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -52.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_12" type="CSGBox3D" parent="Couloir" unique_id=369992091]
+[node name="Poutre_12" type="CSGBox3D" parent="Couloir" unique_id=441041184]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -52.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_12" type="CSGBox3D" parent="Couloir" unique_id=1516326896]
+[node name="Cadre_g_12" type="CSGBox3D" parent="Couloir" unique_id=314951351]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -54.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_12" type="CSGBox3D" parent="Couloir" unique_id=962316494]
+[node name="Toile_g_12" type="CSGBox3D" parent="Couloir" unique_id=1246608076]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -54.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_12" type="CSGBox3D" parent="Couloir" unique_id=1275645760]
+[node name="Cadre_d_12" type="CSGBox3D" parent="Couloir" unique_id=1712434332]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -54.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_12" type="CSGBox3D" parent="Couloir" unique_id=1440155287]
+[node name="Toile_d_12" type="CSGBox3D" parent="Couloir" unique_id=667574785]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -54.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_13" type="CSGBox3D" parent="Couloir" unique_id=595799904]
+[node name="Pilier_g_13" type="CSGBox3D" parent="Couloir" unique_id=2127851182]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -56.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_13" type="CSGBox3D" parent="Couloir" unique_id=2098717056]
+[node name="Pilier_d_13" type="CSGBox3D" parent="Couloir" unique_id=1672884489]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -56.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_13" type="CSGBox3D" parent="Couloir" unique_id=928439533]
+[node name="Poutre_13" type="CSGBox3D" parent="Couloir" unique_id=771441811]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -56.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_13" type="CSGBox3D" parent="Couloir" unique_id=201100103]
+[node name="Cadre_g_13" type="CSGBox3D" parent="Couloir" unique_id=1593098251]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -58.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_13" type="CSGBox3D" parent="Couloir" unique_id=179557540]
+[node name="Toile_g_13" type="CSGBox3D" parent="Couloir" unique_id=863102090]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -58.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_13" type="CSGBox3D" parent="Couloir" unique_id=1706315439]
+[node name="Cadre_d_13" type="CSGBox3D" parent="Couloir" unique_id=912465624]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -58.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_13" type="CSGBox3D" parent="Couloir" unique_id=867997137]
+[node name="Toile_d_13" type="CSGBox3D" parent="Couloir" unique_id=2024085770]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -58.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_14" type="CSGBox3D" parent="Couloir" unique_id=857787741]
+[node name="Pilier_g_14" type="CSGBox3D" parent="Couloir" unique_id=181685304]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -60.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_14" type="CSGBox3D" parent="Couloir" unique_id=1468115992]
+[node name="Pilier_d_14" type="CSGBox3D" parent="Couloir" unique_id=1748314268]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -60.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_14" type="CSGBox3D" parent="Couloir" unique_id=918720787]
+[node name="Poutre_14" type="CSGBox3D" parent="Couloir" unique_id=1889406656]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -60.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_14" type="CSGBox3D" parent="Couloir" unique_id=371271242]
+[node name="Cadre_g_14" type="CSGBox3D" parent="Couloir" unique_id=1361401483]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -62.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_14" type="CSGBox3D" parent="Couloir" unique_id=165666450]
+[node name="Toile_g_14" type="CSGBox3D" parent="Couloir" unique_id=1670349181]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -62.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_14" type="CSGBox3D" parent="Couloir" unique_id=1097396836]
+[node name="Cadre_d_14" type="CSGBox3D" parent="Couloir" unique_id=2065809344]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -62.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_14" type="CSGBox3D" parent="Couloir" unique_id=232115667]
+[node name="Toile_d_14" type="CSGBox3D" parent="Couloir" unique_id=404927257]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -62.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Pilier_g_15" type="CSGBox3D" parent="Couloir" unique_id=249339510]
+[node name="Pilier_g_15" type="CSGBox3D" parent="Couloir" unique_id=1843939054]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925, 1.3, -64.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Pilier_d_15" type="CSGBox3D" parent="Couloir" unique_id=1809195104]
+[node name="Pilier_d_15" type="CSGBox3D" parent="Couloir" unique_id=472160686]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.925, 1.3, -64.45)
 size = Vector3(0.15, 2.6, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Poutre_15" type="CSGBox3D" parent="Couloir" unique_id=1604843203]
+[node name="Poutre_15" type="CSGBox3D" parent="Couloir" unique_id=538802714]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.525, -64.45)
 size = Vector3(1.7, 0.15, 0.3)
 material = SubResource("StandardMaterial3D_4jkb3")
 
-[node name="Cadre_g_15" type="CSGBox3D" parent="Couloir" unique_id=1392633104]
+[node name="Cadre_g_15" type="CSGBox3D" parent="Couloir" unique_id=808258006]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97, 1.5, -66.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_g_15" type="CSGBox3D" parent="Couloir" unique_id=351097851]
+[node name="Toile_g_15" type="CSGBox3D" parent="Couloir" unique_id=2072021824]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935, 1.5, -66.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Cadre_d_15" type="CSGBox3D" parent="Couloir" unique_id=1165526250]
+[node name="Cadre_d_15" type="CSGBox3D" parent="Couloir" unique_id=1950685017]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97, 1.5, -66.3)
 size = Vector3(0.06, 0.9, 1.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Toile_d_15" type="CSGBox3D" parent="Couloir" unique_id=1662221697]
+[node name="Toile_d_15" type="CSGBox3D" parent="Couloir" unique_id=1187285206]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.935, 1.5, -66.3)
 size = Vector3(0.02, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_tbjyc")
 
-[node name="Boucle" type="Area3D" parent="Couloir" unique_id=678612027]
+[node name="Boucle" type="Area3D" parent="Couloir" unique_id=690832316]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32.3)
 script = ExtResource("4_v2pcd")
 destinations = Array[NodePath]([NodePath("../Retour")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Couloir/Boucle" unique_id=687295563]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Couloir/Boucle" unique_id=2134197678]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 shape = SubResource("BoxShape3D_tyhmu")
 
-[node name="Retour" type="Marker3D" parent="Couloir" unique_id=1322340108]
+[node name="Retour" type="Marker3D" parent="Couloir" unique_id=1690997602]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.3)
 
-[node name="Zone" type="Area3D" parent="Couloir" unique_id=1098533777]
+[node name="Zone" type="Area3D" parent="Couloir" unique_id=1300321467]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -36.3)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Couloir/Zone" unique_id=1064806404]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Couloir/Zone" unique_id=564976473]
 shape = SubResource("BoxShape3D_0k0o5")
 
-[node name="PorteEntree" type="Node3D" parent="Couloir" unique_id=584327221]
+[node name="PorteEntree" type="Node3D" parent="Couloir" unique_id=702267684]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
 
-[node name="Panneau" type="CSGBox3D" parent="Couloir/PorteEntree" unique_id=1765794307]
+[node name="Panneau" type="CSGBox3D" parent="Couloir/PorteEntree" unique_id=1400080530]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 size = Vector3(1, 2.4, 0.06)
 material = SubResource("StandardMaterial3D_gba23")
 
-[node name="Montant_g" type="CSGBox3D" parent="Couloir/PorteEntree" unique_id=996070879]
+[node name="Montant_g" type="CSGBox3D" parent="Couloir/PorteEntree" unique_id=1921122424]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57, 1.25, 0.02)
 size = Vector3(0.14, 2.5, 0.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Montant_d" type="CSGBox3D" parent="Couloir/PorteEntree" unique_id=64609149]
+[node name="Montant_d" type="CSGBox3D" parent="Couloir/PorteEntree" unique_id=859271780]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57, 1.25, 0.02)
 size = Vector3(0.14, 2.5, 0.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Linteau" type="CSGBox3D" parent="Couloir/PorteEntree" unique_id=888822902]
+[node name="Linteau" type="CSGBox3D" parent="Couloir/PorteEntree" unique_id=1840979225]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57, 0.02)
 size = Vector3(1.28, 0.14, 0.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Poignee" type="CSGBox3D" parent="Couloir/PorteEntree" unique_id=1964649794]
+[node name="Poignee" type="CSGBox3D" parent="Couloir/PorteEntree" unique_id=1832191127]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38, 1.05, 0.06)
 size = Vector3(0.12, 0.05, 0.06)
 material = SubResource("StandardMaterial3D_g82sk")
 
-[node name="Rai" type="CSGBox3D" parent="Couloir/PorteEntree" unique_id=1979432077]
+[node name="Rai" type="CSGBox3D" parent="Couloir/PorteEntree" unique_id=60265943]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0.06)
 size = Vector3(0.9, 0.03, 0.04)
 material = SubResource("StandardMaterial3D_34r5s")
 
-[node name="Lumiere" type="OmniLight3D" parent="Couloir/PorteEntree" unique_id=76275691]
+[node name="Lumiere" type="OmniLight3D" parent="Couloir/PorteEntree" unique_id=1703081224]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0.8)
 light_color = Color(1, 0.94509804, 0.7882353, 1)
 light_energy = 0.9
 omni_range = 3.5
 
-[node name="Pensee" type="Node3D" parent="Couloir/PorteEntree" unique_id=830995307]
+[node name="Pensee" type="Node3D" parent="Couloir/PorteEntree" unique_id=2062118001]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 script = ExtResource("3_7h2ig")
 texte = "La porte d'entrée. Il faut que je sorte d'ici."
 distance = 30.0
 angle_max_deg = 8.0
 
-[node name="Chambre" type="Node3D" parent="." unique_id=424567544]
+[node name="Chambre" type="Node3D" parent="." unique_id=1358392604]
 
-[node name="Sol" type="CSGBox3D" parent="Chambre" unique_id=1867487286]
+[node name="Sol" type="CSGBox3D" parent="Chambre" unique_id=1336629866]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 7.45)
 use_collision = true
 size = Vector3(6.6, 0.5, 6.3)
 material = SubResource("StandardMaterial3D_4j2vk")
 
-[node name="Plafond" type="CSGBox3D" parent="Chambre" unique_id=1107291804]
+[node name="Plafond" type="CSGBox3D" parent="Chambre" unique_id=1276599723]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35, 7.45)
 use_collision = true
 size = Vector3(6.6, 0.3, 6.3)
 material = SubResource("StandardMaterial3D_rwewh")
 
-[node name="Mur_sud" type="CSGBox3D" parent="Chambre" unique_id=1314154910]
+[node name="Mur_sud" type="CSGBox3D" parent="Chambre" unique_id=444060516]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 10.45)
 use_collision = true
 size = Vector3(6, 3.2, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_ouest" type="CSGBox3D" parent="Chambre" unique_id=185961057]
+[node name="Mur_ouest" type="CSGBox3D" parent="Chambre" unique_id=531475255]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.15, 1.6, 7.45)
 use_collision = true
 size = Vector3(0.3, 3.2, 6.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_est_1" type="CSGBox3D" parent="Chambre" unique_id=1336369482]
+[node name="Mur_est_1" type="CSGBox3D" parent="Chambre" unique_id=1481971796]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15, 1.6, 5.2)
 use_collision = true
 size = Vector3(0.3, 3.2, 1.8)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_est_2" type="CSGBox3D" parent="Chambre" unique_id=80646726]
+[node name="Mur_est_2" type="CSGBox3D" parent="Chambre" unique_id=1965643672]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15, 0.5, 7.3)
 use_collision = true
 size = Vector3(0.3, 1, 2.4)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_est_3" type="CSGBox3D" parent="Chambre" unique_id=1609390042]
+[node name="Mur_est_3" type="CSGBox3D" parent="Chambre" unique_id=1702757163]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15, 2.85, 7.3)
 use_collision = true
 size = Vector3(0.3, 0.7, 2.4)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_est_4" type="CSGBox3D" parent="Chambre" unique_id=617168616]
+[node name="Mur_est_4" type="CSGBox3D" parent="Chambre" unique_id=2119934793]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15, 1.6, 9.55)
 use_collision = true
 size = Vector3(0.3, 3.2, 2.1)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Fenetre" type="StaticBody3D" parent="Chambre" unique_id=2056533440]
+[node name="Fenetre" type="StaticBody3D" parent="Chambre" unique_id=1217502424]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15, 1.75, 7.3)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Chambre/Fenetre" unique_id=1520327711]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chambre/Fenetre" unique_id=861725074]
 shape = SubResource("BoxShape3D_2gpts")
 
-[node name="Lit" type="CSGBox3D" parent="Chambre" unique_id=1164789524]
+[node name="Lit" type="CSGBox3D" parent="Chambre" unique_id=898244286]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.225, 9.2)
 use_collision = true
 size = Vector3(1.6, 0.45, 2.1)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Lit_drap" type="CSGBox3D" parent="Chambre" unique_id=1458699441]
+[node name="Lit_drap" type="CSGBox3D" parent="Chambre" unique_id=1929257232]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, 9.15)
 size = Vector3(1.5, 0.14, 1.9)
 material = SubResource("StandardMaterial3D_o8002")
 
-[node name="Lit_oreiller" type="CSGBox3D" parent="Chambre" unique_id=1841672703]
+[node name="Lit_oreiller" type="CSGBox3D" parent="Chambre" unique_id=302910274]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 9.95)
 size = Vector3(1, 0.12, 0.35)
 material = SubResource("StandardMaterial3D_o8002")
 
-[node name="Lit_tete" type="CSGBox3D" parent="Chambre" unique_id=30974990]
+[node name="Lit_tete" type="CSGBox3D" parent="Chambre" unique_id=684667230]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 10.25)
 use_collision = true
 size = Vector3(1.7, 1.2, 0.1)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Table_de_nuit" type="CSGBox3D" parent="Chambre" unique_id=1956377014]
+[node name="Table_de_nuit" type="CSGBox3D" parent="Chambre" unique_id=2103532748]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0.275, 10)
 use_collision = true
 size = Vector3(0.5, 0.55, 0.45)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Armoire" type="CSGBox3D" parent="Chambre" unique_id=1833368205]
+[node name="Armoire" type="CSGBox3D" parent="Chambre" unique_id=182695848]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7, 1, 6)
 use_collision = true
 size = Vector3(0.6, 2, 1.6)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Toile_lit" type="Node3D" parent="Chambre" unique_id=2145215079]
+[node name="Toile_lit" type="Node3D" parent="Chambre" unique_id=1824695960]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.05, 10.28)
 
-[node name="Fond" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=581660244]
+[node name="Fond" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=310764138]
 size = Vector3(1.6, 1, 0.03)
 material = SubResource("StandardMaterial3D_rka8q")
 
-[node name="Cadre_haut" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=2121331311]
+[node name="Cadre_haut" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=388530619]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54, 0)
 size = Vector3(1.76, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_bas" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=2065073426]
+[node name="Cadre_bas" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=11687881]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.54, 0)
 size = Vector3(1.76, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_g" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=478355976]
+[node name="Cadre_g" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=696225431]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.84000003, 0, 0)
 size = Vector3(0.08, 1, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_d" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=1540197805]
+[node name="Cadre_d" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=1112089352]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84000003, 0, 0)
 size = Vector3(0.08, 1, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Forme_0" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=872836959]
+[node name="Forme_0" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=336584361]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.616, 0.27, 0.02)
 size = Vector3(0.048, 0.04, 0.01)
 material = SubResource("StandardMaterial3D_rw7x2")
 
-[node name="Forme_1" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=55156085]
+[node name="Forme_1" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=833735582]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.304, 0.395, 0.022)
 size = Vector3(0.032, 0.03, 0.01)
 material = SubResource("StandardMaterial3D_rw7x2")
 
-[node name="Forme_2" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=853296096]
+[node name="Forme_2" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=1049302899]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.216, 0.32, 0.024)
 size = Vector3(0.048, 0.04, 0.01)
 material = SubResource("StandardMaterial3D_rw7x2")
 
-[node name="Forme_3" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=1881557977]
+[node name="Forme_3" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=275771514]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57600003, 0.165, 0.026)
 size = Vector3(0.032, 0.03, 0.01)
 material = SubResource("StandardMaterial3D_rw7x2")
 
-[node name="Forme_4" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=171531993]
+[node name="Forme_4" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=212802389]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49600002, -0.185, 0.028)
 size = Vector3(0.032, 0.03, 0.01)
 material = SubResource("StandardMaterial3D_rw7x2")
 
-[node name="Forme_5" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=171788797]
+[node name="Forme_5" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=768033297]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.504, -0.28, 0.03)
 size = Vector3(0.048, 0.04, 0.01)
 material = SubResource("StandardMaterial3D_rw7x2")
 
-[node name="Forme_6" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=2080434897]
+[node name="Forme_6" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=1418677728]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0.032)
 size = Vector3(0.32, 0.22, 0.01)
 material = SubResource("StandardMaterial3D_ovyrk")
 
-[node name="Forme_7" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=1349593374]
+[node name="Forme_7" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=1442254016]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0.034)
 size = Vector3(0.448, 0.08, 0.01)
 material = SubResource("StandardMaterial3D_86qir")
 
-[node name="Forme_8" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=1685225997]
+[node name="Forme_8" type="CSGBox3D" parent="Chambre/Toile_lit" unique_id=308715916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0.036)
 size = Vector3(0.096, 0.1, 0.01)
 material = SubResource("StandardMaterial3D_740as")
 
-[node name="Toile_lit_fin" type="Node3D" parent="Chambre" unique_id=112793709]
+[node name="Toile_lit_fin" type="Node3D" parent="Chambre" unique_id=1278506440]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.05, 10.28)
 visible = false
 
-[node name="Fond" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=286829973]
+[node name="Fond" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1313558318]
 size = Vector3(1.6, 1, 0.03)
 material = SubResource("StandardMaterial3D_rka8q")
 
-[node name="Cadre_haut" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1562793555]
+[node name="Cadre_haut" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1388548450]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54, 0)
 size = Vector3(1.76, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_bas" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1536117015]
+[node name="Cadre_bas" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=149467840]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.54, 0)
 size = Vector3(1.76, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_g" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=921240394]
+[node name="Cadre_g" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1354702695]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.84000003, 0, 0)
 size = Vector3(0.08, 1, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_d" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=399285379]
+[node name="Cadre_d" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1277621491]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84000003, 0, 0)
 size = Vector3(0.08, 1, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Forme_0" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=922228986]
+[node name="Forme_0" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1073072089]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.195, 0.02)
 size = Vector3(0.32, 0.45, 0.01)
 material = SubResource("StandardMaterial3D_67x6v")
 
-[node name="Forme_1" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1736511901]
+[node name="Forme_1" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1186511021]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.11, 0.022)
 size = Vector3(0.16, 0.12, 0.01)
 material = SubResource("StandardMaterial3D_qo3ad")
 
-[node name="Forme_2" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1434155011]
+[node name="Forme_2" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1302397220]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.39200002, 0.19, 0.024)
 size = Vector3(0.24000001, 0.04, 0.01)
 material = SubResource("StandardMaterial3D_hcds2")
 
-[node name="Forme_3" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=709200458]
+[node name="Forme_3" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1596662577]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.128, -0.105, 0.026)
 size = Vector3(0.224, 0.03, 0.01)
 material = SubResource("StandardMaterial3D_848u2")
 
-[node name="Forme_4" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1173254308]
+[node name="Forme_4" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=265427435]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.352, -0.25, 0.028)
 size = Vector3(0.064, 0.4, 0.01)
 material = SubResource("StandardMaterial3D_848u2")
 
-[node name="Forme_5" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=11010343]
+[node name="Forme_5" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1781737514]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.352, 0.05, 0.03)
 size = Vector3(0.64, 0.4, 0.01)
 material = SubResource("StandardMaterial3D_cpw2r")
 
-[node name="Forme_6" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1503911009]
+[node name="Forme_6" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=412077265]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.352, 0, 0.032)
 size = Vector3(0.192, 0.1, 0.01)
 material = SubResource("StandardMaterial3D_ovyrk")
 
-[node name="Forme_7" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1844141738]
+[node name="Forme_7" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1286617862]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.352, 0.07, 0.034)
 size = Vector3(0.256, 0.04, 0.01)
 material = SubResource("StandardMaterial3D_86qir")
 
-[node name="Forme_8" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=2128740293]
+[node name="Forme_8" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1950375715]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14400001, 0.195, 0.036)
 size = Vector3(0.032, 0.03, 0.01)
 material = SubResource("StandardMaterial3D_rw7x2")
 
-[node name="Forme_9" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=684831037]
+[node name="Forme_9" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1682577633]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57600003, 0.135, 0.038)
 size = Vector3(0.032, 0.03, 0.01)
 material = SubResource("StandardMaterial3D_rw7x2")
 
-[node name="Forme_10" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=1681144712]
+[node name="Forme_10" type="CSGBox3D" parent="Chambre/Toile_lit_fin" unique_id=2105482139]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.616, 0.37, 0.04)
 size = Vector3(0.048, 0.04, 0.01)
 material = SubResource("StandardMaterial3D_rw7x2")
 
-[node name="Lampe" type="OmniLight3D" parent="Chambre" unique_id=169400223]
+[node name="Lampe" type="OmniLight3D" parent="Chambre" unique_id=2045671205]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 7.3)
 light_energy = 1.2
 shadow_enabled = true
 omni_range = 6.0
 
-[node name="Zone" type="Area3D" parent="Chambre" unique_id=1596293188]
+[node name="Zone" type="Area3D" parent="Chambre" unique_id=1301835568]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 7.45)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Chambre/Zone" unique_id=716532333]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chambre/Zone" unique_id=416807683]
 shape = SubResource("BoxShape3D_tmlbn")
 
-[node name="Reveil" type="Marker3D" parent="Chambre" unique_id=1893630456]
+[node name="Reveil" type="Marker3D" parent="Chambre" unique_id=892565935]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.2, 0, 7.6)
 
-[node name="PenseeFenetre" type="Node3D" parent="Chambre" unique_id=790591471]
+[node name="PenseeFenetre" type="Node3D" parent="Chambre" unique_id=2040005263]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15, 1.75, 7.3)
 script = ExtResource("3_7h2ig")
 texte = "Des étoiles… Où est passé le jardin ?"
 distance = 5.0
 angle_max_deg = 25.0
 
-[node name="PenseeToile" type="Node3D" parent="Chambre" unique_id=586814658]
+[node name="PenseeToile" type="Node3D" parent="Chambre" unique_id=957899637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05, 10.28)
 script = ExtResource("3_7h2ig")
 texte = "Ce tableau… je ne l'ai jamais accroché ici."
 distance = 4.0
 angle_max_deg = 15.0
 
-[node name="PenseeFin" type="Node3D" parent="Chambre" unique_id=1804240841]
+[node name="PenseeFin" type="Node3D" parent="Chambre" unique_id=1400234007]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05, 10.28)
 script = ExtResource("3_7h2ig")
 texte = "Sur le tableau, c'est moi, plus vieux.
@@ -1514,302 +1514,302 @@ distance = 4.0
 angle_max_deg = 15.0
 active = false
 
-[node name="Salon" type="Node3D" parent="." unique_id=497223057]
+[node name="Salon" type="Node3D" parent="." unique_id=437867758]
 
-[node name="Sol" type="CSGBox3D" parent="Salon" unique_id=1502976896]
+[node name="Sol" type="CSGBox3D" parent="Salon" unique_id=2070926618]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.45, -0.25, 0)
 use_collision = true
 size = Vector3(8.3, 0.5, 8.6)
 material = SubResource("StandardMaterial3D_4j2vk")
 
-[node name="Plafond" type="CSGBox3D" parent="Salon" unique_id=31831230]
+[node name="Plafond" type="CSGBox3D" parent="Salon" unique_id=1428237810]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.45, 3.35, 0)
 use_collision = true
 size = Vector3(8.3, 0.3, 8.6)
 material = SubResource("StandardMaterial3D_rwewh")
 
-[node name="Mur_nord" type="CSGBox3D" parent="Salon" unique_id=1560801244]
+[node name="Mur_nord" type="CSGBox3D" parent="Salon" unique_id=514166564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, 1.6, -4.15)
 use_collision = true
 size = Vector3(8, 3.2, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_sud" type="CSGBox3D" parent="Salon" unique_id=926785845]
+[node name="Mur_sud" type="CSGBox3D" parent="Salon" unique_id=1843305146]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, 1.6, 4.15)
 use_collision = true
 size = Vector3(8, 3.2, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_est_1" type="CSGBox3D" parent="Salon" unique_id=515017094]
+[node name="Mur_est_1" type="CSGBox3D" parent="Salon" unique_id=199042303]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.45, 1.6, -2.5)
 use_collision = true
 size = Vector3(0.3, 3.2, 3.6)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_est_2" type="CSGBox3D" parent="Salon" unique_id=251019567]
+[node name="Mur_est_2" type="CSGBox3D" parent="Salon" unique_id=698251377]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.45, 2.8, 0)
 use_collision = true
 size = Vector3(0.3, 0.8, 1.4)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_est_3" type="CSGBox3D" parent="Salon" unique_id=1719648744]
+[node name="Mur_est_3" type="CSGBox3D" parent="Salon" unique_id=14400434]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.45, 1.6, 2.5)
 use_collision = true
 size = Vector3(0.3, 3.2, 3.6)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="PorteSdb" type="CSGBox3D" parent="Salon" unique_id=2127767692]
+[node name="PorteSdb" type="CSGBox3D" parent="Salon" unique_id=808662856]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.45, 1.2, 0)
 use_collision = true
 size = Vector3(0.3, 2.4, 1.4)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Canape" type="CSGBox3D" parent="Salon" unique_id=1207795329]
+[node name="Canape" type="CSGBox3D" parent="Salon" unique_id=643510832]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, 0.22, 3)
 use_collision = true
 size = Vector3(2.4, 0.45, 0.9)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Canape_dossier" type="CSGBox3D" parent="Salon" unique_id=240512195]
+[node name="Canape_dossier" type="CSGBox3D" parent="Salon" unique_id=1871894232]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, 0.6, 3.5)
 use_collision = true
 size = Vector3(2.4, 0.8, 0.2)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Table_basse" type="CSGBox3D" parent="Salon" unique_id=852474085]
+[node name="Table_basse" type="CSGBox3D" parent="Salon" unique_id=659429548]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, 0.2, 1.4)
 use_collision = true
 size = Vector3(1.2, 0.4, 0.7)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Table" type="CSGBox3D" parent="Salon" unique_id=673143658]
+[node name="Table" type="CSGBox3D" parent="Salon" unique_id=995535726]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6, 0.38, -1.8)
 use_collision = true
 size = Vector3(1.4, 0.76, 0.9)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Chaise_1" type="CSGBox3D" parent="Salon" unique_id=1470129480]
+[node name="Chaise_1" type="CSGBox3D" parent="Salon" unique_id=400897574]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.23, -0.9)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Chaise_2" type="CSGBox3D" parent="Salon" unique_id=1648708457]
+[node name="Chaise_2" type="CSGBox3D" parent="Salon" unique_id=44356477]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0.23, -0.9)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Toile_jardin" type="Node3D" parent="Salon" unique_id=124977383]
+[node name="Toile_jardin" type="Node3D" parent="Salon" unique_id=1980208741]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 1.7, -3.98)
 
-[node name="Fond" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=93319883]
+[node name="Fond" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=963359460]
 size = Vector3(1.4, 1, 0.03)
 material = SubResource("StandardMaterial3D_fghto")
 
-[node name="Cadre_haut" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=525871181]
+[node name="Cadre_haut" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=69949866]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54, 0)
 size = Vector3(1.56, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_bas" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=1825361628]
+[node name="Cadre_bas" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=971454484]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.54, 0)
 size = Vector3(1.56, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_g" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=1327255016]
+[node name="Cadre_g" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=2117755316]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.74, 0, 0)
 size = Vector3(0.08, 1, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_d" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=584267951]
+[node name="Cadre_d" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=204203644]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.74, 0, 0)
 size = Vector3(0.08, 1, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Forme_0" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=2125699412]
+[node name="Forme_0" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=641225669]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.325, 0.02)
 size = Vector3(1.4, 0.35, 0.01)
 material = SubResource("StandardMaterial3D_uycdr")
 
-[node name="Forme_1" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=325675717]
+[node name="Forme_1" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=840177266]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0.022)
 size = Vector3(0.42, 0.3, 0.01)
 material = SubResource("StandardMaterial3D_ovyrk")
 
-[node name="Forme_2" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=411452092]
+[node name="Forme_2" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=153278623]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.024)
 size = Vector3(0.504, 0.1, 0.01)
 material = SubResource("StandardMaterial3D_86qir")
 
-[node name="Forme_3" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=1540680162]
+[node name="Forme_3" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=267427381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13, 0.026)
 size = Vector3(0.111999996, 0.14, 0.01)
 material = SubResource("StandardMaterial3D_740as")
 
-[node name="Forme_4" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=1514159331]
+[node name="Forme_4" type="CSGBox3D" parent="Salon/Toile_jardin" unique_id=833388389]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.434, 0.295, 0.028)
 size = Vector3(0.168, 0.15, 0.01)
 material = SubResource("StandardMaterial3D_6vou6")
 
-[node name="Toile_enfant" type="Node3D" parent="Salon" unique_id=534046212]
+[node name="Toile_enfant" type="Node3D" parent="Salon" unique_id=1402343031]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4, 1.8, -3.98)
 
-[node name="Fond" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=1352604716]
+[node name="Fond" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=1678036935]
 size = Vector3(0.9, 1.1, 0.03)
 material = SubResource("StandardMaterial3D_73k8f")
 
-[node name="Cadre_haut" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=1802866959]
+[node name="Cadre_haut" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=265567892]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59000003, 0)
 size = Vector3(1.06, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_bas" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=1398873227]
+[node name="Cadre_bas" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=2093308757]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.59000003, 0)
 size = Vector3(1.06, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_g" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=130189617]
+[node name="Cadre_g" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=1599881967]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48999998, 0, 0)
 size = Vector3(0.08, 1.1, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_d" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=121877024]
+[node name="Cadre_d" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=1287488978]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48999998, 0, 0)
 size = Vector3(0.08, 1.1, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Forme_0" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=226467675]
+[node name="Forme_0" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=644860712]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.107999995, -0.1595, 0.02)
 size = Vector3(0.036, 0.605, 0.01)
 material = SubResource("StandardMaterial3D_848u2")
 
-[node name="Forme_1" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=1914946450]
+[node name="Forme_1" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=40390728]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.117, 0.077, 0.022)
 size = Vector3(0.234, 0.33, 0.01)
 material = SubResource("StandardMaterial3D_o7pqc")
 
-[node name="Forme_2" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=693221227]
+[node name="Forme_2" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=738626050]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.089999996, 0.055, 0.024)
 size = Vector3(0.089999996, 0.11, 0.01)
 material = SubResource("StandardMaterial3D_fghto")
 
-[node name="Forme_3" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=2118222597]
+[node name="Forme_3" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=430873932]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.189, -0.286, 0.026)
 size = Vector3(0.126, 0.352, 0.01)
 material = SubResource("StandardMaterial3D_hcds2")
 
-[node name="Forme_4" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=1548901522]
+[node name="Forme_4" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=948108292]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.189, -0.022, 0.028)
 size = Vector3(0.072, 0.132, 0.01)
 material = SubResource("StandardMaterial3D_qo3ad")
 
-[node name="Forme_5" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=2011257633]
+[node name="Forme_5" type="CSGBox3D" parent="Salon/Toile_enfant" unique_id=849548024]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.072, -0.1815, 0.03)
 size = Vector3(0.107999995, 0.033, 0.01)
 material = SubResource("StandardMaterial3D_848u2")
 
-[node name="Toile_atelier" type="Node3D" parent="Salon" unique_id=1680829569]
+[node name="Toile_atelier" type="Node3D" parent="Salon" unique_id=1753100704]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 8.3, 2, 3.98)
 
-[node name="Fond" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=980970184]
+[node name="Fond" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=946560890]
 size = Vector3(1.6, 0.9, 0.03)
 material = SubResource("StandardMaterial3D_740as")
 
-[node name="Cadre_haut" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=701758408]
+[node name="Cadre_haut" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=16518043]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48999998, 0)
 size = Vector3(1.76, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_bas" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=1778069482]
+[node name="Cadre_bas" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=1117812230]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.48999998, 0)
 size = Vector3(1.76, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_g" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=1431989631]
+[node name="Cadre_g" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=1079909448]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.84000003, 0, 0)
 size = Vector3(0.08, 0.9, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_d" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=394379230]
+[node name="Cadre_d" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=1869546751]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84000003, 0, 0)
 size = Vector3(0.08, 0.9, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Forme_0" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=1764000397]
+[node name="Forme_0" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=2052366]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384, 0.13499999, 0.02)
 size = Vector3(0.512, 0.35999998, 0.01)
 material = SubResource("StandardMaterial3D_rka8q")
 
-[node name="Forme_1" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=973409866]
+[node name="Forme_1" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=2144147738]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264, 0.198, 0.022)
 size = Vector3(0.048, 0.036, 0.01)
 material = SubResource("StandardMaterial3D_rw7x2")
 
-[node name="Forme_2" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=1179139113]
+[node name="Forme_2" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=459050548]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49600002, 0.0585, 0.024)
 size = Vector3(0.032, 0.026999999, 0.01)
 material = SubResource("StandardMaterial3D_rw7x2")
 
-[node name="Forme_3" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=1594873088]
+[node name="Forme_3" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=680325737]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.304, -0.13499999, 0.026)
 size = Vector3(0.512, 0.45, 0.01)
 material = SubResource("StandardMaterial3D_yuqe8")
 
-[node name="Forme_4" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=704806567]
+[node name="Forme_4" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=319547367]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.304, -0.396, 0.028)
 size = Vector3(0.064, 0.107999995, 0.01)
 material = SubResource("StandardMaterial3D_848u2")
 
-[node name="Forme_5" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=990302009]
+[node name="Forme_5" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=326168544]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.120000005, -0.35999998, 0.03)
 size = Vector3(0.08, 0.036, 0.01)
 material = SubResource("StandardMaterial3D_hcds2")
 
-[node name="Forme_6" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=921766677]
+[node name="Forme_6" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=2007187518]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.272, -0.3285, 0.032)
 size = Vector3(0.064, 0.026999999, 0.01)
 material = SubResource("StandardMaterial3D_fghto")
 
-[node name="Forme_7" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=1093694860]
+[node name="Forme_7" type="CSGBox3D" parent="Salon/Toile_atelier" unique_id=438368216]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44, -0.378, 0.034)
 size = Vector3(0.08, 0.036, 0.01)
 material = SubResource("StandardMaterial3D_6vou6")
 
-[node name="Lampe" type="OmniLight3D" parent="Salon" unique_id=1136839882]
+[node name="Lampe" type="OmniLight3D" parent="Salon" unique_id=1590823884]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, 2.8, 0)
 light_energy = 1.2
 shadow_enabled = true
 omni_range = 8.0
 
-[node name="Zone" type="Area3D" parent="Salon" unique_id=761538735]
+[node name="Zone" type="Area3D" parent="Salon" unique_id=1520745378]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, 1.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Salon/Zone" unique_id=2026846218]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Salon/Zone" unique_id=996704035]
 shape = SubResource("BoxShape3D_8dxgb")
 
-[node name="PenseeJardin" type="Node3D" parent="Salon" unique_id=1199116807]
+[node name="PenseeJardin" type="Node3D" parent="Salon" unique_id=1650622230]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 1.7, -3.98)
 script = ExtResource("3_7h2ig")
 texte = "Notre jardin. Avant, la maison était sur Terre."
 distance = 4.5
 angle_max_deg = 15.0
 
-[node name="PenseeEnfant" type="Node3D" parent="Salon" unique_id=1822669546]
+[node name="PenseeEnfant" type="Node3D" parent="Salon" unique_id=1891784673]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4, 1.8, -3.98)
 script = ExtResource("3_7h2ig")
 texte = "C'est moi, petit. Je peignais déjà."
 distance = 4.5
 angle_max_deg = 15.0
 
-[node name="PenseeAtelier" type="Node3D" parent="Salon" unique_id=1284916]
+[node name="PenseeAtelier" type="Node3D" parent="Salon" unique_id=144085024]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, 2, 3.98)
 script = ExtResource("3_7h2ig")
 texte = "Un atelier… Je ne m'en souviens pas."
 distance = 4.5
 angle_max_deg = 15.0
 
-[node name="PenseePorte" type="Node3D" parent="Salon" unique_id=8516267]
+[node name="PenseePorte" type="Node3D" parent="Salon" unique_id=482130308]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.45, 1.2, 0)
 script = ExtResource("3_7h2ig")
 texte = "Cette porte… elle n'était pas là."
@@ -1817,426 +1817,426 @@ distance = 8.0
 angle_max_deg = 25.0
 active = false
 
-[node name="SalleDeBain" type="Node3D" parent="." unique_id=781581946]
+[node name="SalleDeBain" type="Node3D" parent="." unique_id=1027459353]
 
-[node name="Sol" type="CSGBox3D" parent="SalleDeBain" unique_id=1145042289]
+[node name="Sol" type="CSGBox3D" parent="SalleDeBain" unique_id=737491548]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.75, -0.25, 0)
 use_collision = true
 size = Vector3(6.3, 0.5, 6.6)
 material = SubResource("StandardMaterial3D_4j2vk")
 
-[node name="Plafond" type="CSGBox3D" parent="SalleDeBain" unique_id=2024147160]
+[node name="Plafond" type="CSGBox3D" parent="SalleDeBain" unique_id=1439366388]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.75, 3.35, 0)
 use_collision = true
 size = Vector3(6.3, 0.3, 6.6)
 material = SubResource("StandardMaterial3D_rwewh")
 
-[node name="Mur_nord" type="CSGBox3D" parent="SalleDeBain" unique_id=688482017]
+[node name="Mur_nord" type="CSGBox3D" parent="SalleDeBain" unique_id=2061129941]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6, 1.6, -3.15)
 use_collision = true
 size = Vector3(6, 3.2, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_est" type="CSGBox3D" parent="SalleDeBain" unique_id=2134572772]
+[node name="Mur_est" type="CSGBox3D" parent="SalleDeBain" unique_id=1670248441]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.75, 1.6, 0)
 use_collision = true
 size = Vector3(0.3, 3.2, 6.6)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="MurReel" type="CSGBox3D" parent="SalleDeBain" unique_id=880748509]
+[node name="MurReel" type="CSGBox3D" parent="SalleDeBain" unique_id=1491743508]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6, 1.6, 3.15)
 layers = 2
 use_collision = true
 size = Vector3(6, 3.2, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="MurReflet" type="CSGBox3D" parent="SalleDeBain" unique_id=326018667]
+[node name="MurReflet" type="CSGBox3D" parent="SalleDeBain" unique_id=2079876149]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6, 1.6, 3.15)
 layers = 4
 size = Vector3(6, 3.2, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Trou" type="CSGBox3D" parent="SalleDeBain/MurReflet" unique_id=1486167662]
+[node name="Trou" type="CSGBox3D" parent="SalleDeBain/MurReflet" unique_id=1741310177]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, -0.5, 0)
 operation = 2
 size = Vector3(1.2, 2.2, 0.5)
 
-[node name="Passage_sol" type="CSGBox3D" parent="SalleDeBain" unique_id=906366136]
+[node name="Passage_sol" type="CSGBox3D" parent="SalleDeBain" unique_id=999136514]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8, -0.25, 4.8)
 use_collision = true
 size = Vector3(1.8, 0.5, 3)
 material = SubResource("StandardMaterial3D_jkq81")
 
-[node name="Passage_plafond" type="CSGBox3D" parent="SalleDeBain" unique_id=871373945]
+[node name="Passage_plafond" type="CSGBox3D" parent="SalleDeBain" unique_id=717506841]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8, 2.35, 4.8)
 use_collision = true
 size = Vector3(1.8, 0.3, 3)
 material = SubResource("StandardMaterial3D_jkq81")
 
-[node name="Passage_g" type="CSGBox3D" parent="SalleDeBain" unique_id=1552516308]
+[node name="Passage_g" type="CSGBox3D" parent="SalleDeBain" unique_id=1901818930]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.05, 1.1, 4.8)
 use_collision = true
 size = Vector3(0.3, 2.2, 3)
 material = SubResource("StandardMaterial3D_jkq81")
 
-[node name="Passage_d" type="CSGBox3D" parent="SalleDeBain" unique_id=1825818220]
+[node name="Passage_d" type="CSGBox3D" parent="SalleDeBain" unique_id=471411652]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.55, 1.1, 4.8)
 use_collision = true
 size = Vector3(0.3, 2.2, 3)
 material = SubResource("StandardMaterial3D_jkq81")
 
-[node name="Passage_fond" type="CSGBox3D" parent="SalleDeBain" unique_id=1768011924]
+[node name="Passage_fond" type="CSGBox3D" parent="SalleDeBain" unique_id=137003650]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8, 1.1, 6.45)
 use_collision = true
 size = Vector3(1.8, 2.2, 0.3)
 material = SubResource("StandardMaterial3D_jkq81")
 
-[node name="Passage_cadre" type="CSGBox3D" parent="SalleDeBain" unique_id=217491957]
+[node name="Passage_cadre" type="CSGBox3D" parent="SalleDeBain" unique_id=622499008]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8, 1.15, 6.27)
 size = Vector3(0.9, 1.2, 0.06)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Passage_toile" type="CSGBox3D" parent="SalleDeBain" unique_id=296716243]
+[node name="Passage_toile" type="CSGBox3D" parent="SalleDeBain" unique_id=472087766]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8, 1.15, 6.235)
 size = Vector3(0.7, 1, 0.02)
 material = SubResource("StandardMaterial3D_ar3gh")
 
-[node name="Lavabo" type="CSGBox3D" parent="SalleDeBain" unique_id=827429724]
+[node name="Lavabo" type="CSGBox3D" parent="SalleDeBain" unique_id=2124005607]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6, 0.425, -2.75)
 use_collision = true
 size = Vector3(1, 0.85, 0.5)
 material = SubResource("StandardMaterial3D_o8002")
 
-[node name="Miroir_cadre" type="CSGBox3D" parent="SalleDeBain" unique_id=643881743]
+[node name="Miroir_cadre" type="CSGBox3D" parent="SalleDeBain" unique_id=1395132846]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6, 1.85, -2.98)
 size = Vector3(2.6, 2, 0.04)
 material = SubResource("StandardMaterial3D_8xg8x")
 
-[node name="Miroir" type="Node3D" parent="SalleDeBain" unique_id=1949753517]
+[node name="Miroir" type="Node3D" parent="SalleDeBain" unique_id=600091780]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6, 1.85, -2.955)
 script = ExtResource("5_cgj68")
 taille = Vector2(2.4, 1.8)
 
-[node name="Baignoire" type="CSGBox3D" parent="SalleDeBain" unique_id=2087108367]
+[node name="Baignoire" type="CSGBox3D" parent="SalleDeBain" unique_id=2064409996]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.15, 0.3, 0.6)
 use_collision = true
 size = Vector3(0.8, 0.6, 1.9)
 material = SubResource("StandardMaterial3D_o8002")
 
-[node name="Toilettes" type="CSGBox3D" parent="SalleDeBain" unique_id=439737320]
+[node name="Toilettes" type="CSGBox3D" parent="SalleDeBain" unique_id=2143683645]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1, 0.225, -2.6)
 use_collision = true
 size = Vector3(0.4, 0.45, 0.6)
 material = SubResource("StandardMaterial3D_o8002")
 
-[node name="Passage" type="Area3D" parent="SalleDeBain" unique_id=1498507824]
+[node name="Passage" type="Area3D" parent="SalleDeBain" unique_id=987541948]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 16.8, 0, 2.7)
 script = ExtResource("6_ry73i")
 miroir = NodePath("../Miroir")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SalleDeBain/Passage" unique_id=1244827883]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SalleDeBain/Passage" unique_id=648888371]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 shape = SubResource("BoxShape3D_y7ry4")
 
-[node name="Lampe" type="OmniLight3D" parent="SalleDeBain" unique_id=2042594367]
+[node name="Lampe" type="OmniLight3D" parent="SalleDeBain" unique_id=545712123]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6, 2.8, 0.3)
 light_energy = 1.2
 shadow_enabled = true
 omni_range = 7.0
 
-[node name="PenseeMiroir" type="Node3D" parent="SalleDeBain" unique_id=1495334196]
+[node name="PenseeMiroir" type="Node3D" parent="SalleDeBain" unique_id=1480894152]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6, 1.85, -2.955)
 script = ExtResource("3_7h2ig")
 texte = "Ce n'est pas moi… Si. C'est moi, plus vieux."
 distance = 4.0
 angle_max_deg = 15.0
 
-[node name="Galerie" type="Node3D" parent="." unique_id=1559816855]
+[node name="Galerie" type="Node3D" parent="." unique_id=285838361]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 80)
 
-[node name="Sol" type="CSGBox3D" parent="Galerie" unique_id=1163500797]
+[node name="Sol" type="CSGBox3D" parent="Galerie" unique_id=284958363]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 use_collision = true
 size = Vector3(16.6, 0.5, 16.6)
 material = SubResource("StandardMaterial3D_4j2vk")
 
-[node name="Mur_nord" type="CSGBox3D" parent="Galerie" unique_id=952645624]
+[node name="Mur_nord" type="CSGBox3D" parent="Galerie" unique_id=960148834]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -8.150002)
 use_collision = true
 size = Vector3(16, 9, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_sud" type="CSGBox3D" parent="Galerie" unique_id=278401510]
+[node name="Mur_sud" type="CSGBox3D" parent="Galerie" unique_id=1631083077]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 8.150002)
 use_collision = true
 size = Vector3(16, 9, 0.3)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_ouest" type="CSGBox3D" parent="Galerie" unique_id=1109451234]
+[node name="Mur_ouest" type="CSGBox3D" parent="Galerie" unique_id=1145118482]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.15, 4.5, 0)
 use_collision = true
 size = Vector3(0.3, 9, 16.6)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Mur_est" type="CSGBox3D" parent="Galerie" unique_id=845365624]
+[node name="Mur_est" type="CSGBox3D" parent="Galerie" unique_id=301710230]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.15, 4.5, 0)
 use_collision = true
 size = Vector3(0.3, 9, 16.6)
 material = SubResource("StandardMaterial3D_fi83w")
 
-[node name="Balcon" type="CSGBox3D" parent="Galerie" unique_id=1529522322]
+[node name="Balcon" type="CSGBox3D" parent="Galerie" unique_id=310860594]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.85, -7)
 use_collision = true
 size = Vector3(4, 0.3, 2)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Palier" type="CSGBox3D" parent="Galerie" unique_id=218271771]
+[node name="Palier" type="CSGBox3D" parent="Galerie" unique_id=280839340]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.25, 3.85, -6)
 use_collision = true
 size = Vector3(1.5, 0.3, 4)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="Rampe" type="CSGBox3D" parent="Galerie" unique_id=1155768443]
+[node name="Rampe" type="CSGBox3D" parent="Galerie" unique_id=1179685092]
 transform = Transform3D(1, 0, 0, 0, 0.8944272, -0.4472136, 0, 0.4472136, 0.8944272, -7.25, 1.8658359, -0.06708204)
 use_collision = true
 size = Vector3(1.5, 0.3, 8.944272)
 material = SubResource("StandardMaterial3D_2ftrj")
 
-[node name="PorteEntree" type="Node3D" parent="Galerie" unique_id=1636656503]
+[node name="PorteEntree" type="Node3D" parent="Galerie" unique_id=1440654018]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4, -7.970001)
 
-[node name="Panneau" type="CSGBox3D" parent="Galerie/PorteEntree" unique_id=1809401919]
+[node name="Panneau" type="CSGBox3D" parent="Galerie/PorteEntree" unique_id=1553178449]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 size = Vector3(1, 2.4, 0.06)
 material = SubResource("StandardMaterial3D_gba23")
 
-[node name="Montant_g" type="CSGBox3D" parent="Galerie/PorteEntree" unique_id=1953028458]
+[node name="Montant_g" type="CSGBox3D" parent="Galerie/PorteEntree" unique_id=887744754]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57, 1.25, 0.02)
 size = Vector3(0.14, 2.5, 0.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Montant_d" type="CSGBox3D" parent="Galerie/PorteEntree" unique_id=1090911317]
+[node name="Montant_d" type="CSGBox3D" parent="Galerie/PorteEntree" unique_id=1318680310]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57, 1.25, 0.02)
 size = Vector3(0.14, 2.5, 0.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Linteau" type="CSGBox3D" parent="Galerie/PorteEntree" unique_id=1996505558]
+[node name="Linteau" type="CSGBox3D" parent="Galerie/PorteEntree" unique_id=1596976722]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57, 0.02)
 size = Vector3(1.28, 0.14, 0.1)
 material = SubResource("StandardMaterial3D_nr4kj")
 
-[node name="Poignee" type="CSGBox3D" parent="Galerie/PorteEntree" unique_id=1858712891]
+[node name="Poignee" type="CSGBox3D" parent="Galerie/PorteEntree" unique_id=1933719943]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38, 1.05, 0.06)
 size = Vector3(0.12, 0.05, 0.06)
 material = SubResource("StandardMaterial3D_g82sk")
 
-[node name="PorteFin" type="Area3D" parent="Galerie" unique_id=1028268914]
+[node name="PorteFin" type="Area3D" parent="Galerie" unique_id=814853219]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4, -7.5999985)
 script = ExtResource("4_v2pcd")
 destinations = Array[NodePath]([NodePath("../../Chambre/Reveil")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Galerie/PorteFin" unique_id=840358659]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Galerie/PorteFin" unique_id=1217948494]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 shape = SubResource("BoxShape3D_3h60n")
 
-[node name="ToileTournante" type="StaticBody3D" parent="Galerie" unique_id=683013185]
+[node name="ToileTournante" type="StaticBody3D" parent="Galerie" unique_id=484393228]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.97, 1.5, 0)
 script = ExtResource("7_7mpnu")
 piece = NodePath("../../ToilePeinte/Chambre")
 vue = NodePath("../../ToilePeinte/Vue")
 
-[node name="Cadre_haut" type="CSGBox3D" parent="Galerie/ToileTournante" unique_id=2083968166]
+[node name="Cadre_haut" type="CSGBox3D" parent="Galerie/ToileTournante" unique_id=1870540637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 size = Vector3(3, 0.2, 0.12)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Forme_Cadre_haut" type="CollisionShape3D" parent="Galerie/ToileTournante" unique_id=343419205]
+[node name="Forme_Cadre_haut" type="CollisionShape3D" parent="Galerie/ToileTournante" unique_id=329162857]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 shape = SubResource("BoxShape3D_uhh8m")
 
-[node name="Cadre_g" type="CSGBox3D" parent="Galerie/ToileTournante" unique_id=1506548748]
+[node name="Cadre_g" type="CSGBox3D" parent="Galerie/ToileTournante" unique_id=51915545]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, -0.1, 0)
 size = Vector3(0.2, 2.8, 0.12)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Forme_Cadre_g" type="CollisionShape3D" parent="Galerie/ToileTournante" unique_id=1217564450]
+[node name="Forme_Cadre_g" type="CollisionShape3D" parent="Galerie/ToileTournante" unique_id=1507619872]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, -0.1, 0)
 shape = SubResource("BoxShape3D_0sf7q")
 
-[node name="Cadre_d" type="CSGBox3D" parent="Galerie/ToileTournante" unique_id=902066791]
+[node name="Cadre_d" type="CSGBox3D" parent="Galerie/ToileTournante" unique_id=9151446]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, -0.1, 0)
 size = Vector3(0.2, 2.8, 0.12)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Forme_Cadre_d" type="CollisionShape3D" parent="Galerie/ToileTournante" unique_id=651625266]
+[node name="Forme_Cadre_d" type="CollisionShape3D" parent="Galerie/ToileTournante" unique_id=27092774]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, -0.1, 0)
 shape = SubResource("BoxShape3D_jcfqo")
 
-[node name="Manivelle" type="CSGBox3D" parent="Galerie/ToileTournante" unique_id=1087454907]
+[node name="Manivelle" type="CSGBox3D" parent="Galerie/ToileTournante" unique_id=696419218]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62, 0, 0.12)
 size = Vector3(0.12, 0.5, 0.12)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Forme_Manivelle" type="CollisionShape3D" parent="Galerie/ToileTournante" unique_id=1711828722]
+[node name="Forme_Manivelle" type="CollisionShape3D" parent="Galerie/ToileTournante" unique_id=16020399]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62, 0, 0.12)
 shape = SubResource("BoxShape3D_wvgea")
 
-[node name="Manivelle_bras" type="CSGBox3D" parent="Galerie/ToileTournante" unique_id=437196322]
+[node name="Manivelle_bras" type="CSGBox3D" parent="Galerie/ToileTournante" unique_id=1593273888]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62, 0.25, 0.25)
 size = Vector3(0.08, 0.08, 0.3)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Forme_Manivelle_bras" type="CollisionShape3D" parent="Galerie/ToileTournante" unique_id=123412813]
+[node name="Forme_Manivelle_bras" type="CollisionShape3D" parent="Galerie/ToileTournante" unique_id=1700551045]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62, 0.25, 0.25)
 shape = SubResource("BoxShape3D_dej5c")
 
-[node name="EntreeToile" type="Area3D" parent="Galerie" unique_id=755072704]
+[node name="EntreeToile" type="Area3D" parent="Galerie" unique_id=1003118218]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.75, 0, 0)
 script = ExtResource("4_v2pcd")
 destinations = Array[NodePath]([NodePath("../../ToilePeinte/Arrivee")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Galerie/EntreeToile" unique_id=780266992]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Galerie/EntreeToile" unique_id=202391914]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 shape = SubResource("BoxShape3D_2rv1p")
 
-[node name="RetourGalerie" type="Marker3D" parent="Galerie" unique_id=596201670]
+[node name="RetourGalerie" type="Marker3D" parent="Galerie" unique_id=540271376]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6.3, 0, 0)
 
-[node name="Toile_maison" type="Node3D" parent="Galerie" unique_id=445819112]
+[node name="Toile_maison" type="Node3D" parent="Galerie" unique_id=965454251]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.98, 2.6, -3)
 
-[node name="Fond" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=2094853130]
+[node name="Fond" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=406340602]
 size = Vector3(2.4, 1.7, 0.03)
 material = SubResource("StandardMaterial3D_fghto")
 
-[node name="Cadre_haut" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=936418492]
+[node name="Cadre_haut" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=575064810]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89000005, 0)
 size = Vector3(2.5600002, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_bas" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=495487748]
+[node name="Cadre_bas" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=1670738712]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.89000005, 0)
 size = Vector3(2.5600002, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_g" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=405862440]
+[node name="Cadre_g" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=1203710099]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24, 0, 0)
 size = Vector3(0.08, 1.7, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_d" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=922635737]
+[node name="Cadre_d" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=1935871769]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24, 0, 0)
 size = Vector3(0.08, 1.7, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Forme_0" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=768748588]
+[node name="Forme_0" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=852751611]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5525, 0.02)
 size = Vector3(2.4, 0.595, 0.01)
 material = SubResource("StandardMaterial3D_uycdr")
 
-[node name="Forme_1" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=752744138]
+[node name="Forme_1" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=2028878119]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.085, 0.022)
 size = Vector3(0.72, 0.51, 0.01)
 material = SubResource("StandardMaterial3D_ovyrk")
 
-[node name="Forme_2" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=1307387158]
+[node name="Forme_2" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=268456846]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.255, 0.024)
 size = Vector3(0.864, 0.17, 0.01)
 material = SubResource("StandardMaterial3D_86qir")
 
-[node name="Forme_3" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=553648243]
+[node name="Forme_3" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=2146408071]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.221, 0.026)
 size = Vector3(0.192, 0.238, 0.01)
 material = SubResource("StandardMaterial3D_740as")
 
-[node name="Forme_4" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=1252440642]
+[node name="Forme_4" type="CSGBox3D" parent="Galerie/Toile_maison" unique_id=623722792]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.744, 0.5015, 0.028)
 size = Vector3(0.28800002, 0.255, 0.01)
 material = SubResource("StandardMaterial3D_6vou6")
 
-[node name="Toile_atelier" type="Node3D" parent="Galerie" unique_id=1294304225]
+[node name="Toile_atelier" type="Node3D" parent="Galerie" unique_id=794854811]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.98, 2.6, 3)
 
-[node name="Fond" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=420093428]
+[node name="Fond" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=116619446]
 size = Vector3(2.4, 1.4, 0.03)
 material = SubResource("StandardMaterial3D_740as")
 
-[node name="Cadre_haut" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=1779982976]
+[node name="Cadre_haut" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=234069683]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74, 0)
 size = Vector3(2.5600002, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_bas" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=638452138]
+[node name="Cadre_bas" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=693479457]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.74, 0)
 size = Vector3(2.5600002, 0.08, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_g" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=1727027561]
+[node name="Cadre_g" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=1136158215]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24, 0, 0)
 size = Vector3(0.08, 1.4, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Cadre_d" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=1954868594]
+[node name="Cadre_d" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=323038450]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24, 0, 0)
 size = Vector3(0.08, 1.4, 0.06)
 material = SubResource("StandardMaterial3D_x4pfq")
 
-[node name="Forme_0" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=1783758234]
+[node name="Forme_0" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=107433696]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57600003, 0.21, 0.02)
 size = Vector3(0.768, 0.56, 0.01)
 material = SubResource("StandardMaterial3D_rka8q")
 
-[node name="Forme_1" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=1530969793]
+[node name="Forme_1" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=1569713228]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39600003, 0.308, 0.022)
 size = Vector3(0.072000004, 0.055999998, 0.01)
 material = SubResource("StandardMaterial3D_rw7x2")
 
-[node name="Forme_2" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=376398203]
+[node name="Forme_2" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=497775498]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.744, 0.091, 0.024)
 size = Vector3(0.048, 0.042, 0.01)
 material = SubResource("StandardMaterial3D_rw7x2")
 
-[node name="Forme_3" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=1854945012]
+[node name="Forme_3" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=78404310]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45600003, -0.21, 0.026)
 size = Vector3(0.768, 0.7, 0.01)
 material = SubResource("StandardMaterial3D_yuqe8")
 
-[node name="Forme_4" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=106910552]
+[node name="Forme_4" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=2007890436]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45600003, -0.616, 0.028)
 size = Vector3(0.096, 0.168, 0.01)
 material = SubResource("StandardMaterial3D_848u2")
 
-[node name="Forme_5" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=1211641705]
+[node name="Forme_5" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=1955639983]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, -0.56, 0.03)
 size = Vector3(0.120000005, 0.055999998, 0.01)
 material = SubResource("StandardMaterial3D_hcds2")
 
-[node name="Forme_6" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=1569102212]
+[node name="Forme_6" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=1640433615]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.40800002, -0.511, 0.032)
 size = Vector3(0.096, 0.042, 0.01)
 material = SubResource("StandardMaterial3D_fghto")
 
-[node name="Forme_7" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=115868509]
+[node name="Forme_7" type="CSGBox3D" parent="Galerie/Toile_atelier" unique_id=1495222193]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66, -0.588, 0.034)
 size = Vector3(0.120000005, 0.055999998, 0.01)
 material = SubResource("StandardMaterial3D_6vou6")
 
-[node name="Lampe_nord" type="OmniLight3D" parent="Galerie" unique_id=151670463]
+[node name="Lampe_nord" type="OmniLight3D" parent="Galerie" unique_id=2122198666]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -4)
 light_energy = 2.0
 shadow_enabled = true
 omni_range = 14.0
 
-[node name="Lampe_sud" type="OmniLight3D" parent="Galerie" unique_id=1248337701]
+[node name="Lampe_sud" type="OmniLight3D" parent="Galerie" unique_id=512849626]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 4)
 light_energy = 2.0
 shadow_enabled = true
 omni_range = 14.0
 
-[node name="Arrivee" type="Marker3D" parent="Galerie" unique_id=364957612]
+[node name="Arrivee" type="Marker3D" parent="Galerie" unique_id=628993121]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6)
 
-[node name="PenseeArrivee" type="Node3D" parent="Galerie" unique_id=1600743197]
+[node name="PenseeArrivee" type="Node3D" parent="Galerie" unique_id=1793898428]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6)
 script = ExtResource("3_7h2ig")
 texte = "Je suis… dans le tableau ?"
@@ -2244,107 +2244,107 @@ regard = false
 distance = 2.0
 angle_max_deg = 0.0
 
-[node name="PenseePorte" type="Node3D" parent="Galerie" unique_id=1410839459]
+[node name="PenseePorte" type="Node3D" parent="Galerie" unique_id=261795050]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 5.2, -7.970001)
 script = ExtResource("3_7h2ig")
 texte = "La porte d'entrée. Là-haut."
 distance = 18.0
 angle_max_deg = 12.0
 
-[node name="PenseeToile" type="Node3D" parent="Galerie" unique_id=748888140]
+[node name="PenseeToile" type="Node3D" parent="Galerie" unique_id=282509387]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.97, 1.5, 0)
 script = ExtResource("3_7h2ig")
 texte = "Ma chambre d'enfant… Tout y est en couleurs."
 angle_max_deg = 15.0
 
-[node name="ToilePeinte" type="Node3D" parent="." unique_id=1353729940]
+[node name="ToilePeinte" type="Node3D" parent="." unique_id=1976397775]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 3, 80)
 
-[node name="Chambre" type="Node3D" parent="ToilePeinte" unique_id=791800762]
+[node name="Chambre" type="Node3D" parent="ToilePeinte" unique_id=890223858]
 
-[node name="Sol" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1294702310]
+[node name="Sol" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=203119774]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.15, 0)
 use_collision = true
 size = Vector3(6.6, 0.3, 6)
 material = SubResource("StandardMaterial3D_jdiyj")
 
-[node name="Plafond" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1698370597]
+[node name="Plafond" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1664927134]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.15, 0)
 use_collision = true
 size = Vector3(6.6, 0.3, 6)
 material = SubResource("StandardMaterial3D_chr6b")
 
-[node name="Mur_g" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1772017569]
+[node name="Mur_g" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1881005230]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.15, 0, 0)
 use_collision = true
 size = Vector3(0.3, 6, 6)
 material = SubResource("StandardMaterial3D_f4vp1")
 
-[node name="Mur_d" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1413165394]
+[node name="Mur_d" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1521124817]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15, 0, 0)
 use_collision = true
 size = Vector3(0.3, 6, 6)
 material = SubResource("StandardMaterial3D_f4vp1")
 
-[node name="Mur_fond" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1390157889]
+[node name="Mur_fond" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1386751998]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.15)
 use_collision = true
 size = Vector3(6.6, 6.6, 0.3)
 material = SubResource("StandardMaterial3D_ub6ji")
 
-[node name="Lit" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=625139953]
+[node name="Lit" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1039077495]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, -2.8, -1.6)
 use_collision = true
 size = Vector3(1, 0.4, 1.8)
 material = SubResource("StandardMaterial3D_tjwip")
 
-[node name="Lit_drap" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=223311634]
+[node name="Lit_drap" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1216494758]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, -2.55, -1.7)
 size = Vector3(0.9, 0.1, 1.5)
 material = SubResource("StandardMaterial3D_xhjno")
 
-[node name="Fenetre" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1919434980]
+[node name="Fenetre" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=64061306]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.97, 0.5, 0)
 size = Vector3(0.05, 1.2, 1.4)
 material = SubResource("StandardMaterial3D_fghto")
 
-[node name="Fenetre_soleil" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1413469223]
+[node name="Fenetre_soleil" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1267971655]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 0.8, 0.3)
 size = Vector3(0.02, 0.3, 0.3)
 material = SubResource("StandardMaterial3D_6vou6")
 
-[node name="Etagere" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=725555559]
+[node name="Etagere" type="CSGBox3D" parent="ToilePeinte/Chambre" unique_id=1305619304]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 2.2, 0)
 use_collision = true
 size = Vector3(0.6, 0.1, 1.4)
 material = SubResource("StandardMaterial3D_848u2")
 
-[node name="Cube" type="RigidBody3D" parent="ToilePeinte/Chambre" unique_id=485422886 instance=ExtResource("8_fqd6h")]
+[node name="Cube" type="RigidBody3D" parent="ToilePeinte/Chambre" unique_id=328137153 instance=ExtResource("8_fqd6h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 2.5, 0)
 freeze = true
 script = ExtResource("9_j5ypy")
 
-[node name="Lampe" type="OmniLight3D" parent="ToilePeinte" unique_id=1483115114]
+[node name="Lampe" type="OmniLight3D" parent="ToilePeinte" unique_id=204974648]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 light_energy = 1.2
 omni_range = 9.0
 
-[node name="Arrivee" type="Marker3D" parent="ToilePeinte" unique_id=535023135]
+[node name="Arrivee" type="Marker3D" parent="ToilePeinte" unique_id=269949722]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 1.199997)
 
-[node name="Sortie" type="Area3D" parent="ToilePeinte" unique_id=383072501]
+[node name="Sortie" type="Area3D" parent="ToilePeinte" unique_id=160148103]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -3, 2.5999985)
 script = ExtResource("4_v2pcd")
 destinations = Array[NodePath]([NodePath("../../Galerie/RetourGalerie")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ToilePeinte/Sortie" unique_id=1184098598]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToilePeinte/Sortie" unique_id=199431043]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 shape = SubResource("BoxShape3D_83jax")
 
-[node name="Vue" type="Marker3D" parent="ToilePeinte" unique_id=344097017]
+[node name="Vue" type="Marker3D" parent="ToilePeinte" unique_id=1582215094]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.284444)
 
-[node name="PenseeArrivee" type="Node3D" parent="ToilePeinte" unique_id=102287970]
+[node name="PenseeArrivee" type="Node3D" parent="ToilePeinte" unique_id=1319062822]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 1.199997)
 script = ExtResource("3_7h2ig")
 texte = "C'est peint… Tout est peint."
@@ -2352,13 +2352,13 @@ regard = false
 distance = 2.0
 angle_max_deg = 0.0
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=1786265253 instance=ExtResource("10_uv8i4")]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1965834285 instance=ExtResource("10_uv8i4")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.2, 0, 7.6)
 script = ExtResource("11_klisg")
 
-[node name="Interface" type="CanvasLayer" parent="." unique_id=1411363873]
+[node name="Interface" type="CanvasLayer" parent="." unique_id=1370699502]
 
-[node name="Viseur" type="Label" parent="Interface" unique_id=1080242847]
+[node name="Viseur" type="Label" parent="Interface" unique_id=518285844]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -2373,19 +2373,19 @@ text = "·"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ChuteToiles" type="Control" parent="Interface" unique_id=470644585]
+[node name="ChuteToiles" type="Control" parent="Interface" unique_id=207738441]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("12_6kuml")
 
-[node name="Noir" type="ColorRect" parent="Interface" unique_id=1825780644]
+[node name="Noir" type="ColorRect" parent="Interface" unique_id=757611439]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Message" type="Label" parent="Interface" unique_id=1947978425]
+[node name="Message" type="Label" parent="Interface" unique_id=1387710598]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

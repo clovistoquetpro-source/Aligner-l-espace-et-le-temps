@@ -22,6 +22,7 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 | Sauter | Espace | Espace |
 | Prendre ou poser un objet (vise loin pour l'agrandir, près pour le rétrécir), tourner une toile | E | E |
 | Basculer d'époque | Tab ou clic droit | Tab ou clic droit |
+| Fermer les yeux (en restant appuyé) | F | F |
 | Libérer la souris | Échap | Échap |
 
 ## Tests
@@ -33,6 +34,12 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 `scenes/illusions.tscn` est le niveau 1 de la nouvelle direction, en formes simples (fiche : `docs/superpowers/specs/2026-10-28-direction-illusions-design.md`). On se réveille, on veut sortir, et on passe par le couloir sans fin, le miroir de la salle de bain, la chute dans les toiles et la galerie. Il est construit par `tools/constructeur_illusions.gd` :
 `godot --headless --path . -s res://tools/construire_illusions.gd`.
 Tab n'y fait rien : il n'y a pas d'époques. E sert aussi à tourner certaines toiles, en visant leur cadre.
+
+## Le niveau 2 : l'enfance
+
+`scenes/enfance.tscn`, en formes simples : la cour de récré, l'anniversaire vide et le grenier. On y arrive par la toile de l'enfant, au salon, une fois le niveau 1 fini ; à la fin, on revient dans la maison des étoiles, abîmée. Il est construit par `tools/constructeur_enfance.gd` :
+`godot --headless --path . -s res://tools/construire_enfance.gd`.
+Pour l'essayer sans refaire le niveau 1, ouvre `scenes/enfance.tscn` dans Godot et appuie sur **F6**.
 
 ## Le niveau « La maison »
 

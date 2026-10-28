@@ -11,6 +11,8 @@ const HOLD_DIST := 1.5
 const PICK_DIST := 4.0
 
 var anchor: Transform3D
+## Multiplie la vitesse de marche (la peur ralentit Thomas).
+var facteur_vitesse := 1.0
 var held: RigidBody3D = null
 ## Taille à l'écran de l'objet perspectif porté (taille / distance).
 var _ratio := 0.0
@@ -106,8 +108,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP
 	var input := Input.get_vector("gauche", "droite", "avancer", "reculer")
 	var dir := wish_direction(input, rotation.y)
-	velocity.x = dir.x * SPEED
-	velocity.z = dir.z * SPEED
+	velocity.x = dir.x * SPEED * facteur_vitesse
+	velocity.z = dir.z * SPEED * facteur_vitesse
 	move_and_slide()
 	_suivre_objet()
 
