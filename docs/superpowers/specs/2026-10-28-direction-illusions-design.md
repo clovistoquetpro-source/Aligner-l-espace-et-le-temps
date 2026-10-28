@@ -45,13 +45,24 @@ Chaque épreuve doit avoir une raison d'être dans cette histoire.
 
 ## Idées d'épreuves (à creuser)
 
-1. **Le couloir sans fin** (clo). On court dans un couloir, on a l'impression d'avancer, mais on reste toujours au même endroit. C'est un cul-de-sac et seulement ça : on n'en sort pas par une astuce. Le seul moyen est de faire demi-tour. Son rôle : la sensation pure, une salle du musée qu'on visite pour le malaise, sans rien à résoudre. Une musique angoissante l'accompagne.
+1. **Le couloir sans fin** (clo). On court dans un couloir, on a l'impression d'avancer, mais on reste toujours au même endroit. C'est un cul-de-sac et seulement ça : on n'en sort pas par une astuce. Le seul moyen est de faire demi-tour. Son rôle : la sensation pure, une salle du musée qu'on visite pour le malaise, sans rien à résoudre. D'abord prévu avec une musique angoissante, mais clo ne veut aucun son dans le prototype : l'angoisse passe par l'image.
 2. **Le passage qui n'existe que dans le reflet** (clo). L'image est le reflet d'un miroir vertical, accroché au mur : il montre un passage, absent de la pièce réelle. On fonce vers ce que montre le reflet, pas vers ce qu'on voit. Comme un miroir montre ce qui est derrière soi, le passage est dans le mur opposé au miroir : il faut courir à reculons vers lui, les yeux fixés sur le miroir, avec la gauche et la droite inversées. Quand on traverse le mur, l'animation est une chute dans les toiles : on tombe à travers une suite de tableaux encadrés, chacun plus petit que le précédent (des toiles dans des toiles), avant d'atterrir dans la salle suivante. Si on fonce dans le mur à cet endroit, une animation hallucinogène se lance et on se retrouve dans la suite. Elle vient juste après le couloir sans fin : sans rien dire, le couloir a appris au joueur que l'espace ment ici. Ses yeux le trompent, donc l'image dit peut-être vrai, et il ose foncer.
 3. **La toile qui se contient**. Dans la maison, une toile montre la maison elle-même, avec toi dedans, en petit. Ce que tu changes dans la petite change la grande, et inversement. On s'en sert pour ouvrir une porte inaccessible. clo la trouve plus technique et élaborée : à garder.
 4. **Tourner le tableau**. De l'extérieur, on peut tourner une toile accrochée au mur. À l'intérieur, la gravité tourne avec elle, et le mur devient le sol. Mais le peintre y a peint un escalier qui ne marche que dans un sens.
 
 ## Prochaines étapes
 
-1. Continuer le brainstorming, épreuve par épreuve, en commençant par le couloir sans fin.
-2. Prototype gris de la première épreuve retenue, que clo teste avant toute décision de niveau.
+1. clo teste le prototype gris des deux premières salles (voir plus bas).
+2. Continuer le brainstorming avec ses retours : la toile qui se contient, tourner le tableau, de nouvelles idées.
 3. Repenser la direction artistique de la maison dans les étoiles.
+
+## Le prototype gris (2026-10-28)
+
+`scenes/illusions.tscn`, construit par `tools/constructeur_illusions.gd`. F5 le lance. Tout est gris, sans décor ni son, et aucun message ne guide le joueur.
+
+- **Le hall** : une salle de 8 × 8 m, avec une fenêtre sur les étoiles et l'entrée du couloir en face du joueur.
+- **Le couloir sans fin** : 16 tronçons identiques, avec des piliers et des cadres vides qui défilent. Au 7e tronçon, le joueur est ramené 3 tronçons en arrière sans s'en apercevoir. Seule sa lanterne l'éclaire, le fond reste noir. Plus il y reste, plus le champ de vision s'élargit : le couloir s'étire (au plus fort après 25 s). Demi-tour, et on revient au hall.
+- **La porte dans le dos** (ajout à valider) : la salle du miroir est murée au début. Après un passage dans le couloir, une ouverture apparaît dans le hall, mais seulement quand le joueur lui tourne le dos. Le couloir passe ainsi en premier.
+- **La salle du miroir** : un miroir de 3 × 2,4 m au nord. Dans le reflet, le mur sud a un passage, décalé de 2 m vers l'est, avec au fond une toile lumineuse. En vrai, le mur est plein. On voit son propre corps (une capsule grise) seulement dans le miroir.
+- **Le passage** : on le franchit en reculant vers lui à au moins 1,5 m/s, les yeux à moins de 35° du miroir. En regardant le mur, on se cogne.
+- **La chute dans les toiles** : 4 s de tableaux encadrés, chacun à 60 % du précédent, qui tournent en s'enfonçant. On atterrit dans une petite salle fermée, la « suite », avec un message de fin de test.

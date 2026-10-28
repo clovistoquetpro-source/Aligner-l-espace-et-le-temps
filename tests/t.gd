@@ -19,7 +19,7 @@ static func eq(a: Variant, b: Variant, msg := "") -> void:
 
 static func proche(a: Variant, b: Variant, msg := "", eps := 0.001) -> void:
 	var ecart: float
-	if a is Vector3:
+	if a is Vector3 or a is Vector2:
 		ecart = (a - b).length()
 	else:
 		ecart = absf(a - b)

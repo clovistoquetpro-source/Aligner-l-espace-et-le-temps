@@ -10,7 +10,7 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 2. Récupère le dépôt avec [GitHub Desktop](https://desktop.github.com/) : **File → Clone repository**, puis `Aligner-l-espace-et-le-temps`. Ensuite, à chaque nouveauté, clique sur **Fetch origin**, puis sur **Pull origin** s'il apparaît.
    Pour essayer une nouveauté pas encore acceptée (une pull request), choisis sa branche dans le menu **Current branch** en haut (par exemple `prototype-maison`).
 3. Dans Godot, clique sur **Importer**, choisis le fichier `project.godot` du dossier, puis **Importer et modifier**.
-4. Appuie sur **F5** pour jouer.
+4. Appuie sur **F5** pour jouer. F5 lance le prototype gris du musée des illusions (voir plus bas).
 
 ## Touches
 
@@ -28,6 +28,12 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 
 `./run_tests.sh` (il faut la commande `godot` dans le PATH, ou la variable `GODOT`).
 
+## Le prototype des illusions
+
+`scenes/illusions.tscn` est le prototype gris de la nouvelle direction (fiche : `docs/superpowers/specs/2026-10-28-direction-illusions-design.md`) : le couloir sans fin, puis la salle du miroir et la chute dans les toiles. Il est construit par `tools/constructeur_illusions.gd` :
+`godot --headless --path . -s res://tools/construire_illusions.gd`.
+Tab n'y fait rien : il n'y a pas d'époques.
+
 ## Le niveau « La maison »
 
 `scenes/maison.tscn` est construit par le code de `tools/constructeur_maison.gd` :
@@ -38,6 +44,7 @@ Si tu retouches la maison dans l'éditeur Godot, ne relance plus cette commande 
 
 `scenes/egypte.tscn` est construit par `tools/constructeur_egypte.gd` :
 `godot --headless --path . -s res://tools/construire_egypte.gd`.
+Pour essayer la maison, ouvre `scenes/maison.tscn` dans Godot et appuie sur **F6**.
 Pour essayer l'Égypte sans passer par la maison, ouvre `scenes/egypte.tscn` dans Godot et appuie sur **F6** (lancer la scène courante).
 Dans le jeu, on y arrive par le fond du jardin de la maison : passe le portail en regardant l'obélisque qui flotte derrière.
 
