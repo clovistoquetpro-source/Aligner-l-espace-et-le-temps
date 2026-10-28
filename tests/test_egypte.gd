@@ -271,6 +271,41 @@ func test_on_peut_basculer_avant_les_sacs() -> void:
 	T.ok(_peut_basculer(n, (t5.end.z + b.end.z) / 2), "avant les sacs B (vers l'Antiquité)")
 
 
+## Le joueur monte la rampe au clavier, de son pied à la terrasse, en
+## basculant aux bons endroits : 1942 pour les trous, l'Antiquité pour les sacs.
+func test_traversee_de_la_rampe_au_clavier() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	var t3 := _aabb(n.get_node("Rampe/Troncon3"))
+	var t5 := _aabb(n.get_node("Rampe/Troncon5"))
+	var terrasse := _aabb(n.get_node("Rampe/Terrasse"))
+	var a := _sacs(n, "SacsA")
+	var b := _sacs(n, "SacsB")
+	var etapes := [
+		[(t3.end.z + a.end.z) / 2, TempsScript.Epoque.PASSE],
+		[(a.position.z + t3.position.z) / 2, TempsScript.Epoque.PRESENT],
+		[(t5.end.z + b.end.z) / 2, TempsScript.Epoque.PASSE],
+	]
+	j.teleport(Transform3D(Basis(), Vector3(0, 0, -15)))
+	await tree.physics_frame
+	T.ok(Temps.basculer(j), "au pied de la rampe, on passe en 1942")
+	Input.action_press("avancer")
+	var arrive := false
+	for i in 900:
+		await tree.physics_frame
+		var z := j.global_position.z
+		if not etapes.is_empty() and z < etapes[0][0]:
+			T.ok(Temps.basculer(j), "bascule en z = %.1f" % z)
+			T.eq(Temps.courante, etapes[0][1], "époque après la bascule en z = %.1f" % z)
+			etapes.pop_front()
+		if z < terrasse.end.z - 1.0:
+			arrive = true
+			break
+	Input.action_release("avancer")
+	T.ok(arrive, "on arrive sur la terrasse (z = %.1f, y = %.1f)" % [j.global_position.z, j.global_position.y])
+	T.ok(j.global_position.y > 7.8, "à 8 m de haut")
+
+
 func test_chute_sur_le_sable() -> void:
 	var n: Node3D = await _charger()
 	var sol: Node = n.get_node("Sol")
