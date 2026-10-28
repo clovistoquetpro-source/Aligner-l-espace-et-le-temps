@@ -46,7 +46,7 @@ Chaque épreuve doit avoir une raison d'être dans cette histoire.
 ## Idées d'épreuves (à creuser)
 
 1. **Le couloir sans fin** (clo). On court dans un couloir, on a l'impression d'avancer, mais on reste toujours au même endroit. C'est un cul-de-sac et seulement ça : on n'en sort pas par une astuce. Le seul moyen est de faire demi-tour. Son rôle : la sensation pure, une salle du musée qu'on visite pour le malaise, sans rien à résoudre. Une musique angoissante l'accompagne.
-2. **Le passage qui n'existe que sur l'image** (clo). Une image de la pièce montre un passage, absent de la pièce réelle. Si on fonce dans le mur à cet endroit, une animation hallucinogène se lance et on se retrouve dans la suite.
+2. **Le passage qui n'existe que sur l'image** (clo). Une image de la pièce montre un passage, absent de la pièce réelle. Si on fonce dans le mur à cet endroit, une animation hallucinogène se lance et on se retrouve dans la suite. Elle vient juste après le couloir sans fin : sans rien dire, le couloir a appris au joueur que l'espace ment ici. Ses yeux le trompent, donc l'image dit peut-être vrai, et il ose foncer.
 3. **La toile qui se contient**. Dans la maison, une toile montre la maison elle-même, avec toi dedans, en petit. Ce que tu changes dans la petite change la grande, et inversement. On s'en sert pour ouvrir une porte inaccessible. clo la trouve plus technique et élaborée : à garder.
 4. **Tourner le tableau**. De l'extérieur, on peut tourner une toile accrochée au mur. À l'intérieur, la gravité tourne avec elle, et le mur devient le sol. Mais le peintre y a peint un escalier qui ne marche que dans un sens.
 
