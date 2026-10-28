@@ -528,3 +528,155 @@ func test_salle_fermee() -> void:
 		if _fuite(espace, depart + Vector3(0, 1, 0), Vector3.UP, porte):
 			fuites.append("%s vers le haut" % depart)
 	T.ok(fuites.is_empty(), "pas d'autre sortie (%d fuites : %s)" % [fuites.size(), ", ".join(fuites.slice(0, 6))])
+
+
+# --- Énigme 6 : la pyramide --------------------------------------------------------
+
+const FIN_TEXTE := "Époque réparée ! Bientôt : le château…"
+
+
+func _message(n: Node3D) -> String:
+	return (n.get_node("Interface/Message") as Label).text
+
+
+## Pose le joueur sur la tête du sphinx et le fait regarder la pyramide.
+func _au_point_de_vue(n: Node3D) -> Player:
+	var j: Player = n.get_node("Player")
+	var vue: Node3D = n.get_node("Chantier/PointDeVue")
+	j.teleport(Transform3D(Basis(), vue.global_position - Vector3(0, 1.6, 0)))
+	j.velocity = Vector3.ZERO
+	O.viser(j, vue.global_position - vue.global_basis.z)
+	for i in 4:
+		await tree.physics_frame
+	return j
+
+
+## Pose le joueur dans le passage de la fin.
+func _dans_la_fin(n: Node3D, j: Player) -> void:
+	var fin: Node3D = n.get_node("Chantier/Fin")
+	j.teleport(Transform3D(Basis(), fin.global_position))
+	j.velocity = Vector3.ZERO
+	for i in 4:
+		await tree.physics_frame
+
+
+func test_on_monte_sur_le_sphinx() -> void:
+	var n: Node3D = await _charger()
+	var escalier: Node3D = n.get_node("Chantier/EscalierSphinx")
+	var vue: Node3D = n.get_node("Chantier/PointDeVue")
+	var pied := vue.global_position - Vector3(0, 1.6, 0)
+	# Le long de l'escalier, puis tout droit jusqu'au point de vue : une montée
+	# sans marche, puis un palier à la hauteur de la tête.
+	var points: Array[Vector3] = []
+	var haut := escalier.global_transform * Vector3(0, 0, -20)
+	for k in 60:
+		var p := escalier.global_transform * Vector3(0, 0, 0.5 - 0.25 * k)
+		var sol: Dictionary = _sous(n, p.x, p.z)
+		if not sol.is_empty() and sol.position.y > pied.y - 0.05:
+			haut = p
+			break
+		points.append(p)
+	var plat := Vector3(pied.x - haut.x, 0, pied.z - haut.z)
+	for k in int(plat.length() / 0.25) + 1:
+		points.append(haut + plat.normalized() * 0.25 * k)
+	var y_avant := 0.0
+	var marches: Array[String] = []
+	for p in points:
+		var sol: Dictionary = _sous(n, p.x, p.z)
+		var y: float = sol.position.y if not sol.is_empty() else -INF
+		if y - y_avant > 0.2 or y < y_avant - 0.05:
+			marches.append("%s : %.2f → %.2f" % [p, y_avant, y])
+		y_avant = y
+	T.ok(marches.is_empty(), "montée sans marche jusqu'à la tête : %s" % ", ".join(marches.slice(0, 4)))
+	T.ok(absf(y_avant - pied.y) < 0.05, "on arrive au point de vue (%.2f)" % y_avant)
+	T.ok(vue.global_position.z > 15.0 and absf(vue.global_position.x) < 1.0, "le sphinx est au sud du chantier")
+
+
+func test_chaque_degre_a_sa_zone() -> void:
+	var n: Node3D = await _charger()
+	var pyramide: Alignement = n.get_node("Chantier/Pyramide")
+	var vue: Node3D = n.get_node("Chantier/PointDeVue")
+	var hauteurs := {}
+	var hors_rayon: Array[String] = []
+	for b in pyramide.get_children():
+		if not b is CSGShape3D:
+			continue
+		var image: Vector3 = b.get_meta("image")
+		var zone: String = b.get_meta("zone", "")
+		if not hauteurs.has(zone):
+			hauteurs[zone] = []
+		hauteurs[zone].append(image.y)
+		var d := rad_to_deg((b.global_position - vue.global_position).angle_to(image - vue.global_position))
+		if d > 0.1:
+			hors_rayon.append(b.name)
+		T.ok(_aabb(b).position.y > 0.2, "%s flotte au-dessus du sol" % b.name)
+	T.eq(hauteurs.size(), 4, "quatre zones")
+	for zone: String in Chantier.ZONES:
+		T.eq(hauteurs.get(zone, []).size(), 10, "10 blocs pour %s" % zone)
+	for i in 3:
+		var bas: Array = hauteurs.get(Chantier.ZONES[i], [0.0])
+		var dessus: Array = hauteurs.get(Chantier.ZONES[i + 1], [0.0])
+		T.ok(bas.max() < dessus.min(), "%s est sous %s" % [Chantier.ZONES[i], Chantier.ZONES[i + 1]])
+	T.ok(hors_rayon.is_empty(), "chaque bloc est sur son rayon : %s" % ", ".join(hors_rayon))
+
+
+func test_pyramide_incomplete() -> void:
+	var n: Node3D = await _charger()
+	var nuage: Chantier = n.get_node("Chantier/Nuage")
+	for zone in ["carriere", "rampe", "camp"]:
+		nuage.zone_reussie(zone)
+	var j := await _au_point_de_vue(n)
+	T.eq(_message(n), "Il manque encore des blocs…", "au belvédère avec 3 groupes")
+	var pyramide: Alignement = n.get_node("Chantier/Pyramide")
+	pyramide.verifier(j.camera)
+	T.ok(not pyramide.est_resolu, "pas d'alignement avec 3 groupes")
+	T.ok(not (n.get_node("Chantier/PyramideSolide") as CSGShape3D).visible, "pas encore de pyramide")
+	await _dans_la_fin(n, j)
+	T.ok(_message(n) != FIN_TEXTE, "la fin ne marche pas avant la pyramide")
+
+
+func test_parcours_complet() -> void:
+	var n: Node3D = await _charger()
+	n.set("duree_recollage", 0.05)
+	n.set("duree_porte", 0.05)
+	var nuage: Chantier = n.get_node("Chantier/Nuage")
+	nuage.duree_vol = 0.05
+	var j: Player = n.get_node("Player")
+	for g in ["Carriere", "Rampe", "Camp", "Temple"]:
+		(n.get_node(g + "/Cartouche") as Cartouche)._corps_entre(j)
+	T.eq(nuage.revenus(), 4, "les 4 groupes reviennent")
+	T.eq(_message(n), "Un groupe de blocs rejoint la pyramide ! (4/4)", "message du 4e groupe")
+	await tree.create_timer(0.3).timeout
+	T.ok(nuage.est_complet(), "le nuage est complet")
+	j = await _au_point_de_vue(n)
+	var pyramide: Alignement = n.get_node("Chantier/Pyramide")
+	pyramide.verifier(j.camera)
+	T.ok(pyramide.est_resolu, "vue du sphinx, la pyramide est alignée")
+	await tree.create_timer(0.5).timeout
+	var solide: CSGShape3D = n.get_node("Chantier/PyramideSolide")
+	T.ok(solide.visible and solide.use_collision, "la pyramide est visible et solide")
+	T.ok(_bloque(n, Vector3(5, 1, 12), Vector3.FORWARD, 8), "on bute sur la pyramide")
+	T.ok(not _bloque(n, Vector3(0, 1, 12), Vector3.FORWARD, 6), "la porte est ouverte")
+	T.eq(_message(n), "La réalité se recolle…", "message de la pyramide")
+	await _dans_la_fin(n, j)
+	T.eq(_message(n), FIN_TEXTE, "message de fin")
+
+
+func test_la_pyramide_n_enferme_pas_le_joueur() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	for p in [Vector3(3, 0.06, -3), Vector3(-6, 2.56, 1)]:
+		j.teleport(Transform3D(Basis(), p))
+		n.call("_pyramide_solide")
+		await tree.physics_frame
+		await tree.physics_frame
+		T.ok(j.global_position.z > 8.3 and j.global_position.y < 0.5, "en %s : posé devant la pyramide (%s)" % [p, j.global_position])
+		T.ok(not _coince(n, j, j.global_position), "en %s : le joueur n'est pas coincé" % p)
+
+
+func test_messages_des_enigmes() -> void:
+	var n: Node3D = await _charger()
+	(n.get_node("Carriere/Spinosaure") as Spinosaure).renifle.emit()
+	T.eq(_message(n), "Trop petit…", "le spinosaure renifle")
+	(n.get_node("Camp/Sentinelle") as Sentinelle).refuse.emit()
+	T.eq(_message(n), "Halte ! Le mot de passe ?", "la sentinelle refuse")

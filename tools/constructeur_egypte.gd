@@ -17,6 +17,13 @@ const DEPART := Vector3(0, 0, 70)
 ## Côté des caisses de Toon Shooter (Crate.gltf), en mètres.
 const CAISSE := 0.79
 const SOLEIL := Vector3(-25, -30, 0)
+## La pyramide : posée sur le socle (6 cm), 4 degrés de 2,5 m (demi-largeurs).
+const SOCLE := 0.06
+const DEGRES := [8.0, 6.0, 4.0, 2.0]
+const HAUTEUR_DEGRE := 2.5
+## L'œil du joueur debout sur la tête du sphinx, et ce qu'il regarde.
+const OEIL_SPHINX := Vector3(0, 6.8, 20)
+const CENTRE_PYRAMIDE := Vector3(0, 4.5, 5)
 
 
 func construire() -> int:
@@ -809,5 +816,98 @@ func _anneau(s: Node3D, pos: Vector3, interieur: float, exterieur: float, couleu
 	return _ajouter(s, a, "Forme%d" % s.get_child_count())
 
 
+## Énigme 6 : au centre, le socle de la pyramide et le nuage de blocs. Vu
+## de la tête du sphinx (au sud), le nuage complet forme une pyramide à
+## 4 degrés ; elle devient alors solide, et sa porte mène à la fin.
 func _chantier() -> void:
-	_groupe("Chantier")
+	var g := _groupe("Chantier")
+	_boite(g, "Socle", Vector3(0, SOCLE / 2, 0), Vector3(20, SOCLE, 20), "pierre_fonce")
+	for i in 3:
+		var coin := Vector3(-9 + 18 * (i % 2), 0, -9 + 18 * (i / 2))
+		_boite(g, "Pierre%d" % i, coin + Vector3(0, SOCLE + 0.6, 0), Vector3(1.8, 1.2, 1.2), "pierre")
+	_m.egypte(g, "Palmier1", "palm_tree", Vector3(-12.5, 0, 13), 0.7)
+	_m.egypte(g, "Palmier2", "palm_tree", Vector3(12.5, 0, -13), 2.4)
+	_sphinx(g)
+	_nuage(g)
+	_pyramide_solide(g)
+
+
+## Le sphinx regarde la pyramide. Un escalier de chantier monte le long de
+## son flanc est, depuis la sortie du mirage, jusqu'à une passerelle au
+## niveau de sa tête : le point de vue.
+func _sphinx(g: Node3D) -> void:
+	_m.egypte(g, "Sphinx", "sphinx", Vector3(0, 0, 22), PI, 2.0)
+	var tete := OEIL_SPHINX - Vector3(0, 1.6, 0)
+	_escalier(g, "EscalierSphinx", Vector3(3.6, 0, 29.5), Vector3(3.6, tete.y, 20.0), 1.2, "bois")
+	_boite(g, "Passerelle", Vector3(1.95, tete.y - 0.1, 20), Vector3(2.1, 0.2, 1.8), "bois")
+	var vue := Marker3D.new()
+	vue.transform = Transform3D(Basis.looking_at(CENTRE_PYRAMIDE - OEIL_SPHINX), OEIL_SPHINX)
+	_ajouter(g, vue, "PointDeVue")
+	var belvedere := Area3D.new()
+	belvedere.position = Vector3(1.5, tete.y + 1.2, 20)
+	_ajouter(g, belvedere, "Belvedere")
+	var forme := CollisionShape3D.new()
+	var boite := BoxShape3D.new()
+	boite.size = Vector3(4, 2.4, 2.4)
+	forme.shape = boite
+	_ajouter(belvedere, forme, "CollisionShape3D")
+
+
+## Le nuage : 40 blocs posés sur les rayons qui vont de l'œil du sphinx aux
+## faces avant des degrés (10 par degré, en 2 rangs de 5). Chaque degré est
+## le groupe d'une zone, de la carrière (en bas) au temple (en haut). Un bloc
+## garde son point d'image (méta "image") : il s'y pose quand la pyramide
+## se recolle.
+func _nuage(g: Node3D) -> void:
+	var pyramide := Alignement.new()
+	pyramide.position = OEIL_SPHINX + (CENTRE_PYRAMIDE - OEIL_SPHINX) * 0.85
+	_ajouter(g, pyramide, "Pyramide")
+	pyramide.point_de_vue = NodePath("../PointDeVue")
+	var i := 0
+	for d in DEGRES.size():
+		var demi: float = DEGRES[d]
+		var largeur := demi * 2.0 / 5.0
+		var haut := HAUTEUR_DEGRE / 2.0
+		for rang in 2:
+			for col in 5:
+				var image := Vector3(-demi + (col + 0.5) * largeur, SOCLE + HAUTEUR_DEGRE * d + (rang + 0.5) * haut, demi)
+				# Profondeur de 0,5 à 1,5, sans que le bloc descende sous 0,3 m.
+				var bas := image.y - haut / 2.0
+				var k_max := 1.5 if bas >= OEIL_SPHINX.y else minf(1.5, (OEIL_SPHINX.y - 0.3) / (OEIL_SPHINX.y - bas))
+				var k := lerpf(0.5, k_max, fposmod(sin(i * 12.9898) * 43758.5453, 1.0))
+				var couleur := "pierre" if (col + rang) % 2 == 0 else "sable_fonce"
+				var b := _morceau(pyramide, "Bloc%d" % i, OEIL_SPHINX, image, Vector3(largeur, haut, 0.6) * 0.94, 0.0, k, couleur)
+				b.set_meta("zone", Chantier.ZONES[d])
+				b.set_meta("image", image)
+				i += 1
+	var nuage := Chantier.new()
+	_ajouter(g, nuage, "Nuage")
+	nuage.alignement = NodePath("../Pyramide")
+
+
+## La vraie pyramide, cachée et sans collision jusqu'à l'alignement, avec un
+## couloir au pied de sa face sud. La porte le ferme ; au fond, le passage
+## de la fin (inactif jusqu'à l'ouverture de la porte).
+func _pyramide_solide(g: Node3D) -> void:
+	var p := CSGCombiner3D.new()
+	p.visible = false
+	_ajouter(g, p, "PyramideSolide")
+	for d in DEGRES.size():
+		var demi: float = DEGRES[d]
+		_boite(p, "Degre%d" % d, Vector3(0, SOCLE + HAUTEUR_DEGRE * (d + 0.5), 0), Vector3(demi * 2, HAUTEUR_DEGRE, demi * 2), "pierre", false)
+	var face: float = DEGRES[0]
+	var couloir := _boite(p, "Couloir", Vector3(0, SOCLE + 1.1, face - 2.0), Vector3(1.6, 2.2, 4.0), "pierre_fonce", false)
+	couloir.operation = CSGShape3D.OPERATION_SUBTRACTION
+	_boite(p, "Lueur", Vector3(0, SOCLE + 1.1, face - 3.9), Vector3(1.6, 2.2, 0.2), "or", false)
+	var porte := _boite(g, "Porte", Vector3(0, SOCLE + 1.1, face - 0.2), Vector3(1.6, 2.2, 0.4), "pierre_fonce", false)
+	porte.visible = false
+	var fin := PassageTemporel.new()
+	fin.position = Vector3(0, SOCLE, face - 3.0)
+	fin.monitoring = false
+	_ajouter(g, fin, "Fin")
+	var forme := CollisionShape3D.new()
+	var boite := BoxShape3D.new()
+	boite.size = Vector3(1.6, 2.2, 1.2)
+	forme.shape = boite
+	forme.position = Vector3(0, 1.1, 0)
+	_ajouter(fin, forme, "CollisionShape3D")
