@@ -35,9 +35,7 @@ var invitations := 0
 var invites_venus := false
 var voeu_fait := false
 var echelle := 1.0
-var yeux_fermes := false
 
-var _yeux_forces := false
 ## Où sont les invitations au début, pour les remettre si elles tombent.
 var _depart_invitations := {}
 var _temps_table := 0.0
@@ -46,7 +44,6 @@ var _pensee_gateau := false
 
 @onready var _lampe: RigidBody3D = $Cour/Lampe
 @onready var _flou: ColorRect = $Interface/Flou
-@onready var _yeux: ColorRect = $Interface/Yeux
 @onready var _fente: Area3D = $Maison/Fente
 @onready var _fin_table: Node3D = $SalleAManger/Fin
 @onready var _voeu: Area3D = $SalleAManger/Fin/Voeu
@@ -95,8 +92,6 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	yeux_fermes = Input.is_action_pressed("fermer_les_yeux")
-	_yeux.color.a = move_toward(_yeux.color.a, 1.0 if yeux_fermes or _yeux_forces else 0.0, delta * 6.0)
 	match etape:
 		Etape.COUR:
 			_dans_la_cour(delta)
@@ -209,10 +204,10 @@ func _dans_la_maison(delta: float) -> void:
 			poster(corps)
 	if invites_venus and not voeu_fait:
 		_suivre_le_gateau()
-		var voulu := not yeux_fermes
+		var voulu := not yeux_fermes()
 		if _boucle.monitoring != voulu:
 			_boucle.monitoring = voulu
-		if not yeux_fermes and _zone_salle.overlaps_body(_joueur) and _joueur.velocity.z < -0.5:
+		if not yeux_fermes() and _zone_salle.overlaps_body(_joueur) and _joueur.velocity.z < -0.5:
 			_temps_table += delta
 			if _temps_table > 6.0 and not _pensee_table:
 				_pensee_table = true
@@ -242,7 +237,7 @@ func faire_venir_les_invites() -> void:
 
 ## Les yeux ouverts, le gâteau reste à la même distance devant Thomas.
 func _suivre_le_gateau() -> void:
-	if not invites_venus or voeu_fait or yeux_fermes:
+	if not invites_venus or voeu_fait or yeux_fermes():
 		return
 	_fin_table.position.z = minf(FIN_TABLE, _joueur.global_position.z - _fin_table.get_parent().global_position.z - RECUL_GATEAU)
 
@@ -267,7 +262,7 @@ func _sur_voeu(corps: Node3D) -> void:
 ## longueur ; quand il rouvre les yeux, il voit que les invités sont peints.
 func faire_le_voeu() -> void:
 	voeu_fait = true
-	_yeux_forces = true
+	yeux_forces = true
 	_yeux.color.a = 1.0
 	_boucle.monitoring = false
 	_joueur.velocity = Vector3.ZERO
@@ -279,7 +274,7 @@ func faire_le_voeu() -> void:
 	var t := create_tween()
 	t.tween_interval(3.0)
 	t.tween_callback(func() -> void:
-		_yeux_forces = false
+		yeux_forces = false
 		for i in 6:
 			_fin_table.get_node("Flamme_%d" % i).visible = false
 		_fin_table.get_node("Lueur").visible = false)

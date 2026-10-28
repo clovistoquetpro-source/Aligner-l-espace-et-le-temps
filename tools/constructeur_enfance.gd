@@ -75,12 +75,6 @@ func construire() -> int:
 	flou.visible = false
 	_ajouter(ui, flou, "Flou")
 	_interface_souvenir()
-	var yeux := ColorRect.new()
-	yeux.color = Color(0, 0, 0, 0)
-	yeux.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	yeux.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_ajouter(ui, yeux, "Yeux")
-	ui.move_child(ui.get_node("Message"), -1)
 	return _enregistrer("res://scenes/enfance.tscn")
 
 

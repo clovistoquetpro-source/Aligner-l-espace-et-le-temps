@@ -316,3 +316,17 @@ func test_quelques_pas_dans_le_couloir_ne_suffisent_pas() -> void:
 	await _placer(j, Vector3(8, 0, 0), PI / 2)
 	await _attendre(5)
 	T.ok(not n.porte_ouverte, "il faut voir que la porte d'entrée ne se rapproche pas")
+
+
+func test_e_sur_la_toile_tournante() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	await _placer(j, Vector3(5.0, 0, 80), -PI / 2)
+	O.viser(j, Vector3(7.9, 2.9, 80))
+	for i in 3:
+		await tree.process_frame
+	T.eq(n.get_node("Interface/Action").text, "E : tourner la toile", "en visant le cadre")
+	Input.action_press("fermer_les_yeux")
+	await _attendre(30)
+	Input.action_release("fermer_les_yeux")
+	T.ok(n.get_node("Interface/Yeux").color.a > 0.9, "F ferme aussi les yeux au niveau 1")

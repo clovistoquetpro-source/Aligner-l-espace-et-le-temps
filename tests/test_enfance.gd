@@ -38,6 +38,13 @@ func _attendre(images: int, arret := Callable()) -> void:
 			return
 
 
+## Le texte d'aide est mis à jour à chaque image affichée (pas à chaque pas
+## de physique).
+func _images(n: int) -> void:
+	for i in n:
+		await tree.process_frame
+
+
 func _marcher(action: String, images: int, arret := Callable()) -> void:
 	Input.action_press(action)
 	await _attendre(images, arret)
@@ -367,3 +374,35 @@ func test_l_invitation_de_l_armoire_se_voit_depuis_un_cube() -> void:
 	j.teleport(Transform3D(Basis(Vector3.UP, PI / 2), MAISON + Vector3(-8.5, 0, 1.0)))
 	T.ok(not n._visible(j.camera.global_position, e.global_position), "depuis le sol, l'armoire la cache")
 	j.set_physics_process(true)
+
+
+func test_e_et_f_sont_expliques() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	var touches: Label = n.get_node("Interface/Touches")
+	await _images(3)
+	T.ok(touches.text.contains("E : prendre") and touches.text.contains("F (maintenu) : fermer les yeux"), "le panneau des touches parle de E et de F")
+	await _a_la_maison(n)
+	var e: RigidBody3D = n.get_node("Maison/Invitation_bureau")
+	await _placer(j, MAISON + Vector3(-5.3, 0, -0.4), 0.0)
+	O.viser(j, e.global_position)
+	await _images(3)
+	T.eq(n.get_node("Interface/Action").text, "E : prendre", "en visant l'invitation")
+	j._interagir()
+	await _images(3)
+	T.eq(n.get_node("Interface/Action").text, "E : poser", "en la tenant")
+	j.poser()
+	O.viser(j, j.camera.global_position + Vector3(0, 1, -0.2))
+	await _images(3)
+	T.eq(n.get_node("Interface/Action").text, "", "rien à faire au plafond")
+	n.etape = Enfance.Etape.GRENIER
+	await _placer(j, GRENIER + Vector3(0, 0, 1.0), 0.0)
+	O.viser(j, n.get_node("Grenier/Dessin_mur_3").global_position)
+	await _images(3)
+	T.eq(n.get_node("Interface/Action").text, "E : décrocher", "en visant un dessin")
+	Input.action_press("fermer_les_yeux")
+	await _attendre(30)
+	T.ok(n.get_node("Interface/Yeux").color.a > 0.95, "F ferme les yeux")
+	Input.action_release("fermer_les_yeux")
+	await _attendre(30)
+	T.ok(n.get_node("Interface/Yeux").color.a < 0.05, "et on les rouvre")

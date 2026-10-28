@@ -826,142 +826,142 @@ rim_tint = 0.8
 shader = ExtResource("10_i8dmo")
 shader_parameter/flou = null
 
-[node name="Enfance" type="Node3D" unique_id=333045581]
+[node name="Enfance" type="Node3D" unique_id=707532231]
 script = ExtResource("1_bp8at")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=311560914]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1381832483]
 environment = SubResource("Environment_sst1f")
 
-[node name="Cour" type="Node3D" parent="." unique_id=2028089762]
+[node name="Cour" type="Node3D" parent="." unique_id=378242834]
 
-[node name="Sol" type="CSGBox3D" parent="Cour" unique_id=596455102]
+[node name="Sol" type="CSGBox3D" parent="Cour" unique_id=1077022819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 use_collision = true
 size = Vector3(24.6, 0.5, 16.6)
 material = SubResource("StandardMaterial3D_v0occ")
 
-[node name="Mur_ecole" type="CSGBox3D" parent="Cour" unique_id=1570604983]
+[node name="Mur_ecole" type="CSGBox3D" parent="Cour" unique_id=193223722]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -8.15)
 use_collision = true
 size = Vector3(24.6, 7, 0.3)
 material = SubResource("StandardMaterial3D_xe1gf")
 
-[node name="Fenetre_0" type="CSGBox3D" parent="Cour" unique_id=976260459]
+[node name="Fenetre_0" type="CSGBox3D" parent="Cour" unique_id=1794851695]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4.2, -7.98)
 size = Vector3(1.6, 1.4, 0.04)
 material = SubResource("StandardMaterial3D_8rw33")
 
-[node name="Fenetre_1" type="CSGBox3D" parent="Cour" unique_id=1274265074]
+[node name="Fenetre_1" type="CSGBox3D" parent="Cour" unique_id=1169024651]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 4.2, -7.98)
 size = Vector3(1.6, 1.4, 0.04)
 material = SubResource("StandardMaterial3D_8rw33")
 
-[node name="Fenetre_2" type="CSGBox3D" parent="Cour" unique_id=1678901071]
+[node name="Fenetre_2" type="CSGBox3D" parent="Cour" unique_id=511046796]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4.2, -7.98)
 size = Vector3(1.6, 1.4, 0.04)
 material = SubResource("StandardMaterial3D_8rw33")
 
-[node name="Fenetre_3" type="CSGBox3D" parent="Cour" unique_id=418785418]
+[node name="Fenetre_3" type="CSGBox3D" parent="Cour" unique_id=1752489910]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4.2, -7.98)
 size = Vector3(1.6, 1.4, 0.04)
 material = SubResource("StandardMaterial3D_8rw33")
 
-[node name="Fenetre_4" type="CSGBox3D" parent="Cour" unique_id=1016323429]
+[node name="Fenetre_4" type="CSGBox3D" parent="Cour" unique_id=411060655]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4.2, -7.98)
 size = Vector3(1.6, 1.4, 0.04)
 material = SubResource("StandardMaterial3D_8rw33")
 
-[node name="Fenetre_5" type="CSGBox3D" parent="Cour" unique_id=1923076017]
+[node name="Fenetre_5" type="CSGBox3D" parent="Cour" unique_id=1781097220]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4.2, -7.98)
 size = Vector3(1.6, 1.4, 0.04)
 material = SubResource("StandardMaterial3D_8rw33")
 
-[node name="PorteEcole" type="Node3D" parent="Cour" unique_id=618595020]
+[node name="PorteEcole" type="Node3D" parent="Cour" unique_id=2000001267]
 transform = Transform3D(1.3, 0, 0, 0, 1.1, 0, 0, 0, 1, 4, 0, -7.97)
 
-[node name="Panneau" type="CSGBox3D" parent="Cour/PorteEcole" unique_id=1977884688]
+[node name="Panneau" type="CSGBox3D" parent="Cour/PorteEcole" unique_id=442232608]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 size = Vector3(1, 2.4, 0.06)
 material = SubResource("StandardMaterial3D_7afws")
 
-[node name="Montant_g" type="CSGBox3D" parent="Cour/PorteEcole" unique_id=200683239]
+[node name="Montant_g" type="CSGBox3D" parent="Cour/PorteEcole" unique_id=772826791]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57, 1.25, 0.02)
 size = Vector3(0.14, 2.5, 0.1)
 material = SubResource("StandardMaterial3D_ywsxe")
 
-[node name="Montant_d" type="CSGBox3D" parent="Cour/PorteEcole" unique_id=407812748]
+[node name="Montant_d" type="CSGBox3D" parent="Cour/PorteEcole" unique_id=2092043283]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57, 1.25, 0.02)
 size = Vector3(0.14, 2.5, 0.1)
 material = SubResource("StandardMaterial3D_ywsxe")
 
-[node name="Linteau" type="CSGBox3D" parent="Cour/PorteEcole" unique_id=51006489]
+[node name="Linteau" type="CSGBox3D" parent="Cour/PorteEcole" unique_id=1034522741]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57, 0.02)
 size = Vector3(1.28, 0.14, 0.1)
 material = SubResource("StandardMaterial3D_ywsxe")
 
-[node name="Poignee" type="CSGBox3D" parent="Cour/PorteEcole" unique_id=1656340559]
+[node name="Poignee" type="CSGBox3D" parent="Cour/PorteEcole" unique_id=958712943]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38, 1.05, 0.06)
 size = Vector3(0.12, 0.05, 0.06)
 material = SubResource("StandardMaterial3D_ddg7g")
 
-[node name="Rentree" type="Marker3D" parent="Cour" unique_id=465001766]
+[node name="Rentree" type="Marker3D" parent="Cour" unique_id=1529173267]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -7.2)
 
-[node name="Mur_sud" type="CSGBox3D" parent="Cour" unique_id=1690280593]
+[node name="Mur_sud" type="CSGBox3D" parent="Cour" unique_id=500722393]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 8.15)
 use_collision = true
 size = Vector3(24.6, 2.5, 0.3)
 material = SubResource("StandardMaterial3D_dn1om")
 
-[node name="Mur_ouest" type="CSGBox3D" parent="Cour" unique_id=1293357176]
+[node name="Mur_ouest" type="CSGBox3D" parent="Cour" unique_id=1334569919]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.15, 1.25, 0)
 use_collision = true
 size = Vector3(0.3, 2.5, 16)
 material = SubResource("StandardMaterial3D_dn1om")
 
-[node name="Mur_est" type="CSGBox3D" parent="Cour" unique_id=1727420739]
+[node name="Mur_est" type="CSGBox3D" parent="Cour" unique_id=291907057]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.15, 1.25, 0)
 use_collision = true
 size = Vector3(0.3, 2.5, 16)
 material = SubResource("StandardMaterial3D_dn1om")
 
-[node name="Haut_sud" type="StaticBody3D" parent="Cour" unique_id=407197318]
+[node name="Haut_sud" type="StaticBody3D" parent="Cour" unique_id=1091641439]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.25, 8.15)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Haut_sud" unique_id=30345655]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Haut_sud" unique_id=689518892]
 shape = SubResource("BoxShape3D_pm3f4")
 
-[node name="Haut_ouest" type="StaticBody3D" parent="Cour" unique_id=1448481662]
+[node name="Haut_ouest" type="StaticBody3D" parent="Cour" unique_id=478928026]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.15, 6.25, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Haut_ouest" unique_id=22885064]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Haut_ouest" unique_id=522295413]
 shape = SubResource("BoxShape3D_q8e1t")
 
-[node name="Haut_est" type="StaticBody3D" parent="Cour" unique_id=1843153558]
+[node name="Haut_est" type="StaticBody3D" parent="Cour" unique_id=913795747]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.15, 6.25, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Haut_est" unique_id=1796801028]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Haut_est" unique_id=1274464762]
 shape = SubResource("BoxShape3D_rr4gx")
 
-[node name="Lampe" type="RigidBody3D" parent="Cour" unique_id=867482584 groups=["lampe"]]
+[node name="Lampe" type="RigidBody3D" parent="Cour" unique_id=1788020423 groups=["lampe"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Lampe" unique_id=415418400]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Lampe" unique_id=222701155]
 shape = SubResource("BoxShape3D_mtbxo")
 
-[node name="Socle" type="MeshInstance3D" parent="Cour/Lampe" unique_id=718913382]
+[node name="Socle" type="MeshInstance3D" parent="Cour/Lampe" unique_id=350695313]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
 material_override = SubResource("StandardMaterial3D_u44vw")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_fu8md")
 
-[node name="Verre" type="MeshInstance3D" parent="Cour/Lampe" unique_id=967419878]
+[node name="Verre" type="MeshInstance3D" parent="Cour/Lampe" unique_id=1521753247]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0)
 material_override = SubResource("StandardMaterial3D_sv21d")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_1ts6b")
 
-[node name="Lumiere" type="OmniLight3D" parent="Cour/Lampe" unique_id=1440061561]
+[node name="Lumiere" type="OmniLight3D" parent="Cour/Lampe" unique_id=1447316719]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 light_color = Color(1, 0.9098039, 0.6392157, 1)
 light_energy = 3.0
@@ -969,474 +969,474 @@ shadow_enabled = true
 omni_range = 45.0
 omni_attenuation = 0.6
 
-[node name="Enfant_1" type="Node3D" parent="Cour" unique_id=698966665 groups=["enfants"]]
+[node name="Enfant_1" type="Node3D" parent="Cour" unique_id=1830969685 groups=["enfants"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42261827, 0, 0.09369218)
 
-[node name="Ombre" type="Node3D" parent="Cour/Enfant_1" unique_id=379004350]
+[node name="Ombre" type="Node3D" parent="Cour/Enfant_1" unique_id=1914358956]
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_1/Ombre" unique_id=1214280533]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_1/Ombre" unique_id=974686615]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_vqr6m")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_1/Ombre" unique_id=1393937081]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_1/Ombre" unique_id=301946602]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("SphereMesh_cxoou")
 
-[node name="Corps" type="Node3D" parent="Cour/Enfant_1" unique_id=1192881244]
+[node name="Corps" type="Node3D" parent="Cour/Enfant_1" unique_id=165469303]
 visible = false
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_1/Corps" unique_id=1402619876]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_1/Corps" unique_id=312409311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_veeks")
 mesh = SubResource("CapsuleMesh_vqr6m")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_1/Corps" unique_id=508727464]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_1/Corps" unique_id=1029632881]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_m07jr")
 mesh = SubResource("SphereMesh_cxoou")
 
-[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_1" unique_id=718228404]
+[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_1" unique_id=1314736901]
 collision_layer = 128
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_1/Peur" unique_id=1716065673]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_1/Peur" unique_id=687558971]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 shape = SubResource("CylinderShape3D_jdxw7")
 
-[node name="Enfant_2" type="Node3D" parent="Cour" unique_id=1047501252 groups=["enfants"]]
+[node name="Enfant_2" type="Node3D" parent="Cour" unique_id=1737780670 groups=["enfants"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0, -0.08253169)
 
-[node name="Ombre" type="Node3D" parent="Cour/Enfant_2" unique_id=171057522]
+[node name="Ombre" type="Node3D" parent="Cour/Enfant_2" unique_id=1300971411]
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_2/Ombre" unique_id=544716958]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_2/Ombre" unique_id=1770049811]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_ppmlg")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_2/Ombre" unique_id=1042271555]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_2/Ombre" unique_id=2077895030]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("SphereMesh_cixej")
 
-[node name="Corps" type="Node3D" parent="Cour/Enfant_2" unique_id=81173348]
+[node name="Corps" type="Node3D" parent="Cour/Enfant_2" unique_id=1405110571]
 visible = false
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_2/Corps" unique_id=184066863]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_2/Corps" unique_id=367360267]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_acsgb")
 mesh = SubResource("CapsuleMesh_ppmlg")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_2/Corps" unique_id=80590800]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_2/Corps" unique_id=1166210011]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_m07jr")
 mesh = SubResource("SphereMesh_cixej")
 
-[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_2" unique_id=1178830407]
+[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_2" unique_id=1039179082]
 collision_layer = 128
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_2/Peur" unique_id=37419237]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_2/Peur" unique_id=96258638]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 shape = SubResource("CylinderShape3D_q7b0x")
 
-[node name="Enfant_3" type="Node3D" parent="Cour" unique_id=480421695 groups=["enfants"]]
+[node name="Enfant_3" type="Node3D" parent="Cour" unique_id=130494432 groups=["enfants"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.91762954, 0, 0.7541219)
 
-[node name="Ombre" type="Node3D" parent="Cour/Enfant_3" unique_id=1990773523]
+[node name="Ombre" type="Node3D" parent="Cour/Enfant_3" unique_id=580604365]
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_3/Ombre" unique_id=1433969012]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_3/Ombre" unique_id=1215634171]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_sleyk")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_3/Ombre" unique_id=1646959292]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_3/Ombre" unique_id=478300564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("SphereMesh_a4cho")
 
-[node name="Corps" type="Node3D" parent="Cour/Enfant_3" unique_id=1579768696]
+[node name="Corps" type="Node3D" parent="Cour/Enfant_3" unique_id=1494362116]
 visible = false
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_3/Corps" unique_id=804493129]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_3/Corps" unique_id=1397371281]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_yaokx")
 mesh = SubResource("CapsuleMesh_sleyk")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_3/Corps" unique_id=54312668]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_3/Corps" unique_id=470621191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_m07jr")
 mesh = SubResource("SphereMesh_a4cho")
 
-[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_3" unique_id=640992519]
+[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_3" unique_id=1170988918]
 collision_layer = 128
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_3/Peur" unique_id=1579364129]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_3/Peur" unique_id=579067811]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 shape = SubResource("CylinderShape3D_khl0e")
 
-[node name="Enfant_4" type="Node3D" parent="Cour" unique_id=349022026 groups=["enfants"]]
+[node name="Enfant_4" type="Node3D" parent="Cour" unique_id=1639602167 groups=["enfants"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9420248, 0, 1.6596129)
 
-[node name="Ombre" type="Node3D" parent="Cour/Enfant_4" unique_id=791270921]
+[node name="Ombre" type="Node3D" parent="Cour/Enfant_4" unique_id=491403257]
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_4/Ombre" unique_id=1384346141]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_4/Ombre" unique_id=952682280]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_7hgp5")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_4/Ombre" unique_id=1286440406]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_4/Ombre" unique_id=1319321999]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("SphereMesh_my5mn")
 
-[node name="Corps" type="Node3D" parent="Cour/Enfant_4" unique_id=718453616]
+[node name="Corps" type="Node3D" parent="Cour/Enfant_4" unique_id=1081466558]
 visible = false
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_4/Corps" unique_id=1673339166]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_4/Corps" unique_id=2063293269]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_njusm")
 mesh = SubResource("CapsuleMesh_7hgp5")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_4/Corps" unique_id=231868400]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_4/Corps" unique_id=515955161]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_m07jr")
 mesh = SubResource("SphereMesh_my5mn")
 
-[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_4" unique_id=933673511]
+[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_4" unique_id=551687747]
 collision_layer = 128
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_4/Peur" unique_id=302461872]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_4/Peur" unique_id=549894758]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 shape = SubResource("CylinderShape3D_gvc6y")
 
-[node name="Enfant_5" type="Node3D" parent="Cour" unique_id=1606317095 groups=["enfants"]]
+[node name="Enfant_5" type="Node3D" parent="Cour" unique_id=878324926 groups=["enfants"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27176, 0, 2.0142221)
 
-[node name="Ombre" type="Node3D" parent="Cour/Enfant_5" unique_id=1428197327]
+[node name="Ombre" type="Node3D" parent="Cour/Enfant_5" unique_id=107818173]
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_5/Ombre" unique_id=1481700142]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_5/Ombre" unique_id=1800622618]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_l1wxy")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_5/Ombre" unique_id=1784011256]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_5/Ombre" unique_id=1898574108]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("SphereMesh_aklw6")
 
-[node name="Corps" type="Node3D" parent="Cour/Enfant_5" unique_id=904992761]
+[node name="Corps" type="Node3D" parent="Cour/Enfant_5" unique_id=1826881868]
 visible = false
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_5/Corps" unique_id=1073932532]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_5/Corps" unique_id=16639846]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_nfp75")
 mesh = SubResource("CapsuleMesh_l1wxy")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_5/Corps" unique_id=1618859567]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_5/Corps" unique_id=1721099116]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_m07jr")
 mesh = SubResource("SphereMesh_aklw6")
 
-[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_5" unique_id=1469407186]
+[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_5" unique_id=437952186]
 collision_layer = 128
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_5/Peur" unique_id=712219922]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_5/Peur" unique_id=774841110]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 shape = SubResource("CylinderShape3D_ljab3")
 
-[node name="Enfant_6" type="Node3D" parent="Cour" unique_id=957871302 groups=["enfants"]]
+[node name="Enfant_6" type="Node3D" parent="Cour" unique_id=170779308 groups=["enfants"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0, 2.125833)
 
-[node name="Ombre" type="Node3D" parent="Cour/Enfant_6" unique_id=1459618224]
+[node name="Ombre" type="Node3D" parent="Cour/Enfant_6" unique_id=1282688399]
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_6/Ombre" unique_id=339635573]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_6/Ombre" unique_id=851466464]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_ivtcs")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_6/Ombre" unique_id=1104223661]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_6/Ombre" unique_id=546780560]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("SphereMesh_g34ma")
 
-[node name="Corps" type="Node3D" parent="Cour/Enfant_6" unique_id=570948328]
+[node name="Corps" type="Node3D" parent="Cour/Enfant_6" unique_id=161593087]
 visible = false
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_6/Corps" unique_id=2092934916]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_6/Corps" unique_id=455180820]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_c8hqe")
 mesh = SubResource("CapsuleMesh_ivtcs")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_6/Corps" unique_id=781492987]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_6/Corps" unique_id=1960451351]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_m07jr")
 mesh = SubResource("SphereMesh_g34ma")
 
-[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_6" unique_id=1578938978]
+[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_6" unique_id=167560070]
 collision_layer = 128
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_6/Peur" unique_id=1065891029]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_6/Peur" unique_id=1209306426]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 shape = SubResource("CylinderShape3D_pkpto")
 
-[node name="Enfant_7" type="Node3D" parent="Cour" unique_id=1890191266 groups=["enfants"]]
+[node name="Enfant_7" type="Node3D" parent="Cour" unique_id=834108571 groups=["enfants"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8693332, 0, 1.2329371)
 
-[node name="Ombre" type="Node3D" parent="Cour/Enfant_7" unique_id=1558103423]
+[node name="Ombre" type="Node3D" parent="Cour/Enfant_7" unique_id=1270307604]
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_7/Ombre" unique_id=1757022850]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_7/Ombre" unique_id=1015132209]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_cfux3")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_7/Ombre" unique_id=26299329]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_7/Ombre" unique_id=2095403239]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("SphereMesh_3w3c4")
 
-[node name="Corps" type="Node3D" parent="Cour/Enfant_7" unique_id=419328581]
+[node name="Corps" type="Node3D" parent="Cour/Enfant_7" unique_id=669191787]
 visible = false
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_7/Corps" unique_id=247374664]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_7/Corps" unique_id=1778700879]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_1sath")
 mesh = SubResource("CapsuleMesh_cfux3")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_7/Corps" unique_id=553540269]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_7/Corps" unique_id=929626735]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_m07jr")
 mesh = SubResource("SphereMesh_3w3c4")
 
-[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_7" unique_id=321898697]
+[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_7" unique_id=673131651]
 collision_layer = 128
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_7/Peur" unique_id=644154435]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_7/Peur" unique_id=1057534001]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 shape = SubResource("CylinderShape3D_6sit8")
 
-[node name="Enfant_8" type="Node3D" parent="Cour" unique_id=1305896821 groups=["enfants"]]
+[node name="Enfant_8" type="Node3D" parent="Cour" unique_id=1389835754 groups=["enfants"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95262796, 0, 0.45)
 
-[node name="Ombre" type="Node3D" parent="Cour/Enfant_8" unique_id=1393815122]
+[node name="Ombre" type="Node3D" parent="Cour/Enfant_8" unique_id=1934246167]
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_8/Ombre" unique_id=2081150479]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_8/Ombre" unique_id=997706382]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_xvx5y")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_8/Ombre" unique_id=1657337906]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_8/Ombre" unique_id=1767135992]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_v0occ")
 cast_shadow = 3
 mesh = SubResource("SphereMesh_40lf1")
 
-[node name="Corps" type="Node3D" parent="Cour/Enfant_8" unique_id=595139929]
+[node name="Corps" type="Node3D" parent="Cour/Enfant_8" unique_id=1359387168]
 visible = false
 
-[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_8/Corps" unique_id=1907290072]
+[node name="Corps" type="MeshInstance3D" parent="Cour/Enfant_8/Corps" unique_id=634281664]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_8midj")
 mesh = SubResource("CapsuleMesh_xvx5y")
 
-[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_8/Corps" unique_id=1386827331]
+[node name="Tete" type="MeshInstance3D" parent="Cour/Enfant_8/Corps" unique_id=1222019351]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 material_override = SubResource("StandardMaterial3D_m07jr")
 mesh = SubResource("SphereMesh_40lf1")
 
-[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_8" unique_id=1011611390]
+[node name="Peur" type="StaticBody3D" parent="Cour/Enfant_8" unique_id=2060684786]
 collision_layer = 128
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_8/Peur" unique_id=1337710192]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Enfant_8/Peur" unique_id=1953828644]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 shape = SubResource("CylinderShape3D_tjlso")
 
-[node name="Tour_plateforme" type="CSGBox3D" parent="Cour" unique_id=1587445415]
+[node name="Tour_plateforme" type="CSGBox3D" parent="Cour" unique_id=1018131788]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 3.9, -3)
 use_collision = true
 size = Vector3(1.8, 0.2, 1.8)
 material = SubResource("StandardMaterial3D_4ejgq")
 
-[node name="Tour_pilier_0_0" type="CSGBox3D" parent="Cour" unique_id=242604778]
+[node name="Tour_pilier_0_0" type="CSGBox3D" parent="Cour" unique_id=445030881]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7, 1.9, -3.8)
 use_collision = true
 size = Vector3(0.15, 3.8, 0.15)
 material = SubResource("StandardMaterial3D_48acv")
 
-[node name="Tour_pilier_1_0" type="CSGBox3D" parent="Cour" unique_id=1240338243]
+[node name="Tour_pilier_1_0" type="CSGBox3D" parent="Cour" unique_id=944455087]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, 1.9, -3.8)
 use_collision = true
 size = Vector3(0.15, 3.8, 0.15)
 material = SubResource("StandardMaterial3D_48acv")
 
-[node name="Tour_pilier_0_1" type="CSGBox3D" parent="Cour" unique_id=1167762389]
+[node name="Tour_pilier_0_1" type="CSGBox3D" parent="Cour" unique_id=1306137311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7, 1.9, -2.2)
 use_collision = true
 size = Vector3(0.15, 3.8, 0.15)
 material = SubResource("StandardMaterial3D_48acv")
 
-[node name="Tour_pilier_1_1" type="CSGBox3D" parent="Cour" unique_id=321817085]
+[node name="Tour_pilier_1_1" type="CSGBox3D" parent="Cour" unique_id=116967606]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, 1.9, -2.2)
 use_collision = true
 size = Vector3(0.15, 3.8, 0.15)
 material = SubResource("StandardMaterial3D_48acv")
 
-[node name="Tour_rambarde_nord" type="CSGBox3D" parent="Cour" unique_id=1893315133]
+[node name="Tour_rambarde_nord" type="CSGBox3D" parent="Cour" unique_id=1434040032]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 4.2, -3.85)
 use_collision = true
 size = Vector3(1.8, 0.4, 0.1)
 material = SubResource("StandardMaterial3D_48acv")
 
-[node name="Tour_rambarde_est" type="CSGBox3D" parent="Cour" unique_id=684306105]
+[node name="Tour_rambarde_est" type="CSGBox3D" parent="Cour" unique_id=260920597]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.35, 4.2, -2.95)
 use_collision = true
 size = Vector3(0.1, 0.4, 1.7)
 material = SubResource("StandardMaterial3D_48acv")
 
-[node name="Tour_marche_0" type="CSGBox3D" parent="Cour" unique_id=1765721406]
+[node name="Tour_marche_0" type="CSGBox3D" parent="Cour" unique_id=1002358027]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23, 2.9802323e-09, -3)
 size = Vector3(0.46, 0.4, 1)
 material = SubResource("StandardMaterial3D_4ejgq")
 
-[node name="Tour_marche_1" type="CSGBox3D" parent="Cour" unique_id=665970353]
+[node name="Tour_marche_1" type="CSGBox3D" parent="Cour" unique_id=290747779]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.69, 0.40000004, -3)
 size = Vector3(0.46, 0.4, 1)
 material = SubResource("StandardMaterial3D_4ejgq")
 
-[node name="Tour_marche_2" type="CSGBox3D" parent="Cour" unique_id=1891471918]
+[node name="Tour_marche_2" type="CSGBox3D" parent="Cour" unique_id=853046443]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15, 0.8, -3)
 size = Vector3(0.46, 0.4, 1)
 material = SubResource("StandardMaterial3D_4ejgq")
 
-[node name="Tour_marche_3" type="CSGBox3D" parent="Cour" unique_id=823460884]
+[node name="Tour_marche_3" type="CSGBox3D" parent="Cour" unique_id=1847474197]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.61, 1.1999999, -3)
 size = Vector3(0.46, 0.4, 1)
 material = SubResource("StandardMaterial3D_4ejgq")
 
-[node name="Tour_marche_4" type="CSGBox3D" parent="Cour" unique_id=265026005]
+[node name="Tour_marche_4" type="CSGBox3D" parent="Cour" unique_id=1776728755]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0699997, 1.5999999, -3)
 size = Vector3(0.46, 0.4, 1)
 material = SubResource("StandardMaterial3D_4ejgq")
 
-[node name="Tour_marche_5" type="CSGBox3D" parent="Cour" unique_id=90649573]
+[node name="Tour_marche_5" type="CSGBox3D" parent="Cour" unique_id=277478494]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5299997, 2, -3)
 size = Vector3(0.46, 0.4, 1)
 material = SubResource("StandardMaterial3D_4ejgq")
 
-[node name="Tour_marche_6" type="CSGBox3D" parent="Cour" unique_id=1239054195]
+[node name="Tour_marche_6" type="CSGBox3D" parent="Cour" unique_id=46533359]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.99, 2.3999999, -3)
 size = Vector3(0.46, 0.4, 1)
 material = SubResource("StandardMaterial3D_4ejgq")
 
-[node name="Tour_marche_7" type="CSGBox3D" parent="Cour" unique_id=1870726521]
+[node name="Tour_marche_7" type="CSGBox3D" parent="Cour" unique_id=1528824793]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45, 2.8, -3)
 size = Vector3(0.46, 0.4, 1)
 material = SubResource("StandardMaterial3D_4ejgq")
 
-[node name="Tour_marche_8" type="CSGBox3D" parent="Cour" unique_id=411198845]
+[node name="Tour_marche_8" type="CSGBox3D" parent="Cour" unique_id=1940983663]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.91, 3.2, -3)
 size = Vector3(0.46, 0.4, 1)
 material = SubResource("StandardMaterial3D_4ejgq")
 
-[node name="Tour_marche_9" type="CSGBox3D" parent="Cour" unique_id=1547530580]
+[node name="Tour_marche_9" type="CSGBox3D" parent="Cour" unique_id=465280575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.37, 3.6, -3)
 size = Vector3(0.46, 0.4, 1)
 material = SubResource("StandardMaterial3D_4ejgq")
 
-[node name="Tour_escalier" type="StaticBody3D" parent="Cour" unique_id=1298152530]
+[node name="Tour_escalier" type="StaticBody3D" parent="Cour" unique_id=1318219782]
 transform = Transform3D(0, -0.6561787, -0.75460553, 0, 0.75460553, -0.6561787, 1, 0, 0, 4.3, 2, -3)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Tour_escalier" unique_id=379373321]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Tour_escalier" unique_id=206619934]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_t6cec")
 
-[node name="Toboggan" type="StaticBody3D" parent="Cour" unique_id=1555744345]
+[node name="Toboggan" type="StaticBody3D" parent="Cour" unique_id=1986881152]
 transform = Transform3D(-1, 0, 0, 0, 0.78685343, 0.61713994, 0, 0.61713994, -0.78685343, 7.5, 2, 0.45000005)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Toboggan" unique_id=878963102]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cour/Toboggan" unique_id=287063102]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_q6ukp")
 
-[node name="Toboggan_planche" type="CSGBox3D" parent="Cour" unique_id=1299052436]
+[node name="Toboggan_planche" type="CSGBox3D" parent="Cour" unique_id=1731641757]
 transform = Transform3D(1, 0, 0, 0, 0.78685343, -0.61713994, 0, 0.61713994, 0.78685343, 7.5, 2, 0.45000005)
 size = Vector3(0.9, 0.08, 6.481512)
 material = SubResource("StandardMaterial3D_koecg")
 
-[node name="Marelle_0" type="CSGBox3D" parent="Cour" unique_id=746045902]
+[node name="Marelle_0" type="CSGBox3D" parent="Cour" unique_id=1865356580]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.005, 3.5)
 size = Vector3(0.6, 0.01, 0.6)
 material = SubResource("StandardMaterial3D_4lxlh")
 
-[node name="Marelle_1" type="CSGBox3D" parent="Cour" unique_id=348372935]
+[node name="Marelle_1" type="CSGBox3D" parent="Cour" unique_id=367586067]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.005, 4.2)
 size = Vector3(0.6, 0.01, 0.6)
 material = SubResource("StandardMaterial3D_4lxlh")
 
-[node name="Marelle_2" type="CSGBox3D" parent="Cour" unique_id=2027255808]
+[node name="Marelle_2" type="CSGBox3D" parent="Cour" unique_id=808909471]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.35, 0.005, 4.9)
 size = Vector3(0.6, 0.01, 0.6)
 material = SubResource("StandardMaterial3D_4lxlh")
 
-[node name="Marelle_3" type="CSGBox3D" parent="Cour" unique_id=1937402586]
+[node name="Marelle_3" type="CSGBox3D" parent="Cour" unique_id=1926739653]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.65, 0.005, 4.9)
 size = Vector3(0.6, 0.01, 0.6)
 material = SubResource("StandardMaterial3D_4lxlh")
 
-[node name="Marelle_4" type="CSGBox3D" parent="Cour" unique_id=1840834338]
+[node name="Marelle_4" type="CSGBox3D" parent="Cour" unique_id=713752605]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.005, 5.6)
 size = Vector3(0.6, 0.01, 0.6)
 material = SubResource("StandardMaterial3D_4lxlh")
 
-[node name="Marelle_5" type="CSGBox3D" parent="Cour" unique_id=2117292039]
+[node name="Marelle_5" type="CSGBox3D" parent="Cour" unique_id=1715275186]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.35, 0.005, 6.3)
 size = Vector3(0.6, 0.01, 0.6)
 material = SubResource("StandardMaterial3D_4lxlh")
 
-[node name="Marelle_6" type="CSGBox3D" parent="Cour" unique_id=1194290391]
+[node name="Marelle_6" type="CSGBox3D" parent="Cour" unique_id=172556729]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.65, 0.005, 6.3)
 size = Vector3(0.6, 0.01, 0.6)
 material = SubResource("StandardMaterial3D_4lxlh")
 
-[node name="Marelle_7" type="CSGBox3D" parent="Cour" unique_id=1194172924]
+[node name="Marelle_7" type="CSGBox3D" parent="Cour" unique_id=26079459]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.005, 7)
 size = Vector3(0.6, 0.01, 0.6)
 material = SubResource("StandardMaterial3D_4lxlh")
 
-[node name="Banc_1" type="CSGBox3D" parent="Cour" unique_id=525612665]
+[node name="Banc_1" type="CSGBox3D" parent="Cour" unique_id=1434665252]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6, 0.22, -3)
 use_collision = true
 size = Vector3(0.5, 0.45, 2.2)
 material = SubResource("StandardMaterial3D_ugp66")
 
-[node name="Banc_2" type="CSGBox3D" parent="Cour" unique_id=604451296]
+[node name="Banc_2" type="CSGBox3D" parent="Cour" unique_id=698803038]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 7.6)
 use_collision = true
 size = Vector3(2.2, 0.45, 0.5)
 material = SubResource("StandardMaterial3D_ugp66")
 
-[node name="PenseeDepart" type="Node3D" parent="Cour" unique_id=465209633]
+[node name="PenseeDepart" type="Node3D" parent="Cour" unique_id=369446561]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -7.3)
 script = ExtResource("2_g0y8o")
 texte = "Ils sont si grands…"
@@ -1444,14 +1444,14 @@ regard = false
 distance = 2.0
 angle_max_deg = 0.0
 
-[node name="PenseeLampe" type="Node3D" parent="Cour" unique_id=1571453807]
+[node name="PenseeLampe" type="Node3D" parent="Cour" unique_id=541442596]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 1)
 script = ExtResource("2_g0y8o")
 texte = "C'est la lampe qui les rend si grands."
 distance = 5.0
 angle_max_deg = 12.0
 
-[node name="PenseeTour" type="Node3D" parent="Cour" unique_id=599218401]
+[node name="PenseeTour" type="Node3D" parent="Cour" unique_id=49517628]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 4.5, -3)
 script = ExtResource("2_g0y8o")
 texte = "Tout là-haut, la lumière tomberait d'en haut…"
@@ -1459,401 +1459,401 @@ distance = 9.0
 angle_max_deg = 10.0
 active = false
 
-[node name="Maison" type="Node3D" parent="." unique_id=525274888]
+[node name="Maison" type="Node3D" parent="." unique_id=740449049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 500, 0, 0)
 
-[node name="Jardin" type="CSGBox3D" parent="Maison" unique_id=1752942356]
+[node name="Jardin" type="CSGBox3D" parent="Maison" unique_id=162088812]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 13.3)
 use_collision = true
 size = Vector3(21.2, 0.5, 14)
 material = SubResource("StandardMaterial3D_iugmv")
 
-[node name="Cloture_sud" type="CSGBox3D" parent="Maison" unique_id=856858740]
+[node name="Cloture_sud" type="CSGBox3D" parent="Maison" unique_id=1326446949]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 20.15)
 use_collision = true
 size = Vector3(21.2, 1, 0.3)
 material = SubResource("StandardMaterial3D_prg8x")
 
-[node name="Cloture_ouest" type="CSGBox3D" parent="Maison" unique_id=1712147648]
+[node name="Cloture_ouest" type="CSGBox3D" parent="Maison" unique_id=463967048]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.450012, 0.5, 13.15)
 use_collision = true
 size = Vector3(0.3, 1, 13.7)
 material = SubResource("StandardMaterial3D_prg8x")
 
-[node name="Cloture_est" type="CSGBox3D" parent="Maison" unique_id=136830038]
+[node name="Cloture_est" type="CSGBox3D" parent="Maison" unique_id=327139971]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.450012, 0.5, 13.15)
 use_collision = true
 size = Vector3(0.3, 1, 13.7)
 material = SubResource("StandardMaterial3D_prg8x")
 
-[node name="Haut_sud" type="StaticBody3D" parent="Maison" unique_id=28879054]
+[node name="Haut_sud" type="StaticBody3D" parent="Maison" unique_id=1375068948]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 20.15)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Haut_sud" unique_id=1465433181]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Haut_sud" unique_id=853140218]
 shape = SubResource("BoxShape3D_11881")
 
-[node name="Haut_ouest" type="StaticBody3D" parent="Maison" unique_id=1883818782]
+[node name="Haut_ouest" type="StaticBody3D" parent="Maison" unique_id=2147425877]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.450012, 3, 13.15)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Haut_ouest" unique_id=1694576884]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Haut_ouest" unique_id=1537488390]
 shape = SubResource("BoxShape3D_xd2dv")
 
-[node name="Haut_est" type="StaticBody3D" parent="Maison" unique_id=1092897149]
+[node name="Haut_est" type="StaticBody3D" parent="Maison" unique_id=667344426]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.450012, 3, 13.15)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Haut_est" unique_id=279271747]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Haut_est" unique_id=813754079]
 shape = SubResource("BoxShape3D_7ppol")
 
-[node name="Boite_pied" type="CSGBox3D" parent="Maison" unique_id=1751032520]
+[node name="Boite_pied" type="CSGBox3D" parent="Maison" unique_id=2091568749]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.45, 18.5)
 use_collision = true
 size = Vector3(0.08, 0.9, 0.08)
 material = SubResource("StandardMaterial3D_prg8x")
 
-[node name="Boite" type="CSGBox3D" parent="Maison" unique_id=1062395618]
+[node name="Boite" type="CSGBox3D" parent="Maison" unique_id=1592794926]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.05, 18.5)
 use_collision = true
 size = Vector3(0.45, 0.35, 0.3)
 material = SubResource("StandardMaterial3D_n2yfd")
 
-[node name="Fente" type="Area3D" parent="Maison" unique_id=1588794870]
+[node name="Fente" type="Area3D" parent="Maison" unique_id=900845091]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.45, 18.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Fente" unique_id=471868087]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Fente" unique_id=1115840884]
 shape = SubResource("BoxShape3D_ovc61")
 
-[node name="Arbre_tronc" type="CSGBox3D" parent="Maison" unique_id=1050209040]
+[node name="Arbre_tronc" type="CSGBox3D" parent="Maison" unique_id=1023174937]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.2, 14)
 use_collision = true
 size = Vector3(0.5, 2.4, 0.5)
 material = SubResource("StandardMaterial3D_icd6l")
 
-[node name="Arbre_feuillage" type="CSGBox3D" parent="Maison" unique_id=1758817691]
+[node name="Arbre_feuillage" type="CSGBox3D" parent="Maison" unique_id=401689433]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3, 14)
 use_collision = true
 size = Vector3(2.6, 1.8, 2.6)
 material = SubResource("StandardMaterial3D_5f4ku")
 
-[node name="Lampe_jardin" type="OmniLight3D" parent="Maison" unique_id=210523816]
+[node name="Lampe_jardin" type="OmniLight3D" parent="Maison" unique_id=928005508]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 12)
 light_energy = 0.8
 shadow_enabled = true
 omni_range = 14.0
 
-[node name="Depart" type="Marker3D" parent="Maison" unique_id=194153143]
+[node name="Depart" type="Marker3D" parent="Maison" unique_id=1535114645]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.5)
 
-[node name="Sol" type="CSGBox3D" parent="Maison" unique_id=1610481176]
+[node name="Sol" type="CSGBox3D" parent="Maison" unique_id=2008231512]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 2)
 use_collision = true
 size = Vector3(8.6, 0.5, 8.6)
 material = SubResource("StandardMaterial3D_q1kxq")
 
-[node name="Plafond" type="CSGBox3D" parent="Maison" unique_id=1489323790]
+[node name="Plafond" type="CSGBox3D" parent="Maison" unique_id=1244324683]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.95, 2)
 use_collision = true
 size = Vector3(8.6, 0.3, 8.6)
 material = SubResource("StandardMaterial3D_rkkxk")
 
-[node name="Mur_entree_sud_1" type="CSGBox3D" parent="Maison" unique_id=768700904]
+[node name="Mur_entree_sud_1" type="CSGBox3D" parent="Maison" unique_id=264136403]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.4, 6.15)
 use_collision = true
 size = Vector3(3.6, 2.8, 0.3)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_entree_sud_2" type="CSGBox3D" parent="Maison" unique_id=95926641]
+[node name="Mur_entree_sud_2" type="CSGBox3D" parent="Maison" unique_id=1657927711]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55, 6.15)
 use_collision = true
 size = Vector3(1.4, 0.5, 0.3)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_entree_sud_3" type="CSGBox3D" parent="Maison" unique_id=1894585793]
+[node name="Mur_entree_sud_3" type="CSGBox3D" parent="Maison" unique_id=1604173068]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.4, 6.15)
 use_collision = true
 size = Vector3(3.6, 2.8, 0.3)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_entree_nord_1" type="CSGBox3D" parent="Maison" unique_id=1033375742]
+[node name="Mur_entree_nord_1" type="CSGBox3D" parent="Maison" unique_id=646601971]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.649994, 1.4, -2.15)
 use_collision = true
 size = Vector3(3.3, 2.8, 0.3)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_entree_nord_2" type="CSGBox3D" parent="Maison" unique_id=294744867]
+[node name="Mur_entree_nord_2" type="CSGBox3D" parent="Maison" unique_id=82570801]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, -2.15)
 use_collision = true
 size = Vector3(2, 0.4, 0.3)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_entree_nord_3" type="CSGBox3D" parent="Maison" unique_id=1642848140]
+[node name="Mur_entree_nord_3" type="CSGBox3D" parent="Maison" unique_id=1394916587]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.649994, 1.4, -2.15)
 use_collision = true
 size = Vector3(3.3, 2.8, 0.3)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_entree_ouest_1" type="CSGBox3D" parent="Maison" unique_id=837914543]
+[node name="Mur_entree_ouest_1" type="CSGBox3D" parent="Maison" unique_id=1063262220]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.149994, 1.4, -0.3)
 use_collision = true
 size = Vector3(0.3, 2.8, 3.4)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_entree_ouest_2" type="CSGBox3D" parent="Maison" unique_id=2054269507]
+[node name="Mur_entree_ouest_2" type="CSGBox3D" parent="Maison" unique_id=1143621674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.149994, 2.55, 2)
 use_collision = true
 size = Vector3(0.3, 0.5, 1.2)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_entree_ouest_3" type="CSGBox3D" parent="Maison" unique_id=129193204]
+[node name="Mur_entree_ouest_3" type="CSGBox3D" parent="Maison" unique_id=51420400]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.149994, 1.4, 4.3)
 use_collision = true
 size = Vector3(0.3, 2.8, 3.4)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_entree_est_1" type="CSGBox3D" parent="Maison" unique_id=392940582]
+[node name="Mur_entree_est_1" type="CSGBox3D" parent="Maison" unique_id=340881739]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.149994, 1.4, -0.3)
 use_collision = true
 size = Vector3(0.3, 2.8, 3.4)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_entree_est_2" type="CSGBox3D" parent="Maison" unique_id=35487698]
+[node name="Mur_entree_est_2" type="CSGBox3D" parent="Maison" unique_id=792477310]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.149994, 2.55, 2)
 use_collision = true
 size = Vector3(0.3, 0.5, 1.2)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_entree_est_3" type="CSGBox3D" parent="Maison" unique_id=928263085]
+[node name="Mur_entree_est_3" type="CSGBox3D" parent="Maison" unique_id=1558935504]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.149994, 1.4, 4.3)
 use_collision = true
 size = Vector3(0.3, 2.8, 3.4)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Lampe_entree" type="OmniLight3D" parent="Maison" unique_id=1019263611]
+[node name="Lampe_entree" type="OmniLight3D" parent="Maison" unique_id=410945960]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 2)
 light_energy = 1.2
 shadow_enabled = true
 omni_range = 7.0
 
-[node name="@CSGBox3D@2" type="CSGBox3D" parent="Maison" unique_id=1183709303]
+[node name="@CSGBox3D@2" type="CSGBox3D" parent="Maison" unique_id=496957354]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.799988, -0.25, 2)
 use_collision = true
 size = Vector3(7, 0.5, 8.6)
 material = SubResource("StandardMaterial3D_q1kxq")
 
-[node name="@CSGBox3D@3" type="CSGBox3D" parent="Maison" unique_id=555464475]
+[node name="@CSGBox3D@3" type="CSGBox3D" parent="Maison" unique_id=1171324677]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.799988, 2.95, 2)
 use_collision = true
 size = Vector3(7, 0.3, 8.6)
 material = SubResource("StandardMaterial3D_rkkxk")
 
-[node name="Mur_chambre_nord" type="CSGBox3D" parent="Maison" unique_id=1746301113]
+[node name="Mur_chambre_nord" type="CSGBox3D" parent="Maison" unique_id=366934977]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.799988, 1.4, -2.15)
 use_collision = true
 size = Vector3(7, 2.8, 0.3)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_chambre_sud" type="CSGBox3D" parent="Maison" unique_id=735854953]
+[node name="Mur_chambre_sud" type="CSGBox3D" parent="Maison" unique_id=1734529271]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.799988, 1.4, 6.15)
 use_collision = true
 size = Vector3(7, 2.8, 0.3)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_chambre_ouest" type="CSGBox3D" parent="Maison" unique_id=65900264]
+[node name="Mur_chambre_ouest" type="CSGBox3D" parent="Maison" unique_id=1626195388]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.149994, 1.4, 2)
 use_collision = true
 size = Vector3(0.3, 2.8, 8)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Lit" type="CSGBox3D" parent="Maison" unique_id=429736694]
+[node name="Lit" type="CSGBox3D" parent="Maison" unique_id=190258436]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.25, 4.8)
 use_collision = true
 size = Vector3(1, 0.5, 2)
 material = SubResource("StandardMaterial3D_mkg4t")
 
-[node name="Lit_drap" type="CSGBox3D" parent="Maison" unique_id=2058391011]
+[node name="Lit_drap" type="CSGBox3D" parent="Maison" unique_id=1965954828]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.52, 4.7)
 size = Vector3(0.95, 0.06, 1.6)
 material = SubResource("StandardMaterial3D_i8pvh")
 
-[node name="Bureau" type="CSGBox3D" parent="Maison" unique_id=2017340979]
+[node name="Bureau" type="CSGBox3D" parent="Maison" unique_id=1112197103]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2, 0.38, -1.4)
 use_collision = true
 size = Vector3(1.2, 0.76, 0.6)
 material = SubResource("StandardMaterial3D_klhao")
 
-[node name="Chaise" type="CSGBox3D" parent="Maison" unique_id=1885056585]
+[node name="Chaise" type="CSGBox3D" parent="Maison" unique_id=25888144]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2, 0.23, -0.8)
 use_collision = true
 size = Vector3(0.4, 0.46, 0.4)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Armoire" type="CSGBox3D" parent="Maison" unique_id=1538467374]
+[node name="Armoire" type="CSGBox3D" parent="Maison" unique_id=1610390096]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6, 1, 1)
 use_collision = true
 size = Vector3(0.8, 2, 1.6)
 material = SubResource("StandardMaterial3D_fu1xw")
 
-[node name="Coffre" type="CSGBox3D" parent="Maison" unique_id=954600860]
+[node name="Coffre" type="CSGBox3D" parent="Maison" unique_id=556088553]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.25, 5.5)
 use_collision = true
 size = Vector3(0.8, 0.5, 0.6)
 material = SubResource("StandardMaterial3D_rxpku")
 
-[node name="Invitation_bureau" type="RigidBody3D" parent="Maison" unique_id=229957619 groups=["invitations"]]
+[node name="Invitation_bureau" type="RigidBody3D" parent="Maison" unique_id=185117149 groups=["invitations"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.299988, 0.79, -1.45)
 freeze = true
 continuous_cd = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Invitation_bureau" unique_id=510858099]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Invitation_bureau" unique_id=308380838]
 shape = SubResource("BoxShape3D_inx17")
 
-[node name="Mesh" type="MeshInstance3D" parent="Maison/Invitation_bureau" unique_id=298936741]
+[node name="Mesh" type="MeshInstance3D" parent="Maison/Invitation_bureau" unique_id=1564880852]
 material_override = SubResource("StandardMaterial3D_lqicm")
 mesh = SubResource("BoxMesh_yfdgc")
 
-[node name="Cachet" type="MeshInstance3D" parent="Maison/Invitation_bureau" unique_id=2130112948]
+[node name="Cachet" type="MeshInstance3D" parent="Maison/Invitation_bureau" unique_id=1272897552]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0139999995, 0)
 material_override = SubResource("StandardMaterial3D_n2yfd")
 mesh = SubResource("BoxMesh_32seh")
 
-[node name="Invitation_armoire" type="RigidBody3D" parent="Maison" unique_id=1209470592 groups=["invitations"]]
+[node name="Invitation_armoire" type="RigidBody3D" parent="Maison" unique_id=478169831 groups=["invitations"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.899994, 2.1, 1)
 freeze = true
 continuous_cd = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Invitation_armoire" unique_id=349271816]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Invitation_armoire" unique_id=1490303279]
 shape = SubResource("BoxShape3D_uusu1")
 
-[node name="Mesh" type="MeshInstance3D" parent="Maison/Invitation_armoire" unique_id=1594117340]
+[node name="Mesh" type="MeshInstance3D" parent="Maison/Invitation_armoire" unique_id=1647619004]
 material_override = SubResource("StandardMaterial3D_lqicm")
 mesh = SubResource("BoxMesh_xc8vx")
 
-[node name="Cachet" type="MeshInstance3D" parent="Maison/Invitation_armoire" unique_id=1616659131]
+[node name="Cachet" type="MeshInstance3D" parent="Maison/Invitation_armoire" unique_id=274025180]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0139999995, 0, 0)
 material_override = SubResource("StandardMaterial3D_n2yfd")
 mesh = SubResource("BoxMesh_6l27s")
 
-[node name="Cube_1" type="RigidBody3D" parent="Maison" unique_id=209819203 instance=ExtResource("3_dmt0a")]
+[node name="Cube_1" type="RigidBody3D" parent="Maison" unique_id=1580513943 instance=ExtResource("3_dmt0a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4, 0.2, 2.4)
 script = ExtResource("4_ttjcl")
 taille_depart = 0.35
 zone = AABB(488.7, -1, -2.3, 7, 5, 8.6)
 
-[node name="Cube_2" type="RigidBody3D" parent="Maison" unique_id=607472565 instance=ExtResource("3_dmt0a")]
+[node name="Cube_2" type="RigidBody3D" parent="Maison" unique_id=288770071 instance=ExtResource("3_dmt0a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.2, 3.4)
 script = ExtResource("4_ttjcl")
 taille_depart = 0.35
 zone = AABB(488.7, -1, -2.3, 7, 5, 8.6)
 
-[node name="Lampe_chambre" type="OmniLight3D" parent="Maison" unique_id=600187924]
+[node name="Lampe_chambre" type="OmniLight3D" parent="Maison" unique_id=211894169]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.700012, 2.5, 2)
 light_energy = 1.2
 shadow_enabled = true
 omni_range = 7.0
 
-[node name="PenseeBureau" type="Node3D" parent="Maison" unique_id=145877250]
+[node name="PenseeBureau" type="Node3D" parent="Maison" unique_id=1383725691]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.299988, 0.8, -1.45)
 script = ExtResource("2_g0y8o")
 texte = "Mes invitations… Je ne les ai jamais données."
 distance = 3.0
 
-[node name="PenseeArmoire" type="Node3D" parent="Maison" unique_id=2103485308]
+[node name="PenseeArmoire" type="Node3D" parent="Maison" unique_id=196859]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.25, 1.95, 1)
 script = ExtResource("2_g0y8o")
 texte = "J'en avais caché là-haut, pour ne plus les voir."
 distance = 4.0
 angle_max_deg = 15.0
 
-[node name="@CSGBox3D@4" type="CSGBox3D" parent="Maison" unique_id=323980957]
+[node name="@CSGBox3D@4" type="CSGBox3D" parent="Maison" unique_id=462395326]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.299988, -0.25, 2)
 use_collision = true
 size = Vector3(6, 0.5, 8.6)
 material = SubResource("StandardMaterial3D_q1kxq")
 
-[node name="@CSGBox3D@5" type="CSGBox3D" parent="Maison" unique_id=132415173]
+[node name="@CSGBox3D@5" type="CSGBox3D" parent="Maison" unique_id=1593810591]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.299988, 2.95, 2)
 use_collision = true
 size = Vector3(6, 0.3, 8.6)
 material = SubResource("StandardMaterial3D_rkkxk")
 
-[node name="Mur_sdb_nord" type="CSGBox3D" parent="Maison" unique_id=1663512437]
+[node name="Mur_sdb_nord" type="CSGBox3D" parent="Maison" unique_id=298295046]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.299988, 1.4, -2.15)
 use_collision = true
 size = Vector3(6, 2.8, 0.3)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_sdb_sud" type="CSGBox3D" parent="Maison" unique_id=1110248222]
+[node name="Mur_sdb_sud" type="CSGBox3D" parent="Maison" unique_id=608280871]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.299988, 1.4, 6.15)
 use_collision = true
 size = Vector3(6, 2.8, 0.3)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_sdb_est" type="CSGBox3D" parent="Maison" unique_id=1522791777]
+[node name="Mur_sdb_est" type="CSGBox3D" parent="Maison" unique_id=679120329]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.149994, 1.4, 2)
 use_collision = true
 size = Vector3(0.3, 2.8, 8)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Lavabo" type="CSGBox3D" parent="Maison" unique_id=1780026858]
+[node name="Lavabo" type="CSGBox3D" parent="Maison" unique_id=1036419822]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3, 0.42, -1.75)
 use_collision = true
 size = Vector3(0.8, 0.84, 0.5)
 material = SubResource("StandardMaterial3D_tqqu4")
 
-[node name="Miroir_cadre" type="CSGBox3D" parent="Maison" unique_id=750126908]
+[node name="Miroir_cadre" type="CSGBox3D" parent="Maison" unique_id=382473887]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3, 1.45, -1.98)
 size = Vector3(1.55, 1.15, 0.04)
 material = SubResource("StandardMaterial3D_4fr8h")
 
-[node name="Miroir" type="Node3D" parent="Maison" unique_id=351681834]
+[node name="Miroir" type="Node3D" parent="Maison" unique_id=1801480115]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3, 1.45, -1.955)
 script = ExtResource("5_dbne4")
 taille = Vector2(1.4, 1)
 
-[node name="Baignoire" type="CSGBox3D" parent="Maison" unique_id=1236588873]
+[node name="Baignoire" type="CSGBox3D" parent="Maison" unique_id=746993950]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3, 0.3, 5.55)
 use_collision = true
 size = Vector3(1.9, 0.6, 0.8)
 material = SubResource("StandardMaterial3D_tqqu4")
 
-[node name="Etagere" type="CSGBox3D" parent="Maison" unique_id=745078920]
+[node name="Etagere" type="CSGBox3D" parent="Maison" unique_id=455019458]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8, 1, 5.9)
 use_collision = true
 size = Vector3(0.6, 0.04, 0.2)
 material = SubResource("StandardMaterial3D_fu1xw")
 
-[node name="Invitation_reflet" type="RigidBody3D" parent="Maison" unique_id=842924732 groups=["invitations"]]
+[node name="Invitation_reflet" type="RigidBody3D" parent="Maison" unique_id=1771984938 groups=["invitations"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.799988, 1.11, 5.9)
 freeze = true
 continuous_cd = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Invitation_reflet" unique_id=1304992189]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Maison/Invitation_reflet" unique_id=1842553968]
 shape = SubResource("BoxShape3D_is6wl")
 
-[node name="Mesh" type="MeshInstance3D" parent="Maison/Invitation_reflet" unique_id=2035490089]
+[node name="Mesh" type="MeshInstance3D" parent="Maison/Invitation_reflet" unique_id=997197510]
 layers = 4
 material_override = SubResource("StandardMaterial3D_lqicm")
 mesh = SubResource("BoxMesh_5upsh")
 
-[node name="Cachet" type="MeshInstance3D" parent="Maison/Invitation_reflet" unique_id=171909537]
+[node name="Cachet" type="MeshInstance3D" parent="Maison/Invitation_reflet" unique_id=1975592761]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0139999995)
 layers = 4
 material_override = SubResource("StandardMaterial3D_n2yfd")
 mesh = SubResource("BoxMesh_3k1bv")
 
-[node name="Lampe_sdb" type="OmniLight3D" parent="Maison" unique_id=494814183]
+[node name="Lampe_sdb" type="OmniLight3D" parent="Maison" unique_id=1582628300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.299988, 2.5, 2)
 light_energy = 1.2
 shadow_enabled = true
 omni_range = 7.0
 
-[node name="PenseeMiroir" type="Node3D" parent="Maison" unique_id=1621564755]
+[node name="PenseeMiroir" type="Node3D" parent="Maison" unique_id=782662193]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.299988, 1.45, -1.955)
 script = ExtResource("2_g0y8o")
 texte = "Dans le miroir, je suis si petit."
 distance = 3.5
 angle_max_deg = 15.0
 
-[node name="PenseeDepart" type="Node3D" parent="Maison" unique_id=476076121]
+[node name="PenseeDepart" type="Node3D" parent="Maison" unique_id=1404550808]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 17.5)
 script = ExtResource("2_g0y8o")
 texte = "Le soir de mon anniversaire. Personne n'est encore là."
@@ -1861,1056 +1861,1056 @@ regard = false
 distance = 2.0
 angle_max_deg = 0.0
 
-[node name="SalleAManger" type="Node3D" parent="." unique_id=1783502715]
+[node name="SalleAManger" type="Node3D" parent="." unique_id=1071598875]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 500, 0, 0)
 
-[node name="Sol" type="CSGBox3D" parent="SalleAManger" unique_id=633452796]
+[node name="Sol" type="CSGBox3D" parent="SalleAManger" unique_id=1964470691]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -23.3)
 use_collision = true
 size = Vector3(6.6, 0.5, 42)
 material = SubResource("StandardMaterial3D_q1kxq")
 
-[node name="Plafond" type="CSGBox3D" parent="SalleAManger" unique_id=1638662573]
+[node name="Plafond" type="CSGBox3D" parent="SalleAManger" unique_id=1641891758]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.95, -23.3)
 use_collision = true
 size = Vector3(6.6, 0.3, 42)
 material = SubResource("StandardMaterial3D_rkkxk")
 
-[node name="Mur_ouest" type="CSGBox3D" parent="SalleAManger" unique_id=1345863432]
+[node name="Mur_ouest" type="CSGBox3D" parent="SalleAManger" unique_id=1303886290]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.149994, 1.4, -23.3)
 use_collision = true
 size = Vector3(0.3, 2.8, 42)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_est" type="CSGBox3D" parent="SalleAManger" unique_id=1582595917]
+[node name="Mur_est" type="CSGBox3D" parent="SalleAManger" unique_id=1904875447]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.149994, 1.4, -23.3)
 use_collision = true
 size = Vector3(0.3, 2.8, 42)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Mur_fond" type="CSGBox3D" parent="SalleAManger" unique_id=780048431]
+[node name="Mur_fond" type="CSGBox3D" parent="SalleAManger" unique_id=951260906]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -44.45)
 use_collision = true
 size = Vector3(6.6, 2.8, 0.3)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Table" type="CSGBox3D" parent="SalleAManger" unique_id=1434862366]
+[node name="Table" type="CSGBox3D" parent="SalleAManger" unique_id=119156834]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, -23.3)
 use_collision = true
 size = Vector3(1.2, 0.75, 41)
 material = SubResource("StandardMaterial3D_lrf26")
 
-[node name="Nappe" type="CSGBox3D" parent="SalleAManger" unique_id=888468938]
+[node name="Nappe" type="CSGBox3D" parent="SalleAManger" unique_id=1485878288]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, -23.3)
 size = Vector3(1.3, 0.02, 41)
 material = SubResource("StandardMaterial3D_wyaa7")
 
-[node name="Chaise_g_0" type="CSGBox3D" parent="SalleAManger" unique_id=1286309577]
+[node name="Chaise_g_0" type="CSGBox3D" parent="SalleAManger" unique_id=1586746370]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -3.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_0" type="CSGBox3D" parent="SalleAManger" unique_id=1826715577]
+[node name="Dossier_g_0" type="CSGBox3D" parent="SalleAManger" unique_id=926895613]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -3.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_0" type="CSGBox3D" parent="SalleAManger" unique_id=159193073]
+[node name="Chaise_d_0" type="CSGBox3D" parent="SalleAManger" unique_id=93555198]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -3.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_0" type="CSGBox3D" parent="SalleAManger" unique_id=1801679774]
+[node name="Dossier_d_0" type="CSGBox3D" parent="SalleAManger" unique_id=871127283]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -3.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_1" type="CSGBox3D" parent="SalleAManger" unique_id=1661815959]
+[node name="Chaise_g_1" type="CSGBox3D" parent="SalleAManger" unique_id=2024615926]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -4.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_1" type="CSGBox3D" parent="SalleAManger" unique_id=1147687089]
+[node name="Dossier_g_1" type="CSGBox3D" parent="SalleAManger" unique_id=871867345]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -4.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_1" type="CSGBox3D" parent="SalleAManger" unique_id=1472300116]
+[node name="Chaise_d_1" type="CSGBox3D" parent="SalleAManger" unique_id=267796147]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -4.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_1" type="CSGBox3D" parent="SalleAManger" unique_id=1485316676]
+[node name="Dossier_d_1" type="CSGBox3D" parent="SalleAManger" unique_id=1367245098]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -4.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_2" type="CSGBox3D" parent="SalleAManger" unique_id=743202139]
+[node name="Chaise_g_2" type="CSGBox3D" parent="SalleAManger" unique_id=671868248]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -5.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_2" type="CSGBox3D" parent="SalleAManger" unique_id=625621646]
+[node name="Dossier_g_2" type="CSGBox3D" parent="SalleAManger" unique_id=871547235]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -5.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_2" type="CSGBox3D" parent="SalleAManger" unique_id=949454154]
+[node name="Chaise_d_2" type="CSGBox3D" parent="SalleAManger" unique_id=238428427]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -5.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_2" type="CSGBox3D" parent="SalleAManger" unique_id=1019896534]
+[node name="Dossier_d_2" type="CSGBox3D" parent="SalleAManger" unique_id=1203881682]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -5.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_3" type="CSGBox3D" parent="SalleAManger" unique_id=1692966297]
+[node name="Chaise_g_3" type="CSGBox3D" parent="SalleAManger" unique_id=1089412921]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -6.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_3" type="CSGBox3D" parent="SalleAManger" unique_id=854013889]
+[node name="Dossier_g_3" type="CSGBox3D" parent="SalleAManger" unique_id=1946791793]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -6.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_3" type="CSGBox3D" parent="SalleAManger" unique_id=1807407126]
+[node name="Chaise_d_3" type="CSGBox3D" parent="SalleAManger" unique_id=151578395]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -6.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_3" type="CSGBox3D" parent="SalleAManger" unique_id=1528322542]
+[node name="Dossier_d_3" type="CSGBox3D" parent="SalleAManger" unique_id=291410117]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -6.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_4" type="CSGBox3D" parent="SalleAManger" unique_id=2047161055]
+[node name="Chaise_g_4" type="CSGBox3D" parent="SalleAManger" unique_id=2093536535]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -7.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_4" type="CSGBox3D" parent="SalleAManger" unique_id=334755443]
+[node name="Dossier_g_4" type="CSGBox3D" parent="SalleAManger" unique_id=882621941]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -7.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_4" type="CSGBox3D" parent="SalleAManger" unique_id=701344762]
+[node name="Chaise_d_4" type="CSGBox3D" parent="SalleAManger" unique_id=1471811835]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -7.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_4" type="CSGBox3D" parent="SalleAManger" unique_id=547211492]
+[node name="Dossier_d_4" type="CSGBox3D" parent="SalleAManger" unique_id=1999464546]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -7.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_5" type="CSGBox3D" parent="SalleAManger" unique_id=1732772337]
+[node name="Chaise_g_5" type="CSGBox3D" parent="SalleAManger" unique_id=1484544777]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -8.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_5" type="CSGBox3D" parent="SalleAManger" unique_id=253266916]
+[node name="Dossier_g_5" type="CSGBox3D" parent="SalleAManger" unique_id=1031317047]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -8.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_5" type="CSGBox3D" parent="SalleAManger" unique_id=840297783]
+[node name="Chaise_d_5" type="CSGBox3D" parent="SalleAManger" unique_id=433789044]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -8.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_5" type="CSGBox3D" parent="SalleAManger" unique_id=1262693613]
+[node name="Dossier_d_5" type="CSGBox3D" parent="SalleAManger" unique_id=1882262515]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -8.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_6" type="CSGBox3D" parent="SalleAManger" unique_id=1315856631]
+[node name="Chaise_g_6" type="CSGBox3D" parent="SalleAManger" unique_id=1757439796]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -9.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_6" type="CSGBox3D" parent="SalleAManger" unique_id=94822778]
+[node name="Dossier_g_6" type="CSGBox3D" parent="SalleAManger" unique_id=376271689]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -9.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_6" type="CSGBox3D" parent="SalleAManger" unique_id=1630701242]
+[node name="Chaise_d_6" type="CSGBox3D" parent="SalleAManger" unique_id=210805139]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -9.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_6" type="CSGBox3D" parent="SalleAManger" unique_id=359417945]
+[node name="Dossier_d_6" type="CSGBox3D" parent="SalleAManger" unique_id=1724243139]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -9.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_7" type="CSGBox3D" parent="SalleAManger" unique_id=909255889]
+[node name="Chaise_g_7" type="CSGBox3D" parent="SalleAManger" unique_id=1236745389]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -10.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_7" type="CSGBox3D" parent="SalleAManger" unique_id=1454580373]
+[node name="Dossier_g_7" type="CSGBox3D" parent="SalleAManger" unique_id=1877148052]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -10.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_7" type="CSGBox3D" parent="SalleAManger" unique_id=1308339191]
+[node name="Chaise_d_7" type="CSGBox3D" parent="SalleAManger" unique_id=2095971576]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -10.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_7" type="CSGBox3D" parent="SalleAManger" unique_id=965433874]
+[node name="Dossier_d_7" type="CSGBox3D" parent="SalleAManger" unique_id=278147263]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -10.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_8" type="CSGBox3D" parent="SalleAManger" unique_id=318330319]
+[node name="Chaise_g_8" type="CSGBox3D" parent="SalleAManger" unique_id=423265554]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -11.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_8" type="CSGBox3D" parent="SalleAManger" unique_id=733970349]
+[node name="Dossier_g_8" type="CSGBox3D" parent="SalleAManger" unique_id=843770789]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -11.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_8" type="CSGBox3D" parent="SalleAManger" unique_id=238204150]
+[node name="Chaise_d_8" type="CSGBox3D" parent="SalleAManger" unique_id=1081785714]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -11.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_8" type="CSGBox3D" parent="SalleAManger" unique_id=475852891]
+[node name="Dossier_d_8" type="CSGBox3D" parent="SalleAManger" unique_id=1054843258]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -11.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_9" type="CSGBox3D" parent="SalleAManger" unique_id=235855187]
+[node name="Chaise_g_9" type="CSGBox3D" parent="SalleAManger" unique_id=2085509235]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -12.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_9" type="CSGBox3D" parent="SalleAManger" unique_id=639940813]
+[node name="Dossier_g_9" type="CSGBox3D" parent="SalleAManger" unique_id=1000132414]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -12.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_9" type="CSGBox3D" parent="SalleAManger" unique_id=1450305499]
+[node name="Chaise_d_9" type="CSGBox3D" parent="SalleAManger" unique_id=1676070107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -12.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_9" type="CSGBox3D" parent="SalleAManger" unique_id=1914986469]
+[node name="Dossier_d_9" type="CSGBox3D" parent="SalleAManger" unique_id=166750227]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -12.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_10" type="CSGBox3D" parent="SalleAManger" unique_id=1328199017]
+[node name="Chaise_g_10" type="CSGBox3D" parent="SalleAManger" unique_id=907359850]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -13.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_10" type="CSGBox3D" parent="SalleAManger" unique_id=702298546]
+[node name="Dossier_g_10" type="CSGBox3D" parent="SalleAManger" unique_id=1531783394]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -13.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_10" type="CSGBox3D" parent="SalleAManger" unique_id=1456494234]
+[node name="Chaise_d_10" type="CSGBox3D" parent="SalleAManger" unique_id=720908576]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -13.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_10" type="CSGBox3D" parent="SalleAManger" unique_id=1737663662]
+[node name="Dossier_d_10" type="CSGBox3D" parent="SalleAManger" unique_id=546507708]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -13.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_11" type="CSGBox3D" parent="SalleAManger" unique_id=1913306638]
+[node name="Chaise_g_11" type="CSGBox3D" parent="SalleAManger" unique_id=1638805360]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -14.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_11" type="CSGBox3D" parent="SalleAManger" unique_id=1488179637]
+[node name="Dossier_g_11" type="CSGBox3D" parent="SalleAManger" unique_id=360015359]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -14.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_11" type="CSGBox3D" parent="SalleAManger" unique_id=1408161092]
+[node name="Chaise_d_11" type="CSGBox3D" parent="SalleAManger" unique_id=1339601803]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -14.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_11" type="CSGBox3D" parent="SalleAManger" unique_id=76610513]
+[node name="Dossier_d_11" type="CSGBox3D" parent="SalleAManger" unique_id=1486104983]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -14.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_12" type="CSGBox3D" parent="SalleAManger" unique_id=1011920831]
+[node name="Chaise_g_12" type="CSGBox3D" parent="SalleAManger" unique_id=1867337939]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -15.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_12" type="CSGBox3D" parent="SalleAManger" unique_id=1424932167]
+[node name="Dossier_g_12" type="CSGBox3D" parent="SalleAManger" unique_id=322028761]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -15.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_12" type="CSGBox3D" parent="SalleAManger" unique_id=52167942]
+[node name="Chaise_d_12" type="CSGBox3D" parent="SalleAManger" unique_id=1980027752]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -15.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_12" type="CSGBox3D" parent="SalleAManger" unique_id=1625377964]
+[node name="Dossier_d_12" type="CSGBox3D" parent="SalleAManger" unique_id=272869687]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -15.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_13" type="CSGBox3D" parent="SalleAManger" unique_id=1079893800]
+[node name="Chaise_g_13" type="CSGBox3D" parent="SalleAManger" unique_id=2131960396]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -16.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_13" type="CSGBox3D" parent="SalleAManger" unique_id=23773595]
+[node name="Dossier_g_13" type="CSGBox3D" parent="SalleAManger" unique_id=1285907175]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -16.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_13" type="CSGBox3D" parent="SalleAManger" unique_id=1306590917]
+[node name="Chaise_d_13" type="CSGBox3D" parent="SalleAManger" unique_id=1261309804]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -16.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_13" type="CSGBox3D" parent="SalleAManger" unique_id=587164621]
+[node name="Dossier_d_13" type="CSGBox3D" parent="SalleAManger" unique_id=743639695]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -16.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_14" type="CSGBox3D" parent="SalleAManger" unique_id=1009698310]
+[node name="Chaise_g_14" type="CSGBox3D" parent="SalleAManger" unique_id=959213970]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -17.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_14" type="CSGBox3D" parent="SalleAManger" unique_id=56199241]
+[node name="Dossier_g_14" type="CSGBox3D" parent="SalleAManger" unique_id=1359806991]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -17.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_14" type="CSGBox3D" parent="SalleAManger" unique_id=1893215729]
+[node name="Chaise_d_14" type="CSGBox3D" parent="SalleAManger" unique_id=986957873]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -17.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_14" type="CSGBox3D" parent="SalleAManger" unique_id=385830538]
+[node name="Dossier_d_14" type="CSGBox3D" parent="SalleAManger" unique_id=323824521]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -17.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_15" type="CSGBox3D" parent="SalleAManger" unique_id=1983029267]
+[node name="Chaise_g_15" type="CSGBox3D" parent="SalleAManger" unique_id=305899801]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -18.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_15" type="CSGBox3D" parent="SalleAManger" unique_id=2080544145]
+[node name="Dossier_g_15" type="CSGBox3D" parent="SalleAManger" unique_id=1335118549]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -18.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_15" type="CSGBox3D" parent="SalleAManger" unique_id=915017882]
+[node name="Chaise_d_15" type="CSGBox3D" parent="SalleAManger" unique_id=622429920]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -18.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_15" type="CSGBox3D" parent="SalleAManger" unique_id=1078191781]
+[node name="Dossier_d_15" type="CSGBox3D" parent="SalleAManger" unique_id=662406235]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -18.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_16" type="CSGBox3D" parent="SalleAManger" unique_id=55503769]
+[node name="Chaise_g_16" type="CSGBox3D" parent="SalleAManger" unique_id=205869804]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -19.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_16" type="CSGBox3D" parent="SalleAManger" unique_id=2062590923]
+[node name="Dossier_g_16" type="CSGBox3D" parent="SalleAManger" unique_id=1379597331]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -19.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_16" type="CSGBox3D" parent="SalleAManger" unique_id=1468611198]
+[node name="Chaise_d_16" type="CSGBox3D" parent="SalleAManger" unique_id=1684020404]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -19.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_16" type="CSGBox3D" parent="SalleAManger" unique_id=1855593751]
+[node name="Dossier_d_16" type="CSGBox3D" parent="SalleAManger" unique_id=1026233637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -19.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_17" type="CSGBox3D" parent="SalleAManger" unique_id=262289176]
+[node name="Chaise_g_17" type="CSGBox3D" parent="SalleAManger" unique_id=1615021602]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -20.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_17" type="CSGBox3D" parent="SalleAManger" unique_id=1572273705]
+[node name="Dossier_g_17" type="CSGBox3D" parent="SalleAManger" unique_id=1331873831]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -20.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_17" type="CSGBox3D" parent="SalleAManger" unique_id=404649789]
+[node name="Chaise_d_17" type="CSGBox3D" parent="SalleAManger" unique_id=2047337915]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -20.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_17" type="CSGBox3D" parent="SalleAManger" unique_id=1585039205]
+[node name="Dossier_d_17" type="CSGBox3D" parent="SalleAManger" unique_id=1406222537]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -20.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_18" type="CSGBox3D" parent="SalleAManger" unique_id=794236255]
+[node name="Chaise_g_18" type="CSGBox3D" parent="SalleAManger" unique_id=1656395675]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -21.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_18" type="CSGBox3D" parent="SalleAManger" unique_id=1627640086]
+[node name="Dossier_g_18" type="CSGBox3D" parent="SalleAManger" unique_id=677366248]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -21.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_18" type="CSGBox3D" parent="SalleAManger" unique_id=1304629413]
+[node name="Chaise_d_18" type="CSGBox3D" parent="SalleAManger" unique_id=1335595893]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -21.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_18" type="CSGBox3D" parent="SalleAManger" unique_id=1614234132]
+[node name="Dossier_d_18" type="CSGBox3D" parent="SalleAManger" unique_id=1443968082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -21.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_19" type="CSGBox3D" parent="SalleAManger" unique_id=1281707533]
+[node name="Chaise_g_19" type="CSGBox3D" parent="SalleAManger" unique_id=2084053261]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -22.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_19" type="CSGBox3D" parent="SalleAManger" unique_id=1573315944]
+[node name="Dossier_g_19" type="CSGBox3D" parent="SalleAManger" unique_id=171501083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -22.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_19" type="CSGBox3D" parent="SalleAManger" unique_id=1484880489]
+[node name="Chaise_d_19" type="CSGBox3D" parent="SalleAManger" unique_id=1053340668]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -22.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_19" type="CSGBox3D" parent="SalleAManger" unique_id=1873343993]
+[node name="Dossier_d_19" type="CSGBox3D" parent="SalleAManger" unique_id=1499978252]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -22.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_20" type="CSGBox3D" parent="SalleAManger" unique_id=1651004123]
+[node name="Chaise_g_20" type="CSGBox3D" parent="SalleAManger" unique_id=601616453]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -23.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_20" type="CSGBox3D" parent="SalleAManger" unique_id=2056772700]
+[node name="Dossier_g_20" type="CSGBox3D" parent="SalleAManger" unique_id=1672430406]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -23.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_20" type="CSGBox3D" parent="SalleAManger" unique_id=1043438132]
+[node name="Chaise_d_20" type="CSGBox3D" parent="SalleAManger" unique_id=311463305]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -23.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_20" type="CSGBox3D" parent="SalleAManger" unique_id=1012742770]
+[node name="Dossier_d_20" type="CSGBox3D" parent="SalleAManger" unique_id=675023136]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -23.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_21" type="CSGBox3D" parent="SalleAManger" unique_id=51987657]
+[node name="Chaise_g_21" type="CSGBox3D" parent="SalleAManger" unique_id=1277034287]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -24.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_21" type="CSGBox3D" parent="SalleAManger" unique_id=141675905]
+[node name="Dossier_g_21" type="CSGBox3D" parent="SalleAManger" unique_id=687792191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -24.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_21" type="CSGBox3D" parent="SalleAManger" unique_id=1923546090]
+[node name="Chaise_d_21" type="CSGBox3D" parent="SalleAManger" unique_id=790612410]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -24.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_21" type="CSGBox3D" parent="SalleAManger" unique_id=7218174]
+[node name="Dossier_d_21" type="CSGBox3D" parent="SalleAManger" unique_id=1281790555]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -24.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_22" type="CSGBox3D" parent="SalleAManger" unique_id=295323107]
+[node name="Chaise_g_22" type="CSGBox3D" parent="SalleAManger" unique_id=861679293]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -25.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_22" type="CSGBox3D" parent="SalleAManger" unique_id=872878274]
+[node name="Dossier_g_22" type="CSGBox3D" parent="SalleAManger" unique_id=18377766]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -25.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_22" type="CSGBox3D" parent="SalleAManger" unique_id=279012393]
+[node name="Chaise_d_22" type="CSGBox3D" parent="SalleAManger" unique_id=1843402424]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -25.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_22" type="CSGBox3D" parent="SalleAManger" unique_id=414103047]
+[node name="Dossier_d_22" type="CSGBox3D" parent="SalleAManger" unique_id=1861891470]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -25.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_23" type="CSGBox3D" parent="SalleAManger" unique_id=1833315714]
+[node name="Chaise_g_23" type="CSGBox3D" parent="SalleAManger" unique_id=70616811]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -26.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_23" type="CSGBox3D" parent="SalleAManger" unique_id=667446181]
+[node name="Dossier_g_23" type="CSGBox3D" parent="SalleAManger" unique_id=1651545933]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -26.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_23" type="CSGBox3D" parent="SalleAManger" unique_id=2047828126]
+[node name="Chaise_d_23" type="CSGBox3D" parent="SalleAManger" unique_id=790958283]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -26.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_23" type="CSGBox3D" parent="SalleAManger" unique_id=1781774749]
+[node name="Dossier_d_23" type="CSGBox3D" parent="SalleAManger" unique_id=1561496744]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -26.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_24" type="CSGBox3D" parent="SalleAManger" unique_id=4446944]
+[node name="Chaise_g_24" type="CSGBox3D" parent="SalleAManger" unique_id=1344315127]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -27.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_24" type="CSGBox3D" parent="SalleAManger" unique_id=440376844]
+[node name="Dossier_g_24" type="CSGBox3D" parent="SalleAManger" unique_id=570712083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -27.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_24" type="CSGBox3D" parent="SalleAManger" unique_id=2050925814]
+[node name="Chaise_d_24" type="CSGBox3D" parent="SalleAManger" unique_id=1383503387]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -27.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_24" type="CSGBox3D" parent="SalleAManger" unique_id=1038100063]
+[node name="Dossier_d_24" type="CSGBox3D" parent="SalleAManger" unique_id=2094954093]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -27.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_25" type="CSGBox3D" parent="SalleAManger" unique_id=1983258785]
+[node name="Chaise_g_25" type="CSGBox3D" parent="SalleAManger" unique_id=438403662]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -28.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_25" type="CSGBox3D" parent="SalleAManger" unique_id=1309484026]
+[node name="Dossier_g_25" type="CSGBox3D" parent="SalleAManger" unique_id=1076322847]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -28.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_25" type="CSGBox3D" parent="SalleAManger" unique_id=1769188686]
+[node name="Chaise_d_25" type="CSGBox3D" parent="SalleAManger" unique_id=1088718718]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -28.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_25" type="CSGBox3D" parent="SalleAManger" unique_id=1611825910]
+[node name="Dossier_d_25" type="CSGBox3D" parent="SalleAManger" unique_id=102804178]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -28.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_26" type="CSGBox3D" parent="SalleAManger" unique_id=1830276723]
+[node name="Chaise_g_26" type="CSGBox3D" parent="SalleAManger" unique_id=81990219]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -29.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_26" type="CSGBox3D" parent="SalleAManger" unique_id=1393074916]
+[node name="Dossier_g_26" type="CSGBox3D" parent="SalleAManger" unique_id=690625871]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -29.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_26" type="CSGBox3D" parent="SalleAManger" unique_id=1585333356]
+[node name="Chaise_d_26" type="CSGBox3D" parent="SalleAManger" unique_id=1927625019]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -29.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_26" type="CSGBox3D" parent="SalleAManger" unique_id=1380158089]
+[node name="Dossier_d_26" type="CSGBox3D" parent="SalleAManger" unique_id=1009104667]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -29.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_27" type="CSGBox3D" parent="SalleAManger" unique_id=1890764236]
+[node name="Chaise_g_27" type="CSGBox3D" parent="SalleAManger" unique_id=715046594]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -30.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_27" type="CSGBox3D" parent="SalleAManger" unique_id=1766141667]
+[node name="Dossier_g_27" type="CSGBox3D" parent="SalleAManger" unique_id=1546644060]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -30.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_27" type="CSGBox3D" parent="SalleAManger" unique_id=1515173779]
+[node name="Chaise_d_27" type="CSGBox3D" parent="SalleAManger" unique_id=1843864446]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -30.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_27" type="CSGBox3D" parent="SalleAManger" unique_id=213623420]
+[node name="Dossier_d_27" type="CSGBox3D" parent="SalleAManger" unique_id=790164051]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -30.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_28" type="CSGBox3D" parent="SalleAManger" unique_id=2088652659]
+[node name="Chaise_g_28" type="CSGBox3D" parent="SalleAManger" unique_id=1649111568]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -31.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_28" type="CSGBox3D" parent="SalleAManger" unique_id=1434449154]
+[node name="Dossier_g_28" type="CSGBox3D" parent="SalleAManger" unique_id=2038866542]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -31.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_28" type="CSGBox3D" parent="SalleAManger" unique_id=2101026290]
+[node name="Chaise_d_28" type="CSGBox3D" parent="SalleAManger" unique_id=369049314]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -31.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_28" type="CSGBox3D" parent="SalleAManger" unique_id=1085695618]
+[node name="Dossier_d_28" type="CSGBox3D" parent="SalleAManger" unique_id=1679794342]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -31.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_29" type="CSGBox3D" parent="SalleAManger" unique_id=322147273]
+[node name="Chaise_g_29" type="CSGBox3D" parent="SalleAManger" unique_id=1742208693]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -32.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_29" type="CSGBox3D" parent="SalleAManger" unique_id=1616386928]
+[node name="Dossier_g_29" type="CSGBox3D" parent="SalleAManger" unique_id=1186037051]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -32.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_29" type="CSGBox3D" parent="SalleAManger" unique_id=1060590391]
+[node name="Chaise_d_29" type="CSGBox3D" parent="SalleAManger" unique_id=1753388951]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -32.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_29" type="CSGBox3D" parent="SalleAManger" unique_id=171262314]
+[node name="Dossier_d_29" type="CSGBox3D" parent="SalleAManger" unique_id=1290180678]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -32.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_30" type="CSGBox3D" parent="SalleAManger" unique_id=1395535746]
+[node name="Chaise_g_30" type="CSGBox3D" parent="SalleAManger" unique_id=304054202]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -33.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_30" type="CSGBox3D" parent="SalleAManger" unique_id=1045493491]
+[node name="Dossier_g_30" type="CSGBox3D" parent="SalleAManger" unique_id=499483017]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -33.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_30" type="CSGBox3D" parent="SalleAManger" unique_id=1809866259]
+[node name="Chaise_d_30" type="CSGBox3D" parent="SalleAManger" unique_id=1625981848]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -33.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_30" type="CSGBox3D" parent="SalleAManger" unique_id=1703482535]
+[node name="Dossier_d_30" type="CSGBox3D" parent="SalleAManger" unique_id=1276229154]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -33.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_31" type="CSGBox3D" parent="SalleAManger" unique_id=1952799126]
+[node name="Chaise_g_31" type="CSGBox3D" parent="SalleAManger" unique_id=1730537645]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -34.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_31" type="CSGBox3D" parent="SalleAManger" unique_id=924317640]
+[node name="Dossier_g_31" type="CSGBox3D" parent="SalleAManger" unique_id=627023898]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -34.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_31" type="CSGBox3D" parent="SalleAManger" unique_id=348823941]
+[node name="Chaise_d_31" type="CSGBox3D" parent="SalleAManger" unique_id=187987922]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -34.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_31" type="CSGBox3D" parent="SalleAManger" unique_id=434825695]
+[node name="Dossier_d_31" type="CSGBox3D" parent="SalleAManger" unique_id=1207334006]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -34.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_32" type="CSGBox3D" parent="SalleAManger" unique_id=862266925]
+[node name="Chaise_g_32" type="CSGBox3D" parent="SalleAManger" unique_id=1164300488]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -35.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_32" type="CSGBox3D" parent="SalleAManger" unique_id=159329558]
+[node name="Dossier_g_32" type="CSGBox3D" parent="SalleAManger" unique_id=208836775]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -35.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_32" type="CSGBox3D" parent="SalleAManger" unique_id=1497542605]
+[node name="Chaise_d_32" type="CSGBox3D" parent="SalleAManger" unique_id=1730477056]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -35.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_32" type="CSGBox3D" parent="SalleAManger" unique_id=669644756]
+[node name="Dossier_d_32" type="CSGBox3D" parent="SalleAManger" unique_id=1072401668]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -35.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_33" type="CSGBox3D" parent="SalleAManger" unique_id=915414534]
+[node name="Chaise_g_33" type="CSGBox3D" parent="SalleAManger" unique_id=1281170365]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -36.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_33" type="CSGBox3D" parent="SalleAManger" unique_id=708241745]
+[node name="Dossier_g_33" type="CSGBox3D" parent="SalleAManger" unique_id=158593345]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -36.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_33" type="CSGBox3D" parent="SalleAManger" unique_id=748915780]
+[node name="Chaise_d_33" type="CSGBox3D" parent="SalleAManger" unique_id=1349635534]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -36.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_33" type="CSGBox3D" parent="SalleAManger" unique_id=1978898537]
+[node name="Dossier_d_33" type="CSGBox3D" parent="SalleAManger" unique_id=543185003]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -36.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_34" type="CSGBox3D" parent="SalleAManger" unique_id=637623030]
+[node name="Chaise_g_34" type="CSGBox3D" parent="SalleAManger" unique_id=672073074]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -37.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_34" type="CSGBox3D" parent="SalleAManger" unique_id=1198427292]
+[node name="Dossier_g_34" type="CSGBox3D" parent="SalleAManger" unique_id=1672576810]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -37.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_34" type="CSGBox3D" parent="SalleAManger" unique_id=1797809469]
+[node name="Chaise_d_34" type="CSGBox3D" parent="SalleAManger" unique_id=276320900]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -37.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_34" type="CSGBox3D" parent="SalleAManger" unique_id=1336308685]
+[node name="Dossier_d_34" type="CSGBox3D" parent="SalleAManger" unique_id=2000807377]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -37.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_35" type="CSGBox3D" parent="SalleAManger" unique_id=375056841]
+[node name="Chaise_g_35" type="CSGBox3D" parent="SalleAManger" unique_id=1199373168]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -38.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_35" type="CSGBox3D" parent="SalleAManger" unique_id=919546480]
+[node name="Dossier_g_35" type="CSGBox3D" parent="SalleAManger" unique_id=210022242]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -38.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_35" type="CSGBox3D" parent="SalleAManger" unique_id=1010141917]
+[node name="Chaise_d_35" type="CSGBox3D" parent="SalleAManger" unique_id=1584733232]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -38.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_35" type="CSGBox3D" parent="SalleAManger" unique_id=474863397]
+[node name="Dossier_d_35" type="CSGBox3D" parent="SalleAManger" unique_id=1473031454]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -38.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_36" type="CSGBox3D" parent="SalleAManger" unique_id=1829946324]
+[node name="Chaise_g_36" type="CSGBox3D" parent="SalleAManger" unique_id=183777670]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -39.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_36" type="CSGBox3D" parent="SalleAManger" unique_id=306270372]
+[node name="Dossier_g_36" type="CSGBox3D" parent="SalleAManger" unique_id=64509892]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -39.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_36" type="CSGBox3D" parent="SalleAManger" unique_id=1209291634]
+[node name="Chaise_d_36" type="CSGBox3D" parent="SalleAManger" unique_id=1592345719]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -39.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_36" type="CSGBox3D" parent="SalleAManger" unique_id=1749792769]
+[node name="Dossier_d_36" type="CSGBox3D" parent="SalleAManger" unique_id=1544093853]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -39.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_37" type="CSGBox3D" parent="SalleAManger" unique_id=795894012]
+[node name="Chaise_g_37" type="CSGBox3D" parent="SalleAManger" unique_id=1421867284]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -40.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_37" type="CSGBox3D" parent="SalleAManger" unique_id=1627554660]
+[node name="Dossier_g_37" type="CSGBox3D" parent="SalleAManger" unique_id=1017340483]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -40.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_37" type="CSGBox3D" parent="SalleAManger" unique_id=525342181]
+[node name="Chaise_d_37" type="CSGBox3D" parent="SalleAManger" unique_id=456557874]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -40.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_37" type="CSGBox3D" parent="SalleAManger" unique_id=856108204]
+[node name="Dossier_d_37" type="CSGBox3D" parent="SalleAManger" unique_id=701394643]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -40.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_38" type="CSGBox3D" parent="SalleAManger" unique_id=1633613499]
+[node name="Chaise_g_38" type="CSGBox3D" parent="SalleAManger" unique_id=480169736]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -41.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_38" type="CSGBox3D" parent="SalleAManger" unique_id=697343783]
+[node name="Dossier_g_38" type="CSGBox3D" parent="SalleAManger" unique_id=1875062380]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -41.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_38" type="CSGBox3D" parent="SalleAManger" unique_id=788961460]
+[node name="Chaise_d_38" type="CSGBox3D" parent="SalleAManger" unique_id=1391153887]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -41.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_38" type="CSGBox3D" parent="SalleAManger" unique_id=936800938]
+[node name="Dossier_d_38" type="CSGBox3D" parent="SalleAManger" unique_id=1941920865]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -41.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_g_39" type="CSGBox3D" parent="SalleAManger" unique_id=759764434]
+[node name="Chaise_g_39" type="CSGBox3D" parent="SalleAManger" unique_id=725104498]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.23, -42.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_g_39" type="CSGBox3D" parent="SalleAManger" unique_id=850451308]
+[node name="Dossier_g_39" type="CSGBox3D" parent="SalleAManger" unique_id=157966561]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.72, -42.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Chaise_d_39" type="CSGBox3D" parent="SalleAManger" unique_id=1554920738]
+[node name="Chaise_d_39" type="CSGBox3D" parent="SalleAManger" unique_id=235818613]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.23, -42.5)
 use_collision = true
 size = Vector3(0.45, 0.46, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Dossier_d_39" type="CSGBox3D" parent="SalleAManger" unique_id=268690784]
+[node name="Dossier_d_39" type="CSGBox3D" parent="SalleAManger" unique_id=692994181]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.72, -42.5)
 size = Vector3(0.06, 0.52, 0.45)
 material = SubResource("StandardMaterial3D_8mfax")
 
-[node name="Fenetre_g_0" type="CSGBox3D" parent="SalleAManger" unique_id=1889515282]
+[node name="Fenetre_g_0" type="CSGBox3D" parent="SalleAManger" unique_id=1725597216]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98, 1.5, -4)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_d_0" type="CSGBox3D" parent="SalleAManger" unique_id=78961089]
+[node name="Fenetre_d_0" type="CSGBox3D" parent="SalleAManger" unique_id=250969779]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98, 1.5, -4)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_g_1" type="CSGBox3D" parent="SalleAManger" unique_id=1367638131]
+[node name="Fenetre_g_1" type="CSGBox3D" parent="SalleAManger" unique_id=399220275]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98, 1.5, -8)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_d_1" type="CSGBox3D" parent="SalleAManger" unique_id=2129341963]
+[node name="Fenetre_d_1" type="CSGBox3D" parent="SalleAManger" unique_id=886242457]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98, 1.5, -8)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_g_2" type="CSGBox3D" parent="SalleAManger" unique_id=575666175]
+[node name="Fenetre_g_2" type="CSGBox3D" parent="SalleAManger" unique_id=1737040267]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98, 1.5, -12)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_d_2" type="CSGBox3D" parent="SalleAManger" unique_id=1800290015]
+[node name="Fenetre_d_2" type="CSGBox3D" parent="SalleAManger" unique_id=1462362582]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98, 1.5, -12)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_g_3" type="CSGBox3D" parent="SalleAManger" unique_id=386317602]
+[node name="Fenetre_g_3" type="CSGBox3D" parent="SalleAManger" unique_id=244388162]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98, 1.5, -16)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_d_3" type="CSGBox3D" parent="SalleAManger" unique_id=26293671]
+[node name="Fenetre_d_3" type="CSGBox3D" parent="SalleAManger" unique_id=935110709]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98, 1.5, -16)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_g_4" type="CSGBox3D" parent="SalleAManger" unique_id=1051732749]
+[node name="Fenetre_g_4" type="CSGBox3D" parent="SalleAManger" unique_id=1885117117]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98, 1.5, -20)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_d_4" type="CSGBox3D" parent="SalleAManger" unique_id=1322380632]
+[node name="Fenetre_d_4" type="CSGBox3D" parent="SalleAManger" unique_id=1422970013]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98, 1.5, -20)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_g_5" type="CSGBox3D" parent="SalleAManger" unique_id=224071988]
+[node name="Fenetre_g_5" type="CSGBox3D" parent="SalleAManger" unique_id=1726141444]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98, 1.5, -24)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_d_5" type="CSGBox3D" parent="SalleAManger" unique_id=429401135]
+[node name="Fenetre_d_5" type="CSGBox3D" parent="SalleAManger" unique_id=2060144171]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98, 1.5, -24)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_g_6" type="CSGBox3D" parent="SalleAManger" unique_id=1694878992]
+[node name="Fenetre_g_6" type="CSGBox3D" parent="SalleAManger" unique_id=696410164]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98, 1.5, -28)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_d_6" type="CSGBox3D" parent="SalleAManger" unique_id=81662195]
+[node name="Fenetre_d_6" type="CSGBox3D" parent="SalleAManger" unique_id=1321574190]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98, 1.5, -28)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_g_7" type="CSGBox3D" parent="SalleAManger" unique_id=2013300846]
+[node name="Fenetre_g_7" type="CSGBox3D" parent="SalleAManger" unique_id=539793697]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98, 1.5, -32)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_d_7" type="CSGBox3D" parent="SalleAManger" unique_id=2135560703]
+[node name="Fenetre_d_7" type="CSGBox3D" parent="SalleAManger" unique_id=848378842]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98, 1.5, -32)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_g_8" type="CSGBox3D" parent="SalleAManger" unique_id=480784746]
+[node name="Fenetre_g_8" type="CSGBox3D" parent="SalleAManger" unique_id=735196547]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98, 1.5, -36)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_d_8" type="CSGBox3D" parent="SalleAManger" unique_id=1793272362]
+[node name="Fenetre_d_8" type="CSGBox3D" parent="SalleAManger" unique_id=297804108]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98, 1.5, -36)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_g_9" type="CSGBox3D" parent="SalleAManger" unique_id=612083102]
+[node name="Fenetre_g_9" type="CSGBox3D" parent="SalleAManger" unique_id=1055528632]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98, 1.5, -40)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Fenetre_d_9" type="CSGBox3D" parent="SalleAManger" unique_id=1792599540]
+[node name="Fenetre_d_9" type="CSGBox3D" parent="SalleAManger" unique_id=2109121337]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98, 1.5, -40)
 size = Vector3(0.04, 1, 1.2)
 material = SubResource("StandardMaterial3D_j7pcy")
 
-[node name="Lampe_0" type="OmniLight3D" parent="SalleAManger" unique_id=1622077734]
+[node name="Lampe_0" type="OmniLight3D" parent="SalleAManger" unique_id=1379196141]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -6)
 omni_range = 7.0
 
-[node name="Lampe_1" type="OmniLight3D" parent="SalleAManger" unique_id=112386380]
+[node name="Lampe_1" type="OmniLight3D" parent="SalleAManger" unique_id=3079916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -14)
 omni_range = 7.0
 
-[node name="Lampe_2" type="OmniLight3D" parent="SalleAManger" unique_id=969879408]
+[node name="Lampe_2" type="OmniLight3D" parent="SalleAManger" unique_id=969810649]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -22)
 omni_range = 7.0
 
-[node name="Lampe_3" type="OmniLight3D" parent="SalleAManger" unique_id=2082393080]
+[node name="Lampe_3" type="OmniLight3D" parent="SalleAManger" unique_id=1961782782]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -30)
 omni_range = 7.0
 
-[node name="Lampe_4" type="OmniLight3D" parent="SalleAManger" unique_id=517086820]
+[node name="Lampe_4" type="OmniLight3D" parent="SalleAManger" unique_id=1645345457]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -38)
 omni_range = 7.0
 
-[node name="Carte" type="CSGBox3D" parent="SalleAManger" unique_id=790335543]
+[node name="Carte" type="CSGBox3D" parent="SalleAManger" unique_id=795161566]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.78, -3.2)
 size = Vector3(0.3, 0.02, 0.2)
 material = SubResource("StandardMaterial3D_p7f38")
 
-[node name="Carte_texte" type="Label3D" parent="SalleAManger" unique_id=10085037]
+[node name="Carte_texte" type="Label3D" parent="SalleAManger" unique_id=1530576226]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.2, 0.795, -3.2)
 pixel_size = 0.0012
 modulate = Color(0.42745098, 0.18039216, 0.27450982, 1)
@@ -2922,505 +2922,505 @@ Maman"
 font_size = 64
 outline_size = 0
 
-[node name="PenseeCarte" type="Node3D" parent="SalleAManger" unique_id=1658019422]
+[node name="PenseeCarte" type="Node3D" parent="SalleAManger" unique_id=163778354]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2000122, 0.8, -3.2)
 script = ExtResource("2_g0y8o")
 texte = "La carte de maman."
 distance = 3.0
 angle_max_deg = 15.0
 
-[node name="Invite_1" type="Node3D" parent="SalleAManger" unique_id=771369339 groups=["invites"]]
+[node name="Invite_1" type="Node3D" parent="SalleAManger" unique_id=703881394 groups=["invites"]]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 0.46, -3.5)
 visible = false
 
-[node name="Corps" type="CSGBox3D" parent="SalleAManger/Invite_1" unique_id=826646158]
+[node name="Corps" type="CSGBox3D" parent="SalleAManger/Invite_1" unique_id=258083432]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
 size = Vector3(0.5, 0.75, 0.03)
 material = SubResource("StandardMaterial3D_x261r")
 
-[node name="Habit" type="CSGBox3D" parent="SalleAManger/Invite_1" unique_id=1763597882]
+[node name="Habit" type="CSGBox3D" parent="SalleAManger/Invite_1" unique_id=1003137819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, -0.02)
 size = Vector3(0.42, 0.6, 0.01)
 material = SubResource("StandardMaterial3D_veeks")
 
-[node name="Tete" type="CSGBox3D" parent="SalleAManger/Invite_1" unique_id=1890877779]
+[node name="Tete" type="CSGBox3D" parent="SalleAManger/Invite_1" unique_id=760992161]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0)
 size = Vector3(0.32, 0.32, 0.03)
 material = SubResource("StandardMaterial3D_x261r")
 
-[node name="Visage" type="CSGBox3D" parent="SalleAManger/Invite_1" unique_id=1206408697]
+[node name="Visage" type="CSGBox3D" parent="SalleAManger/Invite_1" unique_id=924828930]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.02)
 size = Vector3(0.26, 0.26, 0.01)
 material = SubResource("StandardMaterial3D_m07jr")
 
-[node name="Cheveux" type="CSGBox3D" parent="SalleAManger/Invite_1" unique_id=977637734]
+[node name="Cheveux" type="CSGBox3D" parent="SalleAManger/Invite_1" unique_id=1492660404]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04, -0.022)
 size = Vector3(0.28, 0.08, 0.01)
 material = SubResource("StandardMaterial3D_j7dfn")
 
-[node name="Invite_2" type="Node3D" parent="SalleAManger" unique_id=1545595099 groups=["invites"]]
+[node name="Invite_2" type="Node3D" parent="SalleAManger" unique_id=306219942 groups=["invites"]]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1, 0.46, -3.5)
 visible = false
 
-[node name="Corps" type="CSGBox3D" parent="SalleAManger/Invite_2" unique_id=203193843]
+[node name="Corps" type="CSGBox3D" parent="SalleAManger/Invite_2" unique_id=1377479532]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
 size = Vector3(0.5, 0.75, 0.03)
 material = SubResource("StandardMaterial3D_x261r")
 
-[node name="Habit" type="CSGBox3D" parent="SalleAManger/Invite_2" unique_id=699724282]
+[node name="Habit" type="CSGBox3D" parent="SalleAManger/Invite_2" unique_id=1798553927]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, -0.02)
 size = Vector3(0.42, 0.6, 0.01)
 material = SubResource("StandardMaterial3D_acsgb")
 
-[node name="Tete" type="CSGBox3D" parent="SalleAManger/Invite_2" unique_id=260113138]
+[node name="Tete" type="CSGBox3D" parent="SalleAManger/Invite_2" unique_id=987765423]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0)
 size = Vector3(0.32, 0.32, 0.03)
 material = SubResource("StandardMaterial3D_x261r")
 
-[node name="Visage" type="CSGBox3D" parent="SalleAManger/Invite_2" unique_id=1244857395]
+[node name="Visage" type="CSGBox3D" parent="SalleAManger/Invite_2" unique_id=429092842]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.02)
 size = Vector3(0.26, 0.26, 0.01)
 material = SubResource("StandardMaterial3D_m07jr")
 
-[node name="Cheveux" type="CSGBox3D" parent="SalleAManger/Invite_2" unique_id=2029114871]
+[node name="Cheveux" type="CSGBox3D" parent="SalleAManger/Invite_2" unique_id=2021876545]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04, -0.022)
 size = Vector3(0.28, 0.08, 0.01)
 material = SubResource("StandardMaterial3D_j7dfn")
 
-[node name="Invite_3" type="Node3D" parent="SalleAManger" unique_id=686845006 groups=["invites"]]
+[node name="Invite_3" type="Node3D" parent="SalleAManger" unique_id=2126432845 groups=["invites"]]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 0.46, -4.5)
 visible = false
 
-[node name="Corps" type="CSGBox3D" parent="SalleAManger/Invite_3" unique_id=1533807695]
+[node name="Corps" type="CSGBox3D" parent="SalleAManger/Invite_3" unique_id=663438492]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
 size = Vector3(0.5, 0.75, 0.03)
 material = SubResource("StandardMaterial3D_x261r")
 
-[node name="Habit" type="CSGBox3D" parent="SalleAManger/Invite_3" unique_id=1892050614]
+[node name="Habit" type="CSGBox3D" parent="SalleAManger/Invite_3" unique_id=540865191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, -0.02)
 size = Vector3(0.42, 0.6, 0.01)
 material = SubResource("StandardMaterial3D_yaokx")
 
-[node name="Tete" type="CSGBox3D" parent="SalleAManger/Invite_3" unique_id=144538253]
+[node name="Tete" type="CSGBox3D" parent="SalleAManger/Invite_3" unique_id=366492207]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0)
 size = Vector3(0.32, 0.32, 0.03)
 material = SubResource("StandardMaterial3D_x261r")
 
-[node name="Visage" type="CSGBox3D" parent="SalleAManger/Invite_3" unique_id=408812052]
+[node name="Visage" type="CSGBox3D" parent="SalleAManger/Invite_3" unique_id=657592079]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.02)
 size = Vector3(0.26, 0.26, 0.01)
 material = SubResource("StandardMaterial3D_m07jr")
 
-[node name="Cheveux" type="CSGBox3D" parent="SalleAManger/Invite_3" unique_id=473332370]
+[node name="Cheveux" type="CSGBox3D" parent="SalleAManger/Invite_3" unique_id=238463339]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04, -0.022)
 size = Vector3(0.28, 0.08, 0.01)
 material = SubResource("StandardMaterial3D_j7dfn")
 
-[node name="Invite_4" type="Node3D" parent="SalleAManger" unique_id=1941582365 groups=["invites"]]
+[node name="Invite_4" type="Node3D" parent="SalleAManger" unique_id=100924529 groups=["invites"]]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1, 0.46, -4.5)
 visible = false
 
-[node name="Corps" type="CSGBox3D" parent="SalleAManger/Invite_4" unique_id=1734015710]
+[node name="Corps" type="CSGBox3D" parent="SalleAManger/Invite_4" unique_id=1765341027]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
 size = Vector3(0.5, 0.75, 0.03)
 material = SubResource("StandardMaterial3D_x261r")
 
-[node name="Habit" type="CSGBox3D" parent="SalleAManger/Invite_4" unique_id=1762322526]
+[node name="Habit" type="CSGBox3D" parent="SalleAManger/Invite_4" unique_id=2070908800]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, -0.02)
 size = Vector3(0.42, 0.6, 0.01)
 material = SubResource("StandardMaterial3D_njusm")
 
-[node name="Tete" type="CSGBox3D" parent="SalleAManger/Invite_4" unique_id=594076645]
+[node name="Tete" type="CSGBox3D" parent="SalleAManger/Invite_4" unique_id=1633802052]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0)
 size = Vector3(0.32, 0.32, 0.03)
 material = SubResource("StandardMaterial3D_x261r")
 
-[node name="Visage" type="CSGBox3D" parent="SalleAManger/Invite_4" unique_id=1215252935]
+[node name="Visage" type="CSGBox3D" parent="SalleAManger/Invite_4" unique_id=95340040]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.02)
 size = Vector3(0.26, 0.26, 0.01)
 material = SubResource("StandardMaterial3D_m07jr")
 
-[node name="Cheveux" type="CSGBox3D" parent="SalleAManger/Invite_4" unique_id=1400677577]
+[node name="Cheveux" type="CSGBox3D" parent="SalleAManger/Invite_4" unique_id=1228078353]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04, -0.022)
 size = Vector3(0.28, 0.08, 0.01)
 material = SubResource("StandardMaterial3D_j7dfn")
 
-[node name="Invite_5" type="Node3D" parent="SalleAManger" unique_id=740316088 groups=["invites"]]
+[node name="Invite_5" type="Node3D" parent="SalleAManger" unique_id=735657705 groups=["invites"]]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 0.46, -5.5)
 visible = false
 
-[node name="Corps" type="CSGBox3D" parent="SalleAManger/Invite_5" unique_id=1926206931]
+[node name="Corps" type="CSGBox3D" parent="SalleAManger/Invite_5" unique_id=1921382487]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
 size = Vector3(0.5, 0.75, 0.03)
 material = SubResource("StandardMaterial3D_x261r")
 
-[node name="Habit" type="CSGBox3D" parent="SalleAManger/Invite_5" unique_id=379064965]
+[node name="Habit" type="CSGBox3D" parent="SalleAManger/Invite_5" unique_id=1122322258]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, -0.02)
 size = Vector3(0.42, 0.6, 0.01)
 material = SubResource("StandardMaterial3D_nfp75")
 
-[node name="Tete" type="CSGBox3D" parent="SalleAManger/Invite_5" unique_id=889536773]
+[node name="Tete" type="CSGBox3D" parent="SalleAManger/Invite_5" unique_id=1614322007]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0)
 size = Vector3(0.32, 0.32, 0.03)
 material = SubResource("StandardMaterial3D_x261r")
 
-[node name="Visage" type="CSGBox3D" parent="SalleAManger/Invite_5" unique_id=1523457557]
+[node name="Visage" type="CSGBox3D" parent="SalleAManger/Invite_5" unique_id=1736500173]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.02)
 size = Vector3(0.26, 0.26, 0.01)
 material = SubResource("StandardMaterial3D_m07jr")
 
-[node name="Cheveux" type="CSGBox3D" parent="SalleAManger/Invite_5" unique_id=185248732]
+[node name="Cheveux" type="CSGBox3D" parent="SalleAManger/Invite_5" unique_id=1083261091]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04, -0.022)
 size = Vector3(0.28, 0.08, 0.01)
 material = SubResource("StandardMaterial3D_j7dfn")
 
-[node name="Invite_6" type="Node3D" parent="SalleAManger" unique_id=584357892 groups=["invites"]]
+[node name="Invite_6" type="Node3D" parent="SalleAManger" unique_id=367293700 groups=["invites"]]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1, 0.46, -5.5)
 visible = false
 
-[node name="Corps" type="CSGBox3D" parent="SalleAManger/Invite_6" unique_id=768761646]
+[node name="Corps" type="CSGBox3D" parent="SalleAManger/Invite_6" unique_id=1061183355]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
 size = Vector3(0.5, 0.75, 0.03)
 material = SubResource("StandardMaterial3D_x261r")
 
-[node name="Habit" type="CSGBox3D" parent="SalleAManger/Invite_6" unique_id=747675093]
+[node name="Habit" type="CSGBox3D" parent="SalleAManger/Invite_6" unique_id=1291742291]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, -0.02)
 size = Vector3(0.42, 0.6, 0.01)
 material = SubResource("StandardMaterial3D_c8hqe")
 
-[node name="Tete" type="CSGBox3D" parent="SalleAManger/Invite_6" unique_id=784275614]
+[node name="Tete" type="CSGBox3D" parent="SalleAManger/Invite_6" unique_id=1016505245]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0)
 size = Vector3(0.32, 0.32, 0.03)
 material = SubResource("StandardMaterial3D_x261r")
 
-[node name="Visage" type="CSGBox3D" parent="SalleAManger/Invite_6" unique_id=142598704]
+[node name="Visage" type="CSGBox3D" parent="SalleAManger/Invite_6" unique_id=477137153]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.02)
 size = Vector3(0.26, 0.26, 0.01)
 material = SubResource("StandardMaterial3D_m07jr")
 
-[node name="Cheveux" type="CSGBox3D" parent="SalleAManger/Invite_6" unique_id=1231629130]
+[node name="Cheveux" type="CSGBox3D" parent="SalleAManger/Invite_6" unique_id=689650897]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04, -0.022)
 size = Vector3(0.28, 0.08, 0.01)
 material = SubResource("StandardMaterial3D_j7dfn")
 
-[node name="PenseeInvites" type="Node3D" parent="SalleAManger" unique_id=1933071927]
+[node name="PenseeInvites" type="Node3D" parent="SalleAManger" unique_id=1044518093]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.2, -4.5)
 script = ExtResource("2_g0y8o")
 texte = "Ils me regardent… sans bouger."
 distance = 5.0
 active = false
 
-[node name="Fin" type="Node3D" parent="SalleAManger" unique_id=1236538073]
+[node name="Fin" type="Node3D" parent="SalleAManger" unique_id=964846021]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
 
-[node name="Mur" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1257858049]
+[node name="Mur" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1705720776]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.15)
 use_collision = true
 size = Vector3(6, 2.8, 0.3)
 material = SubResource("StandardMaterial3D_f31as")
 
-[node name="Gateau" type="CSGCylinder3D" parent="SalleAManger/Fin" unique_id=587085349]
+[node name="Gateau" type="CSGCylinder3D" parent="SalleAManger/Fin" unique_id=1792343089]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89, 0.6)
 radius = 0.3
 height = 0.25
 sides = 16
 material = SubResource("StandardMaterial3D_ihw2f")
 
-[node name="Bougie_0" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=300235717]
+[node name="Bougie_0" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1563919831]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 1.08, 0.6)
 size = Vector3(0.03, 0.14, 0.03)
 material = SubResource("StandardMaterial3D_p3xkl")
 
-[node name="Flamme_0" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1333659863]
+[node name="Flamme_0" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1841031954]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 1.1800001, 0.6)
 size = Vector3(0.03, 0.05, 0.03)
 material = SubResource("StandardMaterial3D_xnfpg")
 
-[node name="Bougie_1" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=932012568]
+[node name="Bougie_1" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1723837731]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.08, 0.7558846)
 size = Vector3(0.03, 0.14, 0.03)
 material = SubResource("StandardMaterial3D_p3xkl")
 
-[node name="Flamme_1" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=440984211]
+[node name="Flamme_1" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=506430144]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.1800001, 0.7558846)
 size = Vector3(0.03, 0.05, 0.03)
 material = SubResource("StandardMaterial3D_xnfpg")
 
-[node name="Bougie_2" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1906064684]
+[node name="Bougie_2" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=969300287]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09, 1.08, 0.7558846)
 size = Vector3(0.03, 0.14, 0.03)
 material = SubResource("StandardMaterial3D_p3xkl")
 
-[node name="Flamme_2" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1085772595]
+[node name="Flamme_2" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=54452908]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09, 1.1800001, 0.7558846)
 size = Vector3(0.03, 0.05, 0.03)
 material = SubResource("StandardMaterial3D_xnfpg")
 
-[node name="Bougie_3" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1842169333]
+[node name="Bougie_3" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1497586]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 1.08, 0.6)
 size = Vector3(0.03, 0.14, 0.03)
 material = SubResource("StandardMaterial3D_p3xkl")
 
-[node name="Flamme_3" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=308550986]
+[node name="Flamme_3" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1528409172]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 1.1800001, 0.6)
 size = Vector3(0.03, 0.05, 0.03)
 material = SubResource("StandardMaterial3D_xnfpg")
 
-[node name="Bougie_4" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=42091083]
+[node name="Bougie_4" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1455090586]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09, 1.08, 0.44411543)
 size = Vector3(0.03, 0.14, 0.03)
 material = SubResource("StandardMaterial3D_p3xkl")
 
-[node name="Flamme_4" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=31938878]
+[node name="Flamme_4" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1355196013]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09, 1.1800001, 0.44411543)
 size = Vector3(0.03, 0.05, 0.03)
 material = SubResource("StandardMaterial3D_xnfpg")
 
-[node name="Bougie_5" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=676193887]
+[node name="Bougie_5" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=125737610]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.08, 0.44411543)
 size = Vector3(0.03, 0.14, 0.03)
 material = SubResource("StandardMaterial3D_p3xkl")
 
-[node name="Flamme_5" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=1286604595]
+[node name="Flamme_5" type="CSGBox3D" parent="SalleAManger/Fin" unique_id=274309888]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.1800001, 0.44411543)
 size = Vector3(0.03, 0.05, 0.03)
 material = SubResource("StandardMaterial3D_xnfpg")
 
-[node name="Lueur" type="OmniLight3D" parent="SalleAManger/Fin" unique_id=998276535]
+[node name="Lueur" type="OmniLight3D" parent="SalleAManger/Fin" unique_id=2011575115]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0.6)
 light_color = Color(1, 0.7176471, 0.011764706, 1)
 light_energy = 0.8
 omni_range = 2.5
 
-[node name="Voeu" type="Area3D" parent="SalleAManger/Fin" unique_id=1021827391]
+[node name="Voeu" type="Area3D" parent="SalleAManger/Fin" unique_id=1297683560]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 1.4)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SalleAManger/Fin/Voeu" unique_id=731992044]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SalleAManger/Fin/Voeu" unique_id=1091225757]
 shape = SubResource("BoxShape3D_ytu56")
 
-[node name="Boucle" type="Area3D" parent="SalleAManger" unique_id=558580878]
+[node name="Boucle" type="Area3D" parent="SalleAManger" unique_id=1636097077]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28)
 monitoring = false
 script = ExtResource("6_3fywa")
 destinations = Array[NodePath]([NodePath("../Retour")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SalleAManger/Boucle" unique_id=2130256248]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SalleAManger/Boucle" unique_id=187663115]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 shape = SubResource("BoxShape3D_jedjf")
 
-[node name="Retour" type="Marker3D" parent="SalleAManger" unique_id=1615589596]
+[node name="Retour" type="Marker3D" parent="SalleAManger" unique_id=1514335681]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 
-[node name="Zone" type="Area3D" parent="SalleAManger" unique_id=388230232]
+[node name="Zone" type="Area3D" parent="SalleAManger" unique_id=1081629886]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -23.3)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SalleAManger/Zone" unique_id=832451858]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SalleAManger/Zone" unique_id=2118435843]
 shape = SubResource("BoxShape3D_1t5hy")
 
-[node name="Grenier" type="Node3D" parent="." unique_id=213894861]
+[node name="Grenier" type="Node3D" parent="." unique_id=42292237]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1000, 0, 0)
 
-[node name="Sol" type="CSGBox3D" parent="Grenier" unique_id=1430249698]
+[node name="Sol" type="CSGBox3D" parent="Grenier" unique_id=1393757406]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 use_collision = true
 size = Vector3(6.6, 0.5, 6.6)
 material = SubResource("StandardMaterial3D_10ao1")
 
-[node name="Plafond" type="CSGBox3D" parent="Grenier" unique_id=547789389]
+[node name="Plafond" type="CSGBox3D" parent="Grenier" unique_id=637803363]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.15, 0)
 use_collision = true
 size = Vector3(6.6, 0.3, 6.6)
 material = SubResource("StandardMaterial3D_yagev")
 
-[node name="Mur_nord_1" type="CSGBox3D" parent="Grenier" unique_id=1678615078]
+[node name="Mur_nord_1" type="CSGBox3D" parent="Grenier" unique_id=457571345]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9000244, 2, -3.15)
 use_collision = true
 size = Vector3(2.8, 4, 0.3)
 material = SubResource("StandardMaterial3D_f02jr")
 
-[node name="Mur_nord_2" type="CSGBox3D" parent="Grenier" unique_id=1918577574]
+[node name="Mur_nord_2" type="CSGBox3D" parent="Grenier" unique_id=147228167]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -3.15)
 use_collision = true
 size = Vector3(1, 3, 0.3)
 material = SubResource("StandardMaterial3D_f02jr")
 
-[node name="Mur_nord_3" type="CSGBox3D" parent="Grenier" unique_id=1545280065]
+[node name="Mur_nord_3" type="CSGBox3D" parent="Grenier" unique_id=10856636]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8, -3.15)
 use_collision = true
 size = Vector3(1, 0.4, 0.3)
 material = SubResource("StandardMaterial3D_f02jr")
 
-[node name="Mur_nord_4" type="CSGBox3D" parent="Grenier" unique_id=1564762462]
+[node name="Mur_nord_4" type="CSGBox3D" parent="Grenier" unique_id=379047791]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9000244, 2, -3.15)
 use_collision = true
 size = Vector3(2.8, 4, 0.3)
 material = SubResource("StandardMaterial3D_f02jr")
 
-[node name="Mur_sud" type="CSGBox3D" parent="Grenier" unique_id=1259246804]
+[node name="Mur_sud" type="CSGBox3D" parent="Grenier" unique_id=775451856]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 3.15)
 use_collision = true
 size = Vector3(6.6, 4, 0.3)
 material = SubResource("StandardMaterial3D_f02jr")
 
-[node name="Mur_ouest" type="CSGBox3D" parent="Grenier" unique_id=1434003756]
+[node name="Mur_ouest" type="CSGBox3D" parent="Grenier" unique_id=462785553]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1500244, 2, 0)
 use_collision = true
 size = Vector3(0.3, 4, 6)
 material = SubResource("StandardMaterial3D_f02jr")
 
-[node name="Mur_est" type="CSGBox3D" parent="Grenier" unique_id=323504691]
+[node name="Mur_est" type="CSGBox3D" parent="Grenier" unique_id=1616807578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1500244, 2, 0)
 use_collision = true
 size = Vector3(0.3, 4, 6)
 material = SubResource("StandardMaterial3D_f02jr")
 
-[node name="Chevalet" type="CSGBox3D" parent="Grenier" unique_id=1502554590]
+[node name="Chevalet" type="CSGBox3D" parent="Grenier" unique_id=978340658]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.8, 0.2)
 use_collision = true
 size = Vector3(0.08, 1.6, 0.08)
 material = SubResource("StandardMaterial3D_6sgep")
 
-[node name="Chevalet_toile" type="CSGBox3D" parent="Grenier" unique_id=1986508514]
+[node name="Chevalet_toile" type="CSGBox3D" parent="Grenier" unique_id=902413301]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1.15, 0.25)
 size = Vector3(0.7, 0.55, 0.03)
 material = SubResource("StandardMaterial3D_lw6cn")
 
-[node name="Caisse" type="CSGBox3D" parent="Grenier" unique_id=1604912543]
+[node name="Caisse" type="CSGBox3D" parent="Grenier" unique_id=1623211052]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0.35, 2.2)
 use_collision = true
 size = Vector3(0.9, 0.7, 0.9)
 material = SubResource("StandardMaterial3D_6sgep")
 
-[node name="Dessin_lucarne_1" type="StaticBody3D" parent="Grenier" unique_id=1649483560 groups=["dessins_lucarne"]]
+[node name="Dessin_lucarne_1" type="StaticBody3D" parent="Grenier" unique_id=1879191049 groups=["dessins_lucarne"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 3.15, -2.97)
 script = ExtResource("7_x201w")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_lucarne_1" unique_id=838400573]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_lucarne_1" unique_id=1825753369]
 shape = SubResource("BoxShape3D_pglxd")
 
-[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_lucarne_1" unique_id=2042845748]
+[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_lucarne_1" unique_id=211351532]
 material_override = SubResource("StandardMaterial3D_urnjv")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_wl7gx")
 
-[node name="Dessin_lucarne_2" type="StaticBody3D" parent="Grenier" unique_id=2019724478 groups=["dessins_lucarne"]]
+[node name="Dessin_lucarne_2" type="StaticBody3D" parent="Grenier" unique_id=1415632732 groups=["dessins_lucarne"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 3.15, -2.97)
 script = ExtResource("7_x201w")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_lucarne_2" unique_id=1157663386]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_lucarne_2" unique_id=1020053820]
 shape = SubResource("BoxShape3D_ijbps")
 
-[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_lucarne_2" unique_id=556294852]
+[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_lucarne_2" unique_id=122645162]
 material_override = SubResource("StandardMaterial3D_ocahx")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_2mag5")
 
-[node name="Dessin_lucarne_3" type="StaticBody3D" parent="Grenier" unique_id=54736568 groups=["dessins_lucarne"]]
+[node name="Dessin_lucarne_3" type="StaticBody3D" parent="Grenier" unique_id=1099334609 groups=["dessins_lucarne"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 3.45, -2.97)
 script = ExtResource("7_x201w")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_lucarne_3" unique_id=1571993639]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_lucarne_3" unique_id=458805068]
 shape = SubResource("BoxShape3D_uloqx")
 
-[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_lucarne_3" unique_id=479104443]
+[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_lucarne_3" unique_id=620096798]
 material_override = SubResource("StandardMaterial3D_v2y2e")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_356q3")
 
-[node name="Dessin_lucarne_4" type="StaticBody3D" parent="Grenier" unique_id=139087537 groups=["dessins_lucarne"]]
+[node name="Dessin_lucarne_4" type="StaticBody3D" parent="Grenier" unique_id=2123067948 groups=["dessins_lucarne"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 3.45, -2.97)
 script = ExtResource("7_x201w")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_lucarne_4" unique_id=190944281]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_lucarne_4" unique_id=123170355]
 shape = SubResource("BoxShape3D_0mvju")
 
-[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_lucarne_4" unique_id=350370182]
+[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_lucarne_4" unique_id=1511771763]
 material_override = SubResource("StandardMaterial3D_uwst1")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_xr3td")
 
-[node name="Dessin_mur_1" type="StaticBody3D" parent="Grenier" unique_id=1060668821 groups=["dessins"]]
+[node name="Dessin_mur_1" type="StaticBody3D" parent="Grenier" unique_id=1143585057 groups=["dessins"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.97, 1.4, -1)
 script = ExtResource("7_x201w")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_mur_1" unique_id=1113283864]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_mur_1" unique_id=735161469]
 shape = SubResource("BoxShape3D_igr8p")
 
-[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_mur_1" unique_id=1106539849]
+[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_mur_1" unique_id=931702685]
 material_override = SubResource("StandardMaterial3D_urnjv")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_bwga4")
 
-[node name="Dessin_mur_2" type="StaticBody3D" parent="Grenier" unique_id=833739386 groups=["dessins"]]
+[node name="Dessin_mur_2" type="StaticBody3D" parent="Grenier" unique_id=376941871 groups=["dessins"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.97, 1.5, 1.2)
 script = ExtResource("7_x201w")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_mur_2" unique_id=1327463490]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_mur_2" unique_id=669179719]
 shape = SubResource("BoxShape3D_gddny")
 
-[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_mur_2" unique_id=1052495874]
+[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_mur_2" unique_id=1154015908]
 material_override = SubResource("StandardMaterial3D_ocahx")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_oueng")
 
-[node name="Dessin_mur_3" type="StaticBody3D" parent="Grenier" unique_id=24610240 groups=["dessins"]]
+[node name="Dessin_mur_3" type="StaticBody3D" parent="Grenier" unique_id=1607510455 groups=["dessins"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97, 1.3, 0)
 script = ExtResource("7_x201w")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_mur_3" unique_id=650633533]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_mur_3" unique_id=1857220533]
 shape = SubResource("BoxShape3D_68c5t")
 
-[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_mur_3" unique_id=1385692569]
+[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_mur_3" unique_id=2018000074]
 material_override = SubResource("StandardMaterial3D_v2y2e")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_t1awo")
 
-[node name="Dessin_mur_4" type="StaticBody3D" parent="Grenier" unique_id=909487736 groups=["dessins"]]
+[node name="Dessin_mur_4" type="StaticBody3D" parent="Grenier" unique_id=1806162247 groups=["dessins"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 1.5, 2.97)
 script = ExtResource("7_x201w")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_mur_4" unique_id=1224076233]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_mur_4" unique_id=2145501971]
 shape = SubResource("BoxShape3D_t6y3x")
 
-[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_mur_4" unique_id=21875473]
+[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_mur_4" unique_id=1012336394]
 material_override = SubResource("StandardMaterial3D_uwst1")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_247mq")
 
-[node name="Dessin_mur_5" type="StaticBody3D" parent="Grenier" unique_id=657469029 groups=["dessins"]]
+[node name="Dessin_mur_5" type="StaticBody3D" parent="Grenier" unique_id=330459263 groups=["dessins"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 1.35, 2.97)
 script = ExtResource("7_x201w")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_mur_5" unique_id=1455048131]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Dessin_mur_5" unique_id=860288455]
 shape = SubResource("BoxShape3D_nu8tf")
 
-[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_mur_5" unique_id=1255638777]
+[node name="Mesh" type="MeshInstance3D" parent="Grenier/Dessin_mur_5" unique_id=394768428]
 material_override = SubResource("StandardMaterial3D_gow7s")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_pdqnu")
 
-[node name="Lucarne" type="Area3D" parent="Grenier" unique_id=977311214]
+[node name="Lucarne" type="Area3D" parent="Grenier" unique_id=547569877]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3, -3.15)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Lucarne" unique_id=1278131410]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grenier/Lucarne" unique_id=483509258]
 shape = SubResource("BoxShape3D_lte3p")
 
-[node name="Lampe" type="OmniLight3D" parent="Grenier" unique_id=2130023830]
+[node name="Lampe" type="OmniLight3D" parent="Grenier" unique_id=1143369505]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 1)
 light_energy = 1.2
 omni_range = 9.0
 
-[node name="Arrivee" type="Marker3D" parent="Grenier" unique_id=1807523136]
+[node name="Arrivee" type="Marker3D" parent="Grenier" unique_id=1139965872]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
 
-[node name="PenseeDessins" type="Node3D" parent="Grenier" unique_id=798876140]
+[node name="PenseeDessins" type="Node3D" parent="Grenier" unique_id=1128515301]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9699707, 1.45, 0.1)
 script = ExtResource("2_g0y8o")
 texte = "Je dessinais tout le temps. Tout seul."
 distance = 4.0
 angle_max_deg = 25.0
 
-[node name="PenseeLucarne" type="Node3D" parent="Grenier" unique_id=1429317075]
+[node name="PenseeLucarne" type="Node3D" parent="Grenier" unique_id=1956609068]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3, -3)
 script = ExtResource("2_g0y8o")
 texte = "Des cerfs-volants… Les autres jouent dehors."
@@ -3428,46 +3428,46 @@ distance = 12.0
 angle_max_deg = 15.0
 active = false
 
-[node name="Dehors" type="Node3D" parent="." unique_id=1967183418]
+[node name="Dehors" type="Node3D" parent="." unique_id=1537706958]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1000, 0, 0)
 
-[node name="Cerf_volant_1" type="CSGBox3D" parent="Dehors" unique_id=924058741]
+[node name="Cerf_volant_1" type="CSGBox3D" parent="Dehors" unique_id=1222070086]
 transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, -4, 9, -22)
 size = Vector3(1.2, 1.2, 0.05)
 material = SubResource("StandardMaterial3D_iq1c3")
 
-[node name="Ficelle_1" type="CSGBox3D" parent="Dehors" unique_id=237570381]
+[node name="Ficelle_1" type="CSGBox3D" parent="Dehors" unique_id=126673092]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, -22)
 size = Vector3(0.02, 8, 0.02)
 material = SubResource("StandardMaterial3D_prg8x")
 
-[node name="Cerf_volant_2" type="CSGBox3D" parent="Dehors" unique_id=310687735]
+[node name="Cerf_volant_2" type="CSGBox3D" parent="Dehors" unique_id=1767421800]
 transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, 0, 11, -22)
 size = Vector3(1.2, 1.2, 0.05)
 material = SubResource("StandardMaterial3D_1f10p")
 
-[node name="Ficelle_2" type="CSGBox3D" parent="Dehors" unique_id=266444608]
+[node name="Ficelle_2" type="CSGBox3D" parent="Dehors" unique_id=1727351613]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -22)
 size = Vector3(0.02, 8, 0.02)
 material = SubResource("StandardMaterial3D_prg8x")
 
-[node name="Cerf_volant_3" type="CSGBox3D" parent="Dehors" unique_id=1058974587]
+[node name="Cerf_volant_3" type="CSGBox3D" parent="Dehors" unique_id=1518649403]
 transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, 4, 9, -22)
 size = Vector3(1.2, 1.2, 0.05)
 material = SubResource("StandardMaterial3D_3xbbd")
 
-[node name="Ficelle_3" type="CSGBox3D" parent="Dehors" unique_id=420067725]
+[node name="Ficelle_3" type="CSGBox3D" parent="Dehors" unique_id=817941225]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -22)
 size = Vector3(0.02, 8, 0.02)
 material = SubResource("StandardMaterial3D_prg8x")
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=1023969420 instance=ExtResource("8_ontsr")]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=380881785 instance=ExtResource("8_ontsr")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 0, -7.3)
 script = ExtResource("9_y7n8w")
 
-[node name="Interface" type="CanvasLayer" parent="." unique_id=1101494932]
+[node name="Interface" type="CanvasLayer" parent="." unique_id=1387414594]
 
-[node name="Viseur" type="Label" parent="Interface" unique_id=300165552]
+[node name="Viseur" type="Label" parent="Interface" unique_id=327317546]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -3482,7 +3482,7 @@ text = "·"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Flou" type="ColorRect" parent="Interface" unique_id=1355561152]
+[node name="Flou" type="ColorRect" parent="Interface" unique_id=1674272378]
 visible = false
 material = SubResource("ShaderMaterial_kn1vr")
 anchors_preset = 15
@@ -3490,26 +3490,56 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="ChuteToiles" type="Control" parent="Interface" unique_id=1872008850]
+[node name="ChuteToiles" type="Control" parent="Interface" unique_id=675629822]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("11_0ni37")
 
-[node name="Noir" type="ColorRect" parent="Interface" unique_id=1014435831]
+[node name="Noir" type="ColorRect" parent="Interface" unique_id=402792096]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Yeux" type="ColorRect" parent="Interface" unique_id=593722666]
+[node name="Yeux" type="ColorRect" parent="Interface" unique_id=1703807973]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[node name="Message" type="Label" parent="Interface" unique_id=404446515]
+[node name="Action" type="Label" parent="Interface" unique_id=1100843573]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = 30.0
+offset_right = 0.5
+offset_bottom = 60.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0.16862746, 0.11372549, 0.30588236, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="Touches" type="Label" parent="Interface" unique_id=451119930]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -190.0
+offset_right = 1.0
+offset_bottom = -24.0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0.16862746, 0.11372549, 0.30588236, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+vertical_alignment = 2
+
+[node name="Message" type="Label" parent="Interface" unique_id=2095684521]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

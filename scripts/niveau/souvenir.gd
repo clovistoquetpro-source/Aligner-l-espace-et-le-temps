@@ -2,18 +2,48 @@ class_name Souvenir
 extends Niveau
 
 ## Base des niveaux de l'histoire de Thomas : les pensées qui viennent du
-## regard, le réveil (l'écran noir qui s'ouvre), la chute dans les toiles et
-## le corps qu'on ne voit que dans les miroirs.
+## regard, le réveil (l'écran noir qui s'ouvre), les yeux fermés (F), la chute
+## dans les toiles, le corps qu'on ne voit que dans les miroirs, et l'aide sur
+## les touches.
 
 const DUREE_REVEIL := 2.5
 ## Un obstacle plus proche que la pensée (de cette marge) la cache.
 const MARGE_VUE := 0.4
+## Le panneau des touches reste affiché ce temps après le réveil.
+const DUREE_TOUCHES := 10.0
+const TOUCHES := "Z Q S D : se déplacer\nSouris : regarder\nEspace : sauter\nE : prendre, poser, utiliser\nF (maintenu) : fermer les yeux\nÉchap : libérer la souris et voir les touches"
+
+## Les yeux restent fermés, même sans F (pendant une scène).
+var yeux_forces := false
 
 var _file: Array[String] = []
+var _reste_touches := DUREE_TOUCHES + DUREE_REVEIL
 
 @onready var _joueur: Player = $Player
 @onready var _chute: ChuteToiles = $Interface/ChuteToiles
 @onready var _noir: ColorRect = $Interface/Noir
+@onready var _yeux: ColorRect = $Interface/Yeux
+@onready var _action: Label = $Interface/Action
+@onready var _touches: Label = $Interface/Touches
+
+
+## Thomas ferme les yeux (F maintenu) : l'écran devient noir.
+func yeux_fermes() -> bool:
+	return Input.is_action_pressed("fermer_les_yeux")
+
+
+## Ce que E ferait maintenant, ou "" : prendre, poser, utiliser…
+func action_possible() -> String:
+	if _joueur.held != null:
+		return "poser"
+	_joueur.ray.force_raycast_update()
+	var cible := _joueur.ray.get_collider()
+	if cible is RigidBody3D and not (cible as RigidBody3D).is_in_group("fixe"):
+		return "prendre"
+	if cible != null and cible.has_method("activer"):
+		var a = cible.get("action")
+		return a if a is String and a != "" else "utiliser"
+	return ""
 
 
 func _forme_du_reflet(parent: Node3D, mesh: Mesh, pos: Vector3, couleur: Color) -> MeshInstance3D:
@@ -46,6 +76,15 @@ func _process(delta: float) -> void:
 	super._process(delta)
 	if not _file.is_empty() and _reste_message <= 0.3:
 		afficher("« %s »" % _file.pop_front())
+	_yeux.color.a = move_toward(_yeux.color.a, 1.0 if yeux_fermes() or yeux_forces else 0.0, delta * 6.0)
+	var a := action_possible() if _joueur.is_physics_processing() else ""
+	_action.text = "E : " + a if a != "" else ""
+	# Les touches : au début du niveau, et quand la souris est libérée.
+	_reste_touches = maxf(_reste_touches - delta, 0.0)
+	var libre := Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and DisplayServer.get_name() != "headless"
+	_touches.text = TOUCHES + ("\n\nClique pour reprendre." if libre else "")
+	_touches.visible = libre or (_reste_touches > 0.0 and _noir.color.a < 0.5)
+	_touches.modulate.a = 1.0 if libre else clampf(_reste_touches, 0.0, 1.0)
 
 
 func _ecouter_les_pensees() -> void:

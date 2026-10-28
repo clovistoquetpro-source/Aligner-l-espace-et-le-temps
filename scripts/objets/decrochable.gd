@@ -8,6 +8,8 @@ signal decroche
 const DUREE := 0.5
 
 var accroche := true
+## Ce que fait E (affiché sous le viseur).
+var action := "décrocher"
 
 
 func activer(_joueur: Node3D = null) -> void:

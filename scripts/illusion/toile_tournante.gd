@@ -22,6 +22,8 @@ const DISTANCE_VUE := 25.0
 
 ## Quarts de tour (dans le sens des aiguilles d'une montre) depuis le début.
 var quarts := 0
+## Ce que fait E (affiché sous le viseur).
+var action := "tourner la toile"
 
 var _tween: Tween
 var _vue: SubViewport

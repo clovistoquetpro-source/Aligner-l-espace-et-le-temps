@@ -11,16 +11,41 @@ func _motifs() -> Dictionary:
 	return {}
 
 
-## Une interface de souvenir : la chute dans les toiles et l'écran noir des
-## yeux fermés, sous les messages.
+## Une interface de souvenir : la chute dans les toiles, l'écran noir du
+## réveil et celui des yeux fermés, l'action de E sous le viseur, le panneau
+## des touches, puis les messages par-dessus tout.
 func _interface_souvenir() -> void:
 	var ui := _racine.get_node("Interface")
 	_ajouter(ui, ChuteToiles.new(), "ChuteToiles")
-	var noir := ColorRect.new()
-	noir.color = Color.BLACK
-	noir.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	noir.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_ajouter(ui, noir, "Noir")
+	for nom in ["Noir", "Yeux"]:
+		var noir := ColorRect.new()
+		noir.color = Color(0, 0, 0, 1.0 if nom == "Noir" else 0.0)
+		noir.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		noir.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_ajouter(ui, noir, nom)
+	var action := Label.new()
+	action.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	action.offset_top = 30
+	action.offset_bottom = 60
+	action.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	action.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	action.add_theme_font_size_override("font_size", 20)
+	action.add_theme_color_override("font_outline_color", Color("2b1d4e"))
+	action.add_theme_constant_override("outline_size", 8)
+	action.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_ajouter(ui, action, "Action")
+	var touches := Label.new()
+	touches.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
+	touches.offset_left = 24
+	touches.offset_top = -190
+	touches.offset_bottom = -24
+	touches.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	touches.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+	touches.add_theme_font_size_override("font_size", 18)
+	touches.add_theme_color_override("font_outline_color", Color("2b1d4e"))
+	touches.add_theme_constant_override("outline_size", 8)
+	touches.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_ajouter(ui, touches, "Touches")
 	# Les pensées s'affichent par-dessus le noir.
 	ui.move_child(ui.get_node("Message"), -1)
 
