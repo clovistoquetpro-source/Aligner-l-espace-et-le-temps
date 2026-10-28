@@ -53,7 +53,9 @@ Chaque épreuve doit avoir une raison d'être dans cette histoire.
 
 ### Ce que clo a décidé
 
-- **La blessure** : son premier amour est mort. Depuis, le peintre repeint sa vie pour que ça ne soit jamais arrivé.
+- **Les personnages** : Thomas (le joueur, et le peintre) et Juliette, son premier amour.
+- **La blessure** : Juliette est morte dans un accident de moto. Elle adorait la moto, les cheveux au vent. Depuis, Thomas repeint sa vie pour que ça ne soit jamais arrivé.
+- **L'enfance** : l'isolement. Pas d'amis, il se referme sur lui-même. Il regrette de ne pas avoir osé aller vers les autres et se faire des amis.
 - **Le voyage** : on traverse les périodes de sa vie (l'enfance, l'adolescence, le jeune adulte), avec des moments durs et tristes. Le voyage n'est pas gai : la joie ne revient qu'à la fin.
 - **La révélation** : chaque fois qu'on « corrige » un souvenir, le présent devient plus gris et plus cassé.
 - **La fin** : il pose le pinceau. Les couleurs reviennent, il est vieux, et il reprend goût à la vie.
@@ -61,29 +63,28 @@ Chaque épreuve doit avoir une raison d'être dans cette histoire.
 
 ### Le fil (proposition)
 
-- **Le peintre**, c'est le personnage aujourd'hui, vieux et seul dans la maison. Il repeint ses souvenirs à l'infini pour sauver son premier amour. À force, l'espace et le temps se sont déchirés : la maison a quitté la Terre et flotte dans les étoiles. Tout est gris, sauf les toiles : il ne vit plus que dans ses souvenirs.
-- **Le joueur** est ce même personnage, mais il se voit jeune, parce qu'il refuse le temps qui passe. Le miroir dit la vérité : il est vieux, c'est lui le peintre. Il ne le comprend vraiment qu'à la fin.
+- **Le peintre**, c'est Thomas aujourd'hui, vieux et seul dans la maison. Il repeint ses souvenirs à l'infini pour sauver Juliette. À force, l'espace et le temps se sont déchirés : la maison a quitté la Terre et flotte dans les étoiles. Tout est gris, sauf les toiles : il ne vit plus que dans ses souvenirs.
+- **Le joueur** est ce même Thomas, mais il se voit jeune, parce qu'il refuse le temps qui passe. Le miroir dit la vérité : il est vieux, c'est lui le peintre. Il ne le comprend vraiment qu'à la fin.
 - **La maison sert de point de départ** entre les niveaux. Chaque toile de la maison ouvre sur une période de sa vie. Après chaque niveau, on revient dans la maison, et elle est un peu plus abîmée : une pièce a disparu, des étoiles passent à travers les murs, des meubles flottent.
 - **Remettre en ordre**, le joueur croit d'abord que c'est corriger le souvenir (l'objectif du niveau l'y pousse), et le présent empire. Il finit par comprendre que remettre en ordre, c'est laisser le souvenir tel qu'il s'est vraiment passé, même triste.
 
 ### Les niveaux (proposition)
 
 1. **La maison dans les étoiles** (le présent, fait). On veut sortir, on ne peut pas. Le miroir montre le joueur plus vieux. On entre dans les toiles.
-2. **L'enfance** : la maison sur Terre, le jardin (la toile du salon). Un enfant souvent seul, qui peint pour s'échapper. C'est la naissance de son défaut : fuir dans la peinture plutôt que vivre. Le moment dur reste à choisir avec clo.
-3. **L'adolescence** : il rencontre son premier amour. Les premiers souvenirs heureux sont aussi ceux qu'il a le plus repeints. On y voit déjà des versions trop belles, qui se craquellent.
-4. **Le jeune adulte** : la vie à deux, l'atelier (la toile « atelier inconnu » du salon), puis la mort. C'est le souvenir qu'il a repeint mille fois. Le niveau rejoue la même scène en de multiples versions (l'esprit d'Inception et de Tenet), et dans chacune, quelque chose cloche. La maison du présent est presque détruite.
-5. **L'atelier du peintre** (la fin) : il rencontre son moi plus vieux, épuisé, entouré de mille versions de la même toile. Tout le pousse à peindre une dernière correction. La solution est de poser le pinceau. Les couleurs reviennent, la maison retrouve la Terre et le jardin, et la porte d'entrée, qui fuyait au niveau 1, s'ouvre enfin. Il sort, vieux, dans le monde en couleurs.
+2. **L'enfance** : la maison sur Terre, le jardin (la toile du salon). Thomas enfant, sans amis, qui se referme et peint pour s'échapper. Il n'ose pas aller vers les autres, et le regrettera. C'est la naissance de son défaut : fuir dans la peinture plutôt que vivre.
+3. **L'adolescence** : il rencontre Juliette. Les premiers souvenirs heureux sont aussi ceux qu'il a le plus repeints. On y voit déjà des versions trop belles, qui se craquellent.
+4. **Le jeune adulte** : la vie à deux, l'atelier (la toile « atelier inconnu » du salon), les balades à moto, puis l'accident. C'est le souvenir qu'il a repeint mille fois. Le niveau rejoue la même scène en de multiples versions (l'esprit d'Inception et de Tenet), et dans chacune, quelque chose cloche. La maison du présent est presque détruite.
+5. **L'atelier du peintre** (la fin) : il rencontre son moi plus vieux, épuisé, entouré de mille versions de la même toile. Tout le pousse à peindre une dernière correction. La solution est de poser le pinceau. Les couleurs reviennent, la maison retrouve la Terre et le jardin, et la porte d'entrée, qui fuyait au niveau 1, s'ouvre enfin. Il sort, vieux, et redécouvre la nature : tout est coloré et verdoyant, il y a des papillons, des rencontres.
 
 ### La durée
 
-clo veut un jeu au moins 5 fois plus long que le niveau 1 actuel, qu'on estime à 10-20 minutes (pas encore mesuré sur des joueurs) : on vise donc 1 h à 1 h 30 en tout. Chaque nouveau niveau devra être au moins aussi long que le niveau 1, avec 3 ou 4 vraies énigmes qui combinent les mécaniques, en plus des moments d'histoire. Le niveau 1 lui-même pourra gagner une ou deux énigmes.
+clo vise 10 à 15 minutes, jusqu'à 20, par niveau : environ 1 h à 1 h 30 pour les 5 niveaux. Le niveau 1 actuel est trop court pour ça : il gagnera des énigmes. Chaque niveau combine plusieurs vraies énigmes et des moments d'histoire.
 
 ### Questions ouvertes
 
-- Le nom du personnage, et celui de son premier amour (qui c'est, à quoi il ou elle ressemble).
-- Le moment dur de l'enfance.
-- Comment l'amour meurt (une maladie, un accident…), et ce que le peintre change dans chaque version repeinte.
-- Ce qu'on voit à la toute fin, dehors.
+- À quoi ressemblent Thomas et Juliette, et comment se rencontrent-ils à l'adolescence ?
+- L'accident : Thomas était-il là ? Se sent-il responsable ?
+- Ce que le peintre change dans chaque version repeinte de l'accident (Juliette ne prend pas la moto, la route disparaît, il cache les clés…), et ce qui cloche à chaque fois.
 
 ## Méthode de construction
 
