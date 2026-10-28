@@ -74,6 +74,10 @@ Chaque épreuve doit avoir une raison d'être dans cette histoire.
 4. **Le jeune adulte** : la vie à deux, l'atelier (la toile « atelier inconnu » du salon), puis la mort. C'est le souvenir qu'il a repeint mille fois. Le niveau rejoue la même scène en de multiples versions (l'esprit d'Inception et de Tenet), et dans chacune, quelque chose cloche. La maison du présent est presque détruite.
 5. **L'atelier du peintre** (la fin) : il rencontre son moi plus vieux, épuisé, entouré de mille versions de la même toile. Tout le pousse à peindre une dernière correction. La solution est de poser le pinceau. Les couleurs reviennent, la maison retrouve la Terre et le jardin, et la porte d'entrée, qui fuyait au niveau 1, s'ouvre enfin. Il sort, vieux, dans le monde en couleurs.
 
+### La durée
+
+clo veut un jeu au moins 5 fois plus long que le niveau 1 actuel, qu'on estime à 10-20 minutes (pas encore mesuré sur des joueurs) : on vise donc 1 h à 1 h 30 en tout. Chaque nouveau niveau devra être au moins aussi long que le niveau 1, avec 3 ou 4 vraies énigmes qui combinent les mécaniques, en plus des moments d'histoire. Le niveau 1 lui-même pourra gagner une ou deux énigmes.
+
 ### Questions ouvertes
 
 - Le nom du personnage, et celui de son premier amour (qui c'est, à quoi il ou elle ressemble).
