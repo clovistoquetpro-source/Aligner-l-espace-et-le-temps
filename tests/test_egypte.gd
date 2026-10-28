@@ -402,3 +402,129 @@ func test_le_camp_s_ouvre() -> void:
 	T.eq(cartouche.zone, "camp", "le cartouche du camp")
 	T.eq(O.epoque(cartouche), -1, "il est là dans les deux époques")
 	T.ok(cartouche.global_position.x > 45.0, "au fond de l'enceinte")
+
+
+# --- Énigme 5 : le temple qui boucle ---------------------------------------------
+
+## L'intérieur de la salle des colonnes (6 m de large, 20 m de long, 5 m de haut).
+const SALLE := AABB(Vector3(27, 0, 32), Vector3(20, 5, 6))
+## Tout le temple, murs, pylône et sanctuaire compris.
+const TEMPLE := AABB(Vector3(24.4, 0, 31.4), Vector3(29.8, 5.5, 7.2))
+## Le passage du pylône, dans le mur de l'entrée.
+const ENTREE_TEMPLE := AABB(Vector3(26.4, 0, 34.0), Vector3(0.6, 4.6, 2.0))
+const AXE_TEMPLE := Vector3(1, 0, 0)
+const SYMBOLES := ["Scarabee", "Oeil", "Ankh", "Plume", "Soleil", "Serpent"]
+
+
+func _zone(porte: PorteTrompeuse) -> AABB:
+	var forme: CollisionShape3D = porte.get_child(0)
+	var taille := (forme.shape as BoxShape3D).size
+	return forme.global_transform * AABB(-taille / 2, taille)
+
+
+## Vrai si le joueur, debout en `p`, serait dans un mur ou une colonne.
+func _coince(n: Node3D, j: Player, p: Vector3) -> bool:
+	var capsule := CapsuleShape3D.new()
+	capsule.radius = 0.35
+	capsule.height = 1.8
+	var q := PhysicsShapeQueryParameters3D.new()
+	q.shape = capsule
+	q.transform = Transform3D(Basis(), p + Vector3(0, 0.95, 0))
+	q.exclude = [j.get_rid()]
+	return not n.get_world_3d().direct_space_state.intersect_shape(q, 1).is_empty()
+
+
+func test_temple_boucle() -> void:
+	var n: Node3D = await _charger()
+	var porte: PorteTrompeuse = n.get_node("Temple/Boucle")
+	var scarabee: Node3D = n.get_node("Temple/DalleScarabee")
+	var oeil := porte.global_position + Vector3(0, 1.6, 0)
+	T.eq(_destination(porte, AXE_TEMPLE, scarabee.global_position), "Debut", "tout droit : retour au début de la salle")
+	for s in SYMBOLES:
+		var d: Node3D = n.get_node("Temple/Dalle" + s)
+		T.ok(d.get_node_or_null("Symbole") is CSGShape3D, "%s porte son symbole" % d.name)
+		var attendu := "Sanctuaire" if s == "Scarabee" else "Debut"
+		T.eq(_destination(porte, (d.global_position - oeil).normalized(), scarabee.global_position), attendu, "en regardant %s" % d.name)
+	T.ok(scarabee.global_position.x >= SALLE.position.x + SALLE.size.x * 2.0 / 3.0 and scarabee.global_position.x <= SALLE.end.x, "le scarabée est dans le dernier tiers")
+	T.ok(minf(absf(scarabee.global_position.z - SALLE.position.z), absf(scarabee.global_position.z - SALLE.end.z)) < 0.6, "sur un mur latéral")
+	var debut: Node3D = n.get_node("Temple/Debut")
+	T.ok(debut.global_position.x < SALLE.position.x + 2.0, "Debut est à l'entrée de la salle")
+	T.ok(debut.global_basis.is_equal_approx(porte.global_basis), "on repart dans le même sens")
+	# En vrai : le joueur arrive à la porte (sans encore la toucher), tout
+	# droit ou en regardant le scarabée. Entre les dernières colonnes, il
+	# passe de z = 34,1 à 35,9.
+	var j: Player = n.get_node("Player")
+	for z in [34.1, 35.0, 35.9]:
+		for vise in [false, true]:
+			var avant := Vector3(porte.global_position.x - 0.6, 0, z)
+			j.remove_meta("arrivee_ms")
+			j.teleport(Transform3D(Basis(Vector3.UP, -PI / 2), avant))
+			j.head.rotation.x = 0.0
+			await tree.physics_frame
+			if vise:
+				O.viser(j, scarabee.global_position)
+			porte._corps_entre(j)
+			var p := j.global_position
+			if vise:
+				T.ok(p.distance_to(avant) < 0.05, "z %.1f, en regardant le scarabée : on passe (%s)" % [z, p])
+			else:
+				T.ok(p.distance_to(Vector3(debut.global_position.x - 0.6, 0, z)) < 0.05, "z %.1f, tout droit : retour au début (%s)" % [z, p])
+				T.ok(not _coince(n, j, p), "z %.1f : on n'arrive pas dans une colonne" % z)
+	var cartouche: Cartouche = n.get_node("Temple/Cartouche")
+	T.eq(cartouche.zone, "temple", "le cartouche du temple")
+	T.ok(cartouche.global_position.x > SALLE.end.x and TEMPLE.has_point(cartouche.global_position + Vector3(0, 1, 0)), "il est dans le sanctuaire")
+
+
+func test_carte_seulement_en_1942() -> void:
+	var n: Node3D = await _charger()
+	var carte: Node3D = n.get_node("Temple/CarteSoldats")
+	T.eq(O.epoque(carte), TempsScript.Epoque.PRESENT, "la carte des soldats n'existe qu'en 1942")
+	var textes := O.tous(carte, func(x: Node) -> bool: return x is Label3D and "le scarabée" in (x as Label3D).text)
+	T.eq(textes.size(), 1, "« Pour sortir : le scarabée »")
+	T.ok(carte.get_node_or_null("Scarabee") != null and carte.get_node_or_null("Cercle") != null, "le scarabée entouré de rouge")
+	T.ok(String(carte.get_parent().name) == "Temple" and SALLE.has_point(carte.global_position), "punaisée dans la salle")
+	var dalles := O.tous(n.get_node("Temple"), func(x: Node) -> bool: return String(x.name).begins_with("Dalle"))
+	T.eq(dalles.size(), SYMBOLES.size(), "six dalles")
+	for d in dalles:
+		T.eq(O.tous(d, func(x: Node) -> bool: return x is EpochMember).size(), 0, "%s est là dans les deux époques" % d.name)
+
+
+## Vrai si le rayon de `a` vers `dir` (normé) sort du temple ailleurs que par
+## l'entrée ou par la porte qui boucle.
+func _fuite(espace: PhysicsDirectSpaceState3D, a: Vector3, dir: Vector3, porte: AABB) -> bool:
+	var touche := espace.intersect_ray(PhysicsRayQueryParameters3D.create(a, a + dir * 80))
+	var dist := INF
+	if not touche.is_empty():
+		var p: Vector3 = touche.position
+		if TEMPLE.grow(0.05).has_point(p):
+			return false
+		dist = a.distance_to(p)
+	for passage: AABB in [porte, ENTREE_TEMPLE]:
+		if absf(dir.x) < 1e-4:
+			continue
+		var t := (passage.get_center().x - a.x) / dir.x
+		var c := a + dir * t
+		if t > 0 and t < dist and c.y >= passage.position.y and c.y <= passage.end.y and c.z >= passage.position.z and c.z <= passage.end.z:
+			return false
+	return true
+
+
+func test_salle_fermee() -> void:
+	var n: Node3D = await _charger()
+	var porte := _zone(n.get_node("Temple/Boucle"))
+	T.ok(porte.position.z <= SALLE.position.z and porte.end.z >= SALLE.end.z, "la porte couvre toute la largeur")
+	T.ok(porte.position.y <= 0.0 and porte.end.y >= SALLE.end.y, "et toute la hauteur")
+	var espace := n.get_world_3d().direct_space_state
+	var fuites: Array[String] = []
+	var departs := [Vector3(28.3, 0, 35), Vector3(32.5, 0, 35), Vector3(36.5, 0, 34.5), Vector3(40.5, 0, 33), Vector3(42.95, 0, 35),
+		Vector3(44.5, 0, 35), Vector3(46.5, 0, 32.6), Vector3(46.5, 0, 37.4), Vector3(50.5, 0, 33), Vector3(52.5, 0, 37)]
+	for depart: Vector3 in departs:
+		for y in [0.3, 1.7, 3.5, 4.8]:
+			for i in 24:
+				for elev in [0.0, 0.6]:
+					var dir := Vector3(cos(TAU * i / 24.0) * cos(elev), sin(elev), sin(TAU * i / 24.0) * cos(elev))
+					if _fuite(espace, depart + Vector3(0, y, 0), dir, porte):
+						fuites.append("%s y %.1f dir %d/%.1f" % [depart, y, i, elev])
+		if _fuite(espace, depart + Vector3(0, 1, 0), Vector3.UP, porte):
+			fuites.append("%s vers le haut" % depart)
+	T.ok(fuites.is_empty(), "pas d'autre sortie (%d fuites : %s)" % [fuites.size(), ", ".join(fuites.slice(0, 6))])

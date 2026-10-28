@@ -10,6 +10,7 @@ const COULEURS := {
 	"sable": "e8955a", "sable_fonce": "c9743f", "pierre": "d2af73", "pierre_fonce": "b99561",
 	"brique": "c9744a", "or": "f3c330", "turquoise": "1fb5a8", "eau": "2ec4d6",
 	"bois": "8a5a3c", "kaki": "6b7a45", "toile": "c8b48a", "ombre": "b5562a", "fer": "4a3b30",
+	"lapis": "183da0", "papier": "efe3c2", "rouge": "d62828", "encre": "2b2118",
 }
 
 const DEPART := Vector3(0, 0, 70)
@@ -615,8 +616,197 @@ func _ankh(g: Node3D) -> void:
 
 
 
+## Énigme 5 : la salle des colonnes du temple (x de 27 à 47, z de 32 à 38)
+## ramène à son début, sauf si on passe la porte du fond en regardant la
+## dalle du scarabée. Seule une carte des soldats de 1942 le dit.
 func _temple() -> void:
-	_groupe("Temple")
+	var t := _groupe("Temple")
+	# Le pylône (décor) devant le mur de l'entrée ; ses tours sont des murs
+	# invisibles, pour que le passage reste libre même avec le modèle du pack.
+	_m.egypte(t, "Pylone", "temple_gate_pylon", Vector3(25.44, 0, 35), -PI / 2, 1.2, false)
+	_mur_invisible(t, "TourNord", Vector3(25.44, 3.1, 32.72), Vector3(1.92, 6.2, 2.64))
+	_mur_invisible(t, "TourSud", Vector3(25.44, 3.1, 37.28), Vector3(1.92, 6.2, 2.64))
+	for i in 2:
+		_m.egypte(t, "Statue%d" % (i + 1), "pharaoh_statue", Vector3(22.8, 0, 32.4 + 5.2 * i), -PI / 2)
+	# Les murs (5,5 m) et les plafonds de la salle et du sanctuaire.
+	_boite(t, "MurNord", Vector3(40.3, 2.75, 31.7), Vector3(27.8, 5.5, 0.6), "pierre")
+	_boite(t, "MurSud", Vector3(40.3, 2.75, 38.3), Vector3(27.8, 5.5, 0.6), "pierre")
+	_boite(t, "MurOuestNord", Vector3(26.7, 2.75, 33.02), Vector3(0.6, 5.5, 2.04), "pierre")
+	_boite(t, "MurOuestSud", Vector3(26.7, 2.75, 36.98), Vector3(0.6, 5.5, 2.04), "pierre")
+	_boite(t, "MurOuestHaut", Vector3(26.7, 5.09, 35), Vector3(0.6, 0.82, 1.92), "pierre")
+	_boite(t, "MurFondNord", Vector3(47.3, 2.75, 32.875), Vector3(0.6, 5.5, 1.75), "pierre")
+	_boite(t, "MurFondSud", Vector3(47.3, 2.75, 37.125), Vector3(0.6, 5.5, 1.75), "pierre")
+	_boite(t, "MurFondHaut", Vector3(47.3, 4.375, 35), Vector3(0.6, 2.25, 2.5), "pierre")
+	_boite(t, "MurEst", Vector3(53.9, 2.75, 35), Vector3(0.6, 5.5, 6), "pierre")
+	_boite(t, "PlafondSalle", Vector3(37, 5.25, 35), Vector3(20, 0.5, 6), "pierre_fonce")
+	_boite(t, "PlafondSanctuaire", Vector3(50.6, 5.25, 35), Vector3(6, 0.5, 6), "pierre_fonce")
+	_boite(t, "Pavement", Vector3(39.05, 0.01, 35), Vector3(29.1, 0.02, 6), "pierre_fonce", false)
+	# Deux rangées de 4 colonnes ; elles touchent le plafond.
+	for i in 4:
+		for k in 2:
+			_m.egypte(t, "Colonne%d" % (2 * i + k), "column_papyrus", Vector3(30.5 + 4 * i, 0, 33.2 + 3.6 * k), 0.0, 5.0 / 4.93)
+	# Les dalles : trois par mur ; le scarabée et le serpent sont au-delà de
+	# la porte, au bout de la salle.
+	var dalles := [["Oeil", 32.5, 0], ["Plume", 36.5, 0], ["Scarabee", 45.5, 0], ["Soleil", 32.5, 1], ["Ankh", 36.5, 1], ["Serpent", 45.5, 1]]
+	for d: Array in dalles:
+		var sud: bool = d[2] == 1
+		_dalle(t, d[0], Vector3(d[1], 0, 38.0 if sud else 32.0), PI if sud else 0.0)
+	for x in [28.6, 40.5]:
+		_torche(t, "TorcheNord%d" % x, Vector3(x, 2.4, 32), 0.0)
+		_torche(t, "TorcheSud%d" % x, Vector3(x, 2.4, 38), PI)
+	# La porte du fond : un cadre, et la porte trompeuse qui couvre toute la
+	# salle. Tout droit, on revient au début ; en regardant le scarabée, on
+	# passe (Sanctuaire = la porte elle-même : pas de saut visible).
+	_boite(t, "MontantNord", Vector3(43.5, 2.5, 32.2), Vector3(0.5, 5, 0.4), "pierre_fonce")
+	_boite(t, "MontantSud", Vector3(43.5, 2.5, 37.8), Vector3(0.5, 5, 0.4), "pierre_fonce")
+	_boite(t, "Linteau", Vector3(43.5, 4.6, 35), Vector3(0.5, 0.8, 5.2), "pierre_fonce")
+	_boite(t, "Frise", Vector3(43.24, 4.6, 35), Vector3(0.02, 0.2, 5.2), "or", false)
+	var porte := _porte_trompeuse(t, "Boucle", Vector3(43.5, 0, 35), Vector3(6, 5, 0.4), PI / 2)
+	for m: Array in [["Debut", 28.3], ["Sanctuaire", 43.5]]:
+		var repere := Marker3D.new()
+		repere.position = Vector3(m[1], 0, 35)
+		repere.rotation.y = PI / 2
+		_ajouter(t, repere, m[0])
+	porte.cible_regard = NodePath("../DalleScarabee")
+	porte.destinations = [NodePath("../Debut"), NodePath("../Sanctuaire")]
+	porte.index_sinon = 0
+	porte.index_si_regard = 1
+	porte.angle_max_deg = 15.0
+	# Le sanctuaire : une statue, deux torches et le cartouche.
+	_m.egypte(t, "Statue", "pharaoh_statue", Vector3(52.6, 0, 35), -PI / 2)
+	for z in [33.0, 37.0]:
+		_torche(t, "TorcheSanctuaire%d" % z, Vector3(53.6, 2.4, z), -PI / 2)
+	var cartouche: Cartouche = load("res://scenes/cartouche.tscn").instantiate()
+	cartouche.position = Vector3(50.4, 0, 35)
+	cartouche.zone = "temple"
+	_ajouter(t, cartouche, "Cartouche")
+	_carte_soldats(t)
+
+
+## Une dalle de hiéroglyphes contre un mur, en `pos` (au sol, contre le mur),
+## qui regarde vers `rot_y`. Le nœud est au centre de son grand symbole :
+## c'est le point que la porte trompeuse vise.
+func _dalle(t: Node3D, sorte: String, pos: Vector3, rot_y: float) -> Node3D:
+	var d := Node3D.new()
+	d.position = pos + Basis(Vector3.UP, rot_y) * Vector3(0, 1.15, 0.34)
+	d.rotation.y = rot_y
+	_ajouter(t, d, "Dalle" + sorte)
+	_m.egypte(d, "Pierre", "hieroglyph_slab", Vector3(0, -1.15, -0.17))
+	_symbole(d, "Symbole", sorte, "lapis", "or")
+	return d
+
+
+## Une torche fixée au mur en `pos`, tournée vers `rot_y`.
+func _torche(t: Node3D, nom: String, pos: Vector3, rot_y: float) -> void:
+	var p: CSGCombiner3D = _m.prop(t, nom, pos, rot_y, false)
+	_m.cube(p, Vector3(0, 0, 0.12), Vector3(0.08, 0.08, 0.24), "ocre_fonce")
+	_m.cyl(p, Vector3(0, 0.08, 0.26), 0.12, 0.18, "or", 8, true, Vector3(PI, 0, 0))
+	_m.cyl(p, Vector3(0, 0.3, 0.26), 0.09, 0.3, "flamme", 6, true)
+	_m.lumiere(p, Vector3(0, 0.5, 0.5), 7.0, 1.1, Color("ff9f1c"))
+
+
+## La carte des soldats de 1942, punaisée sur la première colonne du côté
+## sud, face à l'entrée : le scarabée entouré de rouge.
+func _carte_soldats(t: Node3D) -> void:
+	var carte: CSGCombiner3D = _m.prop(t, "CarteSoldats", Vector3(30.03, 1.55, 36.8), -PI / 2, false, PRESENT)
+	_boite(carte, "Papier", Vector3.ZERO, Vector3(0.6, 0.8, 0.01), "papier", false)
+	var dessin := _symbole(carte, "Scarabee", "Scarabee", "encre", "papier")
+	dessin.position = Vector3(0, 0.12, 0.006)
+	dessin.scale = Vector3(0.24, 0.24, 0.1)
+	_anneau(carte, Vector3(0, 0.12, 0.009), 0.17, 0.2, "rouge").name = "Cercle"
+	_ovale(carte, Vector3(0, 0.36, 0.008), Vector2(0.025, 0.025), "rouge").name = "Punaise"
+	var texte := _texte(carte, "Texte", Vector3(0, -0.22, 0.008), "Pour sortir :\nle scarabée", 0.0, 0.001)
+	texte.modulate = Color(COULEURS["encre"])
+	texte.outline_size = 0
+
+
+## Un hiéroglyphe en relief d'environ 1 m de haut, dans le plan XY, tourné
+## vers +Z : `couleur` pour le dessin, `detail` pour ce qui ressort dessus.
+func _symbole(parent: Node3D, nom: String, sorte: String, couleur: String, detail: String) -> CSGCombiner3D:
+	var s := CSGCombiner3D.new()
+	_ajouter(parent, s, nom)
+	match sorte:
+		"Scarabee":
+			_ovale(s, Vector3(0, -0.08, 0), Vector2(0.26, 0.34), couleur)
+			_ovale(s, Vector3(0, 0.33, 0), Vector2(0.14, 0.1), couleur)
+			_trait(s, Vector3(0, -0.1, 0.03), Vector2(0.025, 0.5), 0.0, detail)
+			for cote in [-1, 1]:
+				for k in 3:
+					_trait(s, Vector3(cote * 0.3, -0.26 + 0.17 * k, 0), Vector2(0.3, 0.045), cote * (0.45 - 0.45 * k), couleur)
+				_trait(s, Vector3(cote * 0.12, 0.47, 0), Vector2(0.04, 0.16), -cote * 0.5, couleur)
+		"Oeil":
+			_ovale(s, Vector3(0, 0.08, 0), Vector2(0.42, 0.17), couleur)
+			_ovale(s, Vector3(0, 0.08, 0.02), Vector2(0.3, 0.11), detail)
+			_disque(s, Vector3(0, 0.08, 0.06), 0.09, couleur)
+			_trait(s, Vector3(0, 0.34, 0), Vector2(0.84, 0.07), -0.08, couleur)
+			_trait(s, Vector3(-0.04, -0.22, 0), Vector2(0.06, 0.36), 0.15, couleur)
+			_trait(s, Vector3(0.2, -0.16, 0), Vector2(0.4, 0.06), -0.6, couleur)
+			_anneau(s, Vector3(0.36, -0.36, 0), 0.07, 0.12, couleur)
+		"Ankh":
+			_anneau(s, Vector3(0, 0.36, 0), 0.1, 0.19, couleur).scale = Vector3(1, 1, 1.3)
+			_trait(s, Vector3(0, 0.06, 0), Vector2(0.6, 0.11), 0.0, couleur)
+			_trait(s, Vector3(0, -0.3, 0), Vector2(0.12, 0.62), 0.0, couleur)
+		"Plume":
+			_ovale(s, Vector3(0.04, 0, 0), Vector2(0.14, 0.48), couleur, -0.15)
+			_trait(s, Vector3(0, -0.02, 0.03), Vector2(0.03, 1.0), -0.15, detail)
+			_ovale(s, Vector3(0.12, 0.47, 0), Vector2(0.08, 0.06), couleur)
+		"Soleil":
+			_disque(s, Vector3(0, 0.05, 0), 0.24, couleur)
+			_disque(s, Vector3(0, 0.05, 0.03), 0.13, detail)
+			for k in 8:
+				var a := TAU * k / 8.0
+				_trait(s, Vector3(sin(a) * 0.38, 0.05 + cos(a) * 0.38, 0), Vector2(0.06, 0.16), -a, couleur)
+		"Serpent":
+			for k in 9:
+				_ovale(s, Vector3(0.16 * sin(k * 0.9), -0.45 + 0.1 * k, 0), Vector2(0.08, 0.08), couleur)
+			_ovale(s, Vector3(0.2, 0.5, 0), Vector2(0.13, 0.09), couleur)
+			_disque(s, Vector3(0.24, 0.52, 0.04), 0.025, detail)
+			_trait(s, Vector3(0.38, 0.5, 0), Vector2(0.14, 0.025), 0.0, "rouge")
+	return s
+
+
+func _ovale(s: Node3D, pos: Vector3, rayons: Vector2, couleur: String, rot_z := 0.0) -> CSGSphere3D:
+	var b := CSGSphere3D.new()
+	b.position = pos
+	b.rotation.z = rot_z
+	b.radius = 1.0
+	b.scale = Vector3(rayons.x, rayons.y, 0.05)
+	b.radial_segments = 16
+	b.rings = 8
+	b.material = _mat(couleur)
+	return _ajouter(s, b, "Forme%d" % s.get_child_count())
+
+
+func _trait(s: Node3D, pos: Vector3, taille: Vector2, rot_z: float, couleur: String) -> CSGBox3D:
+	var b := CSGBox3D.new()
+	b.position = pos
+	b.rotation.z = rot_z
+	b.size = Vector3(taille.x, taille.y, 0.06)
+	b.material = _mat(couleur)
+	return _ajouter(s, b, "Forme%d" % s.get_child_count())
+
+
+func _disque(s: Node3D, pos: Vector3, rayon: float, couleur: String) -> CSGCylinder3D:
+	var c := CSGCylinder3D.new()
+	c.position = pos
+	c.rotation.x = PI / 2
+	c.radius = rayon
+	c.height = 0.06
+	c.sides = 20
+	c.material = _mat(couleur)
+	return _ajouter(s, c, "Forme%d" % s.get_child_count())
+
+
+func _anneau(s: Node3D, pos: Vector3, interieur: float, exterieur: float, couleur: String) -> CSGTorus3D:
+	var a := CSGTorus3D.new()
+	a.position = pos
+	a.rotation.x = PI / 2
+	a.inner_radius = interieur
+	a.outer_radius = exterieur
+	a.sides = 20
+	a.ring_sides = 6
+	a.material = _mat(couleur)
+	return _ajouter(s, a, "Forme%d" % s.get_child_count())
 
 
 func _chantier() -> void:
