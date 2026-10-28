@@ -76,6 +76,15 @@ Chaque épreuve doit avoir une raison d'être dans cette histoire.
 4. **Le jeune adulte** : la vie à deux, l'atelier (la toile « atelier inconnu » du salon), les balades à moto, puis l'accident. C'est le souvenir qu'il a repeint mille fois. Le niveau rejoue la même scène en de multiples versions (l'esprit d'Inception et de Tenet), et dans chacune, quelque chose cloche. La maison du présent est presque détruite.
 5. **L'atelier du peintre** (la fin) : il rencontre son moi plus vieux, épuisé, entouré de mille versions de la même toile. Tout le pousse à peindre une dernière correction. La solution est de poser le pinceau. Les couleurs reviennent, la maison retrouve la Terre et le jardin, et la porte d'entrée, qui fuyait au niveau 1, s'ouvre enfin. Il sort, vieux, et redécouvre la nature : tout est coloré et verdoyant, il y a des papillons, des rencontres.
 
+### Le niveau 2 : l'enfance (en cours de conception)
+
+Une journée d'enfance, en trois parties qui s'enchaînent (les trois idées réunies, choix de clo). On y entre par la toile « C'est moi, petit » du salon du niveau 1.
+
+1. **La cour de récré** : Thomas est seul. Les autres enfants n'existent que dans les reflets (vitres, flaques) : quand il s'approche, ils s'effacent. Il voit trouble, la peur le ralentit, il se sent petit. clo veut une épreuve métaphorique, qui fait vaincre la peur et la timidité (à inventer ensemble).
+2. **L'anniversaire vide**, dans la maison d'enfance, sur Terre. Thomas n'a pas osé donner ses invitations, et personne n'est venu : c'est le moment dur. Deux énigmes : retrouver les invitations jamais données, cachées dans la maison, et les poster ; les invités arrivent, mais peints, plats comme du carton. Puis la table s'allonge sans fin vers le gâteau, comme le couloir du niveau 1. Les invités peints sont la correction du peintre : ils semblent être le but du niveau, mais en vérité personne n'était venu, et la maison du présent s'abîme.
+3. **Le grenier qui grandit** : Thomas s'y enferme pour peindre. Le grenier grandit quand il regarde ses dessins (il fuit) et rétrécit quand il regarde par la lucarne, vers les autres. Il faut atteindre la trappe. Il y peint sa première toile, celle du salon.
+4. **Le retour** dans la maison des étoiles, un peu plus abîmée.
+
 ### La durée
 
 clo vise 10 à 15 minutes, jusqu'à 20, par niveau : environ 1 h à 1 h 30 pour les 5 niveaux. Le niveau 1 actuel est trop court pour ça : il gagnera des énigmes. Chaque niveau combine plusieurs vraies énigmes et des moments d'histoire.
