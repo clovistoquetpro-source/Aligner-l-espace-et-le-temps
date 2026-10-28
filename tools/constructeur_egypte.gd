@@ -245,8 +245,95 @@ func _spinosaure(g: Node3D, pos: Vector3) -> void:
 	z.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 
 
+## Énigme 3 : une rampe de chantier monte vers une terrasse à 8 m. En
+## Antiquité, deux tronçons ne sont pas encore construits (quelques blocs
+## flottent à leur place). En 1942, les soldats les ont comblés avec des ponts
+## de planches, mais ont barré la rampe de deux tranchées en sacs de sable. On
+## monte en basculant : les trous se traversent en 1942, les sacs en Antiquité.
+const RAMPE_PIED := -18.0
+const RAMPE_LONGUEURS := [6.0, 5.5, 9.0, 5.5, 8.0]
+const RAMPE_HAUTEUR := 8.0
+const RAMPE_LARGEUR := 3.0
+## Épaisseur et hauteur des parapets : plus hauts qu'un saut (1 m), pour
+## qu'on ne puisse pas contourner les sacs de sable en marchant dessus.
+const PARAPET := Vector2(0.3, 1.2)
+
+
 func _rampe() -> void:
-	_groupe("Rampe")
+	var g := _groupe("Rampe")
+	var total: float = RAMPE_LONGUEURS.reduce(func(a: float, b: float) -> float: return a + b, 0.0)
+	var pente := RAMPE_HAUTEUR / total
+	var z := RAMPE_PIED
+	for i in RAMPE_LONGUEURS.size():
+		var long: float = RAMPE_LONGUEURS[i]
+		var pont := i % 2 == 1
+		_troncon(g, "Troncon%d" % (i + 1), z, long, pente, pont)
+		if pont:
+			for k in 3:
+				var b := _boite(g, "Flottant%d_%d" % [i + 1, k], Vector3(0.9 * (k - 1), (RAMPE_PIED - z + long * (k + 1) / 4.0) * pente + 0.6 * (k % 2), z - long * (k + 1) / 4.0), Vector3(1.4, 0.7, 1.0), "pierre", false, PASSE)
+				b.rotation = Vector3(0.2 * k, 0.5 * k - 0.4, 0.15)
+		z -= long
+	# Les tranchées, au milieu des tronçons 3 et 5, posées sur la pente.
+	for paire in [["SacsA", 2], ["SacsB", 4]]:
+		var debut := RAMPE_PIED
+		for k in paire[1]:
+			debut -= RAMPE_LONGUEURS[k]
+		var milieu: float = debut - RAMPE_LONGUEURS[paire[1]] / 2.0
+		_m.militaire(g, paire[0], "SackTrench", Vector3(0, (RAMPE_PIED - milieu - 0.46) * pente, milieu))
+	# Un soldat dort en travers du premier tronçon, la tête à l'ouest (il
+	# laisse 1,2 m pour passer à l'est).
+	var dormeur: Node3D = _m.soldat(g, "SoldatDormeur", Vector3(0.3, 1.2 * pente, RAMPE_PIED - 1.2), PI / 2, "Death")
+	dormeur.set("pose_finale", true)
+	var zzz := _texte(g, "Ronflement", Vector3(-0.8, 1.2 * pente + 0.9, RAMPE_PIED - 1.2), "Z z z", 0.0, 0.008)
+	zzz.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	var m := EpochMember.new()
+	m.epoque = PRESENT
+	_ajouter(zzz, m, "EpochMember")
+	# La terrasse et son cartouche.
+	_boite(g, "Terrasse", Vector3(0, RAMPE_HAUTEUR / 2, z - 5), Vector3(10, RAMPE_HAUTEUR, 10), "brique")
+	var cartouche: Cartouche = load("res://scenes/cartouche.tscn").instantiate()
+	cartouche.position = Vector3(0, RAMPE_HAUTEUR, z - 6)
+	cartouche.zone = "rampe"
+	_ajouter(g, cartouche, "Cartouche")
+
+
+## Un tronçon de rampe de `long` m (le long de -Z, à partir de `z0`), bordé de
+## parapets. En briques et plein jusqu'au sol, ou, pour un `pont` de 1942, en
+## planches et suspendu (on peut passer dessous).
+func _troncon(g: Node3D, nom: String, z0: float, long: float, pente: float, pont: bool) -> CSGCombiner3D:
+	var t := CSGCombiner3D.new()
+	t.position = Vector3(0, 0, z0)
+	# X local = vers le haut de la rampe (-Z du monde), Z local = +X du monde.
+	t.rotation.y = PI / 2
+	t.use_collision = true
+	_ajouter(g, t, nom)
+	var h0 := (RAMPE_PIED - z0) * pente
+	var h1 := h0 + long * pente
+	var demi := RAMPE_LARGEUR / 2 + PARAPET.x
+	var dessous := [Vector2(0, h0 - 0.4), Vector2(long, h1 - 0.4)] if pont else [Vector2(0, 0), Vector2(long, 0)]
+	var corps := PackedVector2Array(dessous + [Vector2(long, h1), Vector2(0, h0)])
+	if not pont and h0 < 0.01:
+		corps.remove_at(3)
+	_profil(t, "Corps", corps, 2 * demi, demi, "bois" if pont else "brique")
+	var bord := PackedVector2Array([Vector2(0, h0), Vector2(long, h1), Vector2(long, h1 + PARAPET.y), Vector2(0, h0 + PARAPET.y)])
+	for cote in [-1, 1]:
+		var z := demi if cote > 0 else -RAMPE_LARGEUR / 2
+		_profil(t, "Parapet" + ("Est" if cote > 0 else "Ouest"), bord, PARAPET.x, z, "kaki" if pont else "pierre_fonce")
+	if pont:
+		var e := EpochMember.new()
+		e.epoque = PRESENT
+		_ajouter(t, e, "EpochMember")
+	return t
+
+
+## Un profil (vu de côté) extrudé sur `epaisseur`, à partir de `z` local.
+func _profil(t: Node3D, nom: String, points: PackedVector2Array, epaisseur: float, z: float, couleur: String) -> void:
+	var p := CSGPolygon3D.new()
+	p.polygon = points
+	p.depth = epaisseur
+	p.position.z = z
+	p.material = _mat(couleur)
+	_ajouter(t, p, nom)
 
 
 func _camp() -> void:

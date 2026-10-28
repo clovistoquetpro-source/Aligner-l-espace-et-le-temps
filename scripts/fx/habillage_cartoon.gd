@@ -10,6 +10,9 @@ extends Node3D
 @export var corriger_couleurs := false
 ## Animation jouée en boucle au lancement (un morceau de son nom, voir Anime).
 @export var animation := ""
+## Si vrai, l'animation n'est pas jouée en boucle : le modèle prend sa
+## dernière pose (un soldat couché qui dort…).
+@export var pose_finale := false
 ## Morceaux du modèle à cacher (les armes des soldats…).
 @export var caches := PackedStringArray()
 
@@ -20,4 +23,4 @@ func _ready() -> void:
 		for n in find_children(nom, "Node3D", true, false):
 			n.visible = false
 	if animation != "":
-		Anime.jouer(self, animation, false, true)
+		Anime.jouer(self, animation, pose_finale, not pose_finale)

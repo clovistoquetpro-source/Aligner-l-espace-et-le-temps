@@ -191,3 +191,95 @@ func test_carriere_resolue() -> void:
 	var cartouche: Cartouche = n.get_node("Carriere/Cartouche")
 	T.eq(cartouche.zone, "carriere", "le cartouche de la carrière")
 	T.ok(cartouche.global_position.x < -40.0, "il est au fond de la carrière")
+
+
+# --- Énigme 3 : la rampe ----------------------------------------------------------
+
+func _aabb(v: VisualInstance3D) -> AABB:
+	return v.global_transform * v.get_aabb()
+
+
+## Ce que touche un rayon vertical qui descend en (x, z) : { position, collider }.
+func _sous(n: Node3D, x: float, z: float) -> Dictionary:
+	var r := PhysicsRayQueryParameters3D.create(Vector3(x, 30, z), Vector3(x, -5, z))
+	return n.get_world_3d().direct_space_state.intersect_ray(r)
+
+
+## La forme solide des sacs de sable, dans le monde.
+func _sacs(n: Node3D, nom: String) -> AABB:
+	return n.get_node("Rampe/%s/EpochMember" % nom).aabbs_solides()[0]
+
+
+func test_rampe_trouee_dans_l_antiquite() -> void:
+	var n: Node3D = await _charger()
+	for nom in ["Troncon1", "Troncon3", "Troncon5", "Terrasse"]:
+		T.eq(O.epoque(n.get_node("Rampe/" + nom)), -1, "%s existe dans les deux époques" % nom)
+	for nom in ["Troncon2", "Troncon4"]:
+		var t: CSGShape3D = n.get_node("Rampe/" + nom)
+		T.eq(O.epoque(t), TempsScript.Epoque.PRESENT, "%s n'existe qu'en 1942" % nom)
+		var long := _aabb(t).size.z
+		T.ok(long >= 5.5, "%s : un trou de %.1f m, trop long pour un saut" % [nom, long])
+	T.proche(O.boite(n.get_node("Rampe/Terrasse")).end.y, 8.0, "la terrasse est à 8 m", 0.01)
+
+
+func test_rampe_continue_en_1942() -> void:
+	var n: Node3D = await _charger()
+	await _basculer_sans_joueur(TempsScript.Epoque.PRESENT)
+	var sacs := [_sacs(n, "SacsA"), _sacs(n, "SacsB")]
+	var debut := O.boite(n.get_node("Rampe/Terrasse")).end.z
+	var avant := Vector2(-18.5, _sous(n, 0, -18.5)["position"].y)
+	var z := -19.0
+	while z > debut:
+		var sur_les_sacs := sacs.any(func(s: AABB) -> bool: return z > s.position.z - 0.1 and z < s.end.z + 0.1)
+		var h: float = _sous(n, 0, z).get("position", Vector3.DOWN).y
+		if not sur_les_sacs:
+			var montee := (h - avant.y) / (avant.x - z)
+			T.ok(montee > 0.0 and montee < 0.3, "z %.1f : la pente monte sans marche (%.2f puis %.2f)" % [z, avant.y, h])
+			avant = Vector2(z, h)
+		z -= 0.5
+	T.ok(avant.y > 7.8, "on arrive en haut (%.2f m)" % avant.y)
+
+
+func test_sacs_de_sable_en_1942() -> void:
+	var n: Node3D = await _charger()
+	for paire in [["SacsA", "Troncon3"], ["SacsB", "Troncon5"]]:
+		T.eq(O.epoque(n.get_node("Rampe/" + paire[0])), TempsScript.Epoque.PRESENT, "%s n'existe qu'en 1942" % paire[0])
+		var s := _sacs(n, paire[0])
+		var t := _aabb(n.get_node("Rampe/" + paire[1]))
+		T.ok(s.size.y >= 1.2, "%s : %.2f m de haut, trop haut pour un saut" % [paire[0], s.size.y])
+		T.ok(s.position.x <= -1.5 and s.end.x >= 1.5, "%s barre toute la largeur" % paire[0])
+		T.ok(s.position.z - t.position.z >= 2.0 and t.end.z - s.end.z >= 2.0, "%s : de la place de chaque côté sur %s" % paire)
+
+
+## Le joueur debout sur la rampe en (0, z) peut basculer dans les deux sens.
+func _peut_basculer(n: Node3D, z: float) -> bool:
+	var pied: Vector3 = _sous(n, 0, z)["position"]
+	var boite := AABB(pied - Vector3(0.35, 0, 0.35), Temps.TAILLE_JOUEUR).grow(-Temps.MARGE)
+	return TempsScript.bascule_possible(boite, O.solides_de(n, TempsScript.Epoque.PASSE)) \
+		and TempsScript.bascule_possible(boite, O.solides_de(n, TempsScript.Epoque.PRESENT))
+
+
+func test_on_peut_basculer_avant_les_sacs() -> void:
+	var n: Node3D = await _charger()
+	await _basculer_sans_joueur(TempsScript.Epoque.PRESENT)
+	var t3 := _aabb(n.get_node("Rampe/Troncon3"))
+	var t5 := _aabb(n.get_node("Rampe/Troncon5"))
+	var a := _sacs(n, "SacsA")
+	var b := _sacs(n, "SacsB")
+	T.ok(_peut_basculer(n, (t3.end.z + a.end.z) / 2), "avant les sacs A (vers l'Antiquité)")
+	T.ok(_peut_basculer(n, (a.position.z + t3.position.z) / 2), "après les sacs A (retour en 1942)")
+	T.ok(_peut_basculer(n, (t5.end.z + b.end.z) / 2), "avant les sacs B (vers l'Antiquité)")
+
+
+func test_chute_sur_le_sable() -> void:
+	var n: Node3D = await _charger()
+	var sol: Node = n.get_node("Sol")
+	for nom in ["Troncon2", "Troncon4"]:
+		var c := _aabb(n.get_node("Rampe/" + nom)).get_center()
+		T.eq(_sous(n, 0, c.z).get("collider"), sol, "%s en Antiquité : on tombe sur le sable" % nom)
+		for cote in [-1, 1]:
+			var r := PhysicsRayQueryParameters3D.create(Vector3(0, 1, c.z), Vector3(12 * cote, 1, c.z))
+			T.eq(n.get_world_3d().direct_space_state.intersect_ray(r).get("collider"), null, "%s : on ressort sur le côté" % nom)
+	var cartouche: Cartouche = n.get_node("Rampe/Cartouche")
+	T.eq(cartouche.zone, "rampe", "le cartouche de la rampe")
+	T.ok(cartouche.global_position.y > 7.9, "il est sur la terrasse")
