@@ -157,8 +157,92 @@ func _dune(p: Node, pos: Vector3, taille: Vector3) -> void:
 	b.scale = taille
 
 
+## Énigme 2 : la carrière, fermée de falaises, n'a qu'une entrée, et un
+## spinosaure dort en travers. Au bord du Nil, un petit poisson : agrandi
+## (perspective forcée) et posé sur la pierre plate devant le dinosaure, il le
+## réveille ; il va le manger, se recouche plus loin et libère l'entrée.
 func _carriere() -> void:
-	_groupe("Carriere")
+	var g := _groupe("Carriere")
+	# Falaises : x de -64 à -36, z de -14 à 14 ; entrée de 4 m à l'est.
+	_boite(g, "FalaiseOuest", Vector3(-63, 3, 0), Vector3(2, 6, 28), "pierre_fonce")
+	_boite(g, "FalaiseNord", Vector3(-49, 3, -13), Vector3(26, 6, 2), "pierre_fonce")
+	_boite(g, "FalaiseSud", Vector3(-49, 3, 13), Vector3(26, 6, 2), "pierre_fonce")
+	_boite(g, "FalaiseEstNord", Vector3(-37, 3, -7), Vector3(2, 6, 10), "pierre_fonce")
+	_boite(g, "FalaiseEstSud", Vector3(-37, 3, 7), Vector3(2, 6, 10), "pierre_fonce")
+	# Des blocs à moitié taillés dans la carrière.
+	for i in 5:
+		var pos := Vector3(-55 + 3.2 * (i % 3), 0.6 + 1.2 * (i / 3), -8 + 1.3 * (i / 3))
+		_boite(g, "Bloc%d" % i, pos, Vector3(2.4, 1.2, 1.2), "pierre")
+	_boite(g, "BlocTaille", Vector3(-46, 0.6, 8.5), Vector3(3, 1.2, 1.6), "pierre")
+	var cartouche: Cartouche = load("res://scenes/cartouche.tscn").instantiate()
+	cartouche.position = Vector3(-58, 0, 0)
+	cartouche.zone = "carriere"
+	_ajouter(g, cartouche, "Cartouche")
+	# Le spinosaure, la pierre plate où poser l'appât, et sa place après le repas.
+	_spinosaure(g, Vector3(-34.5, 0, 0.5))
+	_boite(g, "PierrePlate", Vector3(-27.5, 0.2, 0.5), Vector3(3, 0.4, 3), "pierre")
+	var zone := Area3D.new()
+	zone.position = Vector3(-27.5, 1.9, 0.5)
+	_ajouter(g, zone, "ZoneAppat")
+	var forme := CollisionShape3D.new()
+	var boite := BoxShape3D.new()
+	boite.size = Vector3(3, 3, 3)
+	forme.shape = boite
+	_ajouter(zone, forme, "CollisionShape3D")
+	var repas := Marker3D.new()
+	repas.position = Vector3(-24, 0, -10)
+	_ajouter(g, repas, "Repas")
+	var dino: Spinosaure = g.get_node("Spinosaure")
+	dino.zone_appat = NodePath("../ZoneAppat")
+	dino.arrivee = NodePath("../Repas")
+	# Les soldats de 1942 ont planté un panneau.
+	var panneau: Node3D = _m.militaire(g, "Panneau", "Sign", Vector3(-26, 0, 6), PI * 0.62, 2.0, false)
+	_texte(panneau, "Texte", Vector3(0, 1.1, 0.28), "DANGER !\nNe pas réveiller\nle monstre.\nIl ne mange que\nles GROS\npoissons.", 0.0, 0.0015)
+	_nil(g)
+
+
+## Le Nil : une bande d'eau au sud de la carrière, bordée de papyrus. Une
+## barrière invisible empêche d'y marcher. Le poisson attend sur la rive.
+func _nil(g: Node3D) -> void:
+	_boite(g, "Eau", Vector3(-56, 0.02, 23.5), Vector3(88, 0.04, 7), "eau", false)
+	_mur_invisible(g, "BarriereNil", Vector3(-56, 1.5, 23.5), Vector3(88, 3, 7.4))
+	for i in 9:
+		var x := -40.0 + 3.0 * i
+		if absf(x + 24) < 2.0:
+			continue
+		_m.egypte(g, "Papyrus%d" % i, "papyrus_reeds", Vector3(x, 0, 19.4 + 0.3 * (i % 2)), 0.5 * i, 1.0, false)
+	_m.egypte(g, "PalmierNil1", "palm_tree", Vector3(-18, 0, 17), 1.0, 1.0, false)
+	_m.egypte(g, "PalmierNil2", "palm_tree", Vector3(-33, 0, 16.5), 2.5, 1.1, false)
+	var poisson: ObjetPerspectif = load("res://scenes/poisson.tscn").instantiate()
+	poisson.position = Vector3(-24, 0.2, 17.5)
+	poisson.rotation.y = 0.4
+	poisson.taille_depart = 0.4
+	# Hors de cette zone (et dans le Nil), il revient sur la rive.
+	poisson.zone = AABB(Vector3(-64, -2, -20), Vector3(52, 30, 39.5))
+	_ajouter(g, poisson, "Poisson")
+
+
+## Le spinosaure endormi : le T-rex du pack (9 m), couché, avec une boîte de
+## collision qui ferme l'entrée de la carrière. Sa voile est ajoutée au
+## lancement (scripts/egypte/spinosaure.gd).
+func _spinosaure(g: Node3D, pos: Vector3) -> void:
+	var dino := Spinosaure.new()
+	dino.position = pos
+	_ajouter(g, dino, "Spinosaure")
+	var forme := CollisionShape3D.new()
+	var boite := BoxShape3D.new()
+	boite.size = Vector3(5, 2.6, 7)
+	forme.shape = boite
+	forme.position = Vector3(1.0, 1.3, -0.5)
+	_ajouter(dino, forme, "CollisionShape3D")
+	var habillage := Node3D.new()
+	habillage.set_script(_m.HABILLAGE)
+	_ajouter(dino, habillage, "Modele")
+	var trex: Node3D = load("res://assets/modeles/dinos/Trex.fbx").instantiate()
+	trex.scale = Vector3.ONE * 0.3
+	_ajouter(habillage, trex, "Trex")
+	var z := _texte(dino, "Ronflement", Vector3(4, 2.6, 2), "Z z z", 0.0, 0.012)
+	z.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 
 
 func _rampe() -> void:

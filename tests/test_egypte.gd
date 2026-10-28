@@ -117,3 +117,77 @@ func test_pas_de_contournement() -> void:
 		var a := TAU * k / 16.0
 		var r := PhysicsRayQueryParameters3D.create(depart, depart + Vector3(sin(a), 0, -cos(a)) * 80)
 		T.ok(not espace.intersect_ray(r).is_empty(), "l'arrivée est fermée (direction %d/16)" % k)
+
+
+# --- Énigme 2 : le spinosaure ---------------------------------------------------
+
+## Ce que touche un rayon horizontal qui traverse l'entrée de la carrière à
+## la hauteur `y` et au décalage `z`.
+func _a_travers_l_entree(n: Node3D, y: float, z: float) -> Object:
+	var r := PhysicsRayQueryParameters3D.create(Vector3(-24, y, z), Vector3(-50, y, z))
+	var touche := n.get_world_3d().direct_space_state.intersect_ray(r)
+	return touche.get("collider")
+
+
+func _basculer_sans_joueur(ep: int) -> void:
+	Temps.courante = ep
+	Temps.epoque_changee.emit(ep)
+	await tree.physics_frame
+	await tree.physics_frame
+
+
+func test_le_spinosaure_bloque_l_entree() -> void:
+	var n: Node3D = await _charger()
+	var dino: Node = n.get_node("Carriere/Spinosaure")
+	for ep in [TempsScript.Epoque.PASSE, TempsScript.Epoque.PRESENT]:
+		await _basculer_sans_joueur(ep)
+		for y in [0.5, 1.5, 2.4]:
+			for z in [-1.8, 0.0, 1.8]:
+				T.eq(_a_travers_l_entree(n, y, z), dino, "époque %d, y %.1f, z %.1f : le spinosaure barre l'entrée" % [ep, y, z])
+
+
+func test_trajet_du_spinosaure() -> void:
+	var n: Node3D = await _charger()
+	var dino: Node3D = n.get_node("Carriere/Spinosaure")
+	var appat: Node3D = n.get_node("Carriere/ZoneAppat")
+	var repas: Node3D = n.get_node("Carriere/Repas")
+	var entree := Vector3(-37, 0, 0)
+	# Il s'éloigne de l'entrée pour aller manger, puis ne repasse pas devant.
+	var avant := Vector2(dino.global_position.x - entree.x, dino.global_position.z - entree.z).length()
+	var p1 := Geometry3D.get_closest_point_to_segment(entree, dino.global_position, appat.global_position)
+	T.ok(p1.distance_to(entree) >= avant - 0.01, "il part en s'éloignant de l'entrée")
+	var p2 := Geometry3D.get_closest_point_to_segment(entree, appat.global_position, repas.global_position)
+	T.ok(Vector2(p2.x - entree.x, p2.z - entree.z).length() > 6.0, "il va se coucher loin de l'entrée")
+
+
+func test_poisson_qui_s_echappe() -> void:
+	var n: Node3D = await _charger()
+	var poisson: ObjetPerspectif = n.get_node("Carriere/Poisson")
+	var depart := poisson.global_position
+	poisson.global_position = Vector3(0, 1, 500)
+	await tree.physics_frame
+	await tree.physics_frame
+	T.ok(poisson.global_position.distance_to(depart) < 1.0, "le poisson revient au bord du Nil")
+	poisson.global_position = Vector3(-30, 1, 23)
+	await tree.physics_frame
+	await tree.physics_frame
+	T.ok(poisson.global_position.distance_to(depart) < 1.0, "jeté dans le Nil, il revient aussi")
+
+
+func test_carriere_resolue() -> void:
+	var n: Node3D = await _charger()
+	var dino: Spinosaure = n.get_node("Carriere/Spinosaure")
+	dino.duree_marche = 0.05
+	var poisson: ObjetPerspectif = n.get_node("Carriere/Poisson")
+	var zone: Area3D = n.get_node("Carriere/ZoneAppat")
+	poisson.taille = 2.0
+	poisson.global_position = zone.global_position
+	for i in 40:
+		await tree.physics_frame
+	T.eq(dino.etat, Spinosaure.Etat.REPU, "il a mangé")
+	for y in [0.5, 1.5]:
+		for z in [-1.0, 0.0, 1.0]:
+			T.eq(_a_travers_l_entree(n, y, z), null, "l'entrée est libre (y %.1f, z %.1f)" % [y, z])
+	var cartouche: Cartouche = n.get_node("Carriere/Cartouche")
+	T.eq(cartouche.zone, "carriere", "le cartouche de la carrière")
+	T.ok(cartouche.global_position.x < -40.0, "il est au fond de la carrière")
