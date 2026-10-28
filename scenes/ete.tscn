@@ -1,0 +1,1730 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/niveau/ete.gd" id="1_vtq7f"]
+[ext_resource type="Script" path="res://scripts/illusion/miroir.gd" id="2_odrnr"]
+[ext_resource type="Script" path="res://scripts/niveau/pensee.gd" id="3_j1bpa"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="4_i46fh"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="5_wba70"]
+[ext_resource type="Script" path="res://scripts/fx/fissures.gd" id="6_3ce4m"]
+[ext_resource type="Script" path="res://scripts/fx/chute_toiles.gd" id="7_nxget"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k2r7p"]
+sky_top_color = Color(0.30588236, 0.65882355, 0.87058824, 1)
+sky_horizon_color = Color(1, 0.9098039, 0.6392157, 1)
+ground_bottom_color = Color(0.23921569, 0.3529412, 0.5019608, 1)
+ground_horizon_color = Color(1, 0.9098039, 0.6392157, 1)
+sun_angle_max = 8.0
+sun_curve = 0.05
+
+[sub_resource type="Sky" id="Sky_2lhiv"]
+sky_material = SubResource("ProceduralSkyMaterial_k2r7p")
+
+[sub_resource type="Environment" id="Environment_ux8ed"]
+background_mode = 2
+sky = SubResource("Sky_2lhiv")
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.9098039, 0.7607843, 1)
+ambient_light_energy = 0.45
+reflected_light_source = 1
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8bpph"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.4862745, 0.70980394, 0.09411765, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xemw"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.9137255, 0.84705883, 0.6509804, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipe50"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.42352942, 0.45882353, 0.49019608, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dgiyj"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.972549, 0.9764706, 0.98039216, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ltha"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.7372549, 0.42352942, 0.14509805, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gm2wn"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.6117647, 0.4, 0.26666668, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c422r"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.5411765, 0.69411767, 0.49019608, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t31x5"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.41568628, 0.5529412, 0.4509804, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_47vyk"]
+size = Vector3(64, 8, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_euo1a"]
+size = Vector3(1, 8, 62)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t6lnk"]
+size = Vector3(1, 8, 62)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o6lua"]
+size = Vector3(64, 8, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fk4xs"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.23921569, 0.3529412, 0.5019608, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u8t2y"]
+size = Vector3(64, 1.55, 40)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vccu0"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.6431373, 0.44313726, 0.28235295, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2vfmi"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.43529412, 0.27058825, 0.09411765, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjvf6"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.43529412, 0.27058825, 0.09411765, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3dgrx"]
+size = Vector3(0.8, 0.6, 0.06)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rq6jg"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.9607843, 0.9607843, 0.9607843, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lu4y2"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.30588236, 0.65882355, 0.87058824, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00q75"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.1764706, 0.41568628, 0.30980393, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ysk8t"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.32156864, 0.7176471, 0.53333336, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lsnr"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.95686275, 0.63529414, 0.38039216, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4sf3"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.90588236, 0.43529412, 0.31764707, 1)
+roughness = 0.8
+emission_enabled = true
+emission = Color(0.90588236, 0.43529412, 0.31764707, 1)
+emission_energy_multiplier = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jb07e"]
+size = Vector3(2, 2.4, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1qf1r"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.7882353, 0.5647059, 0.3529412, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y3j53"]
+size = Vector3(2, 0.2, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3uif6"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.49803922, 0.33333334, 0.22352941, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ptnes"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.6117647, 0.56078434, 0.5019608, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ay38c"]
+size = Vector3(5, 3, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdjbu"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.21960784, 0.4, 0.25490198, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p48p6"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 0, 0.43137255, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54axp"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 0.74509805, 0.043137256, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dm16c"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.9843137, 0.3372549, 0.02745098, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nwnh4"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.5137255, 0.21960784, 0.9254902, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lx54k"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.9647059, 0.7411765, 0.3764706, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_i284t"]
+top_radius = 0.18
+bottom_radius = 0.32
+height = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ujivm"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.9490196, 0.7764706, 0.627451, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_06lsn"]
+radius = 0.13
+height = 0.26
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7cvcl"]
+radius = 0.16
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s1q4x"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.49803922, 0.30980393, 0.14117648, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fsrfr"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.9019608, 0.22352941, 0.27450982, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp8t0"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.16862746, 0.1764706, 0.25882354, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx8sd"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+roughness = 0.8
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_k0tw5"]
+top_radius = 0.28
+bottom_radius = 0.28
+height = 0.08
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_oqv8s"]
+top_radius = 0.28
+bottom_radius = 0.28
+height = 0.08
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_awn7i"]
+top_radius = 0.18
+bottom_radius = 0.22
+height = 0.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_muuvk"]
+radius = 0.13
+height = 0.26
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6c5xp"]
+radius = 0.16
+height = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6gscf"]
+top_radius = 0.18
+bottom_radius = 0.32
+height = 0.9
+
+[sub_resource type="SphereMesh" id="SphereMesh_ywoln"]
+radius = 0.13
+height = 0.26
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qfu0n"]
+radius = 0.16
+height = 0.6
+
+[node name="Ete" type="Node3D" unique_id=1686513699]
+script = ExtResource("1_vtq7f")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1700745442]
+environment = SubResource("Environment_ux8ed")
+
+[node name="Soleil" type="DirectionalLight3D" parent="." unique_id=669202411]
+light_color = Color(1, 0.94509804, 0.7882353, 1)
+shadow_enabled = true
+
+[node name="Rive" type="Node3D" parent="." unique_id=2033965903]
+
+[node name="Sol_sud" type="CSGBox3D" parent="Rive" unique_id=78775459]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 10)
+use_collision = true
+size = Vector3(64, 0.8, 20)
+material = SubResource("StandardMaterial3D_8bpph")
+
+[node name="Sol_ouest" type="CSGBox3D" parent="Rive" unique_id=933409285]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, -0.1, -20)
+use_collision = true
+size = Vector3(12, 0.8, 40)
+material = SubResource("StandardMaterial3D_8bpph")
+
+[node name="Sol_est" type="CSGBox3D" parent="Rive" unique_id=1421159552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, -0.1, -20)
+use_collision = true
+size = Vector3(12, 0.8, 40)
+material = SubResource("StandardMaterial3D_8bpph")
+
+[node name="Sol_nord" type="CSGBox3D" parent="Rive" unique_id=1082287078]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -44)
+use_collision = true
+size = Vector3(88, 0.8, 8)
+material = SubResource("StandardMaterial3D_8bpph")
+
+[node name="Plage" type="CSGBox3D" parent="Rive" unique_id=1316066381]
+transform = Transform3D(-1, 0, 0, 0, 0.9662349, -0.25766262, 0, -0.25766262, -0.9662349, 16, -0.64493525, -2.9613507)
+use_collision = true
+size = Vector3(8, 0.3, 6.20967)
+material = SubResource("StandardMaterial3D_2xemw")
+
+[node name="Route" type="CSGBox3D" parent="Rive" unique_id=686650181]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31, 12)
+size = Vector3(64, 0.02, 3.5)
+material = SubResource("StandardMaterial3D_ipe50")
+
+[node name="Ligne_0" type="CSGBox3D" parent="Rive" unique_id=1529132356]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0.325, 12)
+size = Vector3(2, 0.01, 0.15)
+material = SubResource("StandardMaterial3D_dgiyj")
+
+[node name="Ligne_1" type="CSGBox3D" parent="Rive" unique_id=1228928862]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0.325, 12)
+size = Vector3(2, 0.01, 0.15)
+material = SubResource("StandardMaterial3D_dgiyj")
+
+[node name="Ligne_2" type="CSGBox3D" parent="Rive" unique_id=1654861370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0.325, 12)
+size = Vector3(2, 0.01, 0.15)
+material = SubResource("StandardMaterial3D_dgiyj")
+
+[node name="Ligne_3" type="CSGBox3D" parent="Rive" unique_id=778062364]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.325, 12)
+size = Vector3(2, 0.01, 0.15)
+material = SubResource("StandardMaterial3D_dgiyj")
+
+[node name="Ligne_4" type="CSGBox3D" parent="Rive" unique_id=1703421986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.325, 12)
+size = Vector3(2, 0.01, 0.15)
+material = SubResource("StandardMaterial3D_dgiyj")
+
+[node name="Ligne_5" type="CSGBox3D" parent="Rive" unique_id=231178644]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.325, 12)
+size = Vector3(2, 0.01, 0.15)
+material = SubResource("StandardMaterial3D_dgiyj")
+
+[node name="Ligne_6" type="CSGBox3D" parent="Rive" unique_id=341333360]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.325, 12)
+size = Vector3(2, 0.01, 0.15)
+material = SubResource("StandardMaterial3D_dgiyj")
+
+[node name="Ligne_7" type="CSGBox3D" parent="Rive" unique_id=810193423]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.325, 12)
+size = Vector3(2, 0.01, 0.15)
+material = SubResource("StandardMaterial3D_dgiyj")
+
+[node name="Ligne_8" type="CSGBox3D" parent="Rive" unique_id=1190823011]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.325, 12)
+size = Vector3(2, 0.01, 0.15)
+material = SubResource("StandardMaterial3D_dgiyj")
+
+[node name="Ligne_9" type="CSGBox3D" parent="Rive" unique_id=1896264043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.325, 12)
+size = Vector3(2, 0.01, 0.15)
+material = SubResource("StandardMaterial3D_dgiyj")
+
+[node name="Ligne_10" type="CSGBox3D" parent="Rive" unique_id=1024930876]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 0.325, 12)
+size = Vector3(2, 0.01, 0.15)
+material = SubResource("StandardMaterial3D_dgiyj")
+
+[node name="Ligne_11" type="CSGBox3D" parent="Rive" unique_id=423241696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0.325, 12)
+size = Vector3(2, 0.01, 0.15)
+material = SubResource("StandardMaterial3D_dgiyj")
+
+[node name="Cabane" type="CSGBox3D" parent="Rive" unique_id=1872932270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1.55, 4)
+use_collision = true
+size = Vector3(4, 2.5, 3)
+material = SubResource("StandardMaterial3D_8ltha")
+
+[node name="Cabane_toit" type="CSGBox3D" parent="Rive" unique_id=738957719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 3, 4)
+use_collision = true
+size = Vector3(4.6, 0.4, 3.6)
+material = SubResource("StandardMaterial3D_gm2wn")
+
+[node name="Colline_1" type="CSGBox3D" parent="Rive" unique_id=1527020063]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 3, 26)
+size = Vector3(30, 8, 10)
+material = SubResource("StandardMaterial3D_c422r")
+
+[node name="Colline_2" type="CSGBox3D" parent="Rive" unique_id=1754740168]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 4, 28)
+size = Vector3(36, 10, 10)
+material = SubResource("StandardMaterial3D_c422r")
+
+[node name="Colline_3" type="CSGBox3D" parent="Rive" unique_id=1144135847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 5, -10)
+size = Vector3(10, 12, 50)
+material = SubResource("StandardMaterial3D_t31x5")
+
+[node name="Colline_4" type="CSGBox3D" parent="Rive" unique_id=1359074455]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 2.5, -56)
+size = Vector3(50, 6, 12)
+material = SubResource("StandardMaterial3D_t31x5")
+
+[node name="Colline_5" type="CSGBox3D" parent="Rive" unique_id=1842820480]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 1.5, 10)
+size = Vector3(10, 4, 30)
+material = SubResource("StandardMaterial3D_t31x5")
+
+[node name="Bord_sud" type="StaticBody3D" parent="Rive" unique_id=2072288643]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 20.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rive/Bord_sud" unique_id=507491007]
+shape = SubResource("BoxShape3D_47vyk")
+
+[node name="Bord_est" type="StaticBody3D" parent="Rive" unique_id=134901308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 3, -10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rive/Bord_est" unique_id=1298273569]
+shape = SubResource("BoxShape3D_euo1a")
+
+[node name="Bord_ouest" type="StaticBody3D" parent="Rive" unique_id=1200021500]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.5, 3, -10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rive/Bord_ouest" unique_id=1265664173]
+shape = SubResource("BoxShape3D_t6lnk")
+
+[node name="Bord_nord" type="StaticBody3D" parent="Rive" unique_id=1056508576]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -42.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rive/Bord_nord" unique_id=334479331]
+shape = SubResource("BoxShape3D_o6lua")
+
+[node name="Depart" type="Marker3D" parent="Rive" unique_id=1704548505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, -3.6)
+
+[node name="Lac" type="Node3D" parent="." unique_id=841889082]
+
+[node name="Fond" type="CSGBox3D" parent="Lac" unique_id=677626395]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.55, -20)
+use_collision = true
+size = Vector3(64, 0.5, 40)
+material = SubResource("StandardMaterial3D_fk4xs")
+
+[node name="Eau" type="Node3D" parent="Lac" unique_id=423198286]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -20)
+script = ExtResource("2_odrnr")
+taille = Vector2(64, 40)
+definition = 12
+teinte = Color(0.62352943, 0.7882353, 0.9098039, 1)
+distance_vue = 200.0
+
+[node name="Nage" type="Area3D" parent="Lac" unique_id=966926104]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.625, -20)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lac/Nage" unique_id=1267710926]
+shape = SubResource("BoxShape3D_u8t2y")
+
+[node name="Rive_est" type="Marker3D" parent="Lac" unique_id=238054630]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 16, 0.3, 2)
+
+[node name="Ponton" type="Node3D" parent="." unique_id=1510862978]
+
+[node name="Planches" type="CSGBox3D" parent="Ponton" unique_id=1735741493]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.35, -2.5)
+use_collision = true
+size = Vector3(2, 0.3, 5)
+material = SubResource("StandardMaterial3D_vccu0")
+
+[node name="Pilotis_0_0" type="CSGBox3D" parent="Ponton" unique_id=273259084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.9, -0.6, -1)
+size = Vector3(0.2, 1.6, 0.2)
+material = SubResource("StandardMaterial3D_2vfmi")
+
+[node name="Pilotis_1_0" type="CSGBox3D" parent="Ponton" unique_id=1029964939]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1, -0.6, -1)
+size = Vector3(0.2, 1.6, 0.2)
+material = SubResource("StandardMaterial3D_2vfmi")
+
+[node name="Pilotis_0_1" type="CSGBox3D" parent="Ponton" unique_id=1590710225]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.9, -0.6, -4)
+size = Vector3(0.2, 1.6, 0.2)
+material = SubResource("StandardMaterial3D_2vfmi")
+
+[node name="Pilotis_1_1" type="CSGBox3D" parent="Ponton" unique_id=1699364202]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1, -0.6, -4)
+size = Vector3(0.2, 1.6, 0.2)
+material = SubResource("StandardMaterial3D_2vfmi")
+
+[node name="Chevalet_g" type="CSGBox3D" parent="Ponton" unique_id=904457377]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.35, 1.1, -4.6)
+size = Vector3(0.06, 1.3, 0.06)
+material = SubResource("StandardMaterial3D_vjvf6")
+
+[node name="Chevalet_d" type="CSGBox3D" parent="Ponton" unique_id=146503887]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.65, 1.1, -4.6)
+size = Vector3(0.06, 1.3, 0.06)
+material = SubResource("StandardMaterial3D_vjvf6")
+
+[node name="Chevalet_barre" type="CSGBox3D" parent="Ponton" unique_id=1398153702]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.05, -4.58)
+size = Vector3(0.8, 0.05, 0.1)
+material = SubResource("StandardMaterial3D_vjvf6")
+
+[node name="Tableau" type="RigidBody3D" parent="Ponton" unique_id=2081361198 groups=["tableau"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.42, -4.6)
+freeze = true
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponton/Tableau" unique_id=1302440961]
+shape = SubResource("BoxShape3D_3dgrx")
+
+[node name="Peinture" type="Node3D" parent="Ponton/Tableau" unique_id=1742494375]
+
+[node name="Toile" type="CSGBox3D" parent="Ponton/Tableau/Peinture" unique_id=427631858]
+size = Vector3(0.8, 0.6, 0.03)
+material = SubResource("StandardMaterial3D_rq6jg")
+
+[node name="Lac" type="CSGBox3D" parent="Ponton/Tableau/Peinture" unique_id=1687702577]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0.017)
+size = Vector3(0.78, 0.28, 0.004)
+material = SubResource("StandardMaterial3D_lu4y2")
+
+[node name="Ile" type="CSGBox3D" parent="Ponton/Tableau/Peinture" unique_id=75253241]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, -0.04, 0.02)
+size = Vector3(0.26, 0.07, 0.004)
+material = SubResource("StandardMaterial3D_00q75")
+
+[node name="Arbre" type="CSGBox3D" parent="Ponton/Tableau/Peinture" unique_id=104751517]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0.03, 0.021)
+size = Vector3(0.06, 0.1, 0.004)
+material = SubResource("StandardMaterial3D_ysk8t")
+
+[node name="Ciel" type="CSGBox3D" parent="Ponton/Tableau/Peinture" unique_id=607342741]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.019)
+visible = false
+size = Vector3(0.78, 0.28, 0.004)
+material = SubResource("StandardMaterial3D_7lsnr")
+
+[node name="Soleil" type="CSGBox3D" parent="Ponton/Tableau/Peinture" unique_id=405456219]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.06, 0.022)
+visible = false
+size = Vector3(0.07, 0.07, 0.004)
+material = SubResource("StandardMaterial3D_b4sf3")
+
+[node name="Coulures" type="CSGBox3D" parent="Ponton/Tableau/Peinture" unique_id=1165951785]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0.024)
+visible = false
+size = Vector3(0.78, 0.56, 0.004)
+material = SubResource("StandardMaterial3D_fk4xs")
+
+[node name="Zone" type="Area3D" parent="Ponton" unique_id=1530439174]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.5, -2.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponton/Zone" unique_id=300726048]
+shape = SubResource("BoxShape3D_jb07e")
+
+[node name="PenseeTableau" type="Node3D" parent="Ponton" unique_id=612640586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.42, -4.6)
+script = ExtResource("3_j1bpa")
+texte = "Le lac, l'île… Il me manque le ciel du soir."
+distance = 3.0
+
+[node name="Pont" type="Node3D" parent="." unique_id=1037876851]
+
+[node name="Morceau_sud" type="CSGBox3D" parent="Pont" unique_id=1211544783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, -4)
+use_collision = true
+size = Vector3(2, 0.2, 8)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Morceau_sud_pilotis_0" type="CSGBox3D" parent="Pont" unique_id=2014893885]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.25, -1)
+size = Vector3(0.25, 2.3, 0.25)
+material = SubResource("StandardMaterial3D_2vfmi")
+
+[node name="Morceau_sud_pilotis_1" type="CSGBox3D" parent="Pont" unique_id=797655321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.25, -4)
+size = Vector3(0.25, 2.3, 0.25)
+material = SubResource("StandardMaterial3D_2vfmi")
+
+[node name="Morceau_sud_pilotis_2" type="CSGBox3D" parent="Pont" unique_id=1209115370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.25, -7)
+size = Vector3(0.25, 2.3, 0.25)
+material = SubResource("StandardMaterial3D_2vfmi")
+
+[node name="Morceau_nord" type="CSGBox3D" parent="Pont" unique_id=2037637907]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, -17.75)
+use_collision = true
+size = Vector3(2, 0.2, 7.5)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Morceau_nord_pilotis_0" type="CSGBox3D" parent="Pont" unique_id=1362553986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.25, -15)
+size = Vector3(0.25, 2.3, 0.25)
+material = SubResource("StandardMaterial3D_2vfmi")
+
+[node name="Morceau_nord_pilotis_1" type="CSGBox3D" parent="Pont" unique_id=1389523554]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.25, -18)
+size = Vector3(0.25, 2.3, 0.25)
+material = SubResource("StandardMaterial3D_2vfmi")
+
+[node name="Morceau_nord_pilotis_2" type="CSGBox3D" parent="Pont" unique_id=2119935043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.25, -21)
+size = Vector3(0.25, 2.3, 0.25)
+material = SubResource("StandardMaterial3D_2vfmi")
+
+[node name="Rambarde_g" type="CSGBox3D" parent="Pont" unique_id=670639342]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.45, -4)
+size = Vector3(0.08, 0.08, 8)
+material = SubResource("StandardMaterial3D_2vfmi")
+
+[node name="Rambarde_d" type="CSGBox3D" parent="Pont" unique_id=974910266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.45, -4)
+size = Vector3(0.08, 0.08, 8)
+material = SubResource("StandardMaterial3D_2vfmi")
+
+[node name="Casse_sud" type="CSGBox3D" parent="Pont" unique_id=503555136]
+transform = Transform3D(1, 0, 0, 0, 0.921061, -0.38941833, 0, 0.38941833, 0.921061, 3.5, 0.75, -8.3)
+size = Vector3(0.9, 0.12, 0.6)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Casse_nord" type="CSGBox3D" parent="Pont" unique_id=1392232383]
+transform = Transform3D(1, 0, 0, 0, 0.921061, 0.38941833, 0, -0.38941833, 0.921061, 4.4, 0.75, -13.7)
+size = Vector3(1, 0.12, 0.6)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Reflet" type="Node3D" parent="Pont" unique_id=71830837]
+
+[node name="Planche_0" type="CSGBox3D" parent="Pont/Reflet" unique_id=445827958]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, -13.7)
+layers = 4
+size = Vector3(2, 0.2, 0.55)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Planche_1" type="CSGBox3D" parent="Pont/Reflet" unique_id=1154755041]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, -13.1)
+layers = 4
+size = Vector3(2, 0.2, 0.55)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Planche_2" type="CSGBox3D" parent="Pont/Reflet" unique_id=1907396955]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, -12.5)
+layers = 4
+size = Vector3(2, 0.2, 0.55)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Planche_3" type="CSGBox3D" parent="Pont/Reflet" unique_id=103015337]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, -11.9)
+layers = 4
+size = Vector3(2, 0.2, 0.55)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Planche_4" type="CSGBox3D" parent="Pont/Reflet" unique_id=1242035307]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, -11.3)
+layers = 4
+size = Vector3(2, 0.2, 0.55)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Planche_5" type="CSGBox3D" parent="Pont/Reflet" unique_id=536104028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, -10.7)
+layers = 4
+size = Vector3(2, 0.2, 0.55)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Planche_6" type="CSGBox3D" parent="Pont/Reflet" unique_id=392497378]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, -10.1)
+layers = 4
+size = Vector3(2, 0.2, 0.55)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Planche_7" type="CSGBox3D" parent="Pont/Reflet" unique_id=1425072834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, -9.5)
+layers = 4
+size = Vector3(2, 0.2, 0.55)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Planche_8" type="CSGBox3D" parent="Pont/Reflet" unique_id=13799088]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, -8.9)
+layers = 4
+size = Vector3(2, 0.2, 0.55)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Planche_9" type="CSGBox3D" parent="Pont/Reflet" unique_id=1855577875]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, -8.3)
+layers = 4
+size = Vector3(2, 0.2, 0.55)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Solide" type="StaticBody3D" parent="Pont" unique_id=680846889]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, -11)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pont/Solide" unique_id=976625667]
+shape = SubResource("BoxShape3D_y3j53")
+disabled = true
+
+[node name="PenseeTrou" type="Node3D" parent="Pont" unique_id=1605648967]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -11)
+script = ExtResource("3_j1bpa")
+texte = "Le pont est cassé…"
+distance = 7.0
+angle_max_deg = 25.0
+
+[node name="PenseeReflet" type="Node3D" parent="Pont" unique_id=2133424419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1, -11)
+script = ExtResource("3_j1bpa")
+texte = "Dans l'eau… le pont est entier."
+distance = 9.0
+active = false
+
+[node name="Ile" type="Node3D" parent="." unique_id=2036058043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -26)
+
+[node name="Sol" type="CSGBox3D" parent="Ile" unique_id=670670109]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+use_collision = true
+size = Vector3(12, 0.5, 9)
+material = SubResource("StandardMaterial3D_8bpph")
+
+[node name="Pente" type="CSGBox3D" parent="Ile" unique_id=365472096]
+transform = Transform3D(1, 0, 0, 0, 0.882353, -0.47058824, 0, 0.47058824, 0.882353, -3, -0.63235295, 5.929412)
+use_collision = true
+size = Vector3(3, 0.3, 3.3999999)
+material = SubResource("StandardMaterial3D_2xemw")
+
+[node name="Escalier" type="CSGBox3D" parent="Ile" unique_id=1368777120]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.65, 4.3)
+use_collision = true
+size = Vector3(2, 0.7, 0.4)
+material = SubResource("StandardMaterial3D_1qf1r")
+
+[node name="Tronc" type="CSGBox3D" parent="Ile" unique_id=725132580]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.3, -1.5)
+use_collision = true
+size = Vector3(0.7, 4, 0.7)
+material = SubResource("StandardMaterial3D_3uif6")
+
+[node name="Feuillage" type="CSGBox3D" parent="Ile" unique_id=1571834745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4.8, -1.5)
+use_collision = true
+size = Vector3(5, 2.6, 5)
+material = SubResource("StandardMaterial3D_ysk8t")
+
+[node name="Rocher" type="CSGBox3D" parent="Ile" unique_id=566142839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.6, -2.5)
+use_collision = true
+size = Vector3(1.6, 0.8, 1.2)
+material = SubResource("StandardMaterial3D_ptnes")
+
+[node name="Place" type="Marker3D" parent="Ile" unique_id=1159113188]
+transform = Transform3D(0.8910065, 0, 0.45399052, 0, 1, 0, -0.45399052, 0, 0.8910065, -1, 0.3, -3.6000004)
+
+[node name="Rendez_vous" type="Area3D" parent="Ile" unique_id=901565160]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.5, -2.6000004)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ile/Rendez_vous" unique_id=362682506]
+shape = SubResource("BoxShape3D_ay38c")
+
+[node name="Fleurs" type="Node3D" parent="Ile" unique_id=2095012004]
+visible = false
+
+[node name="Tige_0" type="CSGBox3D" parent="Ile/Fleurs" unique_id=2108705417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23383522, 0.5, -2.1325505)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_0" type="CSGBox3D" parent="Ile/Fleurs" unique_id=748751393]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23383522, 0.72, -2.1325505)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_1" type="CSGBox3D" parent="Ile/Fleurs" unique_id=996078936]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.151536, 0.5, 2.0350246)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_1" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1737318408]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.151536, 0.72, 2.0350246)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_2" type="CSGBox3D" parent="Ile/Fleurs" unique_id=83118474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8669233, 0.5, 3.342453)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_2" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1443102626]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8669233, 0.72, 3.342453)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_3" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1434235609]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.449932, 0.5, -2.459429)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_3" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1705019431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.449932, 0.72, -2.459429)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_4" type="CSGBox3D" parent="Ile/Fleurs" unique_id=406567582]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85280323, 0.5, -2.0772574)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_4" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1050698105]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85280323, 0.72, -2.0772574)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_5" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1446308419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4189596, 0.5, -4.1086984)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_5" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1682158734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4189596, 0.72, -4.1086984)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_6" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1682006091]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07183123, 0.5, -2.102436)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_6" type="CSGBox3D" parent="Ile/Fleurs" unique_id=133707896]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07183123, 0.72, -2.102436)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_7" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1462068977]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0590215, 0.5, 2.6395483)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_7" type="CSGBox3D" parent="Ile/Fleurs" unique_id=734063495]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0590215, 0.72, 2.6395483)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_8" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1112421085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9277587, 0.5, 1.6965418)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_8" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1559303660]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9277587, 0.72, 1.6965418)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_9" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1695301713]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24303865, 0.5, 3.6594777)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_9" type="CSGBox3D" parent="Ile/Fleurs" unique_id=2019031370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24303865, 0.72, 3.6594777)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_10" type="CSGBox3D" parent="Ile/Fleurs" unique_id=465994954]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6809335, 0.5, 2.452135)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_10" type="CSGBox3D" parent="Ile/Fleurs" unique_id=748656976]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6809335, 0.72, 2.452135)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_11" type="CSGBox3D" parent="Ile/Fleurs" unique_id=2080707188]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.419219, 0.5, 2.17986)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_11" type="CSGBox3D" parent="Ile/Fleurs" unique_id=898562668]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.419219, 0.72, 2.17986)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_12" type="CSGBox3D" parent="Ile/Fleurs" unique_id=695883177]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3966913, 0.5, 3.363155)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_12" type="CSGBox3D" parent="Ile/Fleurs" unique_id=485592279]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3966913, 0.72, 3.363155)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_13" type="CSGBox3D" parent="Ile/Fleurs" unique_id=410121415]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5399456, 0.5, 0.11052847)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_13" type="CSGBox3D" parent="Ile/Fleurs" unique_id=738861196]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5399456, 0.72, 0.11052847)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_14" type="CSGBox3D" parent="Ile/Fleurs" unique_id=588738838]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4793768, 0.5, 1.5683861)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_14" type="CSGBox3D" parent="Ile/Fleurs" unique_id=233026422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4793768, 0.72, 1.5683861)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_15" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1353783161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.831456, 0.5, -2.0134795)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_15" type="CSGBox3D" parent="Ile/Fleurs" unique_id=652586795]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.831456, 0.72, -2.0134795)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_16" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1555117791]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.754787, 0.5, 3.2841778)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_16" type="CSGBox3D" parent="Ile/Fleurs" unique_id=247107602]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.754787, 0.72, 3.2841778)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_17" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1231881861]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3147912, 0.5, 1.8026752)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_17" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1076243427]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3147912, 0.72, 1.8026752)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_18" type="CSGBox3D" parent="Ile/Fleurs" unique_id=252543527]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5659728, 0.5, 0.9265766)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_18" type="CSGBox3D" parent="Ile/Fleurs" unique_id=2110291023]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5659728, 0.72, 0.9265766)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_19" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1372459092]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3103898, 0.5, -1.8424037)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_19" type="CSGBox3D" parent="Ile/Fleurs" unique_id=10322048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3103898, 0.72, -1.8424037)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_20" type="CSGBox3D" parent="Ile/Fleurs" unique_id=961576843]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5192316, 0.5, -1.6246266)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_20" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1123664773]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5192316, 0.72, -1.6246266)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_21" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1341560659]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.525917, 0.5, -3.2946677)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_21" type="CSGBox3D" parent="Ile/Fleurs" unique_id=144405426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.525917, 0.72, -3.2946677)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_22" type="CSGBox3D" parent="Ile/Fleurs" unique_id=968998029]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0226402, 0.5, 1.0348849)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_22" type="CSGBox3D" parent="Ile/Fleurs" unique_id=631667127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0226402, 0.72, 1.0348849)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_23" type="CSGBox3D" parent="Ile/Fleurs" unique_id=954779678]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9782104, 0.5, 4.1448736)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_23" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1100199495]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9782104, 0.72, 4.1448736)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_24" type="CSGBox3D" parent="Ile/Fleurs" unique_id=617434496]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.127814, 0.5, 1.9232807)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_24" type="CSGBox3D" parent="Ile/Fleurs" unique_id=224829792]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.127814, 0.72, 1.9232807)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_25" type="CSGBox3D" parent="Ile/Fleurs" unique_id=299826137]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.77063847, 0.5, 3.7043967)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_25" type="CSGBox3D" parent="Ile/Fleurs" unique_id=333949170]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.77063847, 0.72, 3.7043967)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_26" type="CSGBox3D" parent="Ile/Fleurs" unique_id=631632259]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8084307, 0.5, -2.0282748)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_26" type="CSGBox3D" parent="Ile/Fleurs" unique_id=279324563]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8084307, 0.72, -2.0282748)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_27" type="CSGBox3D" parent="Ile/Fleurs" unique_id=80342120]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.255951, 0.5, -3.7459555)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_27" type="CSGBox3D" parent="Ile/Fleurs" unique_id=274875978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.255951, 0.72, -3.7459555)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_28" type="CSGBox3D" parent="Ile/Fleurs" unique_id=646729726]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8576002, 0.5, 3.7530446)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_28" type="CSGBox3D" parent="Ile/Fleurs" unique_id=740094211]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8576002, 0.72, 3.7530446)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_29" type="CSGBox3D" parent="Ile/Fleurs" unique_id=80300038]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.177738, 0.5, 1.4210362)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_29" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1500357781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.177738, 0.72, 1.4210362)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_30" type="CSGBox3D" parent="Ile/Fleurs" unique_id=930219490]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12184334, 0.5, -3.6401107)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_30" type="CSGBox3D" parent="Ile/Fleurs" unique_id=29955442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12184334, 0.72, -3.6401107)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_31" type="CSGBox3D" parent="Ile/Fleurs" unique_id=726242426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0065207, 0.5, 0.7464175)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_31" type="CSGBox3D" parent="Ile/Fleurs" unique_id=21337447]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0065207, 0.72, 0.7464175)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_32" type="CSGBox3D" parent="Ile/Fleurs" unique_id=741816960]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.061009407, 0.5, 0.68777037)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_32" type="CSGBox3D" parent="Ile/Fleurs" unique_id=87947729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.061009407, 0.72, 0.68777037)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_33" type="CSGBox3D" parent="Ile/Fleurs" unique_id=283739646]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48792553, 0.5, -1.6751299)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_33" type="CSGBox3D" parent="Ile/Fleurs" unique_id=205476904]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48792553, 0.72, -1.6751299)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_34" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1894826134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6196527, 0.5, -1.7946744)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_34" type="CSGBox3D" parent="Ile/Fleurs" unique_id=596328779]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6196527, 0.72, -1.7946744)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_35" type="CSGBox3D" parent="Ile/Fleurs" unique_id=949500542]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5429053, 0.5, 0.393507)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_35" type="CSGBox3D" parent="Ile/Fleurs" unique_id=430602795]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5429053, 0.72, 0.393507)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_36" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1971121274]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10577059, 0.5, -2.6040435)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_36" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1081445544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10577059, 0.72, -2.6040435)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_37" type="CSGBox3D" parent="Ile/Fleurs" unique_id=39256456]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3906944, 0.5, -0.30648518)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_37" type="CSGBox3D" parent="Ile/Fleurs" unique_id=801349972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3906944, 0.72, -0.30648518)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_38" type="CSGBox3D" parent="Ile/Fleurs" unique_id=2090542015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4875493, 0.5, 2.9469194)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_38" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1648474439]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4875493, 0.72, 2.9469194)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_39" type="CSGBox3D" parent="Ile/Fleurs" unique_id=17750729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3815308, 0.5, -1.4432466)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_39" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1574358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3815308, 0.72, -1.4432466)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_40" type="CSGBox3D" parent="Ile/Fleurs" unique_id=777000832]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.187283, 0.5, 1.0851741)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_40" type="CSGBox3D" parent="Ile/Fleurs" unique_id=117111576]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.187283, 0.72, 1.0851741)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_41" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1879730880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.356319, 0.5, 2.0660105)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_41" type="CSGBox3D" parent="Ile/Fleurs" unique_id=850421106]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.356319, 0.72, 2.0660105)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_42" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1287533201]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6000705, 0.5, 1.1192417)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_42" type="CSGBox3D" parent="Ile/Fleurs" unique_id=2063370204]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6000705, 0.72, 1.1192417)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_43" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1737889920]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4665527, 0.5, 3.9765348)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_43" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1204105467]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4665527, 0.72, 3.9765348)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_44" type="CSGBox3D" parent="Ile/Fleurs" unique_id=113265152]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0345926, 0.5, -2.27915)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_44" type="CSGBox3D" parent="Ile/Fleurs" unique_id=290320190]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0345926, 0.72, -2.27915)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_45" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1891449310]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6332021, 0.5, 1.7201643)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_45" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1738459769]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6332021, 0.72, 1.7201643)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_46" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1620549849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19920301, 0.5, -1.3474395)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_46" type="CSGBox3D" parent="Ile/Fleurs" unique_id=598897181]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19920301, 0.72, -1.3474395)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_47" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1634523606]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8966272, 0.5, -0.7537823)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_47" type="CSGBox3D" parent="Ile/Fleurs" unique_id=445174949]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8966272, 0.72, -0.7537823)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_48" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1323774565]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3493052, 0.5, -1.2838311)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_48" type="CSGBox3D" parent="Ile/Fleurs" unique_id=2049676753]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3493052, 0.72, -1.2838311)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_49" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1954296026]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5684679, 0.5, -1.1150482)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_49" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1253299839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5684679, 0.72, -1.1150482)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_50" type="CSGBox3D" parent="Ile/Fleurs" unique_id=2038239717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.70401955, 0.5, 3.6989412)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_50" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1477943894]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.70401955, 0.72, 3.6989412)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_51" type="CSGBox3D" parent="Ile/Fleurs" unique_id=741951970]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36614037, 0.5, 3.344252)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_51" type="CSGBox3D" parent="Ile/Fleurs" unique_id=941116882]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36614037, 0.72, 3.344252)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_52" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1178293055]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.631256, 0.5, -2.0587366)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_52" type="CSGBox3D" parent="Ile/Fleurs" unique_id=2108877774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.631256, 0.72, -2.0587366)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_53" type="CSGBox3D" parent="Ile/Fleurs" unique_id=612559853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1445475, 0.5, -1.185585)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_53" type="CSGBox3D" parent="Ile/Fleurs" unique_id=384219381]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1445475, 0.72, -1.185585)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_54" type="CSGBox3D" parent="Ile/Fleurs" unique_id=777811729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49624157, 0.5, -3.0142775)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_54" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1363061370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49624157, 0.72, -3.0142775)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_55" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1020559334]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9045911, 0.5, -3.4529257)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_55" type="CSGBox3D" parent="Ile/Fleurs" unique_id=415104901]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9045911, 0.72, -3.4529257)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Tige_56" type="CSGBox3D" parent="Ile/Fleurs" unique_id=456605096]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.94985104, 0.5, 2.104322)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_56" type="CSGBox3D" parent="Ile/Fleurs" unique_id=450436172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.94985104, 0.72, 2.104322)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_p48p6")
+
+[node name="Tige_57" type="CSGBox3D" parent="Ile/Fleurs" unique_id=232852085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.773653, 0.5, -0.29493952)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_57" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1715907946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.773653, 0.72, -0.29493952)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_54axp")
+
+[node name="Tige_58" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1207645813]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2187667, 0.5, -3.2286706)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_58" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1559810482]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2187667, 0.72, -3.2286706)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_dm16c")
+
+[node name="Tige_59" type="CSGBox3D" parent="Ile/Fleurs" unique_id=2043620533]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.008157, 0.5, 2.662538)
+size = Vector3(0.03, 0.4, 0.03)
+material = SubResource("StandardMaterial3D_kdjbu")
+
+[node name="Fleur_59" type="CSGBox3D" parent="Ile/Fleurs" unique_id=1089391828]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.008157, 0.72, 2.662538)
+size = Vector3(0.14, 0.08, 0.14)
+material = SubResource("StandardMaterial3D_nwnh4")
+
+[node name="Juliette" type="Node3D" parent="." unique_id=1656521101]
+
+[node name="Debout" type="Node3D" parent="Juliette" unique_id=1810024894]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.3, -29.6)
+visible = false
+
+[node name="Robe" type="MeshInstance3D" parent="Juliette/Debout" unique_id=1378670940]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+material_override = SubResource("StandardMaterial3D_lx54k")
+mesh = SubResource("CylinderMesh_i284t")
+
+[node name="Tete" type="MeshInstance3D" parent="Juliette/Debout" unique_id=1548538324]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_ujivm")
+mesh = SubResource("SphereMesh_06lsn")
+
+[node name="Buste" type="MeshInstance3D" parent="Juliette/Debout" unique_id=1218596715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13, 0)
+material_override = SubResource("StandardMaterial3D_lx54k")
+mesh = SubResource("CapsuleMesh_7cvcl")
+
+[node name="Cheveux" type="Node3D" parent="Juliette/Debout" unique_id=1236735586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0.08)
+
+[node name="Meche" type="CSGBox3D" parent="Juliette/Debout/Cheveux" unique_id=761821315]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0.08)
+size = Vector3(0.26, 0.45, 0.08)
+material = SubResource("StandardMaterial3D_s1q4x")
+
+[node name="Dessus" type="CSGBox3D" parent="Juliette/Debout/Cheveux" unique_id=1909347391]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, -0.06)
+size = Vector3(0.28, 0.1, 0.26)
+material = SubResource("StandardMaterial3D_s1q4x")
+
+[node name="Mobylette" type="Node3D" parent="Juliette" unique_id=1928106772]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 36, 0.32, 12.8)
+
+[node name="Cadre" type="CSGBox3D" parent="Juliette/Mobylette" unique_id=1671569068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+size = Vector3(0.25, 0.3, 1.2)
+material = SubResource("StandardMaterial3D_fsrfr")
+
+[node name="Selle" type="CSGBox3D" parent="Juliette/Mobylette" unique_id=234464073]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68, 0.15)
+size = Vector3(0.28, 0.08, 0.5)
+material = SubResource("StandardMaterial3D_xp8t0")
+
+[node name="Guidon" type="CSGBox3D" parent="Juliette/Mobylette" unique_id=399991991]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, -0.55)
+size = Vector3(0.6, 0.05, 0.05)
+material = SubResource("StandardMaterial3D_xp8t0")
+
+[node name="Fourche" type="CSGBox3D" parent="Juliette/Mobylette" unique_id=1156601173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -0.5)
+size = Vector3(0.05, 0.6, 0.05)
+material = SubResource("StandardMaterial3D_xp8t0")
+
+[node name="Roue_av" type="MeshInstance3D" parent="Juliette/Mobylette" unique_id=304017362]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.28, -0.55)
+material_override = SubResource("StandardMaterial3D_bx8sd")
+mesh = SubResource("CylinderMesh_k0tw5")
+
+[node name="Roue_ar" type="MeshInstance3D" parent="Juliette/Mobylette" unique_id=2071377708]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.28, 0.5)
+material_override = SubResource("StandardMaterial3D_bx8sd")
+mesh = SubResource("CylinderMesh_oqv8s")
+
+[node name="Juliette" type="Node3D" parent="Juliette/Mobylette" unique_id=1090650108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0.15)
+
+[node name="Robe" type="MeshInstance3D" parent="Juliette/Mobylette/Juliette" unique_id=325570145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+material_override = SubResource("StandardMaterial3D_lx54k")
+mesh = SubResource("CylinderMesh_awn7i")
+
+[node name="Tete" type="MeshInstance3D" parent="Juliette/Mobylette/Juliette" unique_id=819735341]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08, 0)
+material_override = SubResource("StandardMaterial3D_ujivm")
+mesh = SubResource("SphereMesh_muuvk")
+
+[node name="Buste" type="MeshInstance3D" parent="Juliette/Mobylette/Juliette" unique_id=495523664]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.71, 0)
+material_override = SubResource("StandardMaterial3D_lx54k")
+mesh = SubResource("CapsuleMesh_6c5xp")
+
+[node name="Cheveux" type="Node3D" parent="Juliette/Mobylette/Juliette" unique_id=1689074964]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13, 0.08)
+
+[node name="Meche" type="CSGBox3D" parent="Juliette/Mobylette/Juliette/Cheveux" unique_id=1463324084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0.08)
+size = Vector3(0.26, 0.45, 0.08)
+material = SubResource("StandardMaterial3D_s1q4x")
+
+[node name="Dessus" type="CSGBox3D" parent="Juliette/Mobylette/Juliette/Cheveux" unique_id=1506215968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, -0.06)
+size = Vector3(0.28, 0.1, 0.26)
+material = SubResource("StandardMaterial3D_s1q4x")
+
+[node name="Nuit" type="Node3D" parent="." unique_id=1733007900]
+visible = false
+
+[node name="Lanterne" type="OmniLight3D" parent="Nuit" unique_id=258775117]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.2, -22)
+light_color = Color(1, 0.8392157, 0.64705884, 1)
+light_energy = 1.5
+omni_range = 9.0
+
+[node name="Dans_l_eau" type="Marker3D" parent="Nuit" unique_id=1601145311]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1.3, -15)
+
+[node name="Juliette" type="Node3D" parent="Nuit" unique_id=1095274767]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -3, 0.3, -22.5)
+
+[node name="Robe" type="MeshInstance3D" parent="Nuit/Juliette" unique_id=1722837876]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+material_override = SubResource("StandardMaterial3D_lx54k")
+mesh = SubResource("CylinderMesh_6gscf")
+
+[node name="Tete" type="MeshInstance3D" parent="Nuit/Juliette" unique_id=425636448]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_ujivm")
+mesh = SubResource("SphereMesh_ywoln")
+
+[node name="Buste" type="MeshInstance3D" parent="Nuit/Juliette" unique_id=1929853607]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13, 0)
+material_override = SubResource("StandardMaterial3D_lx54k")
+mesh = SubResource("CapsuleMesh_qfu0n")
+
+[node name="Cheveux" type="Node3D" parent="Nuit/Juliette" unique_id=1052389205]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0.08)
+
+[node name="Meche" type="CSGBox3D" parent="Nuit/Juliette/Cheveux" unique_id=1786126102]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0.08)
+size = Vector3(0.26, 0.45, 0.08)
+material = SubResource("StandardMaterial3D_s1q4x")
+
+[node name="Dessus" type="CSGBox3D" parent="Nuit/Juliette/Cheveux" unique_id=855433709]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, -0.06)
+size = Vector3(0.28, 0.1, 0.26)
+material = SubResource("StandardMaterial3D_s1q4x")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=2095856863 instance=ExtResource("4_i46fh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, -3.6)
+script = ExtResource("5_wba70")
+
+[node name="Interface" type="CanvasLayer" parent="." unique_id=206117171]
+
+[node name="Viseur" type="Label" parent="Interface" unique_id=1607939832]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -11.5
+offset_right = 2.5
+offset_bottom = 11.5
+theme_override_font_sizes/font_size = 40
+text = "·"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Repeint" type="ColorRect" parent="Interface" unique_id=753416815]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.9647059, 0.94509804, 0.90588236, 0)
+
+[node name="Fissures" type="Control" parent="Interface" unique_id=256031753]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("6_3ce4m")
+
+[node name="ChuteToiles" type="Control" parent="Interface" unique_id=1902225321]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("7_nxget")
+
+[node name="Noir" type="ColorRect" parent="Interface" unique_id=1478456561]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Yeux" type="ColorRect" parent="Interface" unique_id=2032429364]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Action" type="Label" parent="Interface" unique_id=1581318818]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = 30.0
+offset_right = 0.5
+offset_bottom = 60.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0.16862746, 0.11372549, 0.30588236, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="Touches" type="Label" parent="Interface" unique_id=1736461458]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -190.0
+offset_right = 1.0
+offset_bottom = -24.0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0.16862746, 0.11372549, 0.30588236, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+vertical_alignment = 2
+
+[node name="Message" type="Label" parent="Interface" unique_id=1706210760]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_top = 40.0
+offset_right = 0.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0.16862746, 0.11372549, 0.30588236, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1

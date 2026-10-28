@@ -50,6 +50,10 @@ const MOTIFS := {
 		[0.6, 0.08, 0.04, 0.55, "bois"], [0.5, 0.42, 0.26, 0.3, "blanc"], [0.55, 0.5, 0.1, 0.1, "ciel"],
 		[0.22, 0.08, 0.14, 0.32, "rouge"], [0.25, 0.42, 0.08, 0.12, "peau"], [0.36, 0.32, 0.12, 0.03, "bois"],
 	]},
+	"lac": { "fond": "soleil", "formes": [
+		[0.0, 0.0, 1.0, 0.45, "ciel"], [0.3, 0.42, 0.4, 0.1, "herbe"], [0.45, 0.5, 0.06, 0.16, "brun"],
+		[0.36, 0.62, 0.24, 0.14, "herbe"], [0.12, 0.55, 0.1, 0.1, "blanc"],
+	]},
 	"atelier": { "fond": "brun", "formes": [
 		[0.58, 0.45, 0.32, 0.4, "nuit"], [0.65, 0.7, 0.03, 0.04, "etoile"], [0.8, 0.55, 0.02, 0.03, "etoile"],
 		[0.15, 0.1, 0.32, 0.5, "dos_toile"], [0.29, 0.0, 0.04, 0.12, "bois"],
@@ -254,6 +258,10 @@ func _salon() -> void:
 	var jardin := _toile(g, "Toile_jardin", Vector3(6.5, 1.7, -3.98), 0.0, Vector2(1.4, 1.0), "jardin")
 	var enfant := _toile(g, "Toile_enfant", Vector3(10.4, 1.8, -3.98), 0.0, Vector2(0.9, 1.1), "enfant")
 	var atelier := _toile(g, "Toile_atelier", Vector3(8.3, 2.0, 3.98), PI, Vector2(1.6, 0.9), "atelier")
+	# La toile du lac n'apparaît qu'au retour de l'enfance : elle mène au niveau 3.
+	var lac := _toile(g, "Toile_lac", Vector3(5.6, 1.6, 3.98), PI, Vector2(1.2, 0.8), "lac")
+	lac.visible = false
+	_pensee(g, "PenseeLac", lac.position + g.position, "Le lac… l'été de mes seize ans.", 4.5, 15.0, true, false)
 	_lampe(g, "Lampe", Vector3(8.3, 2.8, 0), 8.0)
 	_zone(g, "Zone", Vector3(8.3, 1.5, 0), Vector3(8, 3, 8))
 	_pensee(g, "PenseeJardin", jardin.position + g.position, "Notre jardin. Avant, la maison était sur Terre.", 4.5, 15.0)

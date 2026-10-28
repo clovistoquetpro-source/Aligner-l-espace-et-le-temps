@@ -39,6 +39,9 @@ var _pensees_couloir := 0
 var _fin_annoncee := false
 var _fov_base := 80.0
 var _vers_enfance := false
+## La toile du lac mène au niveau 3 (au retour de l'enfance).
+var toile_lac_ouverte := false
+var _vers_l_ete := false
 
 @onready var _zone_couloir: Area3D = $Couloir/Zone
 @onready var _boucle: PorteTrompeuse = $Couloir/Boucle
@@ -150,6 +153,10 @@ func _physics_process(delta: float) -> void:
 	if toile_enfant_ouverte and not _vers_enfance and _regarde(toile.global_position, 25.0, 2.5):
 		_vers_enfance = true
 		_tomber_dans_les_toiles(_joueur)
+	var lac: Node3D = $Salon/Toile_lac
+	if toile_lac_ouverte and not _vers_l_ete and _regarde(lac.global_position, 25.0, 2.5):
+		_vers_l_ete = true
+		_tomber_dans_les_toiles(_joueur)
 
 
 func _dans_le_dos(point: Vector3) -> bool:
@@ -179,6 +186,9 @@ func _atterrir() -> void:
 		Histoire.chapitre = maxi(Histoire.chapitre, 2)
 		Histoire.vers("res://scenes/enfance.tscn")
 		return
+	if _vers_l_ete:
+		Histoire.vers("res://scenes/ete.tscn")
+		return
 	_joueur.teleport(_arrivee.global_transform)
 	_joueur.set_anchor(_arrivee.global_transform)
 	_joueur.set_physics_process(true)
@@ -197,8 +207,10 @@ func _sur_fin(corps: Node3D) -> void:
 	_ouvrir_les_yeux("Je ne suis pas sorti… Je suis revenu dans ma chambre.")
 
 
-## De retour de l'enfance : la correction a abîmé la maison. Le mur nord du
-## salon s'est envolé (on voit les étoiles), les meubles flottent.
+## De retour d'un souvenir : chaque correction a abîmé la maison. Après
+## l'enfance, le mur nord du salon s'est envolé (on voit les étoiles) et les
+## meubles flottent ; après l'été, le plafond du salon et un mur de l'entrée
+## partent aussi, et la chambre flotte.
 func _retour_de_l_enfance() -> void:
 	fini = true
 	_fin_annoncee = true
@@ -208,20 +220,36 @@ func _retour_de_l_enfance() -> void:
 	var depart := Transform3D(Basis(), Vector3(10.4, 0, -1.2))
 	_joueur.teleport(depart)
 	_joueur.set_anchor(depart)
-	# Le mur disparaît, mais on ne tombe pas dans le vide.
+	# Les murs disparaissent, mais on ne tombe pas dans le vide.
 	var mur: CSGBox3D = $Salon/Mur_nord
 	mur.visible = false
+	var flottants := ["Salon/Canape", "Salon/Canape_dossier", "Salon/Table_basse", "Salon/Table", "Salon/Chaise_1", "Salon/Chaise_2"]
+	if Histoire.chapitre >= 4:
+		($Salon/Plafond as CSGBox3D).visible = false
+		for n in ["Hall/Mur_ouest_1", "Hall/Mur_ouest_2", "Hall/Mur_ouest_3", "Hall/Mur_ouest_4"]:
+			var m := get_node_or_null(n) as CSGBox3D
+			if m != null:
+				m.visible = false
+		flottants.append_array(["Chambre/Armoire", "Chambre/Table_de_nuit", "Hall/Banc"])
 	var i := 0
-	for nom in ["Canape", "Canape_dossier", "Table_basse", "Table", "Chaise_1", "Chaise_2"]:
-		var m: CSGBox3D = get_node("Salon/" + nom)
+	for nom in flottants:
+		var m: CSGBox3D = get_node(nom)
 		m.use_collision = false
-		m.position.y += 1.8 + 0.3 * i
+		m.position.y += 1.8 + 0.3 * (i % 6)
 		m.rotation = Vector3(0.2 * (i % 3) - 0.2, 0.3 * i, 0.15 * (i % 2))
 		var t := create_tween().set_loops()
-		t.tween_property(m, "position:y", m.position.y + 0.25, 2.0 + 0.3 * i).set_trans(Tween.TRANS_SINE)
-		t.tween_property(m, "position:y", m.position.y, 2.0 + 0.3 * i).set_trans(Tween.TRANS_SINE)
+		t.tween_property(m, "position:y", m.position.y + 0.25, 2.0 + 0.3 * (i % 6)).set_trans(Tween.TRANS_SINE)
+		t.tween_property(m, "position:y", m.position.y, 2.0 + 0.3 * (i % 6)).set_trans(Tween.TRANS_SINE)
 		i += 1
+	if Histoire.chapitre >= 4:
+		var t := _ouvrir_les_yeux("Le plafond… il n'y a plus que les étoiles.")
+		t.tween_callback(penser.bind("Chaque souvenir que je répare défait un peu plus la maison."))
+		t.tween_interval(9.0)
+		t.tween_callback(afficher.bind("Fin du niveau 3. Bientôt : le jeune adulte.", 8.0))
+		return
+	toile_lac_ouverte = true
+	$Salon/Toile_lac.visible = true
+	$Salon/PenseeLac.active = true
 	var t := _ouvrir_les_yeux("La maison… Elle se défait.")
 	t.tween_callback(penser.bind("J'ai changé le souvenir. Et ici, tout s'abîme."))
-	t.tween_interval(9.0)
-	t.tween_callback(afficher.bind("Fin du niveau 2. Bientôt : l'adolescence.", 8.0))
+	t.tween_callback(penser.bind("Un nouveau tableau, au salon…"))

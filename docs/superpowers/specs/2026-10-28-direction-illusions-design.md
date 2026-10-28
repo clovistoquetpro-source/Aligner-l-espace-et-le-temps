@@ -109,6 +109,13 @@ Choix de clo : la rencontre au bord du lac, l'été (lumière dorée, chaleur) ;
 
 **La correction et la vérité.** Le moment parfait a lieu : le soleil se fige, des fleurs poussent partout, Juliette dit « C'est… parfait », puis elle ne bouge plus, plate comme une toile. L'image se fissure : « Ce n'est pas vrai. Ce soir-là, je suis arrivé trop tard. » Le vrai souvenir se rejoue : la nuit, Thomas dans l'eau près de l'île, Juliette qui rit sur la rive. Quand il la rejoint : « Et je l'ai repeint… mille fois. » Chute dans les toiles, retour dans la maison des étoiles, encore plus abîmée.
 
+**Construit en formes simples** (2026-10-28) : `scenes/ete.tscn`, par `tools/constructeur_ete.gd`. Ce qui reste à valider avec clo :
+- La durée d'une journée (2 min, coucher du soleil à partir de 1 min 35) et le temps des événements (Juliette arrive à 3 s, parle à 12 s, repart à 24 s, est sur l'île à 40 s).
+- Pour finir le tableau : être sur le ponton, au coucher, le tableau en main, et regarder le soleil (à moins de 20°).
+- Pour le pont du reflet : regarder l'eau à moins de 1,5 m du trou ; dès qu'on lève les yeux, les planches ne portent plus.
+- À partir de la 3e journée, Juliette ajoute « Ne sois pas en retard, cette fois. »
+- Au retour dans la maison : le plafond du salon et un mur de l'entrée sont partis, la chambre et l'entrée flottent. Message « Fin du niveau 3. Bientôt : le jeune adulte. »
+
 ### La durée
 
 clo vise 10 à 15 minutes, jusqu'à 20, par niveau : environ 1 h à 1 h 30 pour les 5 niveaux. Le niveau 1 actuel est trop court pour ça : il gagnera des énigmes. Chaque niveau combine plusieurs vraies énigmes et des moments d'histoire.
@@ -132,7 +139,7 @@ On construit chaque niveau entièrement en formes simples (une « greybox ») : 
 
 ## Prochaines étapes
 
-1. clo joue les niveaux 1 et 2 (voir plus bas et plus haut) et dit ce qui marche ou pas.
+1. clo joue les niveaux 1, 2 et 3 et dit ce qui marche ou pas.
 2. Confirmer la structure « de souvenir en souvenir » et l'histoire du niveau 2.
 3. Inventer ensemble les énigmes du niveau suivant (la toile qui se contient reste en réserve).
 4. Habiller le niveau 1 quand il sera validé.

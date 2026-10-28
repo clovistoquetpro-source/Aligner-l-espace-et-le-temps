@@ -69,13 +69,18 @@ func _ouvrir_les_yeux(pensee: String, delai := 0.5) -> Tween:
 
 ## Affiche une pensée, après celles qui attendent déjà.
 func penser(texte: String) -> void:
-	_file.append(texte)
+	_file.append("« %s »" % texte)
+
+
+## Une réplique d'un personnage (Juliette…), après ce qui attend déjà.
+func dire(qui: String, texte: String) -> void:
+	_file.append("%s : « %s »" % [qui, texte])
 
 
 func _process(delta: float) -> void:
 	super._process(delta)
 	if not _file.is_empty() and _reste_message <= 0.3:
-		afficher("« %s »" % _file.pop_front())
+		afficher(_file.pop_front())
 	_yeux.color.a = move_toward(_yeux.color.a, 1.0 if yeux_fermes() or yeux_forces else 0.0, delta * 6.0)
 	var a := action_possible() if _joueur.is_physics_processing() else ""
 	_action.text = "E : " + a if a != "" else ""

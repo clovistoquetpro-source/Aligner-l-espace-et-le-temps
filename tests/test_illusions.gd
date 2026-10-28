@@ -219,7 +219,7 @@ func test_les_pensees_viennent_du_regard() -> void:
 	await tree.physics_frame
 	await tree.physics_frame
 	T.ok(pensee.dite, "en regardant la toile")
-	T.ok(n._file.has(pensee.texte) or n.get_node("Interface/Message").text.contains("jardin"), "la pensée s'affiche")
+	T.ok(n._file.has("« %s »" % pensee.texte) or n.get_node("Interface/Message").text.contains("jardin"), "la pensée s'affiche")
 
 
 func test_le_vide_du_balcon_ne_se_saute_pas() -> void:
@@ -330,3 +330,27 @@ func test_e_sur_la_toile_tournante() -> void:
 	await _attendre(30)
 	Input.action_release("fermer_les_yeux")
 	T.ok(n.get_node("Interface/Yeux").color.a > 0.9, "F ferme aussi les yeux au niveau 1")
+
+
+func test_apres_l_enfance_la_toile_du_lac_mene_au_niveau_3() -> void:
+	Histoire.chapitre = 3
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	var lac: Node3D = n.get_node("Salon/Toile_lac")
+	T.ok(lac.visible and n.toile_lac_ouverte, "la toile du lac est apparue")
+	await _placer(j, Vector3(5.6, 0, 2.2), PI)
+	O.viser(j, lac.global_position)
+	await _attendre(5)
+	T.ok(n.get_node("Interface/ChuteToiles").en_cours(), "on tombe dans la toile")
+	await _attendre(int((ChuteToiles.DUREE + 0.5) * 60), func() -> bool: return Histoire.scene_demandee != "")
+	T.eq(Histoire.scene_demandee, "res://scenes/ete.tscn", "vers l'été")
+
+
+func test_apres_l_ete_la_maison_s_abime_encore() -> void:
+	Histoire.chapitre = 4
+	Histoire.corrections = 2
+	var n: Node3D = await _charger()
+	T.ok(not n.get_node("Salon/Plafond").visible, "le plafond du salon est parti")
+	T.ok(not n.get_node("Hall/Mur_ouest_1").visible, "un mur de l'entrée aussi")
+	T.ok(n.get_node("Chambre/Armoire").position.y > 1.5, "l'armoire flotte")
+	T.ok(not n.get_node("Salon/Toile_lac").visible, "plus de toile à franchir pour l'instant")

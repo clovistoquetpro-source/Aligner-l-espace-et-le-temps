@@ -41,6 +41,12 @@ Tab n'y fait rien : il n'y a pas d'époques. E sert aussi à tourner certaines t
 `godot --headless --path . -s res://tools/construire_enfance.gd`.
 Pour l'essayer sans refaire le niveau 1, ouvre `scenes/enfance.tscn` dans Godot et appuie sur **F6**.
 
+## Le niveau 3 : l'été au lac
+
+`scenes/ete.tscn`, en formes simples : Thomas a 16 ans, Juliette lui donne rendez-vous sur l'île au coucher du soleil, et la journée recommence tant que ce n'est pas « parfait ». On y arrive par la toile du lac, au salon, au retour de l'enfance. Il est construit par `tools/constructeur_ete.gd` :
+`godot --headless --path . -s res://tools/construire_ete.gd`.
+Pour l'essayer directement, ouvre `scenes/ete.tscn` et appuie sur **F6**.
+
 ## Le niveau « La maison »
 
 `scenes/maison.tscn` est construit par le code de `tools/constructeur_maison.gd` :

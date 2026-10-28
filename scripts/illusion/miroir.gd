@@ -17,6 +17,10 @@ const DISTANCE_VUE := 15.0
 @export var taille := Vector2(3.0, 2.4)
 ## Pixels par mètre de l'image du reflet.
 @export var definition := 300
+## La couleur de la vitre (blanc : un miroir ; bleu : l'eau d'un lac).
+@export var teinte := Color.WHITE
+## Au-delà de cette distance, on ne met plus le reflet à jour.
+@export var distance_vue := DISTANCE_VUE
 
 var camera: Camera3D
 var _vue: SubViewport
@@ -55,6 +59,7 @@ func _ready() -> void:
 	var mat := ShaderMaterial.new()
 	mat.shader = preload("res://shaders/miroir.gdshader")
 	mat.set_shader_parameter("reflet", _vue.get_texture())
+	mat.set_shader_parameter("teinte", teinte)
 	_vitre = MeshInstance3D.new()
 	_vitre.name = "Vitre"
 	_vitre.mesh = quad
@@ -69,7 +74,7 @@ func _process(_delta: float) -> void:
 	if oeil == null:
 		return
 	var c := camera_reflet(global_transform, oeil.global_position, taille)
-	var utile := not c.is_empty() and oeil.global_position.distance_to(global_position) < DISTANCE_VUE
+	var utile := not c.is_empty() and oeil.global_position.distance_to(global_position) < distance_vue
 	_vitre.visible = not c.is_empty()
 	_vue.render_target_update_mode = SubViewport.UPDATE_ALWAYS if utile else SubViewport.UPDATE_DISABLED
 	if not utile:
