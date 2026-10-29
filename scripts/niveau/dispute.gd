@@ -1,6 +1,9 @@
 extends Souvenir
 
-## Niveau 4, en formes simples : « La pluie ». Le soir de la dispute : on
+## Niveau 4, en formes simples : « La pluie ». D'abord le bonheur : l'atelier
+## à deux, un jour de soleil (Juliette cache les clés de la moto, on ne les
+## voit que dans le miroir), puis une balade à moto au bord de la mer, cheveux
+## au vent. Puis, des années plus tard, le soir de la dispute : on
 ## arrive à la fin du souvenir, figé (la pluie suspendue). R maintenu remonte
 ## le temps ; ce que Thomas tient ne remonte pas le temps. Il faut descendre
 ## de la mezzanine avant que l'étagère ne tombe sur l'escalier, reprendre le
@@ -9,7 +12,20 @@ extends Souvenir
 ## Au bout de la route, le vide : elle tombe dans tous les cas.
 ## Voir docs/superpowers/specs/2026-10-28-direction-illusions-design.md.
 
-enum Etat { ATELIER, COURSE, CHUTE, VERITE, FIN }
+enum Etat { BONHEUR, BALADE, ATELIER, COURSE, CHUTE, VERITE, FIN }
+
+## La balade : sa vitesse (m/s), et ce que disent Juliette et Thomas.
+const VITESSE_BALADE := 9.0
+const LONGUEUR_BALADE := 620.0
+const PAROLES_BALADE := [
+	[3.0, "Juliette", "Accroche-toi !"],
+	[12.0, "Juliette", "Tu sens le vent ?"],
+	[22.0, "", "Ses cheveux me fouettaient le visage. Elle riait."],
+	[32.0, "Juliette", "Ferme les yeux. Juste une seconde."],
+	[46.0, "Thomas", "Je voudrais que ça ne s'arrête jamais."],
+	[50.0, "Juliette", "Alors on ne s'arrêtera jamais."],
+	[60.0, "", "On roulait souvent. Puis, un soir, il a plu."],
+]
 
 ## La dispute dure 40 s ; on arrive à la fin, quand tout est figé.
 const DUREE := 40.0
@@ -60,7 +76,9 @@ const ELOIGNE := 0.55
 const ATTRAPEE := 0.8
 const DUREE_CHUTE := 9.0
 
-var etat := Etat.ATELIER
+var etat := Etat.BONHEUR
+var cles_trouvees := false
+var temps_balade := 0.0
 ## L'instant du souvenir (de 0, avant la dispute, à DUREE, après).
 var moment := DUREE
 var rembobine := false
@@ -76,6 +94,11 @@ var _temps_chute := 0.0
 var _lachee := false
 var _temporels: Array[ObjetTemporel] = []
 
+@onready var _cles: RigidBody3D = $Bonheur/Cles
+@onready var _juliette_atelier: Node3D = $Bonheur/Juliette
+@onready var _moto_bonheur: Node3D = $Bonheur/Mobylette
+@onready var _moto_balade: Node3D = $Balade/Mobylette
+@onready var _env_pluie: Environment = ($WorldEnvironment as WorldEnvironment).environment
 @onready var _casque: RigidBody3D = $Atelier/Casque
 @onready var _sortie: Area3D = $Atelier/Sortie
 @onready var _rebours: ColorRect = $Interface/Rebours
@@ -90,18 +113,169 @@ var _temporels: Array[ObjetTemporel] = []
 @onready var _pluie_chute: Pluie = $Vide/Pluie
 
 
+var _soleil: DirectionalLight3D
+
+
 func _ready() -> void:
 	Temps.reinitialiser()
-	touches_en_plus = "R (maintenu) : remonter le temps"
 	_joueur.camera.cull_mask &= ~Miroir.COUCHE_REFLET
 	for n in find_children("*", "ObjetTemporel", true, false):
 		_temporels.append(n as ObjetTemporel)
 	_sortie.body_entered.connect(_sur_sortie)
 	_vide.body_entered.connect(_sur_vide)
 	_bord.body_entered.connect(_sur_bord)
+	($Bonheur/Depart_moto as Area3D).body_entered.connect(_sur_la_moto)
 	_chute.finie.connect(_retour_dans_la_maison_des_etoiles)
 	_appliquer_le_moment()
-	var t := _ouvrir_les_yeux("Elle est partie. Il pleuvait.")
+	_le_soleil(true)
+	var t := _ouvrir_les_yeux("Notre atelier, un jour de soleil.")
+	t.tween_interval(1.0)
+	t.tween_callback(dire.bind("Juliette", "Tu as encore de la peinture sur le nez."))
+	t.tween_callback(dire.bind("Juliette", "Il fait si beau… Viens rouler avec moi !"))
+	t.tween_callback(dire.bind("Thomas", "D'accord. Je prends les clés."))
+	t.tween_callback(dire.bind("Juliette", "Trop tard, je les ai cachées ! Regarde-toi dans le miroir, tu verras."))
+
+
+## Le soleil du bonheur (ou la pluie du soir de la dispute).
+func _le_soleil(beau: bool) -> void:
+	var we := $WorldEnvironment as WorldEnvironment
+	if not beau:
+		we.environment = _env_pluie
+		if _soleil != null:
+			_soleil.queue_free()
+			_soleil = null
+		return
+	var ciel := ProceduralSkyMaterial.new()
+	ciel.sky_top_color = Color("4ea8de")
+	ciel.sky_horizon_color = Color("ffb38a")
+	ciel.ground_horizon_color = Color("ffb38a")
+	ciel.ground_bottom_color = Color("3a86ff")
+	var sky := Sky.new()
+	sky.sky_material = ciel
+	var env := Environment.new()
+	env.background_mode = Environment.BG_SKY
+	env.sky = sky
+	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	env.ambient_light_color = Color("ffe8c2")
+	env.ambient_light_energy = 0.5
+	env.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED
+	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	env.glow_enabled = true
+	we.environment = env
+	_soleil = DirectionalLight3D.new()
+	_soleil.name = "Soleil"
+	_soleil.rotation_degrees = Vector3(-18, -100, 0)
+	_soleil.light_color = Color("ffd6a5")
+	_soleil.shadow_enabled = true
+	add_child(_soleil)
+
+
+# --- Le bonheur ----------------------------------------------------------------
+
+
+func _dans_le_bonheur() -> void:
+	if _joueur.held == _cles and not cles_trouvees:
+		cles_trouvees = true
+		for m in _cles.find_children("*", "MeshInstance3D", false, false):
+			(m as MeshInstance3D).layers = 1
+		penser("Les voilà !")
+		dire("Juliette", "Bravo ! Allez, je t'attends dehors.")
+		_juliette_atelier.visible = false
+		_moto_bonheur.get_node("Juliette").visible = true
+	var cheveux: Node3D = _juliette_atelier.get_node("Cheveux")
+	cheveux.rotation.x = 0.08 * sin(_temps_reel * 1.5)
+	_temps_reel += get_physics_process_delta_time()
+
+
+func _sur_la_moto(corps: Node3D) -> void:
+	if not corps is Player or etat != Etat.BONHEUR:
+		return
+	if not cles_trouvees:
+		if _une_fois("sans_cles"):
+			penser("Les clés… Elle les a cachées.")
+		return
+	commencer_la_balade()
+
+
+## Thomas monte derrière Juliette ; la moto file au bord de la mer. On peut
+## regarder autour de soi, rien de plus.
+func commencer_la_balade() -> void:
+	etat = Etat.BALADE
+	temps_balade = 0.0
+	if _joueur.held != null:
+		var c := _joueur.held
+		_joueur.poser()
+		c.visible = false
+	_joueur.velocity = Vector3.ZERO
+	_joueur.set_physics_process(false)
+	_joueur.head.position.y = 1.7
+	_placer_sur_la_moto(0.0)
+	_joueur.rotation.y = _moto_balade.rotation.y
+	_blanc.color.a = 1.0
+	create_tween().tween_property(_blanc, "color:a", 0.0, 1.5)
+
+
+## Le virage de la route de la balade, à `z` (coordonnées de la balade).
+static func virage(z: float) -> float:
+	return 25.0 * sin(z / 90.0)
+
+
+var _cap_balade := 0.0
+
+
+func _placer_sur_la_moto(t: float) -> void:
+	var balade := ($Balade as Node3D).global_position
+	var z := -minf(t * VITESSE_BALADE, LONGUEUR_BALADE)
+	var avant := Vector3(virage(z - 1.0), 0, z - 1.0)
+	var ici := Vector3(virage(z), 0, z)
+	var cap := atan2(-(avant.x - ici.x), -(avant.z - ici.z))
+	_moto_balade.global_position = balade + ici
+	_moto_balade.rotation = Vector3(0, cap, (virage(z - 6.0) - virage(z)) * -0.02)
+	# Thomas, assis derrière elle : sa tête suit la moto, il regarde où il veut.
+	var regard := _joueur.rotation.y - _cap_balade
+	_cap_balade = cap
+	# Un peu sur le côté : il regarde la route par-dessus son épaule.
+	_joueur.global_position = _moto_balade.global_position + _moto_balade.global_basis * Vector3(0.35, 0.0, 0.85)
+	_joueur.rotation.y = cap + clampf(wrapf(regard, -PI, PI), -1.8, 1.8)
+
+
+func _dans_la_balade(delta: float) -> void:
+	var avant := temps_balade
+	temps_balade += delta
+	_placer_sur_la_moto(temps_balade)
+	var cheveux: Node3D = _moto_balade.get_node("Juliette/Cheveux")
+	cheveux.rotation.x = 0.5 + 0.2 * sin(temps_balade * 7.0)
+	_joueur.camera.fov = 80.0 + 4.0 * sin(temps_balade * 0.6)
+	for p in PAROLES_BALADE:
+		if avant < p[0] and temps_balade >= p[0]:
+			if p[1] == "":
+				penser(p[2])
+			else:
+				dire(p[1], p[2])
+	if yeux_fermes() and temps_balade > 30.0 and _une_fois("yeux_balade"):
+		penser("Le vent, le soleil, elle.")
+	if temps_balade >= LONGUEUR_BALADE / VITESSE_BALADE:
+		etat = Etat.ATELIER
+		var t := create_tween()
+		t.tween_property(_noir, "color:a", 1.0, 2.0)
+		t.tween_callback(commencer_la_dispute)
+
+
+## Des années plus tard, le soir de la dispute, figé : Juliette est partie.
+func commencer_la_dispute(fondu := true) -> void:
+	etat = Etat.ATELIER
+	_le_soleil(false)
+	_joueur.camera.fov = 80.0
+	_joueur.head.position.y = 1.6
+	touches_en_plus = "R (maintenu) : remonter le temps"
+	var depart: Marker3D = $Mezzanine/Depart
+	_joueur.teleport(depart.global_transform)
+	_joueur.set_anchor(depart.global_transform)
+	_joueur.set_physics_process(true)
+	if not fondu:
+		_noir.color.a = 0.0
+		return
+	var t := _ouvrir_les_yeux("Des années plus tard. Elle est partie. Il pleuvait.")
 	t.tween_callback(penser.bind("Tout s'est arrêté, ce soir-là."))
 	t.tween_interval(6.0)
 	t.tween_callback(penser.bind("Si je pouvais revenir en arrière…"))
@@ -124,6 +298,10 @@ static func a_l_envers(texte: String) -> String:
 
 func _physics_process(delta: float) -> void:
 	match etat:
+		Etat.BONHEUR:
+			_dans_le_bonheur()
+		Etat.BALADE:
+			_dans_la_balade(delta)
 		Etat.ATELIER:
 			_dans_l_atelier(delta)
 		Etat.COURSE:

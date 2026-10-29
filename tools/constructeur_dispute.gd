@@ -22,7 +22,10 @@ const COULEURS := {
 	"trottoir": "6c757d", "facade": "9a8c98", "facade_1": "b5838d", "facade_2": "c9ada7", "facade_3": "4a4e69", "mob": "e63946",
 	"mob_selle": "2b2d42", "roue": "222222", "robe": "f6bd60", "peau": "f2c6a0", "cheveux": "7f4f24",
 	"chemise": "457b9d", "pantalon": "2b2d42", "barriere": "ffb703", "mur_course": "e76f51", "telephone": "222222",
-	"ecran": "caf0f8",
+	"tronc": "7f5539", "feuillage": "52b788",
+	"ecran": "caf0f8", "soleil_mur": "ffe8c2", "parquet_clair": "c9905a", "fleurs": "ff8fab", "vase": "457b9d",
+	"cle": "d4af37", "mer": "3a86ff", "falaise": "bc8a5f", "champ": "a7c957", "route_claire": "8d99ae",
+	"toile_juliette": "f6bd60", "photo": "f1faee", "veste": "e63946", "disque": "2b2d42",
 }
 
 const H := 6.0
@@ -45,6 +48,11 @@ const REPERES := Niveau4.REPERES
 const BORD := 4.9
 const REZ := 4.0
 const VIDE := Vector3(1000, 0, 0)
+## Le prologue heureux : l'atelier, au soleil, et la balade à moto, au bord
+## de la mer.
+const BONHEUR := Vector3(-500, 0, 0)
+const BALADE := Vector3(-1000, 0, 0)
+const LONGUEUR_BALADE := 620.0
 
 
 func construire() -> int:
@@ -52,6 +60,8 @@ func construire() -> int:
 	_racine.name = "Dispute"
 	_racine.set_script(load("res://scripts/niveau/dispute.gd"))
 	_environnement()
+	_bonheur()
+	_balade()
 	_atelier()
 	_mezzanine()
 	_escalier()
@@ -59,7 +69,7 @@ func construire() -> int:
 	_rue()
 	_course()
 	_vide()
-	_joueur_et_interface(Vector3(-3.0, MEZZ_Y, -3.6), PI)
+	_joueur_et_interface(BONHEUR + Vector3(1.5, 0, 2.0), PI)
 	_racine.get_node("BasculeFx").free()
 	var ui := _racine.get_node("Interface")
 	for r in [["Rebours", Color(0.55, 0.75, 1.0, 0.0)], ["Blanc", Color(1, 1, 1, 0.0)]]:
@@ -195,6 +205,119 @@ func _mobylette(parent: Node3D, nom: String) -> Node3D:
 	var j := _silhouette(mob, "Juliette", true, true)
 	j.position = Vector3(0, 0.35, 0.15)
 	return mob
+
+
+# --- Le bonheur : l'atelier au soleil, puis la balade ------------------------
+
+
+## Le même atelier, des années plus tôt, un jour de soleil : la vie à deux.
+## Les clés de la moto, que Juliette cache, ne se voient que dans le miroir.
+func _bonheur() -> void:
+	var g := _groupe("Bonheur", BONHEUR)
+	var c := BONHEUR
+	var h := 4.0
+	_sol_plafond(g, c.x - 5.3, c.x + 5.3, c.z - 4.3, c.z + 4.3, h, "parquet_clair", "plafond")
+	_mur(g, "Mur_nord", true, c.z - 4.15, c.x - 5.3, c.x + 5.3, h, "soleil_mur")
+	_mur(g, "Mur_sud", true, c.z + 4.15, c.x - 5.3, c.x + 5.3, h, "soleil_mur", [[c.x - 3.0, 1.2, 2.3]])
+	_mur(g, "Mur_ouest", false, c.x - 5.15, c.z - 4.0, c.z + 4.0, h, "soleil_mur", [[c.z, 3.0, 2.0, 0.9]])
+	_mur_invisible(g, "Fenetre", c + Vector3(-5.15, 1.9, 0), Vector3(EP, 2.0, 3.0))
+	_mur(g, "Mur_est", false, c.x + 5.15, c.z - 4.0, c.z + 4.0, h, "soleil_mur")
+	# La vie à deux : deux chevalets, ses toiles à elle et à lui, des fleurs,
+	# des photos, sa veste rouge, un tourne-disque.
+	_boite(g, "Chevalet_thomas", Vector3(1.5, 0.8, 0.5), Vector3(0.08, 1.6, 0.08), "chevalet", false)
+	_boite(g, "Toile_thomas", Vector3(1.5, 1.3, 0.55), Vector3(1.0, 0.75, 0.04), "toile", false)
+	_boite(g, "Toile_thomas_portrait", Vector3(1.5, 1.3, 0.58), Vector3(0.3, 0.45, 0.01), "toile_juliette", false)
+	_boite(g, "Chevalet_juliette", Vector3(-1.5, 0.8, -0.5), Vector3(0.08, 1.6, 0.08), "chevalet", false)
+	_boite(g, "Toile_juliette", Vector3(-1.5, 1.3, -0.45), Vector3(1.0, 0.75, 0.04), "toile", false)
+	_boite(g, "Toile_juliette_mer", Vector3(-1.5, 1.2, -0.42), Vector3(0.9, 0.3, 0.01), "mer", false)
+	_boite(g, "Table", Vector3(3.5, 0.38, -2.8), Vector3(1.4, 0.76, 0.8), "table")
+	_boite(g, "Vase", Vector3(3.2, 0.9, -2.8), Vector3(0.15, 0.28, 0.15), "vase", false)
+	_boite(g, "Fleurs", Vector3(3.2, 1.12, -2.8), Vector3(0.3, 0.16, 0.3), "fleurs", false)
+	_boite(g, "Tasse_1", Vector3(3.7, 0.82, -2.6), Vector3(0.1, 0.12, 0.1), "tasse", false)
+	_boite(g, "Tasse_2", Vector3(3.9, 0.82, -2.9), Vector3(0.1, 0.12, 0.1), "tasse", false)
+	_boite(g, "Tourne_disque", Vector3(4.6, 0.85, -1.2), Vector3(0.5, 0.15, 0.4), "disque", false)
+	for i in 4:
+		_boite(g, "Photo_%d" % i, Vector3(-3.0 + 1.1 * i, 2.4, -3.98), Vector3(0.6, 0.45, 0.03), "photo", false)
+	_boite(g, "Veste", Vector3(-4.95, 1.6, 3.4), Vector3(0.06, 0.7, 0.45), "veste", false)
+	# Le miroir, et l'étagère derrière Thomas où Juliette cache les clés.
+	_boite(g, "Miroir_cadre", Vector3(4.98, 1.6, 1.5), Vector3(0.04, 1.5, 1.1), "rambarde", false)
+	var miroir := Miroir.new()
+	miroir.taille = Vector2(1.0, 1.4)
+	miroir.position = Vector3(4.955, 1.6, 1.5)
+	miroir.rotation.y = -PI / 2
+	_ajouter(g, miroir, "Miroir")
+	_boite(g, "Etagere", Vector3(-4.8, 1.4, 1.6), Vector3(0.5, 0.06, 1.2), "etagere")
+	var cles := RigidBody3D.new()
+	cles.position = Vector3(-4.75, 1.47, 1.7)
+	cles.freeze = true
+	cles.add_to_group("cles", true)
+	_ajouter(g, cles, "Cles")
+	_forme(cles, "CollisionShape3D", _boite_forme(Vector3(0.2, 0.1, 0.2)))
+	var anneau := TorusMesh.new()
+	anneau.inner_radius = 0.03
+	anneau.outer_radius = 0.05
+	var ma := _mesh(cles, "Anneau", anneau, Vector3.ZERO, "cle")
+	ma.layers = Miroir.COUCHE_REFLET
+	var tige := BoxMesh.new()
+	tige.size = Vector3(0.12, 0.02, 0.03)
+	var mt := _mesh(cles, "Cle", tige, Vector3(0.09, 0, 0), "cle")
+	mt.layers = Miroir.COUCHE_REFLET
+	var j := _silhouette(g, "Juliette", true)
+	j.position = Vector3(-1.0, 0, 0.6)
+	j.rotation.y = -PI * 0.7
+	_lampe(g, "Lumiere", c + Vector3(-3.0, 3.2, 0), 12.0, true, 1.6)
+	var soleil := SpotLight3D.new()
+	soleil.position = Vector3(-8, 4.5, 0)
+	soleil.rotation_degrees = Vector3(-25, -90, 0)
+	soleil.spot_range = 16.0
+	soleil.spot_angle = 35.0
+	soleil.light_energy = 3.0
+	soleil.light_color = Color("ffe8a3")
+	soleil.shadow_enabled = true
+	_ajouter(g, soleil, "Soleil_fenetre")
+	# Dehors, devant la porte : la moto.
+	_boite(g, "Trottoir", Vector3(0, -0.25, 6.3), Vector3(12, 0.5, 4.0), "trottoir")
+	# Autour : de l'herbe, des arbres, la mer au loin.
+	_boite(g, "Herbe", Vector3(0, -0.3, 0), Vector3(80, 0.4, 80), "champ", false)
+	for i in 8:
+		var a := TAU * i / 8.0 + 0.3
+		var p := Vector3(cos(a) * 16.0, 0, sin(a) * 16.0 + 2.0)
+		_boite(g, "Arbre_%d_tronc" % i, p + Vector3(0, 1.5, 0), Vector3(0.5, 3.0, 0.5), "tronc", false)
+		_boite(g, "Arbre_%d_feuillage" % i, p + Vector3(0, 3.8, 0), Vector3(3.0, 2.2, 3.0), "feuillage", false)
+	_mur_invisible(g, "Bord_dehors", c + Vector3(0, 2, 8.4), Vector3(12, 4, 0.4))
+	_mur_invisible(g, "Bord_dehors_g", c + Vector3(-6, 2, 6.3), Vector3(0.4, 4, 4))
+	_mur_invisible(g, "Bord_dehors_d", c + Vector3(6, 2, 6.3), Vector3(0.4, 4, 4))
+	var mob := _mobylette(g, "Mobylette")
+	mob.position = Vector3(-1.0, 0, 6.5)
+	mob.rotation.y = -PI / 2
+	mob.get_node("Juliette").visible = false
+	_zone(g, "Depart_moto", c + Vector3(-1.0, 1.0, 6.5), Vector3(3.0, 2.0, 2.5))
+	_marque(g, "Depart", c + Vector3(1.5, 0, 2.0), PI)
+	_pensee(g, "PenseeAtelier", c + Vector3(-1.5, 1.3, -0.45), "Notre atelier. Elle peignait la mer, moi je la peignais, elle.", 6.0, 25.0)
+	_pensee(g, "PenseePhotos", c + Vector3(-1.4, 2.4, -3.98), "Nos photos… On était heureux.", 5.0, 20.0)
+
+
+## La balade : une route au bord de la mer, au coucher du soleil, avec des
+## champs de l'autre côté. Le niveau y fait avancer la moto.
+func _balade() -> void:
+	var g := _groupe("Balade", BALADE)
+	var pas := 15.0
+	var n := int(LONGUEUR_BALADE / pas)
+	for i in n:
+		var z0 := -pas * i
+		var z1 := z0 - pas
+		var a := Vector3(Niveau4.virage(z0), 0, z0)
+		var b := Vector3(Niveau4.virage(z1), 0, z1)
+		var morceau := _boite(g, "Route_%d" % i, (a + b) / 2 + Vector3(0, -0.1, 0), Vector3(6.0, 0.2, a.distance_to(b) + 0.4), "route_claire", false)
+		morceau.rotation.y = atan2(-(b.x - a.x), -(b.z - a.z))
+		_boite(g, "Falaise_%d" % i, (a + b) / 2 + Vector3(-7.0, -1.5, 0), Vector3(8.0, 3.0, pas + 0.4), "falaise", false)
+		_boite(g, "Champ_%d" % i, (a + b) / 2 + Vector3(13.0, -0.3, 0), Vector3(20.0, 0.4, pas + 0.4), "champ", false)
+		if i % 3 == 0:
+			_boite(g, "Arbre_%d_tronc" % i, (a + b) / 2 + Vector3(9.0 + 4.0 * (i % 2), 1.5, 0), Vector3(0.5, 3.0, 0.5), "tronc", false)
+			_boite(g, "Arbre_%d_feuillage" % i, (a + b) / 2 + Vector3(9.0 + 4.0 * (i % 2), 3.8, 0), Vector3(3.0, 2.0, 3.0), "feuillage", false)
+	_boite(g, "Mer", Vector3(-160, -3.0, -LONGUEUR_BALADE / 2), Vector3(300, 0.2, LONGUEUR_BALADE + 200), "mer", false)
+	var mob := _mobylette(g, "Mobylette")
+	mob.position = Vector3(0, 0, 0)
 
 
 # --- L'atelier ---------------------------------------------------------------

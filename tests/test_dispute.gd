@@ -20,12 +20,16 @@ func nettoyer() -> void:
 	Histoire.simuler = false
 
 
-func _charger() -> Node3D:
+## Charge le niveau et passe le prologue (le bonheur), sauf `au_debut`.
+func _charger(au_debut := false) -> Node3D:
 	Histoire.simuler = true
 	_niveau = load("res://scenes/dispute.tscn").instantiate()
 	tree.root.add_child(_niveau)
 	await tree.physics_frame
 	await tree.physics_frame
+	if not au_debut:
+		_niveau.commencer_la_dispute(false)
+		await tree.physics_frame
 	return _niveau
 
 
@@ -303,3 +307,57 @@ func test_on_ne_traverse_pas_les_immeubles() -> void:
 	await _attendre(90)
 	Input.action_release("gauche")
 	T.ok(j.global_position.x > 500.0 - 4.6, "le bord de la route arrête Thomas (x = %.2f)" % j.global_position.x)
+
+
+func test_on_commence_par_le_bonheur() -> void:
+	var n: Node3D = await _charger(true)
+	var j: Player = n.get_node("Player")
+	T.eq(n.etat, Dispute.Etat.BONHEUR, "le prologue heureux")
+	T.ok(j.global_position.distance_to(Vector3(-498.5, 0, 2.0)) < 0.5, "dans l'atelier au soleil (%s)" % j.global_position)
+	T.ok(n.get_node("Bonheur/Juliette").visible, "Juliette est là")
+	T.eq((n.get_node("WorldEnvironment") as WorldEnvironment).environment.background_mode, Environment.BG_SKY, "un ciel de beau temps")
+
+
+func test_les_cles_ne_se_voient_que_dans_le_miroir() -> void:
+	var n: Node3D = await _charger(true)
+	var j: Player = n.get_node("Player")
+	var cles: RigidBody3D = n.get_node("Bonheur/Cles")
+	T.eq((cles.get_node("Anneau") as MeshInstance3D).layers, Miroir.COUCHE_REFLET, "invisibles en vrai")
+	await _placer(j, Vector3(-504.0, 0, 1.7), -PI / 2)
+	O.viser(j, cles.global_position)
+	j._interagir()
+	T.ok(j.held == cles, "on les prend là où le miroir les montre")
+	await _attendre(3)
+	T.ok(n.cles_trouvees, "trouvées")
+	T.eq((cles.get_node("Anneau") as MeshInstance3D).layers, 1, "visibles une fois prises")
+	T.ok(n.get_node("Bonheur/Mobylette/Juliette").visible, "Juliette attend sur la moto")
+
+
+func test_sans_les_cles_pas_de_balade() -> void:
+	var n: Node3D = await _charger(true)
+	var j: Player = n.get_node("Player")
+	await _placer(j, Vector3(-501.0, 0, 6.5), 0.0)
+	await _attendre(5)
+	T.eq(n.etat, Dispute.Etat.BONHEUR, "toujours dans l'atelier")
+	T.ok(n._dit.has("sans_cles"), "« Les clés… Elle les a cachées. »")
+
+
+func test_la_balade_puis_le_soir_de_la_dispute() -> void:
+	var n: Node3D = await _charger(true)
+	var j: Player = n.get_node("Player")
+	j.prendre(n.get_node("Bonheur/Cles"))
+	await _attendre(3)
+	await _placer(j, Vector3(-501.0, 0, 6.0), 0.0)
+	await _attendre(5, func() -> bool: return n.etat == Dispute.Etat.BALADE)
+	T.eq(n.etat, Dispute.Etat.BALADE, "on monte derrière Juliette")
+	var depart := j.global_position
+	await _attendre(60)
+	T.ok(j.global_position.distance_to(depart) > 6.0, "la moto avance (%.1f m)" % j.global_position.distance_to(depart))
+	T.ok(not j.is_physics_processing(), "on ne conduit pas")
+	var moto: Node3D = n.get_node("Balade/Mobylette")
+	T.ok(j.global_position.distance_to(moto.global_position) < 1.0, "assis derrière elle")
+	n.temps_balade = Dispute.LONGUEUR_BALADE / Dispute.VITESSE_BALADE - 0.1
+	await _attendre(200, func() -> bool: return n.etat == Dispute.Etat.ATELIER and j.global_position.y > 2.5)
+	T.eq(n.etat, Dispute.Etat.ATELIER, "des années plus tard, le soir de la dispute")
+	T.ok(j.global_position.y > 2.5, "sur la mezzanine (%s)" % j.global_position)
+	T.eq((n.get_node("WorldEnvironment") as WorldEnvironment).environment.fog_enabled, true, "sous la pluie")

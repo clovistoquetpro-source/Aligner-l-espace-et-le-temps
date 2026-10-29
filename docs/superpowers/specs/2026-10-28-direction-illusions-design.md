@@ -123,6 +123,8 @@ Choix de clo : Thomas n'était pas là au moment de l'accident. Ils se sont disp
 
 On y entre par la toile de l'atelier, au salon (« Un atelier… Je ne m'en souviens pas. »), au retour de l'été.
 
+**D'abord, le bonheur** (ajouté après l'avis sur le prototype : Juliette n'était pas assez présente pour que sa perte fasse mal). Le même atelier, des années plus tôt, un jour de soleil : deux chevalets (elle peint la mer, lui la peint, elle), des photos, des fleurs, sa veste rouge. Juliette : « Tu as encore de la peinture sur le nez. Il fait si beau… Viens rouler avec moi ! » Thomas : « D'accord. Je prends les clés. » Juliette : « Trop tard, je les ai cachées ! Regarde-toi dans le miroir, tu verras. » Les clés ne se voient que dans le miroir (comme l'invitation de l'enfance). Puis la balade, environ 1 minute : Thomas derrière elle sur la moto, au bord de la mer, au coucher du soleil ; on peut regarder autour de soi. « Tu sens le vent ? » « Ferme les yeux. Juste une seconde. » « Je voudrais que ça ne s'arrête jamais. » « Alors on ne s'arrêtera jamais. » « On roulait souvent. Puis, un soir, il a plu. » Dans le bonheur, Thomas dit oui ; le soir de la dispute, il dira non.
+
 **Le temps à rebours, deux règles, une à la fois** (leçon du niveau 3) :
 1. **R maintenu remonte le temps** : la pluie remonte vers le ciel, les objets reviennent à leur place, Juliette et Thomas reculent, leurs phrases s'écrivent à l'envers. On lâche R : le souvenir repart en avant.
 2. **Ce que Thomas tient ne remonte pas le temps**, comme au niveau 3, où ce qu'il tenait échappait au peintre. Un objet pris dans le passé reste dans ses mains au présent.

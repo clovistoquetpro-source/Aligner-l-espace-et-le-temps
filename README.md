@@ -50,7 +50,7 @@ Pour l'essayer directement, ouvre `scenes/ete.tscn` et appuie sur **F6**.
 
 ## Le niveau 4 : la pluie
 
-`scenes/dispute.tscn`, en formes simples : le soir de la dispute à l'atelier, qu'on remonte dans le temps (R maintenu), puis la course-poursuite derrière Juliette (on avance tout seul : Q et D pour aller à gauche et à droite, Espace pour sauter) et la chute (Espace, le plus vite possible). On y arrive par la toile de l'atelier, au salon, au retour de l'été. Il est construit par `tools/constructeur_dispute.gd` :
+`scenes/dispute.tscn`, en formes simples : d'abord le bonheur (l'atelier à deux au soleil, puis une balade à moto au bord de la mer), puis le soir de la dispute à l'atelier, qu'on remonte dans le temps (R maintenu), puis la course-poursuite derrière Juliette (on avance tout seul : Q et D pour aller à gauche et à droite, Espace pour sauter) et la chute (Espace, le plus vite possible). On y arrive par la toile de l'atelier, au salon, au retour de l'été. Il est construit par `tools/constructeur_dispute.gd` :
 `godot --headless --path . -s res://tools/construire_dispute.gd`.
 Pour l'essayer directement, ouvre `scenes/dispute.tscn` et appuie sur **F6**.
 
