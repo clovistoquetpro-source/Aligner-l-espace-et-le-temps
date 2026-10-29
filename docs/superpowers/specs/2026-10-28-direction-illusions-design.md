@@ -145,6 +145,16 @@ On y entre par la toile de l'atelier, au salon (« Un atelier… Je ne m'en souv
 - Pendant la vérité, R ne fait plus rien : « On ne remonte pas le temps. »
 - Au retour : les plafonds de l'entrée et de la chambre et le mur sud du salon sont partis. Message « Fin du niveau 4. Bientôt : l'atelier du peintre. »
 
+### Le niveau 5 : l'atelier du peintre, et dehors
+
+Choix de clo : on devient le peintre ; on traverse les mille toiles les yeux fermés ; peindre ne marche jamais, et le jeu ne dit jamais de poser le pinceau ; dehors, Thomas marche et rencontre des gens. On y entre par la toile de la chambre (le peintre qui peint la maison), au retour de la pluie.
+
+1. **Le peintre.** Une grande salle sombre, des toiles partout. Au fond, de dos, un vieil homme en blouse et béret rouge peint, face au labyrinthe. Quand Thomas s'approche, il entre en lui : on voit ses mains ridées, le pinceau. Ses yeux sont plus bas, il marche plus lentement. « Ces mains… ce sont les miennes. » « C'est moi, le peintre. Depuis le début. »
+2. **Les mille toiles.** Un labyrinthe dont chaque mur est une toile de la même scène : la route sous la pluie, Juliette qui part à mobylette. Regarder une toile de près aspire Thomas, qui revient à l'entrée du labyrinthe (« Toutes les mêmes… La même route sous la pluie. »). Les yeux fermés (F), les toiles disparaissent : on ne voit plus que ce qui est vrai, un chemin de pétales de la fleur de Juliette, qui brillent dans le noir et mènent au cœur.
+3. **Le cœur.** Un chevalet, face à la dernière toile, encore inachevée. E : peindre. La toile se finit (Juliette reste à la fenêtre, elle ne part pas)… puis se fissure, et tout recommence à l'entrée du labyrinthe. À chaque tentative, de nouvelles toiles s'empilent dans l'atelier, et une pensée : « Encore une fois. », « Elle tombe toujours. », « Mille fois… mille fois la même pluie. », puis « Et si j'arrêtais de peindre ? »
+4. **Poser le pinceau** (E, sans viser le chevalet), une fois qu'on a essayé de peindre au moins une fois. Avant, Thomas le reprend : « Non… Pas encore. Je peux encore la sauver. » Posé : « Je pose le pinceau. » La dernière toile change toute seule : Juliette qui rit, au bord du lac. « Je me souviens d'elle comme elle était. » « Je ne peux pas changer ce qui est arrivé. » Les toiles tombent, la lumière revient, la porte d'entrée de la maison apparaît.
+5. **Dehors.** La nature en couleurs : un chemin, des arbres, des fleurs, des papillons. Thomas est vieux. Trois personnes sur le chemin : une jardinière, un promeneur, un enfant avec un cerf-volant (qui rappelle le grenier). E : dire bonjour ; chacun répond. Au sommet de la colline, le vent se lève : « Le vent… comme dans ses cheveux. » « Je ne peux pas changer ce qui est arrivé. Mais je peux vivre ce qui vient. » Puis le générique.
+
 ### La durée
 
 clo vise 10 à 15 minutes, jusqu'à 20, par niveau : environ 1 h à 1 h 30 pour les 5 niveaux. Le niveau 1 actuel est trop court pour ça : il gagnera des énigmes. Chaque niveau combine plusieurs vraies énigmes et des moments d'histoire.
