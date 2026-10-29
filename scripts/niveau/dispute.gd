@@ -33,6 +33,25 @@ const PHRASES := [
 const VITESSE_COURSE := 1.5
 const AVANCE_MOTO := 11.0
 const ROULIS := 0.06
+## La route de la course (en coordonnées de son groupe ; tools/
+## constructeur_dispute.gd la construit à partir d'ici).
+const FIN_COURSE := -330.0
+const VOIES := [-3.0, 0.0, 3.0]
+## Les obstacles : [z, type, voies bloquées]. Types : « barriere » (à
+## sauter), « mur » (à éviter), « trou » (à sauter, longueur en m).
+const OBSTACLES := [
+	[-20.0, "barriere", 0], [-35.0, "mur", [0, 1]], [-50.0, "mur", [1, 2]], [-62.0, "trou", 3.0],
+	[-78.0, "barriere", 0], [-90.0, "mur", [0, 2]], [-105.0, "trou", 3.5], [-118.0, "mur", [0, 1]],
+	[-127.0, "barriere", 0], [-140.0, "mur", [1, 2]], [-152.0, "trou", 3.0], [-165.0, "barriere", 0],
+	[-176.0, "mur", [0, 2]], [-190.0, "trou", 4.0], [-205.0, "mur", [0, 1]], [-213.0, "mur", [1, 2]],
+	[-228.0, "barriere", 0], [-240.0, "trou", 3.5], [-255.0, "mur", [0, 2]], [-268.0, "barriere", 0],
+	[-278.0, "trou", 3.0], [-292.0, "mur", [1, 2]], [-300.0, "mur", [0, 1]], [-314.0, "barriere", 0],
+]
+const REPERES := [8.0, -70.0, -145.0, -220.0, -285.0]
+## La mobylette regarde ce loin devant elle pour choisir sa voie, et se
+## déplace de côté de ce nombre de mètres par mètre parcouru.
+const VUE_MOTO := 14.0
+const DERIVE_MOTO := 1.2
 ## La chute : Juliette est d'abord à 5 m sous Thomas ; chaque appui sur
 ## Espace la rapproche, la chute l'éloigne.
 const ECART_CHUTE := 5.0
@@ -50,6 +69,9 @@ var rattrapee := false
 
 var _dit := {}
 var _temps_reel := 0.0
+## Où en est la mobylette dans la course (coordonnées de la route).
+var moto_x := 0.0
+var moto_z := -4.0
 var _temps_chute := 0.0
 var _lachee := false
 var _temporels: Array[ObjetTemporel] = []
@@ -190,18 +212,72 @@ func commencer_la_course() -> void:
 	_joueur.set_anchor(depart.global_transform)
 	_joueur.avance_auto = true
 	_joueur.facteur_vitesse = VITESSE_COURSE
+	moto_x = 0.0
+	moto_z = depart.global_position.z - ($Course as Node3D).global_position.z - AVANCE_MOTO
 	penser("Cette fois, je te rattrape.")
 	dire("Thomas", "Juliette ! Attends !")
+
+
+## La voie que vise la mobylette à `z` : la plus proche du milieu parmi
+## celles que le prochain mur laisse libres.
+static func voie_moto(z: float) -> float:
+	for o in OBSTACLES:
+		if o[1] != "mur" or o[0] > z + 0.8 or o[0] < z - VUE_MOTO:
+			continue
+		var libres := []
+		for v in VOIES.size():
+			if not v in o[2]:
+				libres.append(VOIES[v])
+		libres.sort_custom(func(a: float, b: float) -> bool: return absf(a) < absf(b) or (absf(a) == absf(b) and a > b))
+		return libres[0]
+	return 0.0
+
+
+## Un pas de la mobylette : elle avance de `dz` (vers -Z) et glisse vers sa
+## voie.
+static func pas_moto(x: float, z: float, dz: float) -> float:
+	return move_toward(x, voie_moto(z), DERIVE_MOTO * dz)
+
+
+## La hauteur de la mobylette à `z` : elle saute les barrières et les trous,
+## et tombe dans le vide au bout de la route.
+static func hauteur_moto(z: float) -> float:
+	if z < FIN_COURSE:
+		return -0.6 * pow(FIN_COURSE - z, 2.0)
+	var y := 0.0
+	for o in OBSTACLES:
+		var debut: float = o[0] + 2.0
+		var fin: float = o[0] - 2.0
+		if o[1] == "trou":
+			debut = o[0] + 1.5
+			fin = o[0] - o[2] - 1.5
+		elif o[1] != "barriere":
+			continue
+		if z <= debut and z >= fin:
+			var k := (debut - z) / (debut - fin)
+			y = maxf(y, 4.0 * 1.1 * k * (1.0 - k))
+	return y
 
 
 func _dans_la_course(delta: float) -> void:
 	_temps_reel += delta
 	var p := _joueur.global_position
-	# La mobylette reste devant, et zigzague entre les obstacles.
-	var x := 500.0 + 2.2 * sin(_temps_reel * 0.9)
-	var z := minf(p.z - AVANCE_MOTO, 10.0)
-	_moto_course.global_position = Vector3(x, 0.0, z)
-	_moto_course.rotation.y = 0.0
+	# La mobylette reste devant : elle évite les murs, saute le reste.
+	var route := ($Course as Node3D).global_position
+	var z := minf(p.z - route.z - AVANCE_MOTO, 10.0)
+	var dz := maxf(moto_z - z, 0.0)
+	var avant := moto_x
+	var pas := 0.0
+	while pas < dz:
+		var d := minf(0.25, dz - pas)
+		moto_x = pas_moto(moto_x, moto_z - pas - d, d)
+		pas += d
+	moto_z = minf(z, moto_z)
+	_moto_course.global_position = route + Vector3(moto_x, hauteur_moto(moto_z), moto_z)
+	# Elle penche dans les virages.
+	_moto_course.rotation = Vector3(0.0, 0.0, clampf((moto_x - avant) * -3.0, -0.35, 0.35))
+	if moto_z < FIN_COURSE and _une_fois("elle_tombe"):
+		dire("Thomas", "Juliette !")
 	var cheveux: Node3D = _moto_course.get_node("Juliette/Cheveux")
 	cheveux.rotation.x = 0.35 + 0.15 * sin(_temps_reel * 6.0)
 	_pluie_course.global_position = p + Vector3(0, 4.0, -6.0)

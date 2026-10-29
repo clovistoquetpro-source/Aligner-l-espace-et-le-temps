@@ -254,3 +254,52 @@ func test_la_verite_puis_la_maison() -> void:
 	await _attendre(int((16.0 + ChuteToiles.DUREE + 0.5) * 60), func() -> bool: return Histoire.scene_demandee != "")
 	T.eq(Histoire.scene_demandee, "res://scenes/illusions.tscn", "retour dans la maison des étoiles")
 	T.eq(Histoire.chapitre, 5, "le niveau 4 est fini")
+
+
+func test_la_mobylette_ne_traverse_aucun_obstacle() -> void:
+	# On rejoue le trajet de la mobylette, mètre par mètre, comme le jeu.
+	var x := 0.0
+	var z := -4.0
+	var trajet := {}
+	while z > Dispute.FIN_COURSE:
+		x = Dispute.pas_moto(x, z - 0.25, 0.25)
+		z -= 0.25
+		trajet[snappedf(z, 0.25)] = x
+	for o in Dispute.OBSTACLES:
+		var oz: float = o[0]
+		match o[1]:
+			"mur":
+				var xo: float = trajet[snappedf(oz, 0.25)]
+				for v in o[2]:
+					T.ok(absf(xo - Dispute.VOIES[v]) > 1.8, "au mur de %d m, elle n'est pas dans la voie %d (x = %.2f)" % [int(oz), v, xo])
+			"barriere":
+				T.ok(Dispute.hauteur_moto(oz) > 0.8, "elle saute la barrière de %d m" % int(oz))
+			"trou":
+				for k in 5:
+					var zk: float = oz - o[2] * k / 4.0
+					T.ok(Dispute.hauteur_moto(zk) > 0.1, "elle passe au-dessus du trou de %d m" % int(oz))
+	T.ok(Dispute.hauteur_moto(Dispute.FIN_COURSE - 3.0) < -3.0, "au bout de la route, elle tombe")
+
+
+func test_les_immeubles_n_entrent_jamais_dans_la_route() -> void:
+	var n: Node3D = await _charger()
+	var route: Node3D = n.get_node("Course")
+	var fautes: Array[String] = []
+	var immeubles := O.tous(route, func(x: Node) -> bool: return x is CSGBox3D and (String(x.name) == "Etages" or String(x.name).ends_with("_rez")))
+	T.ok(immeubles.size() > 100, "des immeubles des deux côtés (%d morceaux)" % immeubles.size())
+	for b in immeubles:
+		var a := O.boite(b)
+		var local := AABB(a.position - route.global_position, a.size)
+		var dans_la_route := local.position.x < 4.5 and local.end.x > -4.5
+		if dans_la_route and local.position.y < 3.5:
+			fautes.append("%s (x %.1f à %.1f, y dès %.1f)" % [b.get_path(), local.position.x, local.end.x, local.position.y])
+	T.ok(fautes.is_empty(), "rien de solide ni de visible à hauteur de Thomas sur la route : %s" % ", ".join(fautes))
+
+
+func test_on_ne_traverse_pas_les_immeubles() -> void:
+	var n: Node3D = await _charger()
+	var j := await _en_course(n, -200.0)
+	Input.action_press("gauche")
+	await _attendre(90)
+	Input.action_release("gauche")
+	T.ok(j.global_position.x > 500.0 - 4.6, "le bord de la route arrête Thomas (x = %.2f)" % j.global_position.x)

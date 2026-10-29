@@ -33,21 +33,17 @@ const ESC_X := 5.2
 const ESC_HAUT := Vector3(5.2, 2.8, -1.5)
 const ESC_BAS := Vector3(5.2, 0.0, 3.5)
 const PORTE_X := -3.0
-## La route de la course.
+## La route de la course : le niveau en donne le tracé et les obstacles.
+const Niveau4 := preload("res://scripts/niveau/dispute.gd")
 const COURSE := Vector3(500, 0, 0)
-const FIN_COURSE := -330.0
-const VOIES := [-3.0, 0.0, 3.0]
-## Les obstacles : [z, type, voies bloquées]. Types : « barriere » (à
-## sauter), « mur » (à éviter), « trou » (à sauter, longueur en m).
-const OBSTACLES := [
-	[-20.0, "barriere", 0], [-35.0, "mur", [0, 1]], [-50.0, "mur", [1, 2]], [-62.0, "trou", 3.0],
-	[-78.0, "barriere", 0], [-90.0, "mur", [0, 2]], [-105.0, "trou", 3.5], [-118.0, "mur", [0, 1]],
-	[-127.0, "barriere", 0], [-140.0, "mur", [1, 2]], [-152.0, "trou", 3.0], [-165.0, "barriere", 0],
-	[-176.0, "mur", [0, 2]], [-190.0, "trou", 4.0], [-205.0, "mur", [0, 1]], [-213.0, "mur", [1, 2]],
-	[-228.0, "barriere", 0], [-240.0, "trou", 3.5], [-255.0, "mur", [0, 2]], [-268.0, "barriere", 0],
-	[-278.0, "trou", 3.0], [-292.0, "mur", [1, 2]], [-300.0, "mur", [0, 1]], [-314.0, "barriere", 0],
-]
-const REPERES := [8.0, -70.0, -145.0, -220.0, -285.0]
+const FIN_COURSE := Niveau4.FIN_COURSE
+const VOIES := Niveau4.VOIES
+const OBSTACLES := Niveau4.OBSTACLES
+const REPERES := Niveau4.REPERES
+## Le rez-de-chaussée des immeubles, solide, au bord de la route ; au-dessus,
+## les étages penchent au-dessus d'elle.
+const BORD := 4.9
+const REZ := 4.0
 const VIDE := Vector3(1000, 0, 0)
 
 
@@ -390,14 +386,23 @@ func _course() -> void:
 			"mur":
 				for v in o[2]:
 					_boite(g, "Mur_%d_%d" % [int(-z), v], Vector3(VOIES[v], 1.5, z), Vector3(3.0, 3.0, 0.6), "mur_course")
-	# Les immeubles, de plus en plus penchés au-dessus de la route.
+	# Les immeubles : un rez-de-chaussée solide au bord de la route, puis des
+	# étages qui penchent de plus en plus au-dessus d'elle, en tournant autour
+	# de leur bord intérieur, à 4 m de haut : ils ne descendent jamais jusqu'à
+	# Thomas. Au bout, ils se rejoignent au-dessus de la route.
 	var k := 0
 	for z in range(0, int(FIN_COURSE), -12):
 		var penche := clampf(-float(z) / -FIN_COURSE, 0.0, 1.0)
 		for cote in [-1, 1]:
+			var nom := "Immeuble_%d_%s" % [k, "g" if cote < 0 else "d"]
+			var couleur := "facade_%d" % ((k + (1 if cote > 0 else 0)) % 3 + 1) if (k + 1) % 3 > 0 else "facade"
 			var haut := 10.0 + 6.0 * ((k * 7 + (3 if cote > 0 else 0)) % 4)
-			var b := _boite(g, "Immeuble_%d_%s" % [k, "g" if cote < 0 else "d"], Vector3(cote * (8.0 - 3.0 * penche), haut / 2, z), Vector3(5.0, haut, 10.0), "facade_%d" % ((k + (1 if cote > 0 else 0)) % 3 + 1) if (k + 1) % 3 > 0 else "facade", false)
-			b.rotation.z = -cote * penche * 0.9
+			_boite(g, nom + "_rez", Vector3(cote * (BORD + 2.5), REZ / 2, z), Vector3(5.0, REZ, 10.0), couleur)
+			var pivot := Node3D.new()
+			pivot.position = Vector3(cote * BORD, REZ, z)
+			pivot.rotation.z = cote * penche * 1.0
+			_ajouter(g, pivot, nom)
+			_boite(pivot, "Etages", Vector3(cote * 2.5, (haut - REZ) / 2, 0), Vector3(5.0, haut - REZ, 10.0), couleur, false)
 		k += 1
 	# Des toiles qui flottent au-dessus de la route.
 	for i in 8:
