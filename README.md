@@ -23,6 +23,7 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 | Prendre ou poser un objet (vise loin pour l'agrandir, près pour le rétrécir), tourner une toile | E | E |
 | Basculer d'époque | Tab ou clic droit | Tab ou clic droit |
 | Fermer les yeux (en restant appuyé) | F | F |
+| Remonter le temps (en restant appuyé, niveau 4) | R | R |
 | Libérer la souris | Échap | Échap |
 
 ## Tests
@@ -46,6 +47,12 @@ Pour l'essayer sans refaire le niveau 1, ouvre `scenes/enfance.tscn` dans Godot 
 `scenes/ete.tscn`, en formes simples : Thomas a 16 ans, Juliette lui donne rendez-vous sur l'île au coucher du soleil, et la journée recommence tant que ce n'est pas « parfait ». On y arrive par la toile du lac, au salon, au retour de l'enfance. Il est construit par `tools/constructeur_ete.gd` :
 `godot --headless --path . -s res://tools/construire_ete.gd`.
 Pour l'essayer directement, ouvre `scenes/ete.tscn` et appuie sur **F6**.
+
+## Le niveau 4 : la pluie
+
+`scenes/dispute.tscn`, en formes simples : le soir de la dispute à l'atelier, qu'on remonte dans le temps (R maintenu), puis la course-poursuite derrière Juliette (on avance tout seul : Q et D pour aller à gauche et à droite, Espace pour sauter) et la chute (Espace, le plus vite possible). On y arrive par la toile de l'atelier, au salon, au retour de l'été. Il est construit par `tools/constructeur_dispute.gd` :
+`godot --headless --path . -s res://tools/construire_dispute.gd`.
+Pour l'essayer directement, ouvre `scenes/dispute.tscn` et appuie sur **F6**.
 
 ## Le niveau « La maison »
 

@@ -22,6 +22,7 @@ func test_deplacements_physiques() -> void:
 	T.ok(_a_touche("interagir", KEY_E), "interagir = E")
 	T.ok(_a_touche("liberer_souris", KEY_ESCAPE), "liberer_souris = Échap")
 	T.ok(_a_touche("fermer_les_yeux", KEY_F), "fermer_les_yeux = F")
+	T.ok(_a_touche("rembobiner", KEY_R), "rembobiner = R")
 
 
 func test_basculer_tab_et_clic_droit() -> void:

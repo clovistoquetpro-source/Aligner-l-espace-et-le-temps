@@ -15,6 +15,9 @@ const MARGE_TENUE := 0.3
 var anchor: Transform3D
 ## Multiplie la vitesse de marche (la peur ralentit Thomas).
 var facteur_vitesse := 1.0
+## Pendant une course, Thomas avance tout seul, droit devant : on ne choisit
+## que la gauche, la droite et le saut.
+var avance_auto := false
 var held: RigidBody3D = null
 ## Taille à l'écran de l'objet perspectif porté (taille / distance).
 var _ratio := 0.0
@@ -75,7 +78,8 @@ func poser() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		rotate_y(-event.relative.x * MOUSE_SENS)
+		if not avance_auto:
+			rotate_y(-event.relative.x * MOUSE_SENS)
 		head.rotation.x = clampf(head.rotation.x - event.relative.y * MOUSE_SENS, deg_to_rad(-89), deg_to_rad(89))
 	elif event.is_action_pressed("liberer_souris"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -109,6 +113,8 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_pressed("sauter"):
 		velocity.y = JUMP
 	var input := Input.get_vector("gauche", "droite", "avancer", "reculer")
+	if avance_auto:
+		input = Vector2(input.x, -1.0)
 	var dir := wish_direction(input, rotation.y)
 	velocity.x = dir.x * SPEED * facteur_vitesse
 	velocity.z = dir.z * SPEED * facteur_vitesse

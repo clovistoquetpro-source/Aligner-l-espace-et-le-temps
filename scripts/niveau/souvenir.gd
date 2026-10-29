@@ -15,6 +15,8 @@ const TOUCHES := "Z Q S D : se déplacer\nSouris : regarder\nEspace : sauter\nE 
 
 ## Les yeux restent fermés, même sans F (pendant une scène).
 var yeux_forces := false
+## Une ligne de plus dans le panneau des touches, propre au niveau.
+var touches_en_plus := ""
 
 var _file: Array[String] = []
 var _reste_touches := DUREE_TOUCHES + DUREE_REVEIL
@@ -87,7 +89,7 @@ func _process(delta: float) -> void:
 	# Les touches : au début du niveau, et quand la souris est libérée.
 	_reste_touches = maxf(_reste_touches - delta, 0.0)
 	var libre := Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and DisplayServer.get_name() != "headless"
-	_touches.text = TOUCHES + ("\n\nClique pour reprendre." if libre else "")
+	_touches.text = TOUCHES + ("\n" + touches_en_plus if touches_en_plus != "" else "") + ("\n\nClique pour reprendre." if libre else "")
 	_touches.visible = libre or (_reste_touches > 0.0 and _noir.color.a < 0.5)
 	_touches.modulate.a = 1.0 if libre else clampf(_reste_touches, 0.0, 1.0)
 

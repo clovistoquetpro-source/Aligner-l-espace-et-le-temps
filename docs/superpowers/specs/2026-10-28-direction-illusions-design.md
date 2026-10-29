@@ -137,6 +137,14 @@ On y entre par la toile de l'atelier, au salon (« Un atelier… Je ne m'en souv
 
 **La vérité.** Le noir. L'atelier, vide, après. Le casque au portemanteau. « Elle est partie sans son casque. Je ne l'ai pas retenue. » « Mes derniers mots, c'étaient : va-t'en. » Chute dans les toiles, retour dans la maison des étoiles, presque détruite.
 
+**Construit en formes simples** (2026-10-29) : `scenes/dispute.tscn`, par `tools/constructeur_dispute.gd`. Ce qui reste à valider avec clo :
+- On remonte le temps 1,5 fois plus vite qu'il ne passe ; une teinte bleue le montre. Les phrases reviennent à l'envers (« ! ne't-aV »).
+- La porte reste ouverte de 30,6 s à 33 s du souvenir ; sans le casque en main, Thomas ne sort pas (« Il faut que je lui donne son casque. »).
+- La course fait 340 m, avec 24 obstacles (barrières à sauter, murs à éviter, trous à sauter) et 5 repères ; Thomas y court 1,5 fois plus vite qu'il ne marche. La tête roule un peu et le champ de vision respire.
+- La chute : Juliette commence 5 m plus bas ; chaque Espace rapproche de 30 cm, la chute éloigne de 55 cm par seconde ; à 80 cm, Thomas la tient, puis elle glisse. Sans la rattraper, elle disparaît au bout de 9 s.
+- Pendant la vérité, R ne fait plus rien : « On ne remonte pas le temps. »
+- Au retour : les plafonds de l'entrée et de la chambre et le mur sud du salon sont partis. Message « Fin du niveau 4. Bientôt : l'atelier du peintre. »
+
 ### La durée
 
 clo vise 10 à 15 minutes, jusqu'à 20, par niveau : environ 1 h à 1 h 30 pour les 5 niveaux. Le niveau 1 actuel est trop court pour ça : il gagnera des énigmes. Chaque niveau combine plusieurs vraies énigmes et des moments d'histoire.
@@ -160,7 +168,7 @@ On construit chaque niveau entièrement en formes simples (une « greybox ») : 
 
 ## Prochaines étapes
 
-1. clo joue les niveaux 1, 2 et 3 et dit ce qui marche ou pas.
+1. clo joue les niveaux 1 à 4 et dit ce qui marche ou pas.
 2. Confirmer la structure « de souvenir en souvenir » et l'histoire du niveau 2.
 3. Inventer ensemble les énigmes du niveau suivant (la toile qui se contient reste en réserve).
 4. Habiller le niveau 1 quand il sera validé.

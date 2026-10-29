@@ -353,4 +353,27 @@ func test_apres_l_ete_la_maison_s_abime_encore() -> void:
 	T.ok(not n.get_node("Salon/Plafond").visible, "le plafond du salon est parti")
 	T.ok(not n.get_node("Hall/Mur_ouest_1").visible, "un mur de l'entrée aussi")
 	T.ok(n.get_node("Chambre/Armoire").position.y > 1.5, "l'armoire flotte")
-	T.ok(not n.get_node("Salon/Toile_lac").visible, "plus de toile à franchir pour l'instant")
+	T.ok(not n.get_node("Salon/Toile_lac").visible, "la toile du lac est passée")
+	T.ok(n.toile_atelier_ouverte, "la toile de l'atelier mène au niveau 4")
+
+
+func test_la_toile_de_l_atelier_mene_au_niveau_4() -> void:
+	Histoire.chapitre = 4
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	var atelier: Node3D = n.get_node("Salon/Toile_atelier")
+	await _placer(j, Vector3(8.3, 0, 2.2), PI)
+	O.viser(j, atelier.global_position)
+	await _attendre(5)
+	T.ok(n.get_node("Interface/ChuteToiles").en_cours(), "on tombe dans la toile")
+	await _attendre(int((ChuteToiles.DUREE + 0.5) * 60), func() -> bool: return Histoire.scene_demandee != "")
+	T.eq(Histoire.scene_demandee, "res://scenes/dispute.tscn", "vers le soir de pluie")
+
+
+func test_apres_la_pluie_il_ne_reste_presque_rien() -> void:
+	Histoire.chapitre = 5
+	Histoire.corrections = 3
+	var n: Node3D = await _charger()
+	T.ok(not n.get_node("Hall/Plafond").visible, "le plafond de l'entrée est parti")
+	T.ok(not n.get_node("Chambre/Plafond").visible, "celui de la chambre aussi")
+	T.ok(not n.toile_atelier_ouverte, "plus de toile à franchir pour l'instant")

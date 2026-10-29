@@ -42,6 +42,9 @@ var _vers_enfance := false
 ## La toile du lac mène au niveau 3 (au retour de l'enfance).
 var toile_lac_ouverte := false
 var _vers_l_ete := false
+## La toile de l'atelier mène au niveau 4 (au retour de l'été).
+var toile_atelier_ouverte := false
+var _vers_la_pluie := false
 
 @onready var _zone_couloir: Area3D = $Couloir/Zone
 @onready var _boucle: PorteTrompeuse = $Couloir/Boucle
@@ -157,6 +160,10 @@ func _physics_process(delta: float) -> void:
 	if toile_lac_ouverte and not _vers_l_ete and _regarde(lac.global_position, 25.0, 2.5):
 		_vers_l_ete = true
 		_tomber_dans_les_toiles(_joueur)
+	var atelier: Node3D = $Salon/Toile_atelier
+	if toile_atelier_ouverte and not _vers_la_pluie and _regarde(atelier.global_position, 25.0, 2.5):
+		_vers_la_pluie = true
+		_tomber_dans_les_toiles(_joueur)
 
 
 func _dans_le_dos(point: Vector3) -> bool:
@@ -188,6 +195,9 @@ func _atterrir() -> void:
 		return
 	if _vers_l_ete:
 		Histoire.vers("res://scenes/ete.tscn")
+		return
+	if _vers_la_pluie:
+		Histoire.vers("res://scenes/dispute.tscn")
 		return
 	_joueur.teleport(_arrivee.global_transform)
 	_joueur.set_anchor(_arrivee.global_transform)
@@ -231,6 +241,12 @@ func _retour_de_l_enfance() -> void:
 			if m != null:
 				m.visible = false
 		flottants.append_array(["Chambre/Armoire", "Chambre/Table_de_nuit", "Hall/Banc"])
+	if Histoire.chapitre >= 5:
+		for n in ["Hall/Plafond", "Chambre/Plafond", "Chambre/Mur_est_1", "Chambre/Mur_est_2", "Chambre/Mur_est_3", "Chambre/Mur_est_4", "Salon/Mur_sud"]:
+			var m := get_node_or_null(n) as CSGBox3D
+			if m != null:
+				m.visible = false
+		flottants.append_array(["Chambre/Lit_tete", "Chambre/Lit_oreiller", "Hall/Portemanteau"])
 	var i := 0
 	for nom in flottants:
 		var m: CSGBox3D = get_node(nom)
@@ -241,11 +257,17 @@ func _retour_de_l_enfance() -> void:
 		t.tween_property(m, "position:y", m.position.y + 0.25, 2.0 + 0.3 * (i % 6)).set_trans(Tween.TRANS_SINE)
 		t.tween_property(m, "position:y", m.position.y, 2.0 + 0.3 * (i % 6)).set_trans(Tween.TRANS_SINE)
 		i += 1
+	if Histoire.chapitre >= 5:
+		var t := _ouvrir_les_yeux("Il ne reste presque plus rien de la maison.")
+		t.tween_callback(penser.bind("Juliette… Je l'ai repeinte mille fois. Elle tombe toujours."))
+		t.tween_interval(9.0)
+		t.tween_callback(afficher.bind("Fin du niveau 4. Bientôt : l'atelier du peintre.", 8.0))
+		return
 	if Histoire.chapitre >= 4:
+		toile_atelier_ouverte = true
 		var t := _ouvrir_les_yeux("Le plafond… il n'y a plus que les étoiles.")
 		t.tween_callback(penser.bind("Chaque souvenir que je répare défait un peu plus la maison."))
-		t.tween_interval(9.0)
-		t.tween_callback(afficher.bind("Fin du niveau 3. Bientôt : le jeune adulte.", 8.0))
+		t.tween_callback(penser.bind("L'atelier, au salon… Ce soir de pluie."))
 		return
 	toile_lac_ouverte = true
 	$Salon/Toile_lac.visible = true
