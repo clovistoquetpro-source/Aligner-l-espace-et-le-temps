@@ -59,7 +59,7 @@ func test_contenu_du_niveau() -> void:
 	T.eq(O.tous(n, func(x: Node) -> bool: return x is ObjetPerspectif).size(), 1, "le cube")
 	T.ok(O.tous(n, func(x: Node) -> bool: return x is Pensee).size() >= 12, "des pensées partout")
 	T.eq(O.tous(n, func(x: Node) -> bool: return x is BasculeFx).size(), 0, "pas de bascule d'époque")
-	T.ok(ProjectSettings.get_setting("application/run/main_scene") == "res://scenes/illusions.tscn", "F5 lance ce niveau")
+	T.ok(ProjectSettings.get_setting("application/run/main_scene") == "res://scenes/menu.tscn", "F5 lance le menu, puis la cinématique, puis ce niveau")
 
 
 func test_murs_et_sols_ne_se_superposent_pas() -> void:

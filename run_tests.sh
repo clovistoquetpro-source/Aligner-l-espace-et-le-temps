@@ -1,8 +1,8 @@
 #!/bin/sh
 # Lance les tests en mode headless (Linux, macOS ou Git Bash), puis lance le
-# jeu 300 images (le niveau 1), puis l'enfance, l'été, la pluie, l'atelier,
-# la maison et l'Égypte
-# 300 images chacune. Échoue si un test échoue ou si une erreur de script apparaît.
+# jeu 300 images (le menu), puis la cinématique du début, le niveau 1,
+# l'enfance, l'été, la pluie, l'atelier, la maison et l'Égypte, 300 images
+# chacun. Échoue si un test échoue ou si une erreur de script apparaît.
 GODOT="${GODOT:-godot}"
 DIR="$(dirname "$0")"
 LOG="$(mktemp)"
@@ -10,6 +10,8 @@ LOG="$(mktemp)"
 "$GODOT" --headless --path "$DIR" -s res://tests/run_tests.gd >"$LOG" 2>&1
 CODE=$?
 "$GODOT" --headless --path "$DIR" --quit-after 300 >>"$LOG" 2>&1
+"$GODOT" --headless --path "$DIR" --quit-after 300 res://scenes/intro.tscn >>"$LOG" 2>&1
+"$GODOT" --headless --path "$DIR" --quit-after 300 res://scenes/illusions.tscn >>"$LOG" 2>&1
 "$GODOT" --headless --path "$DIR" --quit-after 300 res://scenes/enfance.tscn >>"$LOG" 2>&1
 "$GODOT" --headless --path "$DIR" --quit-after 300 res://scenes/ete.tscn >>"$LOG" 2>&1
 "$GODOT" --headless --path "$DIR" --quit-after 300 res://scenes/dispute.tscn >>"$LOG" 2>&1

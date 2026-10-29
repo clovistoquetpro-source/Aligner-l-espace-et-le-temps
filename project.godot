@@ -3,7 +3,7 @@ config_version=5
 [application]
 
 config/name="Aligner l'espace et le temps"
-run/main_scene="res://scenes/illusions.tscn"
+run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -11,6 +11,7 @@ config/icon="res://icon.svg"
 
 Temps="*res://scripts/time/temps.gd"
 Histoire="*res://scripts/histoire/histoire.gd"
+Pause="*res://scripts/interface/pause.gd"
 
 [display]
 

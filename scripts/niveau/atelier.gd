@@ -559,3 +559,6 @@ func finir() -> void:
 		_generique.visible = true
 		_generique.modulate.a = 0.0)
 	t.tween_property(_generique, "modulate:a", 1.0, 2.0)
+	# Puis le menu principal.
+	t.tween_interval(8.0)
+	t.tween_callback(Histoire.vers.bind("res://scenes/menu.tscn"))

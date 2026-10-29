@@ -10,7 +10,7 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 2. Récupère le dépôt avec [GitHub Desktop](https://desktop.github.com/) : **File → Clone repository**, puis `Aligner-l-espace-et-le-temps`. Ensuite, à chaque nouveauté, clique sur **Fetch origin**, puis sur **Pull origin** s'il apparaît.
    Pour essayer une nouveauté pas encore acceptée (une pull request), choisis sa branche dans le menu **Current branch** en haut (par exemple `prototype-maison`).
 3. Dans Godot, clique sur **Importer**, choisis le fichier `project.godot` du dossier, puis **Importer et modifier**.
-4. Appuie sur **F5** pour jouer. F5 lance le niveau 1 de la nouvelle direction, en formes simples (voir plus bas).
+4. Appuie sur **F5** pour jouer. F5 ouvre le menu principal : **Nouvelle partie** lance la cinématique du début (Espace pour la passer), puis le niveau 1, en formes simples (voir plus bas). La partie est sauvegardée à chaque changement de niveau : **Continuer** reprend au début du dernier niveau commencé.
 
 ## Touches
 
@@ -24,11 +24,16 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 | Basculer d'époque | Tab ou clic droit | Tab ou clic droit |
 | Fermer les yeux (en restant appuyé) | F | F |
 | Remonter le temps (en restant appuyé, niveau 4, aussi pendant la course) | R | R |
-| Libérer la souris | Échap | Échap |
+| Pause (reprendre, sensibilité de la souris, plein écran, les touches, retour au menu, quitter) | Échap | Échap |
 
 ## Tests
 
 `./run_tests.sh` (il faut la commande `godot` dans le PATH, ou la variable `GODOT`). Pour ne lancer qu'une partie des tests : `TESTS=dispute godot --headless --path . -s res://tests/run_tests.gd`.
+
+## La cinématique du début
+
+`scenes/intro.tscn`, en formes simples : la maison sur Terre, un peintre de dos qui repeint ses souvenirs, la maison qui s'arrache du sol jusque dans les étoiles, puis le titre. Elle est construite par `tools/constructeur_intro.gd` :
+`godot --headless --path . -s res://tools/construire_intro.gd`.
 
 ## Le niveau 1 : la maison dans les étoiles
 

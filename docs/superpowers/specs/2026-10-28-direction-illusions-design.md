@@ -198,12 +198,23 @@ On construit chaque niveau entièrement en formes simples (une « greybox ») : 
 
 1. clo joue tout le jeu, du niveau 1 au générique, et dit ce qui marche ou pas (difficulté, durée, clarté, émotion).
 2. Mesurer la durée réelle de chaque niveau (objectif : 10 à 15 minutes, jusqu'à 20).
-3. Écrire la cinématique du début, qui pose le contexte de toute l'histoire.
-4. Habiller les niveaux validés : textures, détails, personnages, puis le son.
+3. La cinématique du début est faite en formes simples (voir plus bas) : à valider.
+4. Plus tard (pas maintenant, choix de clo) : habiller les niveaux validés (textures, détails, personnages, avec des packs gratuits que clo fournira), puis le son.
+
+## Le menu, la sauvegarde et la cinématique du début (2026-10-29)
+
+- **Le menu principal** (`scenes/menu.tscn`, ce que lance F5) : le titre sur un ciel d'étoiles, **Continuer** (s'il y a une partie en cours), **Nouvelle partie** (avec une partie en cours, il faut confirmer : elle sera effacée), **Quitter**.
+- **La sauvegarde** (`user://sauvegarde.cfg`) : le chapitre, les corrections et le niveau en cours, à chaque changement de niveau. « Continuer » reprend au début de ce niveau. Après le générique, on revient au menu ; un jeu fini ne se continue pas.
+- **La pause** (Échap, partout sauf au menu et pendant la cinématique) : reprendre, la sensibilité de la souris, le plein écran (gardés dans `user://reglages.cfg`), les touches, retour au menu, quitter.
+- **La cinématique du début** (`scenes/intro.tscn`, environ 45 s, Espace, Échap, E ou un clic pour la passer). Sans son, comme le reste du prototype.
+  1. La maison sur Terre, son jardin, un ciel bleu : « Avant, la maison était sur Terre. »
+  2. Un atelier sombre ; un vieux peintre, toujours de dos (on ne doit pas deviner que c'est Thomas), peint la maison : « Un peintre repeignait ses souvenirs. Encore, et encore. » Sur sa toile, le ciel devient la nuit, avec des étoiles : « Un jour, il a peint la maison au milieu des étoiles. »
+  3. Le soir, sur Terre : le sol tremble, la maison s'arrache avec son morceau de terre et monte ; le ciel devient les étoiles.
+  4. La maison flotte dans les étoiles, la caméra tourne autour d'elle ; le titre. Puis le niveau 1 : « Quel drôle de rêve… »
 
 ## Le niveau 1 en formes simples (2026-10-28)
 
-`scenes/illusions.tscn`, construit par `tools/constructeur_illusions.gd`. F5 le lance. Sans son. Choix de clo : le joueur veut sortir de chez lui ; l'histoire passe par les toiles et ses pensées ; le miroir le montre plus vieux ; les énigmes de la fin sont la toile qu'on tourne et la perspective forcée.
+`scenes/illusions.tscn`, construit par `tools/constructeur_illusions.gd`. Dans le jeu, il vient après le menu et la cinématique du début. Sans son. Choix de clo : le joueur veut sortir de chez lui ; l'histoire passe par les toiles et ses pensées ; le miroir le montre plus vieux ; les énigmes de la fin sont la toile qu'on tourne et la perspective forcée.
 
 1. **La chambre** : on se réveille (écran noir qui s'ouvre). « Quel drôle de rêve… » Au-dessus du lit, une toile montre la maison dans les étoiles ; par la fenêtre, les étoiles.
 2. **L'entrée** : une fenêtre sur le vide (« La maison flotte… »), et au nord le couloir de la porte d'entrée, éclairée au fond. L'objectif : sortir.

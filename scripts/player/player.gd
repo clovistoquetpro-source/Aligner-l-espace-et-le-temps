@@ -78,11 +78,10 @@ func poser() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		var sens := MOUSE_SENS * Pause.sensibilite
 		if not avance_auto:
-			rotate_y(-event.relative.x * MOUSE_SENS)
-		head.rotation.x = clampf(head.rotation.x - event.relative.y * MOUSE_SENS, deg_to_rad(-89), deg_to_rad(89))
-	elif event.is_action_pressed("liberer_souris"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			rotate_y(-event.relative.x * sens)
+		head.rotation.x = clampf(head.rotation.x - event.relative.y * sens, deg_to_rad(-89), deg_to_rad(89))
 	elif event is InputEventMouseButton and event.pressed and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		get_viewport().set_input_as_handled()
