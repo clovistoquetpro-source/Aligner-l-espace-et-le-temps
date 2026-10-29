@@ -93,28 +93,78 @@ func test_au_coucher_du_soleil_la_journee_recommence() -> void:
 	n.temps = Ete.DUREE_JOUR - 0.05
 	await _attendre(int((Ete.DUREE_REPEINT * 2 + 0.3) * 60))
 	T.eq(n.journee, 2, "le deuxième jour")
-	T.ok(n.temps < 3.0, "le jour recommence (%.1f s)" % n.temps)
+	T.ok(n.temps < 4.0, "le jour recommence (%.1f s)" % n.temps)
 	T.ok(j.global_position.distance_to(Vector3(-8, 0.5, -3.6)) < 0.5, "au ponton (%s)" % j.global_position)
-	T.ok(n.get_node("Pont/Reflet").visible, "le peintre a repeint le pont… dans le reflet")
+	T.ok(not n.get_node("Pont/Reflet").visible, "tant que le tableau n'a jamais été fini, le pont reste cassé")
+	T.proche(n.get_node("Interface/Repeint").anchor_right, 1.0, "le coup de pinceau est passé")
+	T.eq(n.get_node("Interface/Repeint").color.a, 0.0, "et l'écran est de nouveau clair")
 
 
-func test_on_finit_le_tableau_au_coucher_face_au_soleil() -> void:
+func test_le_premier_jour_juliette_donne_une_fleur_qui_reste() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	var fleur: RigidBody3D = n.get_node("Juliette/Fleur")
+	T.ok(not fleur.visible, "pas encore de fleur")
+	n.temps = Ete.PAROLES - 0.05
+	await _attendre(5)
+	T.ok(j.held == fleur and fleur.visible, "elle lui met une fleur dans la main")
+	n.temps = Ete.DUREE_JOUR - 0.05
+	await _attendre(int((Ete.DUREE_REPEINT * 2 + 0.3) * 60))
+	T.eq(n.journee, 2, "le deuxième jour")
+	T.ok(j.held == fleur, "la fleur est encore dans sa main")
+	T.ok(n._file.has("« Sa fleur… Je l'ai encore dans la main. »") or n.get_node("Interface/Message").text.contains("Sa fleur"), "il le remarque")
+	j.poser()
+	n.temps = Ete.PAROLES - 0.05
+	await _attendre(5)
+	T.ok(j.held == null, "les jours suivants, elle ne la redonne pas")
+
+
+func test_la_fleur_n_est_pas_donnee_si_on_tient_le_tableau() -> void:
 	var n: Node3D = await _charger()
 	var j: Player = n.get_node("Player")
 	var t := _prendre_le_tableau(n)
-	var soleil := j.camera.global_position + Ete.direction_soleil(Ete.COUCHER + 5.0) * 10.0
-	O.viser(j, soleil)
+	n.temps = Ete.PAROLES - 0.05
+	await _attendre(5)
+	T.ok(j.held == t, "il garde le tableau")
+	T.ok(not n.get_node("Juliette/Fleur").visible, "pas de fleur")
+
+
+func test_au_coucher_sur_le_ponton_le_ciel_se_peint_tout_seul() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	var t := _prendre_le_tableau(n)
 	n.temps = 50.0
-	await _attendre(5)
-	T.ok(not n.tableau_fini, "l'après-midi, la lumière n'est pas la bonne")
-	n.temps = Ete.COUCHER + 5.0
-	O.viser(j, j.camera.global_position + Vector3(1, 0, 0))
-	await _attendre(5)
-	T.ok(not n.tableau_fini, "il faut regarder le soleil")
-	O.viser(j, soleil)
-	await _attendre(5)
-	T.ok(n.tableau_fini, "au coucher, face au soleil, le ciel se peint")
-	T.ok(t.get_node("Peinture/Ciel").visible, "le ciel est sur le tableau")
+	await _attendre(30)
+	T.ok(n.peinture == 0.0 and not n.tableau_fini, "l'après-midi, rien ne se peint")
+	n.temps = Ete.COUCHER + 1.0
+	await _attendre(60)
+	T.ok(n.peinture > 0.1 and not n.tableau_fini, "au coucher, le ciel commence à se peindre (%.2f)" % n.peinture)
+	T.ok(t.get_node("Peinture/Ciel").visible, "on le voit apparaître")
+	await _attendre(int(Ete.PEINDRE * 60))
+	T.ok(n.tableau_fini, "puis il est fini")
+	T.ok(n.tableau_deja_fini, "le peintre s'en souviendra")
+
+
+func test_loin_du_ponton_le_ciel_ne_se_peint_pas() -> void:
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	_prendre_le_tableau(n)
+	await _placer(j, Vector3(16, 0.3, 6), 0.0)
+	n.temps = Ete.COUCHER + 1.0
+	await _attendre(int((Ete.PEINDRE + 1.0) * 60))
+	T.ok(not n.tableau_fini and n.peinture == 0.0, "il faut être au bout du ponton")
+	T.ok(n._dit.has("loin_du_ponton"), "et Thomas le pense")
+
+
+func test_le_pont_n_est_repeint_qu_apres_le_tableau() -> void:
+	var n: Node3D = await _charger()
+	_prendre_le_tableau(n)
+	n.finir_le_tableau()
+	T.ok(not n.get_node("Pont/Reflet").visible, "le jour même, le pont est encore cassé")
+	n.temps = Ete.DUREE_JOUR - 0.05
+	await _attendre(int((Ete.DUREE_REPEINT * 2 + 0.3) * 60))
+	T.ok(n.pont_repeint and n.get_node("Pont/Reflet").visible, "le lendemain, le pont brille dans l'eau")
+	T.ok(n.get_node("Pont/PenseeBord").active, "au bord du trou, Thomas comprendra")
 
 
 func test_le_tableau_tenu_passe_dans_la_journee_suivante() -> void:
@@ -183,6 +233,7 @@ func test_le_premier_jour_on_tombe_dans_le_trou() -> void:
 func test_le_pont_du_reflet_porte_si_on_regarde_l_eau() -> void:
 	var n: Node3D = await _charger()
 	n.journee = 2
+	n.tableau_deja_fini = true
 	n._commencer_la_journee()
 	var j := await _au_bout_du_pont(n)
 	# On traverse en gardant les yeux sur le reflet des planches.
@@ -200,6 +251,7 @@ func test_le_pont_du_reflet_porte_si_on_regarde_l_eau() -> void:
 func test_lever_les_yeux_sur_le_pont_du_reflet_fait_tomber() -> void:
 	var n: Node3D = await _charger()
 	n.journee = 2
+	n.tableau_deja_fini = true
 	n._commencer_la_journee()
 	var j := await _au_bout_du_pont(n)
 	Input.action_press("avancer")
@@ -268,3 +320,22 @@ func test_la_mobylette_suit_la_journee_meme_si_on_saute_dans_le_temps() -> void:
 	n.temps = Ete.DEPART + 7.9
 	await _attendre(2)
 	T.ok(mob.global_position.x > 30.0, "repartie vers l'est (%s)" % mob.global_position)
+
+
+func test_tomber_du_pont_du_reflet_explique_pourquoi() -> void:
+	var n: Node3D = await _charger()
+	n.journee = 2
+	n.tableau_deja_fini = true
+	n._commencer_la_journee()
+	var j := await _au_bout_du_pont(n)
+	Input.action_press("avancer")
+	for i in 240:
+		if j.global_position.z > -10.0:
+			O.viser(j, Vector3(4.0, 0, j.global_position.z - 2.5))
+		else:
+			O.viser(j, j.camera.global_position + Vector3(0, 0, -10))
+		await tree.physics_frame
+		if n._dit.has("leve_les_yeux"):
+			break
+	Input.action_release("avancer")
+	T.ok(n._dit.has("leve_les_yeux"), "« J'ai levé les yeux… Le pont n'est que dans l'eau. »")

@@ -102,17 +102,18 @@ Choix de clo : la rencontre au bord du lac, l'été (lumière dorée, chaleur) ;
 
 **La journée en boucle.** Une journée dure 2 minutes, de l'après-midi doré au coucher du soleil. Au coucher du soleil, si le moment parfait n'a pas eu lieu, le peintre repeint tout et la journée recommence au ponton (« Encore ce jour-là… »). Chaque nouvelle journée, le peintre change un détail pour rendre le moment plus parfait. Une règle : ce que Thomas tient dans ses mains au moment où tout est repeint passe dans la journée suivante.
 
-**Les énigmes.**
-1. **Le tableau à finir** : le ciel du tableau est blanc. Il ne se finit qu'au coucher du soleil, depuis le ponton, en le tenant face au soleil. Mais à ce moment-là, il est trop tard pour aller sur l'île : il faut garder le tableau dans les mains jusqu'à ce que la journée se repeigne, pour l'avoir fini dès le début de la suivante.
-2. **Le pont cassé** : le pont vers l'île a perdu ses planches au milieu (6 m de vide). Nager, c'est possible, mais l'eau trempe le tableau. Dès la deuxième journée, le peintre a repeint les planches… seulement dans le reflet du lac. Elles ne portent Thomas que s'il regarde leur reflet dans l'eau en avançant ; s'il lève les yeux, il tombe à l'eau.
-3. **Le rendez-vous** : être sur l'île au coucher du soleil, devant Juliette, avec le tableau fini et sec. Trop tôt, elle attend le coucher du soleil ; trempé, elle rit (« Tu es venu à la nage ?! »), mais le peintre refuse : « Non… Ça devait être parfait. »
+**Les énigmes : une règle nouvelle par journée** (refait après le test de clo, qui trouvait le niveau trop dur à comprendre : trois règles cachées, aucune montrée).
+1. **Jour 1, la boucle.** En repartant, Juliette met une fleur sauvage dans la main de Thomas (s'il a les mains libres). Au coucher du soleil, un grand coup de pinceau traverse l'écran et la journée recommence : « Le même jour… Il recommence. » Thomas a encore la fleur : « Sa fleur… Je l'ai encore dans la main. » La règle est apprise sans explication.
+2. **Le tableau à finir.** Juliette le dit : « Il manque le ciel. Peins-le ce soir, quand le soleil se couche. Et viens me l'offrir sur l'île. » Au coucher, sur le ponton, le tableau en main, le ciel se peint tout seul en 4 secondes (pas besoin de viser le soleil). Ailleurs : « Il faudrait que je sois au bout du ponton. » Fini : « Le ciel est fini… Mais elle m'attend déjà sur l'île. » Avec la leçon de la fleur, il faut garder le tableau jusqu'au lendemain : « Il est fini. Cette fois, j'ai toute la journée. »
+3. **Le pont cassé.** Nager trempe le tableau. Le lendemain du premier tableau fini, le peintre a repeint les planches du milieu, seulement dans le reflet, où elles brillent : « Le pont… On dirait qu'il brille, dans l'eau. » Au bord du trou : « Le pont est entier, dans l'eau. Si je ne regarde que l'eau… » Les planches portent Thomas tant qu'il regarde vers l'eau ; s'il lève les yeux, il tombe : « J'ai levé les yeux… Le pont n'est que dans l'eau. »
+4. **Le rendez-vous** : être sur l'île au coucher du soleil, devant Juliette, avec le tableau fini et sec. Trop tôt, elle attend le coucher du soleil ; trempé, elle rit (« Tu es venu à la nage ?! »), mais le peintre refuse : « Non… Ça devait être parfait. »
+5. **Les repères du temps** : « Le soleil commence à descendre. » (1 min), « Bientôt le soir. Elle m'attend sur l'île. » (1 min 20), « Le soleil se couche. » (1 min 35).
 
 **La correction et la vérité.** Le moment parfait a lieu : le soleil se fige, des fleurs poussent partout, Juliette dit « C'est… parfait », puis elle ne bouge plus, plate comme une toile. L'image se fissure : « Ce n'est pas vrai. Ce soir-là, je suis arrivé trop tard. » Le vrai souvenir se rejoue : la nuit, Thomas dans l'eau près de l'île, Juliette qui rit sur la rive. Quand il la rejoint : « Et je l'ai repeint… mille fois. » Chute dans les toiles, retour dans la maison des étoiles, encore plus abîmée.
 
 **Construit en formes simples** (2026-10-28) : `scenes/ete.tscn`, par `tools/constructeur_ete.gd`. Ce qui reste à valider avec clo :
 - La durée d'une journée (2 min, coucher du soleil à partir de 1 min 35) et le temps des événements (Juliette arrive à 3 s, parle à 12 s, repart à 24 s, est sur l'île à 40 s).
-- Pour finir le tableau : être sur le ponton, au coucher, le tableau en main, et regarder le soleil (à moins de 20°).
-- Pour le pont du reflet : regarder l'eau à moins de 1,5 m du trou ; dès qu'on lève les yeux, les planches ne portent plus.
+- Le ciel du tableau se peint en 4 s ; le pont du reflet porte Thomas s'il regarde vers l'eau (le regard descend d'au moins 17°), au bord du trou ou dedans.
 - À partir de la 3e journée, Juliette ajoute « Ne sois pas en retard, cette fois. »
 - Au retour dans la maison : le plafond du salon et un mur de l'entrée sont partis, la chambre et l'entrée flottent. Message « Fin du niveau 3. Bientôt : le jeune adulte. »
 

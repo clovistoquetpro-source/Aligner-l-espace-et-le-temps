@@ -24,7 +24,7 @@ const COULEURS := {
 	"soleil_peint": "e76f51", "chevalet": "6f4518", "mob": "e63946", "mob_selle": "2b2d42",
 	"roue": "222222", "robe": "f6bd60", "peau": "f2c6a0", "cheveux": "7f4f24", "fleur_1": "ff006e",
 	"fleur_2": "ffbe0b", "fleur_3": "fb5607", "fleur_4": "8338ec", "tige": "386641", "chemise": "457b9d",
-	"porte": "7a5c45", "poignee": "d4af37", "cadre": "b8b8c0",
+	"porte": "7a5c45", "poignee": "d4af37", "cadre": "b8b8c0", "planche_vive": "ffd166",
 }
 
 ## Les planches du pont : le pont va de la rive (z = 0) à l'île (z = -22),
@@ -66,7 +66,7 @@ func _couleurs() -> Dictionary:
 
 
 func _lumineux() -> Array:
-	return ["soleil_peint"]
+	return ["soleil_peint", "planche_vive"]
 
 
 ## Un après-midi d'été ; le niveau fait descendre le soleil et rougir le ciel.
@@ -166,7 +166,7 @@ func _lac() -> void:
 	_boite(g, "Fond", Vector3(0, -1.55, -20), Vector3(64, 0.5, 40), "fond")
 	var eau := Miroir.new()
 	eau.taille = Vector2(64, 40)
-	eau.definition = 12
+	eau.definition = 16
 	eau.teinte = Color("9fc9e8")
 	eau.distance_vue = 200.0
 	eau.position = Vector3(0, 0.0, -20)
@@ -235,11 +235,16 @@ func _pont() -> void:
 	# Les planches du reflet.
 	var reflet := Node3D.new()
 	_ajouter(g, reflet, "Reflet")
+	# Elles brillent fort : la teinte bleue de l'eau ne doit pas les éteindre.
+	var vive := Style.materiau(Color(COULEURS["planche_vive"]), true)
+	vive.emission_energy_multiplier = 3.0
 	var n := 10
 	for k in n:
 		var z := TROU.x + (TROU.y - TROU.x) * (k + 0.5) / n
-		var p := _boite(reflet, "Planche_%d" % k, Vector3(PONT_X, PONT_Y - 0.1, z), Vector3(2.0, 0.2, 0.55), "planche", false)
+		# Des couleurs vives : on les remarque dans l'eau, depuis la rive.
+		var p := _boite(reflet, "Planche_%d" % k, Vector3(PONT_X, PONT_Y - 0.1, z), Vector3(2.0, 0.2, 0.55), "planche_vive", false)
 		p.layers = Miroir.COUCHE_REFLET
+		p.material = vive
 	var corps := StaticBody3D.new()
 	corps.position = Vector3(PONT_X, PONT_Y - 0.1, (TROU.x + TROU.y) / 2)
 	_ajouter(g, corps, "Solide")
@@ -253,6 +258,14 @@ func _pont() -> void:
 	dans_l_eau.angle_max_deg = 20.0
 	dans_l_eau.active = false
 	_ajouter(g, dans_l_eau, "PenseeReflet")
+	# Au bord du trou, quand le pont est repeint dans le reflet.
+	var bord := Pensee.new()
+	bord.position = Vector3(PONT_X, PONT_Y + 0.5, TROU.y + 0.8)
+	bord.texte = "Le pont est entier, dans l'eau. Si je ne regarde que l'eau…"
+	bord.regard = false
+	bord.distance = 1.8
+	bord.active = false
+	_ajouter(g, bord, "PenseeBord")
 
 
 ## L'île : une butte, une pente pour sortir de l'eau au sud, le grand arbre,
@@ -303,6 +316,17 @@ func _juliette() -> void:
 		mr.rotation.z = PI / 2
 	var assise := _silhouette(mob, "Juliette", true)
 	assise.position = Vector3(0, 0.35, 0.15)
+	# La fleur sauvage qu'elle donne à Thomas, le premier jour.
+	var fleur := RigidBody3D.new()
+	fleur.position = Vector3(-6.5, 1.0, 2.0)
+	fleur.freeze = true
+	fleur.continuous_cd = true
+	fleur.visible = false
+	fleur.collision_layer = 0
+	_ajouter(g, fleur, "Fleur")
+	_forme(fleur, "CollisionShape3D", _boite_forme(Vector3(0.12, 0.4, 0.12)))
+	_boite(fleur, "Tige", Vector3(0, -0.05, 0), Vector3(0.02, 0.3, 0.02), "tige", false)
+	_boite(fleur, "Fleur", Vector3(0, 0.13, 0), Vector3(0.12, 0.06, 0.12), "fleur_1", false)
 
 
 func _silhouette(parent: Node3D, nom: String, assise: bool) -> Node3D:
