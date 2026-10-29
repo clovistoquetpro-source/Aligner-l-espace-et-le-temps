@@ -22,6 +22,8 @@ const PENSEES_TENTATIVES := ["Encore une fois.", "Elle tombe toujours.", "Mille 
 const PENSEES_ASPIRE := ["La toile m'a aspiré… Toutes les mêmes. La même route sous la pluie.", "Je ne peux plus les regarder.", "Encore cette route…"]
 ## Où se tenir, au cœur, face à la dernière toile.
 const COEUR_FACE := Vector3(6, 0, -18.5)
+## La caméra du premier plan, devant la maison, dehors.
+const POINT_PORTE := Vector3(1003.5, 1.6, -1.0)
 ## Le pinceau, dans la main droite, en bas de l'écran.
 var tenue_pinceau := Transform3D(Basis.from_euler(Vector3(-0.9, 0.3, 0.2)), Vector3(0.26, -0.3, -0.55))
 
@@ -44,7 +46,6 @@ var _vent := 1.0
 @onready var _approche: Area3D = $Antichambre/Approche
 @onready var _chevalet: Support = $Coeur/Chevalet
 @onready var _sortie: Area3D = $Coeur/Sortie
-@onready var _sommet: Area3D = $Dehors/Sommet
 
 
 func _ready() -> void:
@@ -55,7 +56,6 @@ func _ready() -> void:
 	_approche.body_entered.connect(_sur_approche)
 	_chevalet.utilise.connect(_sur_chevalet)
 	_sortie.body_entered.connect(_sur_sortie)
-	_sommet.body_entered.connect(_sur_sommet)
 	for p in find_children("*", "Passant", true, false):
 		(p as Passant).salue.connect(_sur_salut)
 	_ouvrir_les_yeux("L'atelier… Le vrai, cette fois.")
@@ -285,7 +285,7 @@ func poser_le_pinceau() -> void:
 		penser("La porte d'entrée… Elle est là."))
 
 
-# --- Dehors ------------------------------------------------------------------
+# --- Dehors : la cinématique -------------------------------------------------
 
 
 func _sur_sortie(corps: Node3D) -> void:
@@ -293,10 +293,14 @@ func _sur_sortie(corps: Node3D) -> void:
 		sortir()
 
 
-## Dehors : la nature en couleurs, un soleil, un ciel bleu.
+## Dehors : la nature en couleurs, un soleil, un ciel bleu. Toute la scène
+## est une cinématique : on regarde Thomas, vieux, sortir de chez lui,
+## marcher, saluer les passants et monter la colline.
 func sortir() -> void:
 	etat = Etat.DEHORS
+	_joueur.velocity = Vector3.ZERO
 	_joueur.set_physics_process(false)
+	_joueur.set_process_unhandled_input(false)
 	var t := create_tween()
 	t.tween_property(_blanc, "color:a", 1.0, 1.0)
 	t.tween_callback(func() -> void:
@@ -321,14 +325,100 @@ func sortir() -> void:
 		for g in ["Antichambre", "Labyrinthe", "Coeur"]:
 			get_node(g).visible = false
 		$Dehors.visible = true
-		noir_des_yeux = 1.0
-		_joueur.facteur_vitesse = VITESSE_VIEUX
-		var arrivee: Marker3D = $Dehors/Arrivee
-		_joueur.teleport(arrivee.global_transform)
-		_joueur.set_anchor(arrivee.global_transform)
-		_joueur.head.rotation.x = 0.0
-		_joueur.set_physics_process(true))
+		noir_des_yeux = 0.0
+		cinematique = true
+		_cinema.current = true
+		_cinematique())
 	t.tween_property(_blanc, "color:a", 0.0, 2.5)
+
+
+## Les étapes de la cinématique : [plan, point où marcher, arrêt (s), passant
+## à saluer]. Les plans : « porte » (de loin, devant la maison), « suivi » (de
+## côté, derrière lui), « face » (face à lui, pendant qu'il salue),
+## « colline » (derrière lui, puis la caméra s'élève).
+const ETAPES := [
+	["porte", Vector3(0, 0, 3.0), 1.5, ""],
+	["suivi", Vector3(2.0, 0, -8.0), 0.0, ""],
+	["face", Vector3(2.6, 0, -11.5), 5.0, "Jardiniere"],
+	["suivi", Vector3(-1.5, 0, -20.0), 0.0, ""],
+	["face", Vector3(-3.0, 0, -27.5), 4.5, "Promeneur"],
+	["suivi", Vector3(0.0, 0, -36.0), 0.0, ""],
+	["face", Vector3(1.8, 0, -41.5), 5.0, "Enfant"],
+	["suivi", Vector3(0.0, 0, -51.5), 0.0, ""],
+	["colline", Vector3(0.0, 3.0, -64.0), 0.0, ""],
+	["colline", Vector3(0.0, 3.0, -67.0), 0.0, ""],
+]
+const PAS := 1.4
+## Le milieu du chemin, dehors.
+const DEHORS_X := 1000.0
+
+var _plan := "porte"
+var _passant: Node3D
+var _cinema_cible := Vector3.ZERO
+var _grue := 0.0
+
+@onready var _thomas: Node3D = $Dehors/Thomas
+@onready var _cinema: Camera3D = $Dehors/Camera
+
+
+func _cinematique() -> void:
+	penser("Dehors… Je n'étais pas sorti depuis si longtemps.")
+	var t := create_tween()
+	t.tween_interval(1.5)
+	var depart := _thomas.position
+	for e in ETAPES:
+		var vers: Vector3 = e[1]
+		var duree := depart.distance_to(vers) / PAS
+		t.tween_callback(func() -> void:
+			_plan = e[0]
+			var d := vers - _thomas.position
+			_thomas.rotation.y = atan2(-d.x, -d.z))
+		t.tween_property(_thomas, "position", vers, duree)
+		if e[3] != "":
+			var passant: Passant = get_node("Dehors/" + e[3])
+			t.tween_callback(func() -> void:
+				var d := passant.position - _thomas.position
+				_thomas.rotation.y = atan2(-d.x, -d.z)
+				_passant = passant
+				passant.activer())
+		if e[2] > 0.0:
+			t.tween_interval(e[2])
+		depart = vers
+	t.tween_callback(finir)
+
+
+func _process(delta: float) -> void:
+	super._process(delta)
+	if etat != Etat.DEHORS and etat != Etat.GENERIQUE:
+		return
+	# Thomas marche : un léger balancement.
+	_thomas.get_node("Blouse").position.y = 1.1 + 0.03 * absf(sin(_temps * 5.0))
+	var tete := _thomas.global_position + Vector3(0, 1.5, 0)
+	var devant := -_thomas.global_basis.z
+	var cote := _thomas.global_basis.x
+	var voulu := tete
+	match _plan:
+		"porte":
+			voulu = POINT_PORTE
+		"suivi":
+			voulu = tete + cote * 2.6 - devant * 3.2 + Vector3(0, 0.4, 0)
+		"face":
+			# De côté, pour voir Thomas et le passant ensemble, du côté du
+			# chemin.
+			var autre := _passant.global_position if _passant != null else tete + devant * 2.0
+			var milieu := (tete + autre + Vector3(0, 1.4, 0)) / 2.0
+			var travers := (autre - _thomas.global_position).cross(Vector3.UP).normalized()
+			if absf((milieu + travers).x - DEHORS_X) > absf((milieu - travers).x - DEHORS_X):
+				travers = -travers
+			voulu = milieu + travers * 4.5 + Vector3(0, 0.3, 0)
+			tete = milieu
+		"colline":
+			_grue = minf(_grue + delta * 0.6, 12.0) if etat == Etat.GENERIQUE else _grue
+			voulu = tete - devant * 5.0 + cote * 1.5 + Vector3(0, 1.2 + _grue, _grue * 0.8)
+	_cinema.global_position = _cinema.global_position.lerp(voulu, clampf(delta * 1.5, 0.0, 1.0))
+	_cinema_cible = _cinema_cible.lerp(tete if _grue < 1.0 else tete + Vector3(0, 0, -15.0), clampf(delta * 2.0, 0.0, 1.0))
+	if _cinema.global_position.distance_to(_cinema_cible) > 0.1:
+		_cinema.look_at(_cinema_cible, Vector3.UP)
 
 
 func _sur_salut(p: Passant) -> void:
@@ -338,6 +428,8 @@ func _sur_salut(p: Passant) -> void:
 		dire(p.nom, r)
 	if saluts == 1:
 		penser("J'ai osé. Comme elle aurait voulu.")
+	elif p.name == "Enfant":
+		penser("Un cerf-volant… comme ceux que je regardais, du grenier.")
 
 
 func _animer_les_papillons() -> void:
@@ -352,12 +444,8 @@ func _animer_les_papillons() -> void:
 		i += 1
 
 
-func _sur_sommet(corps: Node3D) -> void:
-	if corps is Player and etat == Etat.DEHORS:
-		finir()
-
-
-## Au sommet de la colline, le vent se lève. Puis le générique.
+## Au sommet de la colline, le vent se lève, la caméra s'élève. Puis le
+## générique.
 func finir() -> void:
 	etat = Etat.GENERIQUE
 	Histoire.chapitre = maxi(Histoire.chapitre, 6)

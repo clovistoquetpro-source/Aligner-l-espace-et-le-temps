@@ -431,5 +431,14 @@ func _dehors() -> void:
 			cv.rotation.z = PI / 4
 	_lampe(g, "Soleil_doux", DEHORS + Vector3(0, 30, -30), 120.0, false, 0.6)
 	_marque(g, "Arrivee", DEHORS + Vector3(0, 0, 6), 0.0)
-	_pensee(g, "PenseeArrivee", DEHORS + Vector3(0, 1.0, 6), "Dehors… Je n'étais pas sorti depuis si longtemps.", 2.0, 0.0, false)
-	_pensee(g, "PenseeJardiniere", DEHORS + Vector3(4.5, 1.6, -12), "Je pourrais lui dire bonjour…", 6.0, 20.0)
+	# La porte de la maison, d'où sort Thomas.
+	_porte_dessinee(g, "Porte", DEHORS + Vector3(0, 0, 8.0), PI)
+	_boite(g, "Facade", Vector3(0, 2.0, 8.4), Vector3(8.0, 4.0, 0.6), "mur", false)
+	# La cinématique : Thomas, vieux (le peintre, sans pinceau), et sa caméra.
+	var thomas := _peintre(g, "Thomas")
+	thomas.position = Vector3(0, 0, 7.2)
+	thomas.get_node("Pinceau").visible = false
+	var camera := Camera3D.new()
+	camera.position = Vector3(4.0, 1.7, 12.0)
+	camera.fov = 65.0
+	_ajouter(g, camera, "Camera")

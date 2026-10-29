@@ -14,6 +14,7 @@ var _niveau: Node3D
 func nettoyer() -> void:
 	for a in ["avancer", "reculer", "gauche", "droite", "sauter", "fermer_les_yeux"]:
 		Input.action_release(a)
+	Engine.time_scale = 1.0
 	if is_instance_valid(_niveau):
 		_niveau.free()
 	Temps.reinitialiser()
@@ -165,25 +166,17 @@ func test_poser_le_pinceau_puis_dehors_puis_la_fin() -> void:
 	T.ok(not n.get_node("Labyrinthe/Toile_0").visible, "les toiles sont tombées")
 	await _attendre(5)
 	await _placer(j, Vector3(3.0, 0, -24.0), 0.0)
-	await _attendre(200, func() -> bool: return n.etat == Atelier.Etat.DEHORS and j.global_position.x > 900.0)
-	await _attendre(5)
+	await _attendre(200, func() -> bool: return n.etat == Atelier.Etat.DEHORS)
 	T.eq(n.etat, Atelier.Etat.DEHORS, "dehors")
-	T.ok(j.global_position.distance_to(DEHORS + Vector3(0, 0, 6)) < 1.0, "sur le chemin (%s)" % j.global_position)
+	await _attendre(150, func() -> bool: return n.get_node("Dehors").visible)
 	T.ok(n.get_node("Dehors").visible, "la nature en couleurs")
-	# Dire bonjour à la jardinière.
-	var jardiniere: Passant = n.get_node("Dehors/Jardiniere")
-	await _placer(j, DEHORS + Vector3(2.5, 0, -12), -PI / 2)
-	O.viser(j, jardiniere.global_position + Vector3(0, 1.0, 0))
-	for i in 3:
-		await tree.process_frame
-	T.eq(n.action_possible(), "dire bonjour", "E : dire bonjour")
-	j._interagir()
-	T.ok(jardiniere.deja_salue and n.saluts == 1, "on s'est salués")
-	T.eq(n.action_possible(), "", "plus rien à faire une fois salués")
-	# Le sommet de la colline, puis le générique.
-	await _placer(j, DEHORS + Vector3(0, 3.0, -67), 0.0)
-	await _attendre(5)
-	T.eq(n.etat, Atelier.Etat.GENERIQUE, "au sommet, le vent")
-	await _attendre(int(20.0 * 60), func() -> bool: return n.get_node("Interface/Generique").visible)
+	T.ok(n.get_node("Dehors/Camera").current, "une cinématique : la caméra n'est plus celle de Thomas")
+	T.ok(not j.is_physics_processing(), "le joueur ne bouge plus")
+	# La cinématique dure plus d'une minute : on l'accélère.
+	Engine.time_scale = 8.0
+	await _attendre(int(140.0 * 60 / 8.0), func() -> bool: return n.get_node("Interface/Generique").visible)
+	Engine.time_scale = 1.0
+	T.eq(n.saluts, 3, "Thomas salue les trois passants")
+	T.ok((n.get_node("Dehors/Thomas") as Node3D).position.z < -60.0, "il monte la colline")
 	T.ok(n.get_node("Interface/Generique").visible, "le générique")
 	T.eq(Histoire.chapitre, 6, "le jeu est fini")
