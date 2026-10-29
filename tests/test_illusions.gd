@@ -376,4 +376,19 @@ func test_apres_la_pluie_il_ne_reste_presque_rien() -> void:
 	var n: Node3D = await _charger()
 	T.ok(not n.get_node("Hall/Plafond").visible, "le plafond de l'entrée est parti")
 	T.ok(not n.get_node("Chambre/Plafond").visible, "celui de la chambre aussi")
-	T.ok(not n.toile_atelier_ouverte, "plus de toile à franchir pour l'instant")
+	T.ok(not n.toile_atelier_ouverte, "la toile de l'atelier est passée")
+	T.ok(n.toile_peintre_ouverte, "la toile de la chambre mène au niveau 5")
+
+
+func test_la_toile_de_la_chambre_mene_a_l_atelier_du_peintre() -> void:
+	Histoire.chapitre = 5
+	var n: Node3D = await _charger()
+	var j: Player = n.get_node("Player")
+	var toile: Node3D = n.get_node("Chambre/Toile_lit_fin")
+	await _placer(j, Vector3(0, 0, 8.4), 0.0)
+	j.rotation.y = PI
+	O.viser(j, toile.global_position)
+	await _attendre(5)
+	T.ok(n.get_node("Interface/ChuteToiles").en_cours(), "on tombe dans la toile")
+	await _attendre(int((ChuteToiles.DUREE + 0.5) * 60), func() -> bool: return Histoire.scene_demandee != "")
+	T.eq(Histoire.scene_demandee, "res://scenes/atelier.tscn", "vers l'atelier du peintre")

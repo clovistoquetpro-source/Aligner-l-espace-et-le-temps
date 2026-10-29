@@ -155,6 +155,12 @@ Choix de clo : on devient le peintre ; on traverse les mille toiles les yeux fer
 4. **Poser le pinceau** (E, sans viser le chevalet), une fois qu'on a essayé de peindre au moins une fois. Avant, Thomas le reprend : « Non… Pas encore. Je peux encore la sauver. » Posé : « Je pose le pinceau. » La dernière toile change toute seule : Juliette qui rit, au bord du lac. « Je me souviens d'elle comme elle était. » « Je ne peux pas changer ce qui est arrivé. » Les toiles tombent, la lumière revient, la porte d'entrée de la maison apparaît.
 5. **Dehors.** La nature en couleurs : un chemin, des arbres, des fleurs, des papillons. Thomas est vieux. Trois personnes sur le chemin : une jardinière, un promeneur, un enfant avec un cerf-volant (qui rappelle le grenier). E : dire bonjour ; chacun répond. Au sommet de la colline, le vent se lève : « Le vent… comme dans ses cheveux. » « Je ne peux pas changer ce qui est arrivé. Mais je peux vivre ce qui vient. » Puis le générique.
 
+**Construit en formes simples** (2026-10-29) : `scenes/atelier.tscn`, par `tools/constructeur_atelier.gd`. Ce qui reste à valider avec clo :
+- Le labyrinthe fait 5 × 5 cases de 3 m. Une toile aspire Thomas s'il la regarde à moins de 3,5 m (à moins de 18°) pendant 0,6 s ; il revient à l'entrée. Les yeux fermés, l'écran reste à peine assombri et on voit les pétales.
+- Après une tentative de peindre, on revient à l'entrée du labyrinthe : il faut le retraverser.
+- Le pinceau ne peut être posé qu'après avoir essayé de peindre au moins une fois.
+- Dehors, Thomas (vieux) marche à 75 % de la vitesse. Les trois passants ne sont pas obligatoires ; le générique vient au sommet de la colline : « Aligner l'espace et le temps — Une histoire imaginée par clo — Fin ».
+
 ### La durée
 
 clo vise 10 à 15 minutes, jusqu'à 20, par niveau : environ 1 h à 1 h 30 pour les 5 niveaux. Le niveau 1 actuel est trop court pour ça : il gagnera des énigmes. Chaque niveau combine plusieurs vraies énigmes et des moments d'histoire.
@@ -178,10 +184,10 @@ On construit chaque niveau entièrement en formes simples (une « greybox ») : 
 
 ## Prochaines étapes
 
-1. clo joue les niveaux 1 à 4 et dit ce qui marche ou pas.
-2. Confirmer la structure « de souvenir en souvenir » et l'histoire du niveau 2.
-3. Inventer ensemble les énigmes du niveau suivant (la toile qui se contient reste en réserve).
-4. Habiller le niveau 1 quand il sera validé.
+1. clo joue tout le jeu, du niveau 1 au générique, et dit ce qui marche ou pas (difficulté, durée, clarté, émotion).
+2. Mesurer la durée réelle de chaque niveau (objectif : 10 à 15 minutes, jusqu'à 20).
+3. Écrire la cinématique du début, qui pose le contexte de toute l'histoire.
+4. Habiller les niveaux validés : textures, détails, personnages, puis le son.
 
 ## Le niveau 1 en formes simples (2026-10-28)
 

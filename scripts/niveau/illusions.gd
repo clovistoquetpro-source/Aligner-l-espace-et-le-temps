@@ -45,6 +45,9 @@ var _vers_l_ete := false
 ## La toile de l'atelier mène au niveau 4 (au retour de l'été).
 var toile_atelier_ouverte := false
 var _vers_la_pluie := false
+## La toile de la chambre (le peintre) mène au niveau 5 (au retour de la pluie).
+var toile_peintre_ouverte := false
+var _vers_l_atelier := false
 
 @onready var _zone_couloir: Area3D = $Couloir/Zone
 @onready var _boucle: PorteTrompeuse = $Couloir/Boucle
@@ -164,6 +167,10 @@ func _physics_process(delta: float) -> void:
 	if toile_atelier_ouverte and not _vers_la_pluie and _regarde(atelier.global_position, 25.0, 2.5):
 		_vers_la_pluie = true
 		_tomber_dans_les_toiles(_joueur)
+	var peintre: Node3D = $Chambre/Toile_lit_fin
+	if toile_peintre_ouverte and not _vers_l_atelier and _regarde(peintre.global_position, 25.0, 2.5):
+		_vers_l_atelier = true
+		_tomber_dans_les_toiles(_joueur)
 
 
 func _dans_le_dos(point: Vector3) -> bool:
@@ -198,6 +205,9 @@ func _atterrir() -> void:
 		return
 	if _vers_la_pluie:
 		Histoire.vers("res://scenes/dispute.tscn")
+		return
+	if _vers_l_atelier:
+		Histoire.vers("res://scenes/atelier.tscn")
 		return
 	_joueur.teleport(_arrivee.global_transform)
 	_joueur.set_anchor(_arrivee.global_transform)
@@ -258,10 +268,10 @@ func _retour_de_l_enfance() -> void:
 		t.tween_property(m, "position:y", m.position.y, 2.0 + 0.3 * (i % 6)).set_trans(Tween.TRANS_SINE)
 		i += 1
 	if Histoire.chapitre >= 5:
+		toile_peintre_ouverte = true
 		var t := _ouvrir_les_yeux("Il ne reste presque plus rien de la maison.")
 		t.tween_callback(penser.bind("Juliette… Je l'ai repeinte mille fois. Elle tombe toujours."))
-		t.tween_interval(9.0)
-		t.tween_callback(afficher.bind("Fin du niveau 4. Bientôt : l'atelier du peintre.", 8.0))
+		t.tween_callback(penser.bind("Le tableau de ma chambre… Le peintre, c'est moi."))
 		return
 	if Histoire.chapitre >= 4:
 		toile_atelier_ouverte = true

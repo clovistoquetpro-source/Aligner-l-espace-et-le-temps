@@ -15,6 +15,9 @@ const TOUCHES := "Z Q S D : se déplacer\nSouris : regarder\nEspace : sauter\nE 
 
 ## Les yeux restent fermés, même sans F (pendant une scène).
 var yeux_forces := false
+## Le noir des yeux fermés (1 : tout noir). Au niveau 5, on voit encore ce
+## qui est vrai.
+var noir_des_yeux := 1.0
 ## Une ligne de plus dans le panneau des touches, propre au niveau.
 var touches_en_plus := ""
 
@@ -36,15 +39,17 @@ func yeux_fermes() -> bool:
 
 ## Ce que E ferait maintenant, ou "" : prendre, poser, utiliser…
 func action_possible() -> String:
-	if _joueur.held != null:
-		return "poser"
 	_joueur.ray.force_raycast_update()
 	var cible := _joueur.ray.get_collider()
+	if _joueur.held != null:
+		if cible != null and cible.has_method("utiliser_avec"):
+			return cible.get("action_avec")
+		return "poser"
 	if cible is RigidBody3D and not (cible as RigidBody3D).is_in_group("fixe"):
 		return "prendre"
 	if cible != null and cible.has_method("activer"):
 		var a = cible.get("action")
-		return a if a is String and a != "" else "utiliser"
+		return "utiliser" if a == null else a
 	return ""
 
 
@@ -83,7 +88,7 @@ func _process(delta: float) -> void:
 	super._process(delta)
 	if not _file.is_empty() and _reste_message <= 0.3:
 		afficher(_file.pop_front())
-	_yeux.color.a = move_toward(_yeux.color.a, 1.0 if yeux_fermes() or yeux_forces else 0.0, delta * 6.0)
+	_yeux.color.a = move_toward(_yeux.color.a, noir_des_yeux if yeux_fermes() or yeux_forces else 0.0, delta * 6.0)
 	var a := action_possible() if _joueur.is_physics_processing() else ""
 	_action.text = "E : " + a if a != "" else ""
 	# Les touches : au début du niveau, et quand la souris est libérée.

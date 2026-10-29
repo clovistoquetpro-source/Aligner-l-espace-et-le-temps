@@ -93,11 +93,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _interagir() -> void:
-	if held != null:
-		poser()
-		return
 	ray.force_raycast_update()
 	var cible := ray.get_collider()
+	if held != null:
+		# Un objet tenu peut servir sur un autre (le pinceau sur le chevalet).
+		if cible != null and cible.has_method("utiliser_avec") and cible.utiliser_avec(self, held):
+			return
+		poser()
+		return
 	if cible is RigidBody3D:
 		prendre(cible)
 	elif cible != null and cible.has_method("activer"):
@@ -129,6 +132,11 @@ func _suivre_objet() -> void:
 	if held is ObjetPerspectif:
 		var exclure: Array[RID] = [get_rid()]
 		held.placer(camera, _ratio, exclure)
+		return
+	# Un objet qui se tient dans la main (le pinceau) suit la caméra, en bas
+	# de l'écran.
+	if held.has_meta("tenue"):
+		held.global_transform = camera.global_transform * (held.get_meta("tenue") as Transform3D)
 		return
 	held.global_position = camera.global_position - camera.global_basis.z * distance_tenue()
 	held.global_rotation = Vector3(0, global_rotation.y, 0)

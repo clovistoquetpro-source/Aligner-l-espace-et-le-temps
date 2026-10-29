@@ -54,6 +54,12 @@ Pour l'essayer directement, ouvre `scenes/ete.tscn` et appuie sur **F6**.
 `godot --headless --path . -s res://tools/construire_dispute.gd`.
 Pour l'essayer directement, ouvre `scenes/dispute.tscn` et appuie sur **F6**.
 
+## Le niveau 5 : l'atelier du peintre, et dehors
+
+`scenes/atelier.tscn`, en formes simples : on devient le peintre, on traverse le labyrinthe des mille toiles les yeux fermés, on essaie de peindre, puis on pose le pinceau et on sort, dans la nature en couleurs. On y arrive par la toile de la chambre, au retour de la pluie. Il est construit par `tools/constructeur_atelier.gd` :
+`godot --headless --path . -s res://tools/construire_atelier.gd`.
+Pour l'essayer directement, ouvre `scenes/atelier.tscn` et appuie sur **F6**.
+
 ## Le niveau « La maison »
 
 `scenes/maison.tscn` est construit par le code de `tools/constructeur_maison.gd` :
