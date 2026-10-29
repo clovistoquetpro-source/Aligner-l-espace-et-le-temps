@@ -117,6 +117,26 @@ Choix de clo : la rencontre au bord du lac, l'été (lumière dorée, chaleur) ;
 - À partir de la 3e journée, Juliette ajoute « Ne sois pas en retard, cette fois. »
 - Au retour dans la maison : le plafond du salon et un mur de l'entrée sont partis, la chambre et l'entrée flottent. Message « Fin du niveau 3. Bientôt : le jeune adulte. »
 
+### Le niveau 4 : le jeune adulte, la pluie
+
+Choix de clo : Thomas n'était pas là au moment de l'accident. Ils se sont disputés à l'atelier, Juliette est partie seule à moto, sous la pluie, et il ne l'a pas retenue. On ne voit jamais l'accident. La nouvelle mécanique est le temps à rebours (comme dans Tenet). La correction du peintre est une course-poursuite, idée de clo : Thomas lui court après, à travers des obstacles et des distorsions, comme dans un rêve ou dans Inception. Quand il va la rattraper, elle tombe dans le vide, et lui avec. Il essaie de la rattraper en tapant le plus vite possible sur Espace ; il peut y arriver, mais elle tombe dans tous les cas. Pendant la course, Thomas avance tout seul : on va seulement à gauche, à droite, ou on saute.
+
+On y entre par la toile de l'atelier, au salon (« Un atelier… Je ne m'en souviens pas. »), au retour de l'été.
+
+**Le temps à rebours, deux règles, une à la fois** (leçon du niveau 3) :
+1. **R maintenu remonte le temps** : la pluie remonte vers le ciel, les objets reviennent à leur place, Juliette et Thomas reculent, leurs phrases s'écrivent à l'envers. On lâche R : le souvenir repart en avant.
+2. **Ce que Thomas tient ne remonte pas le temps**, comme au niveau 3, où ce qu'il tenait échappait au peintre. Un objet pris dans le passé reste dans ses mains au présent.
+
+**L'atelier, le soir de la dispute.** On arrive à la fin du souvenir : Juliette est partie, le temps est figé, la pluie est suspendue dans l'air. Thomas est sur la mezzanine, où il dormait.
+- La dispute dure 40 secondes. Juliette : « Tu ne lèves même plus les yeux de tes toiles. » Thomas : « Je travaille, Juliette. » Juliette : « Tu peins nos souvenirs au lieu de les vivre. Viens rouler avec moi. » Thomas : « Il pleut. Et je n'ai pas le temps. » Juliette : « Tu n'as jamais le temps. » Thomas, qui fait tomber son casque : « Laisse-moi ! » Juliette : « Je pars rouler. Seule. » En prenant sa veste, elle renverse l'étagère, qui tombe sur l'escalier. À la porte : « Très bien. Je m'en vais. » Thomas : « C'est ça. Va-t'en ! » La mobylette part ; Thomas ferme la porte à clé.
+- **L'escalier** (apprendre la règle 1) : l'étagère tombée bloque l'escalier de la mezzanine. En remontant le temps, elle revient au mur : il faut descendre avant qu'elle retombe.
+- **Le casque** (apprendre la règle 2) : pendant la dispute, le casque de Juliette tombe par la grille du plancher, dans la cave. Avant, il est au portemanteau. On le prend dans le passé ; il reste dans les mains.
+- **La porte** : elle ne s'ouvre que quand Juliette part, quelques secondes, avant d'être fermée à clé. Il faut être là à ce moment-là, le casque en main, et la suivre dehors. C'est là que le peintre change le souvenir : cette fois, Thomas lui court après.
+
+**La course-poursuite** (la correction). Une rue sous la pluie, qui se déforme comme dans un rêve : les immeubles se penchent et se replient au-dessus de la route, la route se tord, des toiles tombent du ciel. Thomas court tout seul ; Q et D pour aller à gauche et à droite, Espace pour sauter. Il faut éviter les murs, sauter les barrières et les trous ; une chute fait repartir du dernier repère. La mobylette est toujours un peu devant. Au bout, la route s'arrête dans le vide : Juliette tombe, et Thomas saute derrière elle. Pendant la chute, Espace tapé le plus vite possible le rapproche d'elle ; s'il la rattrape, il tient sa main… et elle glisse. Dans tous les cas, elle tombe.
+
+**La vérité.** Le noir. L'atelier, vide, après. Le casque au portemanteau. « Elle est partie sans son casque. Je ne l'ai pas retenue. » « Mes derniers mots, c'étaient : va-t'en. » Chute dans les toiles, retour dans la maison des étoiles, presque détruite.
+
 ### La durée
 
 clo vise 10 à 15 minutes, jusqu'à 20, par niveau : environ 1 h à 1 h 30 pour les 5 niveaux. Le niveau 1 actuel est trop court pour ça : il gagnera des énigmes. Chaque niveau combine plusieurs vraies énigmes et des moments d'histoire.
