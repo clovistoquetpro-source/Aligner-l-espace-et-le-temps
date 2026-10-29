@@ -50,24 +50,43 @@ const VITESSE_COURSE := 1.5
 const AVANCE_MOTO := 11.0
 const ROULIS := 0.06
 ## La route de la course (en coordonnées de son groupe ; tools/
-## constructeur_dispute.gd la construit à partir d'ici).
-const FIN_COURSE := -330.0
+## constructeur_dispute.gd la construit à partir d'ici). Trois parties : la
+## rue sous la pluie ; la rue inondée, toute noire, où l'on ne voit plus la
+## rue que dans l'eau ; puis les toiles du peintre, qui barrent toute la
+## route : les yeux fermés, on voit les vrais murs.
+const INONDEE := [-160.0, -312.0]
+## Les reflets sont un peu sous la surface de l'eau (sinon, elle scintille).
+const SOUS_L_EAU := 0.03
+const DEBUT_TOILES := -315.0
+const FIN_COURSE := -455.0
 const VOIES := [-3.0, 0.0, 3.0]
 ## Les obstacles : [z, type, voies bloquées]. Types : « barriere » (à
-## sauter), « mur » (à éviter), « trou » (à sauter, longueur en m).
+## sauter), « mur » (à éviter), « trou » (à sauter, longueur en m),
+## « toiles » (trois toiles peintes, et derrière, les vrais murs).
 const OBSTACLES := [
 	[-20.0, "barriere", 0], [-35.0, "mur", [0, 1]], [-50.0, "mur", [1, 2]], [-62.0, "trou", 3.0],
 	[-78.0, "barriere", 0], [-90.0, "mur", [0, 2]], [-105.0, "trou", 3.5], [-118.0, "mur", [0, 1]],
-	[-127.0, "barriere", 0], [-140.0, "mur", [1, 2]], [-152.0, "trou", 3.0], [-165.0, "barriere", 0],
-	[-176.0, "mur", [0, 2]], [-190.0, "trou", 4.0], [-205.0, "mur", [0, 1]], [-213.0, "mur", [1, 2]],
-	[-228.0, "barriere", 0], [-240.0, "trou", 3.5], [-255.0, "mur", [0, 2]], [-268.0, "barriere", 0],
-	[-278.0, "trou", 3.0], [-292.0, "mur", [1, 2]], [-300.0, "mur", [0, 1]], [-314.0, "barriere", 0],
+	[-127.0, "barriere", 0], [-140.0, "mur", [1, 2]], [-152.0, "trou", 3.0],
+	[-188.0, "mur", [1]], [-202.0, "barriere", 0], [-215.0, "mur", [0, 1]], [-228.0, "mur", [1, 2]],
+	[-240.0, "barriere", 0], [-252.0, "mur", [0, 2]], [-264.0, "mur", [0, 1]], [-274.0, "barriere", 0],
+	[-286.0, "mur", [1, 2]], [-297.0, "mur", [0, 2]],
+	[-335.0, "toiles", [0, 1]], [-355.0, "toiles", [1, 2]], [-372.0, "toiles", [0, 2]], [-388.0, "toiles", [0, 1]],
+	[-403.0, "toiles", [1, 2]], [-416.0, "toiles", [0, 2]], [-430.0, "toiles", [0, 1]], [-442.0, "toiles", [1, 2]],
 ]
-const REPERES := [8.0, -70.0, -145.0, -220.0, -285.0]
 ## La mobylette regarde ce loin devant elle pour choisir sa voie, et se
 ## déplace de côté de ce nombre de mètres par mètre parcouru.
 const VUE_MOTO := 14.0
 const DERIVE_MOTO := 1.2
+## Les toiles attendent en l'air, au-dessus de la route, et tombent quand
+## Thomas arrive à cette distance (juste après le passage de Juliette).
+const HAUT_TOILES := 14.0
+const CHUTE_TOILES := [13.0, 10.0]
+## Devant les premières toiles, Thomas s'arrête : il faut fermer les yeux.
+const PREMIERES_TOILES := -335.0
+## La course se remonte, comme le soir de la dispute : on garde les
+## dernières secondes. Après un échec, on remonte au moins ce temps.
+const MEMOIRE_COURSE := 12.0
+const RECUL_MIN := 0.5
 ## La chute : Juliette est d'abord à 5 m sous Thomas ; chaque appui sur
 ## Espace la rapproche, la chute l'éloigne.
 const ECART_CHUTE := 5.0
@@ -90,6 +109,23 @@ var _temps_reel := 0.0
 ## Où en est la mobylette dans la course (coordonnées de la route).
 var moto_x := 0.0
 var moto_z := -4.0
+## La course est arrêtée (après un échec, ou R) : R la remonte.
+var course_figee := false
+## Devant les premières toiles, Thomas s'arrête.
+var arret_toiles := false
+var _echec := false
+var _passe: Array = []
+var _curseur := 0.0
+var _yeux_fermes_depuis := 0.0
+var _arret_depuis := 0.0
+var _moto_dans_l_eau := false
+## Images de course depuis le départ ou la reprise : juste après, le dernier
+## contact de Thomas date d'avant l'arrêt.
+var _depuis_reprise := 0
+var _masque_normal := 0
+var _toiles_course: Array[Node3D] = []
+## Le vrai mur derrière chaque toile (ou rien).
+var _vrais_murs := {}
 var _temps_chute := 0.0
 var _lachee := false
 var _temporels: Array[ObjetTemporel] = []
@@ -98,7 +134,8 @@ var _temporels: Array[ObjetTemporel] = []
 @onready var _juliette_atelier: Node3D = $Bonheur/Juliette
 @onready var _moto_bonheur: Node3D = $Bonheur/Mobylette
 @onready var _moto_balade: Node3D = $Balade/Mobylette
-@onready var _env_pluie: Environment = ($WorldEnvironment as WorldEnvironment).environment
+## Une copie : la course l'assombrit (la rue inondée).
+@onready var _env_pluie: Environment = ($WorldEnvironment as WorldEnvironment).environment.duplicate()
 @onready var _casque: RigidBody3D = $Atelier/Casque
 @onready var _sortie: Area3D = $Atelier/Sortie
 @onready var _rebours: ColorRect = $Interface/Rebours
@@ -118,7 +155,12 @@ var _soleil: DirectionalLight3D
 
 func _ready() -> void:
 	Temps.reinitialiser()
-	_joueur.camera.cull_mask &= ~Miroir.COUCHE_REFLET
+	_joueur.camera.cull_mask &= ~(Miroir.COUCHE_REFLET | COUCHE_VRAI)
+	_masque_normal = _joueur.camera.cull_mask
+	for n in get_tree().get_nodes_in_group("toiles_course"):
+		if is_ancestor_of(n):
+			_toiles_course.append(n as Node3D)
+			_vrais_murs[n] = get_node_or_null("Course/Vrai_" + String(n.name).replace("Toile_", "mur_"))
 	for n in find_children("*", "ObjetTemporel", true, false):
 		_temporels.append(n as ObjetTemporel)
 	_sortie.body_entered.connect(_sur_sortie)
@@ -392,6 +434,10 @@ func commencer_la_course() -> void:
 	_joueur.facteur_vitesse = VITESSE_COURSE
 	moto_x = 0.0
 	moto_z = depart.global_position.z - ($Course as Node3D).global_position.z - AVANCE_MOTO
+	course_figee = false
+	arret_toiles = false
+	_passe.clear()
+	_depuis_reprise = 0
 	penser("Cette fois, je te rattrape.")
 	dire("Thomas", "Juliette ! Attends !")
 
@@ -400,7 +446,7 @@ func commencer_la_course() -> void:
 ## celles que le prochain mur laisse libres.
 static func voie_moto(z: float) -> float:
 	for o in OBSTACLES:
-		if o[1] != "mur" or o[0] > z + 0.8 or o[0] < z - VUE_MOTO:
+		if (o[1] != "mur" and o[1] != "toiles") or o[0] > z + 0.8 or o[0] < z - VUE_MOTO:
 			continue
 		var libres := []
 		for v in VOIES.size():
@@ -437,41 +483,204 @@ static func hauteur_moto(z: float) -> float:
 	return y
 
 
+## La nuit de la rue inondée, à `z` (coordonnées de la route) : 0 dehors, 1
+## dedans, avec 10 m pour passer de l'un à l'autre.
+static func nuit(z: float) -> float:
+	return clampf((INONDEE[0] - z) / 10.0, 0.0, 1.0) * clampf((z - INONDEE[1]) / 10.0, 0.0, 1.0)
+
+
+## La hauteur d'une toile qui attend au-dessus de la route, quand Thomas est
+## à `d` mètres devant elle : en l'air, puis elle tombe, puis elle est posée.
+static func hauteur_toile(d: float) -> float:
+	if d >= CHUTE_TOILES[0]:
+		return HAUT_TOILES
+	if d <= CHUTE_TOILES[1]:
+		return 0.0
+	var k := (CHUTE_TOILES[0] - d) / (CHUTE_TOILES[0] - CHUTE_TOILES[1])
+	return HAUT_TOILES * (1.0 - k * k)
+
+
 func _dans_la_course(delta: float) -> void:
-	_temps_reel += delta
+	if course_figee:
+		_remonter_la_course(delta)
+		return
 	var p := _joueur.global_position
-	# La mobylette reste devant : elle évite les murs, saute le reste.
 	var route := ($Course as Node3D).global_position
-	var z := minf(p.z - route.z - AVANCE_MOTO, 10.0)
-	var dz := maxf(moto_z - z, 0.0)
-	var avant := moto_x
-	var pas := 0.0
-	while pas < dz:
-		var d := minf(0.25, dz - pas)
-		moto_x = pas_moto(moto_x, moto_z - pas - d, d)
-		pas += d
-	moto_z = minf(z, moto_z)
+	if arret_toiles:
+		_devant_les_toiles(delta)
+	elif _joueur.is_physics_processing():
+		_temps_reel += delta
+		# La mobylette reste devant : elle évite les murs, saute le reste.
+		var z := minf(p.z - route.z - AVANCE_MOTO, 10.0)
+		var dz := maxf(moto_z - z, 0.0)
+		var pas := 0.0
+		while pas < dz:
+			var d := minf(0.25, dz - pas)
+			moto_x = pas_moto(moto_x, moto_z - pas - d, d)
+			pas += d
+		moto_z = minf(z, moto_z)
+	_le_monde_de_la_course(p, delta)
+	if arret_toiles or not _joueur.is_physics_processing():
+		return
+	_passe.append([p, _joueur.velocity, moto_x, moto_z, _temps_reel])
+	if _passe.size() > int(MEMOIRE_COURSE * Engine.physics_ticks_per_second):
+		_passe.pop_front()
+	_depuis_reprise += 1
+	if _depuis_reprise > 1 and _a_echoue():
+		figer_la_course(true)
+	elif Input.is_action_just_pressed("rembobiner"):
+		figer_la_course(false)
+	var zr := p.z - route.z
+	if zr < INONDEE[0] - 6.0 and _une_fois("nuit"):
+		penser("Il fait si noir… Je ne vois plus rien.")
+		penser("Dans l'eau… La rue est encore là, dans l'eau.")
+	if zr < INONDEE[1] - 4.0 and _une_fois("jour"):
+		penser("La lumière… Elle est toujours devant moi.")
+	# Devant les premières toiles, Thomas s'arrête.
+	if zr < PREMIERES_TOILES + CHUTE_TOILES[1] - 1.0 and _une_fois("arret_toiles"):
+		arret_toiles = true
+		_arret_depuis = 0.0
+		_yeux_fermes_depuis = 0.0
+		_joueur.velocity = Vector3.ZERO
+		_joueur.set_physics_process(false)
+		penser("Des toiles… Elles barrent toute la route.")
+		penser("Elle me disait : ferme les yeux. Juste une seconde.")
+
+
+## La mobylette, la pluie, la nuit, les toiles et les yeux fermés, à
+## l'instant de la course où en est Thomas (qui court ou remonte le temps).
+func _le_monde_de_la_course(p: Vector3, delta: float) -> void:
+	var route := ($Course as Node3D).global_position
+	var zr := p.z - route.z
+	var avant := _moto_course.global_position.x - route.x
 	_moto_course.global_position = route + Vector3(moto_x, hauteur_moto(moto_z), moto_z)
 	# Elle penche dans les virages.
 	_moto_course.rotation = Vector3(0.0, 0.0, clampf((moto_x - avant) * -3.0, -0.35, 0.35))
-	if moto_z < FIN_COURSE and _une_fois("elle_tombe"):
-		dire("Thomas", "Juliette !")
 	var cheveux: Node3D = _moto_course.get_node("Juliette/Cheveux")
 	cheveux.rotation.x = 0.35 + 0.15 * sin(_temps_reel * 6.0)
+	# Dans la rue inondée, on ne la voit plus que dans l'eau.
+	var dans_l_eau: bool = moto_z < INONDEE[0] and moto_z > INONDEE[1]
+	if dans_l_eau != _moto_dans_l_eau:
+		_moto_dans_l_eau = dans_l_eau
+		for g in _moto_course.find_children("*", "GeometryInstance3D", true, false):
+			(g as GeometryInstance3D).layers = Miroir.COUCHE_REFLET if dans_l_eau else 1 | COUCHE_VRAI
+	var reflet: Node3D = $Course/Reflets/Mobylette
+	reflet.visible = dans_l_eau
+	reflet.position = Vector3(moto_x, -hauteur_moto(moto_z) - SOUS_L_EAU, moto_z)
+	reflet.rotation = _moto_course.rotation * Vector3(1, 1, -1)
+	if moto_z < FIN_COURSE and _une_fois("elle_tombe"):
+		dire("Thomas", "Juliette !")
 	_pluie_course.global_position = p + Vector3(0, 4.0, -6.0)
 	_pluie_course.temps = _temps_reel
-	# Le rêve se tord : la tête roule, le champ de vision respire.
-	_joueur.head.rotation.z = ROULIS * sin(_temps_reel * 0.7) * (1.0 + clampf(-p.z / 200.0, 0.0, 1.5))
-	_joueur.camera.fov = 80.0 + 6.0 * sin(_temps_reel * 1.3)
-	if p.z < -150.0 and _une_fois("loin"):
+	var k := nuit(zr)
+	_env_pluie.background_energy_multiplier = lerpf(1.0, 0.02, k)
+	_env_pluie.ambient_light_energy = lerpf(0.35, 0.1, k)
+	_env_pluie.fog_light_color = Color("6c757d").lerp(Color("05060d"), k)
+	for t in _toiles_course:
+		var d := zr - t.position.z
+		t.position.y = hauteur_toile(d)
+		# Thomas déchire la toile qu'il traverse : derrière, parfois, un vrai
+		# mur.
+		t.visible = not (d < 0.9 and absf(p.x - route.x - t.position.x) < 1.6)
+		var mur := _vrais_murs[t] as GeometryInstance3D
+		if mur != null:
+			mur.layers = COUCHE_VRAI if t.visible else 1 | COUCHE_VRAI
+	# Les yeux fermés, parmi les toiles, on ne voit que ce qui est vrai.
+	var parmi_les_toiles := zr < DEBUT_TOILES
+	var vrai := parmi_les_toiles and yeux_fermes()
+	noir_des_yeux = 0.3 if parmi_les_toiles else 1.0
+	_joueur.camera.cull_mask = COUCHE_VRAI if vrai else _masque_normal
+	_env_pluie.background_mode = Environment.BG_COLOR if vrai else Environment.BG_SKY
+	_env_pluie.fog_enabled = not vrai
+	if not course_figee:
+		# Le rêve se tord : la tête roule, le champ de vision respire.
+		_joueur.head.rotation.z = ROULIS * sin(_temps_reel * 0.7) * (1.0 + clampf(-zr / 200.0, 0.0, 1.5))
+		_joueur.camera.fov = 80.0 + 6.0 * sin(_temps_reel * 1.3)
+	if zr < -150.0 and _une_fois("loin"):
 		penser("Elle est juste là… Encore un peu.")
+
+
+## Thomas tombe dans un trou, ou se cogne à un mur ou à une barrière.
+func _a_echoue() -> bool:
+	if _joueur.global_position.y < -1.2:
+		return true
+	for i in _joueur.get_slide_collision_count():
+		var c := _joueur.get_slide_collision(i)
+		var o := c.get_collider() as Node
+		if o != null and o.is_in_group("obstacle_course") and c.get_normal().z > 0.6:
+			return true
+	return false
+
+
+## Le temps de la course s'arrête : R le remonte.
+func figer_la_course(echec: bool) -> void:
+	course_figee = true
+	_echec = echec
+	_curseur = _passe.size() - 1
+	_joueur.velocity = Vector3.ZERO
+	_joueur.set_physics_process(false)
+	if echec and _une_fois("premier_echec"):
+		penser("Non ! … Tout s'est arrêté.")
+		penser("Je peux remonter le temps. Comme dans l'atelier.")
+	var zr := _joueur.global_position.z - ($Course as Node3D).global_position.z
+	if echec and zr < DEBUT_TOILES and _une_fois("vrai_mur"):
+		penser("Derrière la toile… un vrai mur.")
+
+
+## Les images de course remontées depuis l'arrêt.
+func recul() -> float:
+	return (_passe.size() - 1) - _curseur
+
+
+func _remonter_la_course(delta: float) -> void:
+	var r := Input.is_action_pressed("rembobiner")
+	_rebours.color.a = move_toward(_rebours.color.a, 0.18 if r else 0.0, delta * 2.0)
+	if r and not _passe.is_empty():
+		_curseur = maxf(_curseur - VITESSE_REBOURS * delta * Engine.physics_ticks_per_second, 0.0)
+		var e: Array = _passe[int(_curseur)]
+		_joueur.global_position = e[0]
+		moto_x = e[2]
+		moto_z = e[3]
+		_temps_reel = e[4]
+		_le_monde_de_la_course(e[0], delta)
+		return
+	if _passe.is_empty() or (_echec and recul() < RECUL_MIN * Engine.physics_ticks_per_second):
+		return
+	# On repart d'ici : ce qui venait après n'a pas eu lieu.
+	var i := int(_curseur)
+	_joueur.velocity = _passe[i][1]
+	_passe.resize(i + 1)
+	_depuis_reprise = 0
+	course_figee = false
+	_rebours.color.a = 0.0
+	_joueur.set_physics_process(true)
+
+
+## Devant les premières toiles : les yeux fermés, on voit les vrais murs, et
+## Thomas repart.
+func _devant_les_toiles(delta: float) -> void:
+	_arret_depuis += delta
+	_yeux_fermes_depuis = _yeux_fermes_depuis + delta if yeux_fermes() else 0.0
+	if _yeux_fermes_depuis > 0.6 or _arret_depuis > 25.0:
+		arret_toiles = false
+		_joueur.set_physics_process(true)
+		if _yeux_fermes_depuis > 0.6:
+			penser("Les vrais murs… et elle.")
+	elif _arret_depuis > 12.0 and _une_fois("toiles_aide"):
+		penser("Fermer les yeux… Juste une seconde.")
+
+
+func _process(delta: float) -> void:
+	super._process(delta)
+	if course_figee:
+		_action.text = "R (maintenu) : remonter le temps"
+	elif arret_toiles:
+		_action.text = "F (maintenu) : fermer les yeux"
 
 
 func _sur_vide(corps: Node3D) -> void:
 	if corps is Player and etat == Etat.COURSE:
 		_joueur.respawn()
-		if _une_fois("tombe"):
-			penser("Non… Pas encore.")
 
 
 ## Au bout de la route, le vide. Juliette tombe ; Thomas saute derrière elle.
@@ -479,6 +688,10 @@ func _sur_bord(corps: Node3D) -> void:
 	if not corps is Player or etat != Etat.COURSE:
 		return
 	etat = Etat.CHUTE
+	noir_des_yeux = 1.0
+	_joueur.camera.cull_mask = _masque_normal
+	_env_pluie.background_mode = Environment.BG_SKY
+	_env_pluie.fog_enabled = true
 	_joueur.avance_auto = false
 	_joueur.facteur_vitesse = 1.0
 	_joueur.head.rotation.z = 0.0

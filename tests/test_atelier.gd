@@ -121,13 +121,89 @@ func test_on_traverse_le_labyrinthe_les_yeux_fermes_en_suivant_les_petales() -> 
 	Input.action_release("avancer")
 	Input.action_release("fermer_les_yeux")
 	T.eq(n.aspirations, 0, "aucune aspiration")
-	T.ok(j.global_position.z < -16.0, "au cœur (%s)" % j.global_position)
+	T.ok(j.global_position.z < -16.0, "sorti du labyrinthe, dans la salle du miroir (%s)" % j.global_position)
+
+
+func test_dans_le_miroir_thomas_est_jeune_et_juliette_l_attend() -> void:
+	var n: Node3D = await _charger()
+	var j := await _peintre(n)
+	T.eq((n.get_node("Reflets/Mur_est_reel") as GeometryInstance3D).layers, Miroir.COUCHE_REEL, "le vrai mur est plein…")
+	T.ok(n.get_node_or_null("Reflets/Mur_est_reflet/Trou") != null, "…dans le reflet, il a un passage")
+	var robe: GeometryInstance3D = n.get_node("Reflets/Juliette/Robe")
+	T.eq(robe.layers, Miroir.COUCHE_REFLET, "Juliette n'est que dans le reflet")
+	T.eq(robe.layers & j.camera.cull_mask, 0, "on ne la voit pas en vrai")
+	var jeune := j.get_node("Reflet").get_child(0) as GeometryInstance3D
+	T.eq(jeune.layers, Miroir.COUCHE_REFLET, "Thomas jeune, dans le reflet")
+	T.eq((j.camera.get_node("Mains/Main_droite") as GeometryInstance3D).layers, Miroir.COUCHE_REEL, "ses vieilles mains ne sont pas dans le reflet")
+
+
+func test_regarder_les_toiles_du_mur_est_renvoie_a_l_entree_de_la_salle() -> void:
+	var n: Node3D = await _charger()
+	var j := await _peintre(n)
+	await _placer(j, Vector3(11.0, 0, -18.0), -PI / 2)
+	await _attendre(60, func() -> bool: return n.aspirations > 0)
+	T.eq(n.aspirations, 1, "la toile aspire Thomas")
+	var entree: Vector3 = (n.get_node("Reflets/Entree") as Node3D).global_position
+	T.ok(j.global_position.distance_to(entree) < 0.5, "à l'entrée de la salle du miroir (%s)" % j.global_position)
+
+
+func test_a_reculons_les_yeux_sur_le_miroir_on_passe() -> void:
+	var n: Node3D = await _charger()
+	var j := await _peintre(n)
+	# Face au miroir (à l'ouest), on recule vers le mur est.
+	await _placer(j, Vector3(9.0, 0, -18.0), PI / 2)
+	Input.action_press("reculer")
+	await _attendre(600, func() -> bool: return j.global_position.distance_to((n.get_node("SalleToile/Arrivee") as Node3D).global_position) < 0.5)
+	Input.action_release("reculer")
+	T.eq(n.aspirations, 0, "sans regarder les toiles")
+	T.ok(n._dit.has("juliette_entre"), "Juliette est entrée dans le passage, devant lui")
+	T.ok(j.global_position.distance_to((n.get_node("SalleToile/Arrivee") as Node3D).global_position) < 0.5, "après la chute, la salle de la toile (%s)" % j.global_position)
+
+
+func test_la_toile_ne_montre_pas_ce_qui_est_vrai() -> void:
+	var n: Node3D = await _charger()
+	var toile: ToileTournante = n.get_node("SalleToile/ToileTournante")
+	T.eq(toile._camera.cull_mask & Souvenir.COUCHE_VRAI, 0, "les pétales ne sont pas peints sur la toile")
+
+
+func test_la_piece_peinte_quatre_portes_une_seule_vraie() -> void:
+	var n: Node3D = await _charger()
+	var j := await _peintre(n)
+	var piece: Node3D = n.get_node("PiecePeinte")
+	var bas := piece.global_position.y - 3.0
+	# En bas à droite, d'abord : une porte peinte.
+	await _placer(j, piece.global_position + Vector3(1.9, -3.0, -1.2), 0.0)
+	Input.action_press("avancer")
+	await _attendre(90, func() -> bool: return n.aspirations > 0)
+	Input.action_release("avancer")
+	T.eq(n.aspirations, 1, "une porte peinte renvoie Thomas")
+	T.ok(j.global_position.distance_to((n.get_node("SalleToile/Retour") as Node3D).global_position) < 0.5, "devant la toile (%s)" % j.global_position)
+	# Les yeux fermés, dans la pièce : les pétales entourent la vraie porte.
+	await _placer(j, piece.global_position + Vector3(0, -3.0, 1.2), 0.0)
+	Input.action_press("fermer_les_yeux")
+	await _attendre(3)
+	var petale: GeometryInstance3D = n.get_node("PiecePeinte/Chambre/Porte_hd/Petale_0")
+	T.ok(petale.layers & j.camera.cull_mask != 0, "les pétales, les yeux fermés")
+	Input.action_release("fermer_les_yeux")
+	await _attendre(3)
+	T.eq(petale.layers & j.camera.cull_mask, 0, "invisibles, les yeux ouverts")
+	var vraie: Node3D = n.get_node("PiecePeinte/Chambre/Porte_hd")
+	T.ok(vraie.global_position.y > piece.global_position.y, "la vraie porte est en haut, hors de portée")
+	# Un quart de tour : elle descend en bas à droite.
+	(n.get_node("SalleToile/ToileTournante") as ToileTournante).activer()
+	await _attendre(70)
+	T.ok(vraie.global_position.y < bas + 1.5 and vraie.global_position.x > piece.global_position.x, "un quart de tour : en bas à droite (%s)" % vraie.global_position)
+	await _placer(j, piece.global_position + Vector3(1.9, -3.0, -1.2), 0.0)
+	Input.action_press("avancer")
+	await _attendre(90, func() -> bool: return j.global_position.distance_to((n.get_node("Coeur/Seuil") as Node3D).global_position) < 0.5)
+	Input.action_release("avancer")
+	T.ok(j.global_position.distance_to((n.get_node("Coeur/Seuil") as Node3D).global_position) < 0.5, "la vraie porte mène au cœur (%s)" % j.global_position)
 
 
 func test_peindre_ne_marche_jamais() -> void:
 	var n: Node3D = await _charger()
 	var j := await _peintre(n)
-	await _placer(j, Vector3(6, 0, -18.5), 0.0)
+	await _placer(j, Atelier.COEUR_FACE, 0.0)
 	O.viser(j, n.get_node("Coeur/Chevalet").global_position + Vector3(0, 1.2, 0))
 	j._interagir()
 	T.eq(n.etat, Atelier.Etat.PEINT, "E sur le chevalet : on peint")
@@ -135,7 +211,8 @@ func test_peindre_ne_marche_jamais() -> void:
 	await _attendre(int(9.0 * 60), func() -> bool: return n.etat == Atelier.Etat.PEINTRE)
 	T.eq(n.etat, Atelier.Etat.PEINTRE, "puis tout recommence")
 	T.eq(n.tentatives, 1, "une tentative")
-	T.ok(j.global_position.distance_to(Vector3(0, 0, 1.0)) < 0.5, "à l'entrée du labyrinthe (%s)" % j.global_position)
+	var seuil: Vector3 = (n.get_node("Coeur/Seuil") as Node3D).global_position
+	T.ok(j.global_position.distance_to(seuil) < 0.5, "au seuil du cœur, pas au début (%s)" % j.global_position)
 	T.ok(n.get_node("Antichambre/Tentative_1").visible, "de nouvelles toiles s'empilent")
 	T.ok(j.held != null and j.held.name == "Pinceau", "le pinceau toujours en main")
 
@@ -154,7 +231,7 @@ func test_poser_le_pinceau_puis_dehors_puis_la_fin() -> void:
 	var n: Node3D = await _charger()
 	var j := await _peintre(n)
 	n.tentatives = 1
-	await _placer(j, Vector3(6, 0, -18.5), 0.0)
+	await _placer(j, Atelier.COEUR_FACE, 0.0)
 	O.viser(j, j.camera.global_position + Vector3(0, -1, -0.2))
 	T.eq(n.action_possible(), "poser", "E : poser")
 	j._interagir()
@@ -165,7 +242,7 @@ func test_poser_le_pinceau_puis_dehors_puis_la_fin() -> void:
 	T.ok(n.get_node("Coeur/Porte").visible, "la porte d'entrée apparaît")
 	T.ok(not n.get_node("Labyrinthe/Toile_0").visible, "les toiles sont tombées")
 	await _attendre(5)
-	await _placer(j, Vector3(3.0, 0, -24.0), 0.0)
+	await _placer(j, Atelier.COEUR + Vector3(-3.0, 0, -4.0), 0.0)
 	await _attendre(200, func() -> bool: return n.etat == Atelier.Etat.DEHORS)
 	T.eq(n.etat, Atelier.Etat.DEHORS, "dehors")
 	await _attendre(150, func() -> bool: return n.get_node("Dehors").visible)

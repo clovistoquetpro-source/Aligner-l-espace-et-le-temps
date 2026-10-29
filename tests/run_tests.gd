@@ -2,6 +2,7 @@ extends SceneTree
 
 ## Lance chaque tests/test_*.gd et chaque méthode test_*.
 ## godot --headless --path . -s res://tests/run_tests.gd
+## TESTS=dispute ne lance que les fichiers dont le nom contient « dispute ».
 
 
 func _initialize() -> void:
@@ -11,8 +12,9 @@ func _initialize() -> void:
 func _lancer() -> void:
 	var fichiers := DirAccess.get_files_at("res://tests")
 	var total := 0
+	var filtre := OS.get_environment("TESTS")
 	for f in fichiers:
-		if not (f.begins_with("test_") and f.ends_with(".gd")):
+		if not (f.begins_with("test_") and f.ends_with(".gd")) or (filtre != "" and not filtre in f):
 			continue
 		var script: GDScript = load("res://tests/" + f)
 		if script == null or not script.can_instantiate():
@@ -35,5 +37,7 @@ func _lancer() -> void:
 				obj.nettoyer()
 	for e in T.echecs:
 		printerr("ECHEC: " + e)
+	if total == 0:
+		T.echecs.append("aucun test lancé")
 	print("%d tests, %d échecs" % [total, T.echecs.size()])
 	quit(1 if T.echecs.size() > 0 else 0)

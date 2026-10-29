@@ -11,7 +11,7 @@ var _niveau: Node3D
 
 
 func nettoyer() -> void:
-	for a in ["avancer", "reculer", "gauche", "droite", "sauter", "rembobiner"]:
+	for a in ["avancer", "reculer", "gauche", "droite", "sauter", "rembobiner", "fermer_les_yeux"]:
 		Input.action_release(a)
 	if is_instance_valid(_niveau):
 		_niveau.free()
@@ -169,8 +169,12 @@ func test_sans_casque_on_ne_la_suit_pas() -> void:
 	T.ok(n._dit.has("sans_casque"), "« Il faut que je lui donne son casque. »")
 
 
+## Lance la course, et place Thomas en `z` (après les premières toiles, il
+## ne s'y arrête plus).
 func _en_course(n: Node3D, z: float) -> Player:
 	var j: Player = n.get_node("Player")
+	if z < Dispute.PREMIERES_TOILES + Dispute.CHUTE_TOILES[1]:
+		n._dit["arret_toiles"] = true
 	n.commencer_la_course()
 	await _placer(j, Vector3(500, 0, z), 0.0)
 	j.set_anchor(Transform3D(Basis(), Vector3(500, 0, z)))
@@ -197,30 +201,137 @@ func test_une_barriere_se_saute() -> void:
 	T.ok(j.global_position.z < -22.0, "par-dessus la barrière (%s)" % j.global_position)
 
 
-func test_un_mur_s_evite_par_le_cote() -> void:
+func test_se_cogner_a_un_mur_arrete_le_temps_et_r_le_remonte() -> void:
 	var n: Node3D = await _charger()
 	var j := await _en_course(n, -28.0)
 	# À -35 m, les voies de gauche et du milieu sont bloquées.
+	await _attendre(90, func() -> bool: return n.course_figee)
+	T.ok(n.course_figee, "on se cogne au mur : le temps s'arrête")
+	var z := j.global_position.z
+	T.ok(z > -35.0, "contre le mur (%s)" % j.global_position)
+	await _attendre(30)
+	T.proche(j.global_position.z, z, "rien ne bouge", 0.01)
+	T.eq(n.get_node("Interface/Action").text, "R (maintenu) : remonter le temps", "ce que fait R")
+	Input.action_press("rembobiner")
 	await _attendre(60)
-	T.ok(j.global_position.z > -35.0, "tout droit, on bute contre le mur (%s)" % j.global_position)
+	Input.action_release("rembobiner")
+	T.ok(j.global_position.z > z + 3.0, "R remonte la course (%s)" % j.global_position)
+	await _attendre(2)
+	T.ok(not n.course_figee, "on repart")
 	Input.action_press("droite")
 	await _attendre(60)
 	Input.action_release("droite")
 	await _attendre(30)
-	T.ok(j.global_position.z < -36.0, "par la droite, on passe (%s)" % j.global_position)
+	T.ok(j.global_position.z < -36.0 and not n.course_figee, "par la droite, on passe (%s)" % j.global_position)
 
 
-func test_tomber_dans_un_trou_fait_repartir_du_repere() -> void:
+func test_apres_un_echec_il_faut_remonter_un_peu() -> void:
+	var n: Node3D = await _charger()
+	var j := await _en_course(n, -28.0)
+	await _attendre(90, func() -> bool: return n.course_figee)
+	Input.action_press("rembobiner")
+	await _attendre(5)
+	Input.action_release("rembobiner")
+	await _attendre(5)
+	T.ok(n.course_figee, "trop peu : on reste arrêté (recul de %.0f images)" % n.recul())
+	T.ok(j.global_position.z > -35.0, "toujours devant le mur")
+
+
+func test_r_pendant_la_course_la_remonte_aussi() -> void:
+	var n: Node3D = await _charger()
+	var j := await _en_course(n, 8.0)
+	await _attendre(60)
+	var z := j.global_position.z
+	Input.action_press("rembobiner")
+	await _attendre(30)
+	T.ok(n.course_figee, "R arrête la course")
+	T.ok(j.global_position.z > z + 2.0, "et la remonte (%s)" % j.global_position)
+	var moto: Node3D = n.get_node("Course/Mobylette")
+	T.ok(moto.global_position.z < j.global_position.z - 5.0, "la mobylette recule avec lui")
+	Input.action_release("rembobiner")
+	await _attendre(3)
+	T.ok(not n.course_figee, "on lâche R : on repart")
+
+
+func test_tomber_dans_un_trou_arrete_le_temps_et_r_le_remonte() -> void:
 	var n: Node3D = await _charger()
 	var j := await _en_course(n, -56.0)
-	await _attendre(240, func() -> bool: return j.global_position.z > -60.0 and j.global_position.y > -0.5 and n._dit.has("tombe"))
-	T.ok(n._dit.has("tombe"), "on est tombé dans le trou")
-	T.ok(j.global_position.y > -0.5, "on repart du dernier repère (%s)" % j.global_position)
+	await _attendre(240, func() -> bool: return n.course_figee)
+	T.ok(n.course_figee, "on tombe dans le trou : le temps s'arrête")
+	T.ok(j.global_position.y < -1.0, "dans le trou (%s)" % j.global_position)
+	Input.action_press("rembobiner")
+	await _attendre(60)
+	Input.action_release("rembobiner")
+	await _attendre(2)
+	T.ok(j.global_position.y > -0.5 and j.global_position.z > -62.0, "on remonte avant le trou (%s)" % j.global_position)
+	T.ok(not n.course_figee, "on repart")
+
+
+func test_la_rue_inondee_ne_se_voit_que_dans_l_eau() -> void:
+	var n: Node3D = await _charger()
+	var j := await _en_course(n, -175.0)
+	await _attendre(5)
+	var mur: GeometryInstance3D = n.get_node("Course/Mur_188_1")
+	T.eq(mur.layers & j.camera.cull_mask, 0, "le vrai mur ne se voit pas")
+	var reflet: GeometryInstance3D = n.get_node("Course/Reflets/Reflet_Mur_188_1")
+	T.ok(reflet.global_position.y < 0.0 and reflet.layers & j.camera.cull_mask != 0, "son reflet se voit, dans l'eau")
+	T.ok(n._env_pluie.background_energy_multiplier < 0.1, "il fait nuit")
+	var moto: GeometryInstance3D = n.get_node("Course/Mobylette/Cadre")
+	T.eq(moto.layers & j.camera.cull_mask, 0, "Juliette non plus ne se voit pas…")
+	T.ok(n.get_node("Course/Reflets/Mobylette").visible, "…seulement son reflet")
+	await _attendre(150, func() -> bool: return n.course_figee)
+	T.ok(n.course_figee and j.global_position.z > -188.0, "le mur qu'on ne voit pas arrête Thomas (%s)" % j.global_position)
+
+
+func test_hauteur_des_toiles() -> void:
+	T.proche(Dispute.hauteur_toile(30.0), Dispute.HAUT_TOILES, "loin devant, en l'air")
+	var h := Dispute.hauteur_toile(11.5)
+	T.ok(h > 0.0 and h < Dispute.HAUT_TOILES, "elle tombe (%.1f m)" % h)
+	T.proche(Dispute.hauteur_toile(5.0), 0.0, "posée sur la route")
+
+
+func test_les_toiles_barrent_la_route_et_les_yeux_fermes_montrent_les_vrais_murs() -> void:
+	var n: Node3D = await _charger()
+	var j := await _en_course(n, -318.0)
+	await _attendre(180, func() -> bool: return n.arret_toiles)
+	T.ok(n.arret_toiles, "devant les toiles, Thomas s'arrête")
+	for v in 3:
+		T.proche((n.get_node("Course/Toile_335_%d" % v) as Node3D).position.y, 0.0, "la toile %d est tombée" % v, 0.01)
+	var mur: GeometryInstance3D = n.get_node("Course/Vrai_mur_335_0")
+	T.eq(mur.layers & j.camera.cull_mask, 0, "les yeux ouverts, on ne voit pas les vrais murs")
+	await _attendre(30)
+	T.ok(n.arret_toiles, "il attend")
+	T.eq(n.get_node("Interface/Action").text, "F (maintenu) : fermer les yeux", "ce que fait F")
+	Input.action_press("fermer_les_yeux")
+	await _attendre(3)
+	T.eq(j.camera.cull_mask, Souvenir.COUCHE_VRAI, "les yeux fermés, on ne voit que ce qui est vrai")
+	T.ok(mur.layers & j.camera.cull_mask != 0, "les vrais murs")
+	var peinture: GeometryInstance3D = n.get_node("Course/Toile_335_2/Peinture")
+	T.eq(peinture.layers & j.camera.cull_mask, 0, "pas les toiles")
+	await _attendre(60, func() -> bool: return not n.arret_toiles)
+	T.ok(not n.arret_toiles, "Thomas repart")
+	Input.action_press("droite")
+	await _attendre(50)
+	Input.action_release("droite")
+	await _attendre(60)
+	Input.action_release("fermer_les_yeux")
+	T.ok(j.global_position.z < -336.0 and not n.course_figee, "par la voie libre, à travers la toile (%s)" % j.global_position)
+
+
+func test_derriere_une_toile_un_vrai_mur() -> void:
+	var n: Node3D = await _charger()
+	var j := await _en_course(n, -345.0)
+	# À -355 m, les voies du milieu et de droite sont bloquées.
+	await _attendre(150, func() -> bool: return n.course_figee)
+	T.ok(n.course_figee, "on se cogne au vrai mur")
+	T.ok(not (n.get_node("Course/Toile_355_1") as Node3D).visible, "la toile s'est déchirée")
+	var mur: GeometryInstance3D = n.get_node("Course/Vrai_mur_355_1")
+	T.ok(mur.layers & j.camera.cull_mask != 0, "derrière, on voit le vrai mur")
 
 
 func test_au_bout_de_la_route_la_chute_et_espace() -> void:
 	var n: Node3D = await _charger()
-	var j := await _en_course(n, -322.0)
+	var j := await _en_course(n, Dispute.FIN_COURSE + 9.0)
 	await _attendre(120, func() -> bool: return n.etat == Dispute.Etat.CHUTE)
 	T.eq(n.etat, Dispute.Etat.CHUTE, "au bout de la route, le vide")
 	T.ok(not j.avance_auto, "on ne court plus")
@@ -236,7 +347,7 @@ func test_au_bout_de_la_route_la_chute_et_espace() -> void:
 
 func test_sans_taper_elle_tombe_aussi() -> void:
 	var n: Node3D = await _charger()
-	await _en_course(n, -322.0)
+	await _en_course(n, Dispute.FIN_COURSE + 9.0)
 	await _attendre(120, func() -> bool: return n.etat == Dispute.Etat.CHUTE)
 	await _attendre(int(16.0 * 60), func() -> bool: return n.etat == Dispute.Etat.VERITE)
 	T.ok(not n.rattrapee, "sans la rattraper")
@@ -272,7 +383,7 @@ func test_la_mobylette_ne_traverse_aucun_obstacle() -> void:
 	for o in Dispute.OBSTACLES:
 		var oz: float = o[0]
 		match o[1]:
-			"mur":
+			"mur", "toiles":
 				var xo: float = trajet[snappedf(oz, 0.25)]
 				for v in o[2]:
 					T.ok(absf(xo - Dispute.VOIES[v]) > 1.8, "au mur de %d m, elle n'est pas dans la voie %d (x = %.2f)" % [int(oz), v, xo])
@@ -302,7 +413,7 @@ func test_les_immeubles_n_entrent_jamais_dans_la_route() -> void:
 
 func test_on_ne_traverse_pas_les_immeubles() -> void:
 	var n: Node3D = await _charger()
-	var j := await _en_course(n, -200.0)
+	var j := await _en_course(n, -165.0)
 	Input.action_press("gauche")
 	await _attendre(90)
 	Input.action_release("gauche")

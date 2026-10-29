@@ -42,7 +42,8 @@ func _ready() -> void:
 	add_child(_vue)
 	_camera = Camera3D.new()
 	_camera.fov = 70.0
-	_camera.cull_mask = 0xFFFFF & ~Miroir.COUCHE_REFLET
+	# Ce qui est vrai (les yeux fermés) ne se voit pas sur la toile.
+	_camera.cull_mask = 0xFFFFF & ~(Miroir.COUCHE_REFLET | Souvenir.COUCHE_VRAI)
 	_vue.add_child(_camera)
 	var marque := get_node_or_null(vue) as Node3D
 	if marque != null:

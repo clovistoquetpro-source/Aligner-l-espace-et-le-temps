@@ -6,13 +6,16 @@ extends "res://tools/constructeur_souvenir.gd"
 ##
 ## Plan, vu de dessus (-Z vers le haut) :
 ##
-##                  Le cœur (le chevalet, la dernière toile)
+##          La salle du miroir (le passage n'est que dans le reflet)
 ##                        |
 ##          Le labyrinthe des mille toiles (5 × 5 cases de 3 m)
 ##                        |
 ##          L'antichambre (le peintre, de dos, à l'entrée)
 ##
-## Dehors, la nature, en x = 1000.
+## Plus loin, et reliées par des chutes et des toiles : la salle de la toile
+## qui tourne (en x = 40), la pièce peinte aux quatre portes (en x = 80, en
+## l'air), le cœur (le chevalet, la dernière toile, au nord) ; dehors, la
+## nature, en x = 1000.
 
 const COULEURS := {
 	"sol": "3d3029", "mur": "4a4e69", "plafond": "2b2d42", "cadre": "b08d57", "cadre_toile": "b08d57", "toile": "e9dcc9",
@@ -25,11 +28,13 @@ const COULEURS := {
 	"feuillage_2": "95d5b2", "colline": "8ab17d", "banc": "a47148", "fleur_1": "ff006e", "fleur_2": "ffbe0b",
 	"fleur_3": "fb5607", "fleur_4": "8338ec", "fleur_5": "3a86ff", "papillon_1": "ffbe0b", "papillon_2": "ff006e",
 	"papillon_3": "3a86ff", "habit_1": "e76f51", "habit_2": "2a9d8f", "habit_3": "f4a261", "cerf_volant": "e63946",
-	"tige": "386641",
+	"tige": "386641", "chemise": "457b9d", "passage": "3d3029",
+	"p_sol": "c9905a", "p_mur": "f4a261", "p_fond": "e9c46a", "p_plafond": "f6bd60", "p_porte": "7a5c45",
+	"p_cadre": "6f4518", "p_poignee": "d4af37",
 }
 
 ## Couche visible seulement les yeux fermés : ce qui est vrai.
-const COUCHE_VRAI := 8
+const COUCHE_VRAI := Souvenir.COUCHE_VRAI
 const H := 3.2
 const CASE := 3.0
 const N := 5
@@ -40,8 +45,25 @@ const IMPASSES := [
 	[[2, 1], [3, 1]], [[3, 1], [4, 1]], [[4, 1], [4, 0]], [[3, 1], [3, 0]], [[2, 0], [1, 0]], [[1, 0], [0, 0]],
 	[[1, 1], [1, 2]], [[1, 2], [2, 2]], [[0, 3], [0, 4]], [[0, 4], [1, 4]], [[1, 4], [2, 4]], [[2, 4], [3, 4]],
 ]
-const COEUR := Vector3(6, 0, -20)
+const COEUR := Vector3(6, 0, -42)
 const DEHORS := Vector3(1000, 0, 0)
+## La salle du miroir : le miroir à l'ouest, le passage (seulement dans le
+## reflet) à l'est.
+const REFLETS_X := [-2.0, 14.0]
+const REFLETS_Z := [-21.0, -15.0]
+const PASSAGE_Z := -18.0
+const PASSAGE := Vector2(1.4, 2.4)
+## La salle de la toile qui tourne, et la pièce peinte qu'elle montre (un
+## cube ouvert vers +Z).
+const SALLE_TOILE := Vector3(40, 0, -18)
+const PIECE := Vector3(80, 13, -18)
+const COTE_PIECE := 6.0
+## Les portes de la pièce peinte, aux quatre coins du mur du fond : [nom,
+## coin (x, y), vraie]. La vraie est en haut à droite : un quart de tour
+## (dans le sens des aiguilles d'une montre) la met en bas à droite.
+const PORTES := [["Porte_hg", Vector2(-1, 1), false], ["Porte_hd", Vector2(1, 1), true],
+	["Porte_bg", Vector2(-1, -1), false], ["Porte_bd", Vector2(1, -1), false]]
+const PORTE_COTE := 2.0
 
 
 func construire() -> int:
@@ -51,6 +73,9 @@ func construire() -> int:
 	_environnement()
 	_antichambre()
 	_labyrinthe()
+	_salle_des_reflets()
+	_salle_de_la_toile()
+	_piece_peinte()
 	_coeur()
 	_dehors()
 	_joueur_et_interface(Vector3(0, 0, 10), 0.0)
@@ -290,11 +315,15 @@ func _labyrinthe() -> void:
 
 ## Un mur-toile du labyrinthe : solide, la route sous la pluie peinte des deux
 ## côtés. `le_long_de_x` : le mur suit l'axe X.
-func _toile_mur(g: Node3D, nom: String, centre: Vector3, le_long_de_x: bool) -> void:
+## `retour` : où la toile renvoie celui qui la regarde (par défaut, l'entrée
+## du labyrinthe).
+func _toile_mur(g: Node3D, nom: String, centre: Vector3, le_long_de_x: bool, retour := "") -> StaticBody3D:
 	var corps := StaticBody3D.new()
-	corps.position = centre + Vector3(0, H / 2, 0)
+	corps.position = centre + Vector3(0, H / 2, 0) - g.position
 	corps.rotation.y = 0.0 if le_long_de_x else PI / 2
 	corps.add_to_group("toiles_mille", true)
+	if retour != "":
+		corps.set_meta("retour", retour)
 	_ajouter(g, corps, nom)
 	_forme(corps, "CollisionShape3D", _boite_forme(Vector3(CASE + 0.1, H, 0.12)))
 	_deco(corps, "Cadre", Vector3.ZERO, Vector3(CASE + 0.1, H, 0.1), "cadre")
@@ -311,6 +340,195 @@ func _toile_mur(g: Node3D, nom: String, centre: Vector3, le_long_de_x: bool) -> 
 			var f: Array = formes[i]
 			var pos := Vector3((f[0] + f[2] / 2.0 - 0.5) * taille.x, (f[1] + f[3] / 2.0 - 0.5) * taille.y, 0.004 + 0.002 * i)
 			_deco(face, "Forme_%d" % i, pos, Vector3(f[2] * taille.x, f[3] * taille.y, 0.002), f[4])
+	return corps
+
+
+# --- La salle du miroir ------------------------------------------------------
+
+
+## Juliette debout (formes simples), vers son -Z.
+func _juliette(parent: Node3D, nom: String) -> Node3D:
+	var j := Node3D.new()
+	_ajouter(parent, j, nom)
+	var robe := CylinderMesh.new()
+	robe.top_radius = 0.18
+	robe.bottom_radius = 0.32
+	robe.height = 1.2
+	var mr := MeshInstance3D.new()
+	mr.mesh = robe
+	mr.position = Vector3(0, 0.75, 0)
+	mr.material_override = _mat("robe")
+	_ajouter(j, mr, "Robe")
+	var tete := SphereMesh.new()
+	tete.radius = 0.13
+	tete.height = 0.26
+	var mt := MeshInstance3D.new()
+	mt.mesh = tete
+	mt.position = Vector3(0, 1.55, 0)
+	mt.material_override = _mat("peau")
+	_ajouter(j, mt, "Tete")
+	_deco(j, "Cheveux", Vector3(0, 1.45, 0.08), Vector3(0.28, 0.45, 0.1), "cheveux")
+	_deco(j, "Bras", Vector3(0.22, 1.1, -0.15), Vector3(0.08, 0.08, 0.45), "peau")
+	return j
+
+
+## Une salle nue, et un grand miroir au mur ouest. Dans le reflet, Thomas est
+## jeune, et Juliette l'attend devant un passage, dans le mur est. En vrai, le
+## mur est est couvert de toiles (la route sous la pluie) : les regarder
+## renvoie à l'entrée de la salle. Il faut reculer vers le passage, les yeux
+## sur le miroir.
+func _salle_des_reflets() -> void:
+	var g := _groupe("Reflets")
+	var x0: float = REFLETS_X[0]
+	var x1: float = REFLETS_X[1]
+	var z0: float = REFLETS_Z[0]
+	var z1: float = REFLETS_Z[1]
+	_sol_plafond(g, x0 - EP, x1 + EP, z0 - EP, z1, H, "sol", "plafond")
+	_mur(g, "Mur_nord", true, z0 - EP / 2, x0 - EP, x1 + EP, H, "mur")
+	_mur(g, "Mur_sud", true, z1 - EP / 2, x0 - EP, x1 + EP, H, "mur", [[6.0, 2.0, 2.6]])
+	_mur(g, "Mur_ouest", false, x0 - EP / 2, z0, z1, H, "mur")
+	# Le mur est : plein en vrai ; dans le reflet, avec un passage.
+	var reel := _boite(g, "Mur_est_reel", Vector3(x1 + EP / 2, H / 2, (z0 + z1) / 2), Vector3(EP, H, z1 - z0), "mur")
+	reel.layers = Miroir.COUCHE_REEL
+	var reflet := _boite(g, "Mur_est_reflet", Vector3(x1 + EP / 2, H / 2, (z0 + z1) / 2), Vector3(EP, H, z1 - z0), "mur", false)
+	reflet.layers = Miroir.COUCHE_REFLET
+	var trou := CSGBox3D.new()
+	trou.operation = CSGShape3D.OPERATION_SUBTRACTION
+	trou.position = Vector3(0, PASSAGE.y / 2 - H / 2, PASSAGE_Z - (z0 + z1) / 2)
+	trou.size = Vector3(EP + 0.2, PASSAGE.y, PASSAGE.x)
+	_ajouter(reflet, trou, "Trou")
+	# Derrière, le passage, qu'on ne voit que par le trou du reflet.
+	var lp := 3.0
+	var xp := x1 + EP + lp / 2
+	_boite(g, "Passage_sol", Vector3(xp, -0.25, PASSAGE_Z), Vector3(lp, 0.5, PASSAGE.x + 2 * EP), "passage")
+	_boite(g, "Passage_plafond", Vector3(xp, PASSAGE.y + EP / 2, PASSAGE_Z), Vector3(lp, EP, PASSAGE.x + 2 * EP), "passage")
+	_boite(g, "Passage_g", Vector3(xp, PASSAGE.y / 2, PASSAGE_Z - PASSAGE.x / 2 - EP / 2), Vector3(lp, PASSAGE.y, EP), "passage")
+	_boite(g, "Passage_d", Vector3(xp, PASSAGE.y / 2, PASSAGE_Z + PASSAGE.x / 2 + EP / 2), Vector3(lp, PASSAGE.y, EP), "passage")
+	_boite(g, "Passage_fond", Vector3(x1 + EP + lp + EP / 2, PASSAGE.y / 2, PASSAGE_Z), Vector3(EP, PASSAGE.y, PASSAGE.x + 2 * EP), "passage")
+	_boite(g, "Passage_toile", Vector3(x1 + EP + lp - 0.03, 1.2, PASSAGE_Z), Vector3(0.04, 1.0, 0.8), "p_mur", false)
+	# Les toiles du mur est, qu'on ne voit pas dans le reflet.
+	for k in 2:
+		var t := _toile_mur(g, "Toile_est_%d" % k, Vector3(x1 - 0.07, 0, z1 - 1.5 - 3.0 * k), false, "Reflets/Entree")
+		for m in t.find_children("*", "MeshInstance3D", true, false):
+			(m as MeshInstance3D).layers = Miroir.COUCHE_REEL
+	# Le grand miroir.
+	_boite(g, "Miroir_cadre", Vector3(x0 + 0.02, 1.6, PASSAGE_Z), Vector3(0.04, 3.0, 5.8), "cadre", false)
+	var miroir := Miroir.new()
+	miroir.taille = Vector2(5.6, 2.8)
+	miroir.distance_vue = 25.0
+	miroir.position = Vector3(x0 + 0.045, 1.6, PASSAGE_Z) - g.position
+	miroir.rotation.y = PI / 2
+	_ajouter(g, miroir, "Miroir")
+	# Juliette, seulement dans le reflet, devant le passage.
+	var j := _juliette(g, "Juliette")
+	j.position = Vector3(x1 - 1.2, 0, PASSAGE_Z - 1.2)
+	j.rotation.y = PI / 2
+	for m in j.find_children("*", "MeshInstance3D", true, false):
+		(m as MeshInstance3D).layers = Miroir.COUCHE_REFLET
+	var passage := PassageReflet.new()
+	passage.position = Vector3(x1 - 0.5, 0, PASSAGE_Z) - g.position
+	passage.rotation.y = -PI / 2
+	_ajouter(g, passage, "Passage")
+	_forme(passage, "CollisionShape3D", _boite_forme(Vector3(PASSAGE.x, PASSAGE.y, 0.6)), Vector3(0, PASSAGE.y / 2, 0))
+	passage.miroir = NodePath("../Miroir")
+	_lampe(g, "Lampe", Vector3(6.0, H - 0.3, -18.0), 12.0, true, 1.0)
+	_marque(g, "Entree", Vector3(6.0, 0, -16.0), 0.0)
+	_pensee(g, "PenseeMiroir", Vector3(x0 + 0.05, 1.6, PASSAGE_Z), "Dans le miroir… je suis jeune.", 14.0, 20.0)
+	_pensee(g, "PenseeJuliette", Vector3(x0 + 0.05, 1.3, PASSAGE_Z + 0.8), "Elle est là… Seulement dans le reflet.", 14.0, 8.0, true, false)
+
+
+# --- La toile qui tourne ------------------------------------------------------
+
+
+## Une petite salle sombre ; contre le mur nord, posée au sol, une toile
+## qu'on tourne (E sur la manivelle). Elle montre la pièce peinte aux quatre
+## portes ; on y entre en marchant dans la toile.
+func _salle_de_la_toile() -> void:
+	var g := _groupe("SalleToile", SALLE_TOILE)
+	var c := SALLE_TOILE
+	_sol_plafond(g, c.x - 4.3, c.x + 4.3, c.z - 4.3, c.z + 4.3, H, "sol", "plafond")
+	_mur(g, "Mur_nord", true, c.z - 4.15, c.x - 4.3, c.x + 4.3, H, "mur")
+	_mur(g, "Mur_sud", true, c.z + 4.15, c.x - 4.3, c.x + 4.3, H, "mur")
+	_mur(g, "Mur_ouest", false, c.x - 4.15, c.z - 4.0, c.z + 4.0, H, "mur")
+	_mur(g, "Mur_est", false, c.x + 4.15, c.z - 4.0, c.z + 4.0, H, "mur")
+	var toile := ToileTournante.new()
+	toile.position = Vector3(0, 1.5, -3.97)
+	_ajouter(g, toile, "ToileTournante")
+	var b := 0.2
+	var cote := toile.taille
+	for bord in [["Cadre_haut", Vector3(0, cote / 2 + b / 2, 0), Vector3(cote + 2 * b, b, 0.12)],
+			["Cadre_g", Vector3(-cote / 2 - b / 2, -0.1, 0), Vector3(b, cote + 0.2, 0.12)],
+			["Cadre_d", Vector3(cote / 2 + b / 2, -0.1, 0), Vector3(b, cote + 0.2, 0.12)],
+			["Manivelle", Vector3(cote / 2 + b + 0.12, 0, 0.12), Vector3(0.12, 0.5, 0.12)],
+			["Manivelle_bras", Vector3(cote / 2 + b + 0.12, 0.25, 0.25), Vector3(0.08, 0.08, 0.3)]]:
+		_boite(toile, bord[0], bord[1], bord[2], "cadre", false)
+		_forme(toile, "Forme_" + bord[0], _boite_forme(bord[2]), bord[1])
+	toile.piece = NodePath("../../PiecePeinte/Chambre")
+	toile.vue = NodePath("../../PiecePeinte/Vue")
+	var entree := _porte_trompeuse(g, "EntreeToile", c + Vector3(0, 0, -3.75), Vector3(cote, cote + 0.2, 0.4))
+	entree.destinations = [NodePath("../../PiecePeinte/Arrivee")]
+	# Ressorti de la toile, on lui tourne le dos (sinon, on y rentre aussitôt).
+	_marque(g, "Retour", c + Vector3(0, 0, -2.3), PI)
+	_marque(g, "Arrivee", c + Vector3(0, 0, 3.0), 0.0)
+	_lampe(g, "Lampe", c + Vector3(0, H - 0.3, 0.5), 9.0, true, 0.9)
+	_pensee(g, "PenseeToile", c + Vector3(0, 1.5, -3.97), "Une pièce peinte… avec quatre portes.", 7.0, 20.0)
+
+
+## La pièce peinte : un cube ouvert vers +Z, que la toile filme. « Chambre »
+## tourne autour de Z avec la toile ; l'arrivée, la sortie, la lumière et le
+## point de vue ne tournent pas. Quatre portes aux coins du mur du fond, une
+## seule vraie ; les yeux fermés, des pétales l'entourent.
+func _piece_peinte() -> void:
+	var g := _groupe("PiecePeinte", PIECE)
+	var d := COTE_PIECE / 2
+	var piece := Node3D.new()
+	_ajouter(g, piece, "Chambre")
+	_boite(piece, "Sol", Vector3(0, -d - EP / 2, 0), Vector3(COTE_PIECE + 2 * EP, EP, COTE_PIECE), "p_sol")
+	_boite(piece, "Plafond", Vector3(0, d + EP / 2, 0), Vector3(COTE_PIECE + 2 * EP, EP, COTE_PIECE), "p_plafond")
+	_boite(piece, "Mur_g", Vector3(-d - EP / 2, 0, 0), Vector3(EP, COTE_PIECE, COTE_PIECE), "p_mur")
+	_boite(piece, "Mur_d", Vector3(d + EP / 2, 0, 0), Vector3(EP, COTE_PIECE, COTE_PIECE), "p_mur")
+	_boite(piece, "Mur_fond", Vector3(0, 0, -d - EP / 2), Vector3(COTE_PIECE + 2 * EP, COTE_PIECE + 2 * EP, EP), "p_fond")
+	# Un tapis, une fenêtre, une chaise : on voit dans quel sens est la pièce.
+	_boite(piece, "Tapis", Vector3(0, -d + 0.01, 0.2), Vector3(2.6, 0.02, 2.0), "beret", false)
+	_boite(piece, "Fenetre", Vector3(-d + 0.02, 0.4, 0.2), Vector3(0.04, 1.4, 1.6), "fenetre", false)
+	_boite(piece, "Chaise", Vector3(2.2, -d + 0.45, 1.8), Vector3(0.5, 0.9, 0.5), "p_cadre", false)
+	var centre := d - PORTE_COTE / 2 - 0.1
+	for p in PORTES:
+		var coin: Vector2 = p[1]
+		var pos := Vector3(coin.x * centre, coin.y * centre, -d)
+		var porte := Node3D.new()
+		porte.position = pos
+		_ajouter(piece, porte, p[0])
+		# Une porte carrée : elle passe dans tous les sens.
+		_boite(porte, "Cadre", Vector3(0, 0, 0.02), Vector3(PORTE_COTE + 0.2, PORTE_COTE + 0.2, 0.04), "p_cadre", false)
+		_boite(porte, "Panneau", Vector3(0, 0, 0.05), Vector3(PORTE_COTE - 0.1, PORTE_COTE - 0.1, 0.04), "p_porte", false)
+		_boite(porte, "Poignee", Vector3(PORTE_COTE * 0.35, 0, 0.09), Vector3(0.12, 0.12, 0.05), "p_poignee", false)
+		var zone := Area3D.new()
+		zone.position = Vector3(0, 0, 0.45)
+		zone.set_meta("vraie", p[2])
+		zone.add_to_group("portes_peintes", true)
+		_ajouter(porte, zone, "Zone")
+		_forme(zone, "CollisionShape3D", _boite_forme(Vector3(PORTE_COTE - 0.2, PORTE_COTE - 0.2, 0.6)))
+		if p[2]:
+			# Les pétales de la fleur de Juliette, autour de la vraie porte.
+			for k in 24:
+				var a := TAU * k / 24.0
+				var r := PORTE_COTE * 0.68
+				var petale := _deco(porte, "Petale_%d" % k, Vector3(cos(a) * r, sin(a) * r, 0.1), Vector3(0.14, 0.1, 0.01), "petale")
+				petale.rotation.z = a + k
+				petale.layers = COUCHE_VRAI
+				petale.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var bas := PIECE.y - d
+	_lampe(g, "Lampe", PIECE + Vector3(0, 0, 1.0), 10.0, false)
+	_marque(g, "Arrivee", Vector3(PIECE.x, bas, PIECE.z + 1.2))
+	var sortie := _porte_trompeuse(g, "Sortie", Vector3(PIECE.x, bas, PIECE.z + d - 0.4), Vector3(COTE_PIECE, COTE_PIECE, 0.4), PI)
+	sortie.destinations = [NodePath("../../SalleToile/Retour")]
+	# Le point de vue de la toile : face à l'ouverture, à la distance où la
+	# pièce remplit l'image (champ de 70°).
+	var vue := Marker3D.new()
+	vue.position = Vector3(0, 0, d + d / tan(deg_to_rad(35.0)))
+	_ajouter(g, vue, "Vue")
+	_pensee(g, "PenseeArrivee", Vector3(PIECE.x, bas + 1.0, PIECE.z + 1.2), "Quatre portes. Une seule mène quelque part.", 2.0, 0.0, false)
 
 
 # --- Le cœur -----------------------------------------------------------------
@@ -318,15 +536,15 @@ func _toile_mur(g: Node3D, nom: String, centre: Vector3, le_long_de_x: bool) -> 
 
 ## Le chevalet, face à la dernière toile, encore inachevée. La version
 ## parfaite (Juliette à la fenêtre) et le vrai souvenir (au lac) sont cachés.
+## On y arrive par la vraie porte de la pièce peinte, au seuil.
 func _coeur() -> void:
 	var g := _groupe("Coeur")
 	var c := COEUR
-	_sol_plafond(g, c.x - 4.3, c.x + 4.3, c.z - 5.3, -15.0, H + 1.0, "sol", "plafond")
+	_sol_plafond(g, c.x - 4.3, c.x + 4.3, c.z - 5.3, c.z + 5.3, H + 1.0, "sol", "plafond")
 	_mur(g, "Mur_nord", true, c.z - 5.15, c.x - 4.3, c.x + 4.3, H + 1.0, "mur")
-	_mur(g, "Mur_ouest", false, c.x - 4.15, c.z - 5.0, -15.0, H + 1.0, "mur")
-	_mur(g, "Mur_est", false, c.x + 4.15, c.z - 5.0, -15.0, H + 1.0, "mur")
-	# Le mur sud du cœur, avec le passage depuis la sortie du labyrinthe.
-	_mur(g, "Mur_sud", true, -15.15, c.x - 4.3, c.x + 4.3, H + 1.0, "mur", [[6.0, 2.0, 2.6]])
+	_mur(g, "Mur_sud", true, c.z + 5.15, c.x - 4.3, c.x + 4.3, H + 1.0, "mur")
+	_mur(g, "Mur_ouest", false, c.x - 4.15, c.z - 5.0, c.z + 5.0, H + 1.0, "mur")
+	_mur(g, "Mur_est", false, c.x + 4.15, c.z - 5.0, c.z + 5.0, H + 1.0, "mur")
 	var derniere := _toile(g, "Derniere_toile", c + Vector3(0, 2.1, -4.95), 0.0, Vector2(3.2, 2.2), "pluie")
 	var parfaite := _toile(g, "Version_parfaite", c + Vector3(0, 2.1, -4.92), 0.0, Vector2(3.2, 2.2), "fenetre")
 	parfaite.visible = false
@@ -347,7 +565,8 @@ func _coeur() -> void:
 	var sortie := _zone(g, "Sortie", c + Vector3(-3.0, 1.2, -4.5), Vector3(1.2, 2.4, 0.8))
 	sortie.monitoring = false
 	_lampe(g, "Lampe", c + Vector3(0, H, -1.0), 9.0, true, 1.0)
-	_pensee(g, "PenseeDerniere", derniere.position + g.position, "Elle est encore là. Je peux encore la sauver.", 7.0, 20.0)
+	_marque(g, "Seuil", c + Vector3(0, 0, 4.0), 0.0)
+	_pensee(g, "PenseeDerniere", derniere.position + g.position, "Elle est encore là. Je peux encore la sauver.", 9.0, 20.0)
 
 
 # --- Dehors ------------------------------------------------------------------

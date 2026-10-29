@@ -23,12 +23,12 @@ Fiche du jeu : `docs/superpowers/specs/`. Plan en cours : `docs/superpowers/plan
 | Prendre ou poser un objet (vise loin pour l'agrandir, près pour le rétrécir), tourner une toile | E | E |
 | Basculer d'époque | Tab ou clic droit | Tab ou clic droit |
 | Fermer les yeux (en restant appuyé) | F | F |
-| Remonter le temps (en restant appuyé, niveau 4) | R | R |
+| Remonter le temps (en restant appuyé, niveau 4, aussi pendant la course) | R | R |
 | Libérer la souris | Échap | Échap |
 
 ## Tests
 
-`./run_tests.sh` (il faut la commande `godot` dans le PATH, ou la variable `GODOT`).
+`./run_tests.sh` (il faut la commande `godot` dans le PATH, ou la variable `GODOT`). Pour ne lancer qu'une partie des tests : `TESTS=dispute godot --headless --path . -s res://tests/run_tests.gd`.
 
 ## Le niveau 1 : la maison dans les étoiles
 
@@ -50,13 +50,13 @@ Pour l'essayer directement, ouvre `scenes/ete.tscn` et appuie sur **F6**.
 
 ## Le niveau 4 : la pluie
 
-`scenes/dispute.tscn`, en formes simples : d'abord le bonheur (l'atelier à deux au soleil, puis une balade à moto au bord de la mer), puis le soir de la dispute à l'atelier, qu'on remonte dans le temps (R maintenu), puis la course-poursuite derrière Juliette (on avance tout seul : Q et D pour aller à gauche et à droite, Espace pour sauter) et la chute (Espace, le plus vite possible). On y arrive par la toile de l'atelier, au salon, au retour de l'été. Il est construit par `tools/constructeur_dispute.gd` :
+`scenes/dispute.tscn`, en formes simples : d'abord le bonheur (l'atelier à deux au soleil, puis une balade à moto au bord de la mer), puis le soir de la dispute à l'atelier, qu'on remonte dans le temps (R maintenu), puis la course-poursuite derrière Juliette (on avance tout seul : Q et D pour aller à gauche et à droite, Espace pour sauter ; après une chute ou un choc, R remonte la course), avec la rue inondée (on ne voit plus la rue que dans l'eau) et les toiles du peintre (les yeux fermés, F, on voit les vrais murs), puis la chute (Espace, le plus vite possible). On y arrive par la toile de l'atelier, au salon, au retour de l'été. Il est construit par `tools/constructeur_dispute.gd` :
 `godot --headless --path . -s res://tools/construire_dispute.gd`.
 Pour l'essayer directement, ouvre `scenes/dispute.tscn` et appuie sur **F6**.
 
 ## Le niveau 5 : l'atelier du peintre, et dehors
 
-`scenes/atelier.tscn`, en formes simples : on devient le peintre, on traverse le labyrinthe des mille toiles les yeux fermés, on essaie de peindre, puis on pose le pinceau ; dehors, dans la nature en couleurs, la fin est une cinématique. On y arrive par la toile de la chambre, au retour de la pluie. Il est construit par `tools/constructeur_atelier.gd` :
+`scenes/atelier.tscn`, en formes simples : on devient le peintre, on traverse le labyrinthe des mille toiles les yeux fermés, puis la salle du miroir (à reculons, les yeux sur le reflet) et la toile qui tourne (quatre portes, une seule vraie), on essaie de peindre, puis on pose le pinceau ; dehors, dans la nature en couleurs, la fin est une cinématique. On y arrive par la toile de la chambre, au retour de la pluie. Il est construit par `tools/constructeur_atelier.gd` :
 `godot --headless --path . -s res://tools/construire_atelier.gd`.
 Pour l'essayer directement, ouvre `scenes/atelier.tscn` et appuie sur **F6**.
 

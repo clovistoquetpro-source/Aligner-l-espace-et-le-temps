@@ -26,6 +26,7 @@ const COULEURS := {
 	"ecran": "caf0f8", "soleil_mur": "ffe8c2", "parquet_clair": "c9905a", "fleurs": "ff8fab", "vase": "457b9d",
 	"cle": "d4af37", "mer": "3a86ff", "falaise": "bc8a5f", "champ": "a7c957", "route_claire": "8d99ae",
 	"toile_juliette": "f6bd60", "photo": "f1faee", "veste": "e63946", "disque": "2b2d42",
+	"cadre_toile": "c08552", "joint": "9d4edd", "vrai": "f1faee", "ligne": "caf0f8",
 }
 
 const H := 6.0
@@ -42,7 +43,9 @@ const COURSE := Vector3(500, 0, 0)
 const FIN_COURSE := Niveau4.FIN_COURSE
 const VOIES := Niveau4.VOIES
 const OBSTACLES := Niveau4.OBSTACLES
-const REPERES := Niveau4.REPERES
+const INONDEE := Niveau4.INONDEE
+const DEBUT_TOILES := Niveau4.DEBUT_TOILES
+const COUCHE_VRAI := Niveau4.COUCHE_VRAI
 ## Le rez-de-chaussée des immeubles, solide, au bord de la route ; au-dessus,
 ## les étages penchent au-dessus d'elle.
 const BORD := 4.9
@@ -53,6 +56,8 @@ const VIDE := Vector3(1000, 0, 0)
 const BONHEUR := Vector3(-500, 0, 0)
 const BALADE := Vector3(-1000, 0, 0)
 const LONGUEUR_BALADE := 620.0
+## Les reflets sont un peu sous la surface de l'eau (sinon, elle scintille).
+const SOUS_L_EAU := Niveau4.SOUS_L_EAU
 
 
 func construire() -> int:
@@ -87,7 +92,7 @@ func _couleurs() -> Dictionary:
 
 
 func _lumineux() -> Array:
-	return ["ecran", "barriere"]
+	return ["ecran", "barriere", "vrai", "ligne"]
 
 
 ## Un soir de pluie : un ciel bas, gris bleu.
@@ -481,23 +486,40 @@ func _rue() -> void:
 
 ## La route sous la pluie, qui se déforme comme dans un rêve : les immeubles
 ## se penchent de plus en plus au-dessus d'elle. Des barrières, des murs et
-## des trous, jusqu'au vide.
+## des trous ; puis la rue inondée, toute noire, où l'on ne voit la rue que
+## dans l'eau ; puis les toiles du peintre, et derrière, les vrais murs.
+## Jusqu'au vide.
 func _course() -> void:
 	var g := _groupe("Course", COURSE)
+	var reflets := Node3D.new()
+	_ajouter(g, reflets, "Reflets")
 	var trous := []
 	for o in OBSTACLES:
 		if o[1] == "trou":
 			trous.append([o[0], o[0] - o[2]])
-	# La route, coupée aux trous.
+	# La route, coupée aux trous, et l'eau de la rue inondée.
 	var debut := 12.0
 	var morceaux := []
 	for t in trous:
 		morceaux.append([debut, t[0]])
 		debut = t[1]
 	morceaux.append([debut, FIN_COURSE])
-	for i in morceaux.size():
-		var m: Array = morceaux[i]
-		_boite(g, "Route_%d" % i, Vector3(0, -0.25, (m[0] + m[1]) / 2), Vector3(9.0, 0.5, m[0] - m[1]), "rue")
+	var k := 0
+	for m in morceaux:
+		var coupes := [m[0]]
+		for c in INONDEE:
+			if c < m[0] and c > m[1]:
+				coupes.append(c)
+		coupes.append(m[1])
+		for i in coupes.size() - 1:
+			var z0: float = coupes[i]
+			var z1: float = coupes[i + 1]
+			var r := _boite(g, "Route_%d" % k, Vector3(0, -0.25, (z0 + z1) / 2), Vector3(9.0, 0.5, z0 - z1), "rue")
+			if _dans_l_eau((z0 + z1) / 2):
+				r.name = "Eau_%d" % k
+				r.material = _eau()
+				r.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			k += 1
 	_mur_invisible(g, "Bord_g", COURSE + Vector3(-4.7, 3, (12 + FIN_COURSE) / 2), Vector3(0.4, 6, 12 - FIN_COURSE))
 	_mur_invisible(g, "Bord_d", COURSE + Vector3(4.7, 3, (12 + FIN_COURSE) / 2), Vector3(0.4, 6, 12 - FIN_COURSE))
 	_mur_invisible(g, "Bord_debut", COURSE + Vector3(0, 3, 12.2), Vector3(9.4, 6, 0.4))
@@ -505,50 +527,129 @@ func _course() -> void:
 		var z: float = o[0]
 		match o[1]:
 			"barriere":
-				_boite(g, "Barriere_%d" % int(-z), Vector3(0, 0.3, z), Vector3(9.0, 0.6, 0.3), "barriere")
+				_obstacle(g, "Barriere_%d" % int(-z), Vector3(0, 0.3, z), Vector3(9.0, 0.6, 0.3), "barriere")
 			"mur":
 				for v in o[2]:
-					_boite(g, "Mur_%d_%d" % [int(-z), v], Vector3(VOIES[v], 1.5, z), Vector3(3.0, 3.0, 0.6), "mur_course")
+					_obstacle(g, "Mur_%d_%d" % [int(-z), v], Vector3(VOIES[v], 1.5, z), Vector3(3.0, 3.0, 0.6), "mur_course")
+			"toiles":
+				_toiles(g, z, o[2])
+	# Parmi les toiles, les lignes de la route brillent : on les voit aussi
+	# les yeux fermés.
+	for x in [-4.4, -1.5, 1.5, 4.4]:
+		var l := _boite(g, "Ligne_%d" % int(x * 10), Vector3(x, 0.01, (DEBUT_TOILES + FIN_COURSE) / 2), Vector3(0.12, 0.02, DEBUT_TOILES - FIN_COURSE), "ligne", false)
+		l.layers = 1 | COUCHE_VRAI
 	# Les immeubles : un rez-de-chaussée solide au bord de la route, puis des
 	# étages qui penchent de plus en plus au-dessus d'elle, en tournant autour
 	# de leur bord intérieur, à 4 m de haut : ils ne descendent jamais jusqu'à
 	# Thomas. Au bout, ils se rejoignent au-dessus de la route.
-	var k := 0
+	k = 0
 	for z in range(0, int(FIN_COURSE), -12):
 		var penche := clampf(-float(z) / -FIN_COURSE, 0.0, 1.0)
 		for cote in [-1, 1]:
 			var nom := "Immeuble_%d_%s" % [k, "g" if cote < 0 else "d"]
 			var couleur := "facade_%d" % ((k + (1 if cote > 0 else 0)) % 3 + 1) if (k + 1) % 3 > 0 else "facade"
 			var haut := 10.0 + 6.0 * ((k * 7 + (3 if cote > 0 else 0)) % 4)
-			_boite(g, nom + "_rez", Vector3(cote * (BORD + 2.5), REZ / 2, z), Vector3(5.0, REZ, 10.0), couleur)
+			var rez := _boite(g, nom + "_rez", Vector3(cote * (BORD + 2.5), REZ / 2, z), Vector3(5.0, REZ, 10.0), couleur)
 			var pivot := Node3D.new()
 			pivot.position = Vector3(cote * BORD, REZ, z)
 			pivot.rotation.z = cote * penche * 1.0
 			_ajouter(g, pivot, nom)
-			_boite(pivot, "Etages", Vector3(cote * 2.5, (haut - REZ) / 2, 0), Vector3(5.0, haut - REZ, 10.0), couleur, false)
+			var etages := _boite(pivot, "Etages", Vector3(cote * 2.5, (haut - REZ) / 2, 0), Vector3(5.0, haut - REZ, 10.0), couleur, false)
+			if _dans_l_eau(z):
+				# Dans la nuit, on ne voit plus que leur reflet.
+				rez.layers = Miroir.COUCHE_REFLET
+				etages.layers = Miroir.COUCHE_REFLET
+				_boite(reflets, "Reflet_" + nom + "_rez", Vector3(cote * (BORD + 2.5), -REZ / 2 - SOUS_L_EAU, z), Vector3(5.0, REZ, 10.0), couleur, false).material = _mat_reflet(couleur)
+				var p := Node3D.new()
+				p.position = Vector3(cote * BORD, -REZ - SOUS_L_EAU, z)
+				p.rotation.z = -cote * penche * 1.0
+				_ajouter(reflets, p, "Reflet_" + nom)
+				_boite(p, "Reflet_etages", Vector3(cote * 2.5, -(haut - REZ) / 2, 0), Vector3(5.0, haut - REZ, 10.0), couleur, false).material = _mat_reflet(couleur)
 		k += 1
 	# Des toiles qui flottent au-dessus de la route.
 	for i in 8:
 		var z := -40.0 - 36.0 * i
 		var c := _boite(g, "Toile_ciel_%d" % i, Vector3(-3.0 + 2.0 * (i % 4), 8.0 + (i % 3), z), Vector3(2.4, 1.6, 0.08), "toile_peinte" if i % 2 == 0 else "robe", false)
 		c.rotation = Vector3(0.3 * (i % 3), 0.5 * i, 0.2 * (i % 2))
-	for i in REPERES.size():
-		var a := PointAncrage.new()
-		a.position = Vector3(0, 0, REPERES[i])
-		_ajouter(g, a, "Repere_%d" % i)
-		_forme(a, "CollisionShape3D", _boite_forme(Vector3(9.0, 4.0, 1.0)), Vector3(0, 2.0, 0))
+		if _dans_l_eau(z):
+			c.layers = Miroir.COUCHE_REFLET
 	_marque(g, "Depart", COURSE + Vector3(0, 0, 8.0), 0.0)
 	_zone(g, "Vide", COURSE + Vector3(0, -8.0, (12 + FIN_COURSE) / 2), Vector3(40, 4, 12 - FIN_COURSE + 40))
 	_zone(g, "Bord", COURSE + Vector3(0, 1.0, FIN_COURSE - 0.5), Vector3(9.0, 4.0, 1.0))
 	var mob := _mobylette(g, "Mobylette")
 	mob.position = Vector3(0, 0, -4.0)
+	for n in mob.find_children("*", "GeometryInstance3D", true, false):
+		(n as GeometryInstance3D).layers = 1 | COUCHE_VRAI
+	var reflet := _mobylette(reflets, "Mobylette")
+	reflet.scale = Vector3(1, -1, 1)
+	reflet.visible = false
 	var pluie := Pluie.new()
 	pluie.taille = Vector3(18, 10, 24)
 	pluie.nombre = 700
 	pluie.vitesse = 12.0
 	_ajouter(g, pluie, "Pluie")
-	for i in 10:
+	for i in 14:
 		_lampe(g, "Reverbere_%d" % i, COURSE + Vector3(-4.0 if i % 2 == 0 else 4.0, 5.0, -10.0 - 33.0 * i), 16.0, false, 1.4)
+
+
+## Dans la rue inondée (z, en coordonnées de la route).
+func _dans_l_eau(z: float) -> bool:
+	return z < INONDEE[0] and z > INONDEE[1]
+
+
+## L'eau de la rue inondée : sombre, et on voit au travers le reflet de la
+## rue.
+func _eau() -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = Color(0.03, 0.05, 0.12, 0.45)
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	return m
+
+
+## Les couleurs du reflet, dans l'eau : plus bleues, et qui brillent un peu
+## dans le noir.
+func _mat_reflet(cle: String) -> StandardMaterial3D:
+	var nom := "reflet_" + cle
+	if not _materiaux.has(nom):
+		var c := Color(_couleurs()[cle]).lerp(Color("4ea8de"), 0.35)
+		var m := Style.materiau(c, true)
+		m.emission_energy_multiplier = 0.6
+		_materiaux[nom] = m
+	return _materiaux[nom]
+
+
+## Un obstacle de la course (Thomas s'y cogne). Dans la rue inondée, on ne
+## voit que son reflet, dans l'eau.
+func _obstacle(g: Node3D, nom: String, pos: Vector3, taille: Vector3, couleur: String) -> CSGBox3D:
+	var b := _boite(g, nom, pos, taille, couleur)
+	b.add_to_group("obstacle_course", true)
+	if _dans_l_eau(pos.z):
+		b.layers = Miroir.COUCHE_REFLET
+		var r := _boite(g.get_node("Reflets"), "Reflet_" + nom, Vector3(pos.x, -pos.y - SOUS_L_EAU, pos.z), taille, couleur, false)
+		r.material = _mat_reflet(couleur)
+	return b
+
+
+## Trois toiles peintes en travers de la route, en l'air au-dessus d'elle (le
+## niveau les fait tomber quand Thomas arrive) ; derrière, les vrais murs,
+## qu'on ne voit que les yeux fermés.
+func _toiles(g: Node3D, z: float, bloquees: Array) -> void:
+	for v in VOIES.size():
+		var t := Node3D.new()
+		t.position = Vector3(VOIES[v], Niveau4.HAUT_TOILES, z + 0.5)
+		t.add_to_group("toiles_course", true)
+		_ajouter(g, t, "Toile_%d_%d" % [int(-z), v])
+		_boite(t, "Cadre", Vector3(0, 1.5, 0), Vector3(3.0, 3.0, 0.1), "cadre_toile", false)
+		_boite(t, "Peinture", Vector3(0, 1.5, 0.06), Vector3(2.7, 2.7, 0.04), "mur_course", false)
+		for j in 3:
+			_boite(t, "Joint_%d" % j, Vector3(0, 0.75 + 0.75 * j, 0.085), Vector3(2.7, 0.06, 0.01), "joint", false)
+		if v in bloquees:
+			var b := _boite(g, "Vrai_mur_%d_%d" % [int(-z), v], Vector3(VOIES[v], 1.5, z), Vector3(3.0, 3.0, 0.6), "vrai")
+			b.layers = COUCHE_VRAI
+			b.add_to_group("obstacle_course", true)
+			var m := _mat("vrai")
+			m.emission_energy_multiplier = 2.0
 
 
 ## Le vide : on y tombe, Juliette sous Thomas.

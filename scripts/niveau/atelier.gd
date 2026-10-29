@@ -3,25 +3,30 @@ extends Souvenir
 ## Niveau 5, en formes simples : « L'atelier du peintre », puis dehors.
 ## Thomas devient le peintre (lui-même, vieux). Le labyrinthe des mille
 ## toiles aspire celui qui les regarde ; les yeux fermés, on ne voit que ce
-## qui est vrai : les pétales de la fleur de Juliette. Au cœur, peindre ne
-## marche jamais : la toile se finit, se fissure, et tout recommence. Il faut
-## poser le pinceau. Dehors, la nature en couleurs, et des gens à qui dire
-## bonjour. Voir docs/superpowers/specs/2026-10-28-direction-illusions-design.md.
+## qui est vrai : les pétales de la fleur de Juliette. Dans la salle du
+## miroir, Thomas est jeune, et Juliette l'attend devant un passage qui n'est
+## que dans le reflet. Puis la toile qui tourne : une pièce peinte, quatre
+## portes, une seule vraie. Au cœur, peindre ne marche jamais : la toile se
+## finit, se fissure, et tout recommence. Il faut poser le pinceau. Dehors, la
+## nature en couleurs, et des gens à qui dire bonjour.
+## Voir docs/superpowers/specs/2026-10-28-direction-illusions-design.md.
 
 enum Etat { AVANT, DEVENIR, PEINTRE, PEINT, POSE, DEHORS, GENERIQUE }
 
-const COUCHE_VRAI := 8
 const TETE_PEINTRE := 1.45
 const VITESSE_PEINTRE := 0.65
 const VITESSE_VIEUX := 0.75
 ## Une toile aspire Thomas s'il la regarde de près, assez longtemps.
 const ASPIRE_DISTANCE := 3.5
-const ASPIRE_ANGLE := 18.0
 const ASPIRE_TEMPS := 0.6
 const PENSEES_TENTATIVES := ["Encore une fois.", "Elle tombe toujours.", "Mille fois… mille fois la même pluie.", "Et si j'arrêtais de peindre ?"]
 const PENSEES_ASPIRE := ["La toile m'a aspiré… Toutes les mêmes. La même route sous la pluie.", "Je ne peux plus les regarder.", "Encore cette route…"]
-## Où se tenir, au cœur, face à la dernière toile.
-const COEUR_FACE := Vector3(6, 0, -18.5)
+## Le cœur, et où s'y tenir, face à la dernière toile.
+const COEUR := Vector3(6, 0, -42)
+const COEUR_FACE := COEUR + Vector3(0, 0, 1.5)
+## Juliette, dans le reflet, entre dans le passage quand Thomas en est à
+## cette distance.
+const JULIETTE_PART := 4.0
 ## La caméra du premier plan, devant la maison, dehors.
 const POINT_PORTE := Vector3(1003.5, 1.6, -1.0)
 ## Le pinceau, dans la main droite, en bas de l'écran.
@@ -46,6 +51,8 @@ var _vent := 1.0
 @onready var _approche: Area3D = $Antichambre/Approche
 @onready var _chevalet: Support = $Coeur/Chevalet
 @onready var _sortie: Area3D = $Coeur/Sortie
+@onready var _passage: PassageReflet = $Reflets/Passage
+@onready var _juliette_reflet: Node3D = $Reflets/Juliette
 
 
 func _ready() -> void:
@@ -58,6 +65,12 @@ func _ready() -> void:
 	_sortie.body_entered.connect(_sur_sortie)
 	for p in find_children("*", "Passant", true, false):
 		(p as Passant).salue.connect(_sur_salut)
+	_passage.franchi.connect(_par_le_reflet)
+	_chute.finie.connect(_apres_la_chute)
+	for z in get_tree().get_nodes_in_group("portes_peintes"):
+		if is_ancestor_of(z):
+			(z as Area3D).body_entered.connect(_sur_porte_peinte.bind(z))
+	_jeune_dans_le_reflet()
 	_ouvrir_les_yeux("L'atelier… Le vrai, cette fois.")
 
 
@@ -76,6 +89,7 @@ func _physics_process(delta: float) -> void:
 	match etat:
 		Etat.PEINTRE:
 			_dans_le_labyrinthe(delta)
+			_dans_la_salle_du_miroir()
 			_le_pinceau()
 		Etat.DEHORS, Etat.GENERIQUE:
 			_animer_les_papillons()
@@ -131,6 +145,7 @@ func _mettre_les_mains(avec_pinceau: bool) -> void:
 			mi.rotation.x = -0.4
 			mi.material_override = Style.materiau(Color("e0b48e"))
 			mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			mi.layers = Miroir.COUCHE_REEL
 			_mains.add_child(mi)
 	if avec_pinceau and _pinceau == null:
 		_pinceau = RigidBody3D.new()
@@ -151,6 +166,8 @@ func _mettre_les_mains(avec_pinceau: bool) -> void:
 			mi.position = b[1]
 			mi.material_override = Style.materiau(b[3])
 			mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			# Dans le miroir, Thomas est jeune, sans pinceau.
+			mi.layers = Miroir.COUCHE_REEL
 			_pinceau.add_child(mi)
 		add_child(_pinceau)
 		_joueur.prendre(_pinceau)
@@ -159,7 +176,8 @@ func _mettre_les_mains(avec_pinceau: bool) -> void:
 # --- Les mille toiles --------------------------------------------------------
 
 
-## La toile du labyrinthe que Thomas regarde de près, ou null.
+## La toile que Thomas regarde de près (son regard la touche à moins de
+## ASPIRE_DISTANCE), ou null.
 func toile_regardee() -> Node3D:
 	if yeux_fermes():
 		return null
@@ -170,15 +188,19 @@ func toile_regardee() -> Node3D:
 		var t := n as Node3D
 		if not is_ancestor_of(t) or not t.visible:
 			continue
-		var c := t.global_position
-		c.y = o.y
-		# Le point du mur le plus proche du regard, sur sa face.
-		var normale := t.global_basis.z
-		var face := c + normale * signf(normale.dot(o - c)) * 0.06
-		if o.distance_to(face) > ASPIRE_DISTANCE:
+		# Le regard, dans le repère de la toile (elle est dans son plan XY).
+		var oeil := t.global_transform.affine_inverse() * o
+		var regard := t.global_basis.inverse() * d
+		if absf(regard.z) < 0.05:
 			continue
-		if rad_to_deg(d.angle_to(face - o)) > ASPIRE_ANGLE:
+		var k := -oeil.z / regard.z
+		if k <= 0.0 or k > ASPIRE_DISTANCE:
 			continue
+		var point := oeil + regard * k
+		var taille: Vector3 = (t.get_node("CollisionShape3D") as CollisionShape3D).shape.size
+		if absf(point.x) > taille.x / 2 or absf(point.y) > taille.y / 2:
+			continue
+		var face := t.global_transform * Vector3(point.x, point.y, signf(oeil.z) * 0.07)
 		if _visible(o, face):
 			return t
 	return null
@@ -189,18 +211,95 @@ func _dans_le_labyrinthe(delta: float) -> void:
 	_regard_toile = _regard_toile + delta if t != null else 0.0
 	if _regard_toile >= ASPIRE_TEMPS:
 		_regard_toile = 0.0
-		aspirer()
+		aspirer(get_node(t.get_meta("retour", "Labyrinthe/Entree")))
 
 
-## La toile aspire Thomas : il revient à l'entrée du labyrinthe.
-func aspirer() -> void:
+## La toile aspire Thomas : il revient à `retour` (l'entrée du labyrinthe,
+## ou de la salle du miroir).
+func aspirer(retour: Marker3D = null) -> void:
 	aspirations += 1
-	var entree: Marker3D = $Labyrinthe/Entree
+	var entree: Marker3D = retour if retour != null else $Labyrinthe/Entree
 	_joueur.velocity = Vector3.ZERO
 	_joueur.teleport(entree.global_transform)
 	_blanc.color.a = 0.8
 	create_tween().tween_property(_blanc, "color:a", 0.0, 0.6)
 	penser(PENSEES_ASPIRE[mini(aspirations, PENSEES_ASPIRE.size()) - 1])
+
+
+# --- La salle du miroir, puis la toile qui tourne ---------------------------
+
+
+## Le corps qu'on ne voit que dans le miroir : Thomas jeune (chemise bleue,
+## cheveux bruns), sans pinceau.
+func _jeune_dans_le_reflet() -> void:
+	var reflet := Node3D.new()
+	reflet.name = "Reflet"
+	_joueur.add_child(reflet)
+	var corps := CapsuleMesh.new()
+	corps.radius = 0.25
+	corps.height = 1.3
+	_forme_du_reflet(reflet, corps, Vector3(0, 0.75, 0), Color("457b9d"))
+	var tete := SphereMesh.new()
+	tete.radius = 0.14
+	tete.height = 0.28
+	_forme_du_reflet(reflet, tete, Vector3(0, 1.6, 0), Color("f2c6a0"))
+	var cheveux := BoxMesh.new()
+	cheveux.size = Vector3(0.3, 0.12, 0.3)
+	_forme_du_reflet(reflet, cheveux, Vector3(0, 1.72, 0.02), Color("7f4f24"))
+
+
+func _dans_la_salle_du_miroir() -> void:
+	var miroir: Pensee = $Reflets/PenseeMiroir
+	if not miroir.dite:
+		return
+	if _une_fois("viens"):
+		$Reflets/PenseeJuliette.active = true
+		dire("Juliette", "Viens. Par là, derrière toi.")
+	# Quand Thomas s'approche, Juliette entre dans le passage.
+	if _passage.global_position.x - _joueur.global_position.x < JULIETTE_PART and _une_fois("juliette_entre"):
+		var t := create_tween()
+		t.tween_property(_juliette_reflet, "rotation:y", -PI / 2, 0.4)
+		t.tween_property(_juliette_reflet, "position", _juliette_reflet.position + Vector3(4.0, 0, 1.2), 2.0)
+		t.tween_property(_juliette_reflet, "visible", false, 0.0)
+
+
+## Le passage du reflet franchi : la chute dans les toiles, jusqu'à la salle
+## de la toile qui tourne.
+func _par_le_reflet(j: Player) -> void:
+	_tomber_dans_les_toiles(j)
+
+
+func _apres_la_chute() -> void:
+	var arrivee: Marker3D = $SalleToile/Arrivee
+	_joueur.teleport(arrivee.global_transform)
+	_joueur.set_anchor(arrivee.global_transform)
+	_joueur.set_physics_process(true)
+	penser("Elle est partie devant…")
+
+
+## Une porte de la pièce peinte : la vraie mène au cœur ; les autres ne sont
+## que peintes, elles renvoient devant la toile.
+func _sur_porte_peinte(corps: Node3D, porte: Area3D) -> void:
+	if not corps is Player or etat != Etat.PEINTRE:
+		return
+	if porte.get_meta("vraie"):
+		vers_le_coeur()
+		return
+	aspirer($SalleToile/Retour)
+	if _une_fois("porte_peinte"):
+		penser("Une porte peinte… Il n'y a rien derrière.")
+
+
+## La vraie porte : le cœur de l'atelier.
+func vers_le_coeur() -> void:
+	var seuil: Marker3D = $Coeur/Seuil
+	_joueur.velocity = Vector3.ZERO
+	_joueur.teleport(seuil.global_transform)
+	_joueur.set_anchor(seuil.global_transform)
+	_blanc.color.a = 1.0
+	create_tween().tween_property(_blanc, "color:a", 0.0, 1.2)
+	if _une_fois("coeur"):
+		penser("Le cœur de l'atelier. La dernière toile.")
 
 
 # --- Peindre, ou poser le pinceau --------------------------------------------
@@ -232,7 +331,7 @@ func peindre() -> void:
 		_fissures.progres = 0.0
 		var k := mini(tentatives, 4)
 		get_node("Antichambre/Tentative_%d" % k).visible = true
-		_joueur.teleport(($Labyrinthe/Entree as Marker3D).global_transform)
+		_joueur.teleport(($Coeur/Seuil as Marker3D).global_transform)
 		_joueur.set_physics_process(true)
 		etat = Etat.PEINTRE
 		penser(PENSEES_TENTATIVES[mini(tentatives, PENSEES_TENTATIVES.size()) - 1]))

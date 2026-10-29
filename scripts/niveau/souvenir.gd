@@ -11,6 +11,8 @@ const DUREE_REVEIL := 2.5
 const MARGE_VUE := 0.4
 ## Le panneau des touches reste affiché ce temps après le réveil.
 const DUREE_TOUCHES := 10.0
+## Couche de ce qui est vrai : on ne la voit que les yeux fermés.
+const COUCHE_VRAI := 8
 const TOUCHES := "Z Q S D : se déplacer\nSouris : regarder\nEspace : sauter\nE : prendre, poser, utiliser\nF (maintenu) : fermer les yeux\nÉchap : libérer la souris et voir les touches"
 
 ## Les yeux restent fermés, même sans F (pendant une scène).
